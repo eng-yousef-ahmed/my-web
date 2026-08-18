@@ -19,6 +19,19 @@ npm run dev      # local development
 npm run build    # production build → dist/
 ```
 
+## Changing the logo (no code edits)
+
+Drop your logo files into the `public/` folder and they are picked up automatically:
+
+| File | Shown on | Recommended logo colour |
+| --- | --- | --- |
+| `public/logo-light.svg` (or `.png`) | Dark sections (header, dark pages) | White / light |
+| `public/logo-dark.svg` (or `.png`) | Light sections | Black / dark |
+
+- `.svg` is preferred; `.png` works too. The first format that exists wins.
+- If a file is absent, the built-in **YA** mark + wordmark is used as a fallback.
+- Recommended height ~40px (rendered at `h-10`, width auto). Transparent background.
+
 ## Configuration (environment variables)
 
 See `.env.example`. Copy to `.env.local`:

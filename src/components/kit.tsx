@@ -221,9 +221,68 @@ export function LogoMark({ tone = "light", className = "w-10 h-10" }: { tone?: "
   );
 }
 
+/* ---------- swappable brand logo (no code change needed) ----------
+ * Drop your own logo into the `public/` folder and it is picked up
+ * automatically — no code edits required:
+ *
+ *   public/logo-light.svg  (or .png)  → shown on DARK sections  (use a light/white logo)
+ *   public/logo-dark.svg   (or .png)  → shown on LIGHT sections (use a dark/black logo)
+ *
+ * If a file is missing the built-in YA mark + wordmark is used instead.
+ * The first format that exists wins (svg is tried before png).
+ */
+const customLogoCache: Partial<Record<"light" | "dark", Promise<string | null>>> = {};
+
+function resolveCustomLogo(tone: "light" | "dark"): Promise<string | null> {
+  if (!customLogoCache[tone]) {
+    customLogoCache[tone] = new Promise((resolve) => {
+      const candidates = [`/logo-${tone}.svg`, `/logo-${tone}.png`];
+      let i = 0;
+      const next = () => {
+        if (i >= candidates.length) return resolve(null);
+        const img = new Image();
+        img.onload = () => resolve(candidates[i]);
+        img.onerror = () => {
+          i++;
+          next();
+        };
+        img.src = candidates[i];
+      };
+      next();
+    });
+  }
+  return customLogoCache[tone]!;
+}
+
+function useCustomLogo(tone: "light" | "dark"): string | null {
+  const [src, setSrc] = useState<string | null>(null);
+  useEffect(() => {
+    let active = true;
+    resolveCustomLogo(tone).then((s) => {
+      if (active) setSrc(s);
+    });
+    return () => {
+      active = false;
+    };
+  }, [tone]);
+  return src;
+}
+
 export function Logo({ tone = "light", compact = false }: { tone?: "light" | "dark"; compact?: boolean }) {
+  const custom = useCustomLogo(tone);
   const main = tone === "light" ? "text-paper-50" : "text-ink-900";
   const sub = tone === "light" ? "text-mist-300" : "text-mist-500";
+
+  if (custom) {
+    return (
+      <img
+        src={custom}
+        alt="TECH OF THE WORLD"
+        className={`select-none ${compact ? "h-9" : "h-10"} w-auto object-contain`}
+      />
+    );
+  }
+
   return (
     <span className="inline-flex items-center gap-3 select-none">
       <LogoMark tone={tone} className={compact ? "w-9 h-9" : "w-10 h-10"} />
