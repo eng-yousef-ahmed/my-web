@@ -1,0 +1,61 @@
+# TECH OF THE WORLD — Website
+
+Professional IT services & technology solutions provider · **Technology That Moves Business Forward.**
+
+Bilingual (English LTR / Arabic RTL) marketing + conversion site: Home, Services, Projects (case studies), Industries, Insights, About, Saudi Arabia, Egypt, Contact and Request IT Service.
+
+## Stack
+
+- **Vite + React 18 + TypeScript**
+- **Tailwind CSS v4**
+- **react-router-dom** (hash routing — works on any static host)
+- Custom SVG icon set, custom YA logo mark, zero stock imagery
+
+## Setup
+
+```bash
+npm install
+npm run dev      # local development
+npm run build    # production build → dist/
+```
+
+## Configuration (environment variables)
+
+See `.env.example`. Copy to `.env.local`:
+
+| Variable | Purpose |
+| --- | --- |
+| `VITE_WHATSAPP_NUMBER` | Enables one-tap WhatsApp chat (digits only, international format). When empty, WhatsApp buttons are gracefully replaced with configuration placeholders — no fake numbers are ever shown. |
+| `VITE_CONTACT_EMAIL` | Public business email for contact links. |
+| `VITE_FORM_ENDPOINT` | Optional JSON POST endpoint for the service-request form. When empty, the form validates, then offers the completed request as a prefilled WhatsApp / email message (integration-ready, no fake backend). |
+
+## Deployment
+
+Any static host (Vercel, Netlify, Cloudflare Pages, S3):
+
+1. Build command: `npm run build`
+2. Output directory: `dist`
+3. Set the three `VITE_*` variables in the host dashboard
+4. Replace the `tech-of-the-world.example` domain in `index.html` canonical/OG tags, `robots.txt` and `sitemap.xml`
+
+Hash-based routing means no server rewrites are required. If you migrate to clean paths, swap `HashRouter` → `BrowserRouter` and add SPA rewrites.
+
+## Architecture
+
+```
+src/
+  config.ts            env-driven contact & endpoint configuration
+  i18n.tsx             EN/AR language provider (RTL-aware) + UI strings
+  data/
+    content.ts         service lines, differentiators, steps, industries, tech, FAQ
+    cases.ts           8 documented case studies (bilingual)
+    insights.ts        knowledge articles (bilingual)
+  components/
+    kit.tsx            icons, logo, reveal/scramble/marquee primitives, buttons, FAQ
+    chrome.tsx         header, footer, WhatsApp FAB, layout
+    ServiceRequestForm.tsx  validated, integration-ready request form
+  pages/               Home, Services, Projects(+detail), About, Industries,
+                       Insights(+detail), Markets (KSA/EG), Contact, Request
+```
+
+Content rules: no invented clients, budgets, dates, team sizes, metrics, certifications, partnerships or testimonials. Numbers shown are factual properties of the site itself (service lines, markets, documented case studies).
