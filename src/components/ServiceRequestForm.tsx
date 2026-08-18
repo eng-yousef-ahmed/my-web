@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { useLang } from "../i18n";
-import { CONFIG, hasEmail, hasWhatsApp, mailLink, waLink } from "../config";
+import { CONFIG, CONTACT, hasEmail, mailLink, waLink } from "../config";
 import { SERVICE_CATEGORIES } from "../data/content";
-import { Icon } from "./kit";
+import { FlagEG, FlagSA, Icon } from "./kit";
 
 type FormState = {
   fullName: string;
@@ -31,7 +31,7 @@ const initial: FormState = {
 };
 
 export function ServiceRequestForm({ prefillService }: { prefillService?: string }) {
-  const { t, L } = useLang();
+  const { t, L, isAr } = useLang();
   const [form, setForm] = useState<FormState>({ ...initial, service: prefillService ?? "" });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -83,10 +83,10 @@ export function ServiceRequestForm({ prefillService }: { prefillService?: string
     ev.preventDefault();
     if (!validate()) return;
 
-    if (CONFIG.formEndpoint) {
+    if (CONTACT.formEndpoint) {
       setStatus("submitting");
       try {
-        const res = await fetch(CONFIG.formEndpoint, {
+        const res = await fetch(CONTACT.formEndpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...form, source: "website-service-request" }),
@@ -119,8 +119,14 @@ export function ServiceRequestForm({ prefillService }: { prefillService?: string
   }
 
   if (status === "draft") {
-    const wa = waLink(summary());
-    const em = mailLink(`Service Request — ${form.company}`, summary());
+    const msg = summary();
+    const primary: "sa" | "eg" = form.country === "Egypt" ? "eg" : "sa";
+    const secondary: "sa" | "eg" = primary === "eg" ? "sa" : "eg";
+    const opts: Record<"sa" | "eg", { flag: React.ReactNode; label: string; number: string; href: string }> = {
+      sa: { flag: <FlagSA className="w-5 h-5" />, label: isAr ? "واتساب السعودية" : "WhatsApp — KSA", number: CONTACT.displaySA, href: waLink(msg, "sa") },
+      eg: { flag: <FlagEG className="w-5 h-5" />, label: isAr ? "واتساب مصر" : "WhatsApp — Egypt", number: CONTACT.displayEG, href: waLink(msg, "eg") },
+    };
+    const em = mailLink(`Service Request — ${form.company}`, msg);
     return (
       <div className="chamfer bg-ink-850 border border-ink-600 p-8 sm:p-10">
         <div className="flex items-center gap-3 mb-4">
@@ -128,18 +134,24 @@ export function ServiceRequestForm({ prefillService }: { prefillService?: string
           <h3 className="font-display text-2xl font-bold text-paper-50">{t("form.draftTitle")}</h3>
         </div>
         <p className="text-mist-300 leading-relaxed">{t("form.draftBody")}</p>
-        <div className="mt-7 flex flex-col sm:flex-row gap-4">
-          {wa && (
-            <a href={wa} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-3 chamfer-sm bg-[#23a55b] text-white px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] hover:brightness-110 transition-all">
-              <Icon name="wa" className="w-5 h-5" /> {t("form.sendWhatsapp")}
+        <div className="mt-7 grid sm:grid-cols-2 gap-4">
+          {[opts[primary], opts[secondary]].map((o) => (
+            <a key={o.number} href={o.href} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3.5 chamfer-sm bg-[#23a55b] text-white px-5 py-3.5 hover:brightness-110 transition-all">
+              <span className="shrink-0">{o.flag}</span>
+              <span className="leading-tight text-start">
+                <span className="block font-display text-[12.5px] font-semibold uppercase tracking-[0.1em]">{o.label}</span>
+                <span className="block font-mono text-[11.5px] text-white/75" dir="ltr">{o.number}</span>
+              </span>
+              <Icon name="wa" className="w-5 h-5 ms-auto" />
             </a>
-          )}
+          ))}
+        </div>
+        <div className="mt-4 flex flex-col sm:flex-row gap-4">
           {em && (
             <a href={em} className="inline-flex items-center justify-center gap-3 chamfer-sm bg-amber-500 text-ink-950 px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] hover:bg-amber-400 transition-all">
               <Icon name="mail" className="w-5 h-5" /> {t("form.sendEmail")}
             </a>
           )}
-          {!wa && !em && <p className="text-mist-400 text-sm">{t("common.notConfigured")}</p>}
         </div>
         <button onClick={() => { setForm(initial); setStatus("idle"); }} className="mt-6 font-mono text-[12px] uppercase tracking-widest text-mist-400 hover:text-amber-400 transition-colors cursor-pointer">
           ← {t("form.again")}
@@ -263,7 +275,7 @@ export function ServiceRequestForm({ prefillService }: { prefillService?: string
         )}
       </button>
       <p className="mt-4 text-center font-mono text-[10.5px] uppercase tracking-[0.2em] text-mist-500">
-        {hasWhatsApp || hasEmail ? "WhatsApp · Email" : t("common.notConfigured")}
+        {isAr ? "الرد عبر واتساب (السعودية / مصر) أو البريد الإلكتروني" : "Reply via WhatsApp (KSA / Egypt) or Email"}
       </p>
     </form>
   );

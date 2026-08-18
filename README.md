@@ -23,11 +23,12 @@ npm run build    # production build → dist/
 
 See `.env.example`. Copy to `.env.local`:
 
-| Variable | Purpose |
-| --- | --- |
-| `VITE_WHATSAPP_NUMBER` | Enables one-tap WhatsApp chat (digits only, international format). When empty, WhatsApp buttons are gracefully replaced with configuration placeholders — no fake numbers are ever shown. |
-| `VITE_CONTACT_EMAIL` | Public business email for contact links. |
-| `VITE_FORM_ENDPOINT` | Optional JSON POST endpoint for the service-request form. When empty, the form validates, then offers the completed request as a prefilled WhatsApp / email message (integration-ready, no fake backend). |
+| Variable | Default (verified) | Purpose |
+| --- | --- | --- |
+| `VITE_WHATSAPP_SA` | `+966568992794` | WhatsApp — Saudi Arabia. |
+| `VITE_WHATSAPP_EG` | `+201203361192` | WhatsApp — Egypt. |
+| `VITE_CONTACT_EMAIL` | `TechOfTheWorled92@gmail.com` | Public business email for contact links. |
+| `VITE_FORM_ENDPOINT` | — | Optional JSON POST endpoint for the service-request form. When empty, the form validates, then offers the completed request as a prefilled WhatsApp (KSA/EG) / email message (integration-ready, no fake backend). |
 
 ## Deployment
 

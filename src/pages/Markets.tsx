@@ -93,7 +93,7 @@ export default function MarketPage({ market }: { market: MarketId }) {
   );
 
   const localCases = CASES.filter((x) => x.market === market || x.market === "both").slice(0, 3);
-  const wa = waLink(`Hello TECH OF THE WORLD — I am looking for IT services in ${isSa ? "Saudi Arabia" : "Egypt"}.`);
+  const wa = waLink(`Hello TECH OF THE WORLD — I am looking for IT services in ${isSa ? "Saudi Arabia" : "Egypt"}.`, market);
 
   return (
     <>
