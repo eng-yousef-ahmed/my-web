@@ -52,17 +52,17 @@ export default function Services() {
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-mist-500 mb-5">{isAr ? "المسارات" : "Index"}</p>
               <nav className="border-s-2 border-ink-900/10 flex flex-col" aria-label="Service categories">
                 {SERVICE_CATEGORIES.map((c, i) => (
-                  <a
+                  <button
                     key={c.id}
-                    href={`#${c.id}`}
-                    className={`py-3 ps-5 font-display text-[15px] font-semibold transition-all relative ${
+                    onClick={() => document.getElementById(c.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                    className={`py-3 ps-5 text-start font-display text-[15px] font-semibold transition-all relative cursor-pointer ${
                       active === c.id ? "text-amber-600" : "text-mist-500 hover:text-ink-900"
                     }`}
                   >
                     <span className={`absolute start-[-2px] top-0 bottom-0 w-[2px] bg-amber-500 transition-transform origin-top ${active === c.id ? "scale-y-100" : "scale-y-0"}`} aria-hidden="true" />
                     <span className="font-mono text-[11px] text-amber-600 me-2">0{i + 1}</span>
                     {L(c.name)}
-                  </a>
+                  </button>
                 ))}
               </nav>
               <div className="mt-10 chamfer-sm bg-ink-900 text-paper-50 p-6">
