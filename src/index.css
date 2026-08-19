@@ -308,6 +308,104 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 .bg-paper-300 { --ya-kicker: #8f5a12; }
 .text-kicker { color: var(--ya-kicker); }
 
+/* ---------- Batata the potato robot ---------- */
+@keyframes botFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes botBlink {
+  0%, 91%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.05); }
+}
+@keyframes botWave {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-26deg); }
+  45% { transform: rotate(10deg); }
+  70% { transform: rotate(-18deg); }
+}
+@keyframes botBounce {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-13px) scale(1.05); }
+  55% { transform: translateY(0) scale(0.97, 0.93); }
+  75% { transform: translateY(-5px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes botTalk {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+@keyframes botPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes botDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+.bot-float { animation: botFloat 3.4s ease-in-out infinite; }
+.bot-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: botBlink 4.6s ease-in-out infinite;
+}
+.bot-eye-b { animation-delay: 0.12s; }
+.bot-wave {
+  transform-box: fill-box;
+  transform-origin: 15% 85%;
+  animation: botWave 1.5s ease-in-out infinite;
+}
+.bot-bounce { animation: botBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.bot-talk {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: botTalk 0.45s ease-in-out infinite;
+}
+.bot-led { animation: botPulse 1.6s ease-in-out infinite; }
+.bot-led.fast { animation-duration: 0.45s; }
+.bot-pupil { transition: transform 0.16s ease-out; }
+.bot-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-amber-400);
+  animation: botDot 1s ease-in-out infinite;
+}
+.bot-bullet {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--color-amber-500);
+  transform: rotate(45deg) translateY(-1px);
+  margin-inline-end: 8px;
+}
+.bot-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--color-amber-500);
+  color: var(--color-amber-400);
+  padding: 6px 12px;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.25s, color 0.25s;
+  cursor: pointer;
+}
+.bot-chip:hover {
+  background: var(--color-amber-500);
+  color: var(--color-ink-950);
+}
+.bot-chip-wa {
+  border-color: #2fbf67;
+  color: #5fd68f;
+}
+.bot-chip-wa:hover {
+  background: #23a55b;
+  color: #ffffff;
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
