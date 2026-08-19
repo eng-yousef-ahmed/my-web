@@ -1,5 +1,5 @@
 /**
- * TECH OF THE WORLD — central, environment-driven configuration.
+ * TECH OF THE WORLD — central, environment-driven configuration & outbound helpers.
  *
  * Contact channels ship with the verified business numbers below and can be
  * overridden at build time via environment variables (see .env.example):
@@ -34,16 +34,75 @@ export const CONTACT = {
 export const hasWhatsApp = true;
 export const hasEmail = CONTACT.email.length > 0;
 
-/** Builds a wa.me deep link with a prefilled message for the chosen market number. */
+/* ================= outbound automation =================
+ * UTM parameters from the landing URL are captured once per session and
+ * appended to every WhatsApp / email message the site generates — so each
+ * inbound lead arrives with its marketing source attached. No setup needed.
+ */
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign"] as const;
+
+/** Call once on app boot (HashRouter puts the query after "#/route?"). */
+export function captureUtm(): void {
+  try {
+    const query = window.location.hash.split("?")[1] ?? "";
+    const q = new URLSearchParams(query);
+    const found: Record<string, string> = {};
+    UTM_KEYS.forEach((k) => {
+      const v = q.get(k);
+      if (v) found[k] = v;
+    });
+    if (Object.keys(found).length) sessionStorage.setItem("ya-utm", JSON.stringify(found));
+  } catch {
+    /* storage unavailable — enrichment simply skipped */
+  }
+}
+
+function storedUtm(): Record<string, string> {
+  try {
+    return JSON.parse(sessionStorage.getItem("ya-utm") ?? "{}") as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
+
+function enrich(message: string): string {
+  const utm = storedUtm();
+  const parts = Object.entries(utm).map(([k, v]) => `${k}=${v}`).join(", ");
+  return parts ? `${message}\n\n▸ Source: ${parts}` : message;
+}
+
+/** Builds a wa.me deep link with a prefilled, source-enriched message. */
 export function waLink(message: string, market: Market = "sa"): string {
   const number = market === "eg" ? CONTACT.whatsappEG : CONTACT.whatsappSA;
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${number}?text=${encodeURIComponent(enrich(message))}`;
 }
 
 /** Builds a mailto link. Returns null when the email is not configured. */
 export function mailLink(subject: string, body: string): string | null {
   if (!hasEmail) return null;
-  return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(enrich(body))}`;
+}
+
+/** Click-to-call deep link for a market line. */
+export const telHref = (market: Market): string =>
+  `tel:+${market === "eg" ? CONTACT.whatsappEG : CONTACT.whatsappSA}`;
+
+/** A downloadable vCard so one tap saves both lines + email into the visitor's phone. */
+export function vCardDataUrl(): string {
+  const lines = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "FN:TECH OF THE WORLD",
+    "ORG:TECH OF THE WORLD",
+    `TITLE:${CONFIG.positioning}`,
+    `TEL;TYPE=CELL,VOICE:+${CONTACT.whatsappSA}`,
+    `TEL;TYPE=CELL,VOICE:+${CONTACT.whatsappEG}`,
+    `EMAIL:${CONTACT.email}`,
+    `URL:https://wa.me/${CONTACT.whatsappSA}`,
+    "NOTE:Technology That Moves Business Forward — IT services in Saudi Arabia & Egypt",
+    "END:VCARD",
+  ];
+  return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\n"))}`;
 }
 
 /** Generated brand imagery (dark, duotone-graded in CSS). */

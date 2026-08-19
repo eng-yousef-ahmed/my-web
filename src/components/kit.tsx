@@ -232,14 +232,24 @@ export function LogoMark({ tone = "light", className = "w-10 h-10" }: { tone?: "
  * The first format that exists wins (svg is tried before png).
  */
 const customLogoCache: Partial<Record<"light" | "dark", Promise<string | null>>> = {};
+let logoHintShown = false;
 
 function resolveCustomLogo(tone: "light" | "dark"): Promise<string | null> {
   if (!customLogoCache[tone]) {
     customLogoCache[tone] = new Promise((resolve) => {
-      const candidates = [`/logo-${tone}.svg`, `/logo-${tone}.png`];
+      /* tone-specific files win; a universal /logo.* works for both tones */
+      const candidates = [`/logo-${tone}.svg`, `/logo-${tone}.png`, "/logo.svg", "/logo.png"];
       let i = 0;
       const next = () => {
-        if (i >= candidates.length) return resolve(null);
+        if (i >= candidates.length) {
+          if (import.meta.env.DEV && !logoHintShown) {
+            logoHintShown = true;
+            console.info(
+              "[TECH OF THE WORLD] عندك لوجو جاهز؟ حطه في public/logo-light.svg (للأقسام الداكنة) و public/logo-dark.svg (للفاتحة) — أو public/logo.svg لنسختين — هيظهر تلقائيًا بدون أي تعديل في الكود."
+            );
+          }
+          return resolve(null);
+        }
         const img = new Image();
         img.onload = () => resolve(candidates[i]);
         img.onerror = () => {
@@ -404,6 +414,62 @@ export function Marquee({ children, className = "" }: { children: React.ReactNod
   );
 }
 
+/* ================= count-up on scroll ================= */
+export function CountUp({ value, className = "", duration = 1300 }: { value: string; className?: string; duration?: number }) {
+  const reduced = usePrefersReducedMotion();
+  const { ref, inView } = useInView<HTMLSpanElement>(0.4);
+  const [txt, setTxt] = useState(value);
+
+  useEffect(() => {
+    const target = parseInt(value, 10);
+    if (reduced || isNaN(target)) {
+      setTxt(value);
+      return;
+    }
+    if (!inView) return;
+    const padLen = value.length;
+    let raf = 0;
+    const t0 = performance.now();
+    setTxt("0".repeat(padLen));
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - t0) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setTxt(String(Math.round(target * eased)).padStart(padLen, "0"));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value, reduced, duration]);
+
+  return (
+    <span ref={ref} className={className}>
+      {txt}
+    </span>
+  );
+}
+
+/* ================= image with soft reveal ================= */
+export function SmartImg({ className = "", ...rest }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <img
+      {...rest}
+      loading={rest.loading ?? "lazy"}
+      onLoad={() => setLoaded(true)}
+      className={`${className} transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}
+    />
+  );
+}
+
+/* ================= brand mark (custom logo aware) ================= */
+export function BrandMark({ tone = "light", className = "" }: { tone?: "light" | "dark"; className?: string }) {
+  const custom = useCustomLogo(tone);
+  if (custom) {
+    return <img src={custom} alt="TECH OF THE WORLD" className={`block h-16 w-auto object-contain ${className}`} />;
+  }
+  return <LogoMark tone={tone} className={`w-14 h-14 ${className}`} />;
+}
+
 /* ================= buttons ================= */
 export function Btn({
   to,
@@ -426,7 +492,7 @@ export function Btn({
   type?: "button" | "submit";
   disabled?: boolean;
 }) {
-  const base = `group inline-flex items-center gap-3 chamfer-sm px-6 py-3.5 font-display text-[13.5px] font-semibold uppercase tracking-[0.14em] transition-all duration-300 ${
+  const base = `group inline-flex items-center gap-3 chamfer-sm px-6 py-3.5 font-display text-[13.5px] font-semibold uppercase tracking-[0.14em] transition-all duration-300 active:scale-[0.97] ${
     disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
   }`;
   const styles = {

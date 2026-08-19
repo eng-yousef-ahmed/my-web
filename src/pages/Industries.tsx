@@ -34,7 +34,12 @@ export default function Industries() {
                   </span>
                   <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.24em] text-amber-600">{isAr ? "قطاع" : "Sector"} 0{i + 1}</p>
                   <h2 className="mt-2 font-display text-2xl font-bold leading-snug">{L(ind.name)}</h2>
-                  <Btn to={`/request`} className="mt-6 !px-5 !py-3 !text-[12px]">{t("nav.request")}</Btn>
+                  <Btn
+                    to={`/request?context=${encodeURIComponent("industry:" + L(ind.name))}`}
+                    className="mt-6 !px-5 !py-3 !text-[12px]"
+                  >
+                    {t("nav.request")}
+                  </Btn>
                 </div>
                 <div className="lg:[direction:ltr] grid sm:grid-cols-2 gap-8">
                   <div>

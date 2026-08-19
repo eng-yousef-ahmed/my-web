@@ -27,10 +27,12 @@ Drop your logo files into the `public/` folder and they are picked up automatica
 | --- | --- | --- |
 | `public/logo-light.svg` (or `.png`) | Dark sections (header, dark pages) | White / light |
 | `public/logo-dark.svg` (or `.png`) | Light sections | Black / dark |
+| `public/logo.svg` (or `.png`) | Both sections (universal fallback) | Your choice |
 
-- `.svg` is preferred; `.png` works too. The first format that exists wins.
+- `.svg` is preferred; `.png` works too. The first format that exists wins (tone-specific before universal).
 - If a file is absent, the built-in **YA** mark + wordmark is used as a fallback.
-- Recommended height ~40px (rendered at `h-10`, width auto). Transparent background.
+- Recommended height ~40–60px (rendered at `h-10`/`h-16`, width auto). Transparent background.
+- The logo is detected at runtime and also replaces the YA mark in the final CTA — no code edits, ever.
 
 ## Configuration (environment variables)
 
@@ -42,6 +44,13 @@ See `.env.example`. Copy to `.env.local`:
 | `VITE_WHATSAPP_EG` | `+201203361192` | WhatsApp — Egypt. |
 | `VITE_CONTACT_EMAIL` | `TechOfTheWorled92@gmail.com` | Public business email for contact links. |
 | `VITE_FORM_ENDPOINT` | — | Optional JSON POST endpoint for the service-request form. When empty, the form validates, then offers the completed request as a prefilled WhatsApp (KSA/EG) / email message (integration-ready, no fake backend). |
+
+## Built-in lead automation (no setup required)
+
+- **UTM capture** — `utm_source` / `utm_medium` / `utm_campaign` on the landing URL are stored per session and appended to every generated WhatsApp/email message (`▸ Source: ...`), so each lead arrives with its campaign attached.
+- **Context handoff** — CTAs carry smart query params into the request form: market pages preselect the **country**, service sections preselect the **service**, case studies and industries arrive as a visible **context chip** and are included in the sent message.
+- **Market auto-suggestion** — the floating WhatsApp widget orders Saudi/Egypt numbers using the visitor's timezone (best effort) and marks the likely one "Suggested".
+- **One-tap channels** — click-to-call `tel:` links for both lines plus a downloadable **vCard** (both numbers + email) on the Contact page.
 
 ## Deployment
 

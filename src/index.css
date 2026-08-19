@@ -222,6 +222,18 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   transform: translateY(-6px);
 }
 
+/* ---------- page transition ---------- */
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.page-enter { animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ---------- richer card lift ---------- */
+.card-lift:hover {
+  box-shadow: 0 26px 50px -26px rgba(2, 8, 14, 0.55);
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

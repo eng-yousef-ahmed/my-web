@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useLang, usePageMeta } from "../i18n";
+import { useLang, usePageMeta, usePrefersReducedMotion } from "../i18n";
 import { CASES, MARKET_LABEL } from "../data/cases";
 import { FACTS, INDUSTRIES, SERVICE_CATEGORIES, STEPS, TECH_GROUPS, TECH_TICKER, WHY_US, EXTRA_INDUSTRIES } from "../data/content";
-import { Btn, FlagEG, FlagSA, Icon, LogoMark, Marquee, Reveal, Scramble, SectionHeading, useInView } from "../components/kit";
+import { BrandMark, Btn, CountUp, FlagEG, FlagSA, Icon, LogoMark, Marquee, Reveal, Scramble, SectionHeading, SmartImg, useInView } from "../components/kit";
 import { waLink, hasWhatsApp, IMAGES } from "../config";
 
 /* ---------------- hero topology panel ---------------- */
@@ -80,6 +80,43 @@ function TopologyPanel() {
   );
 }
 
+/* ---------------- mouse-follow ambient glow (desktop, motion-safe) ---------------- */
+function HeroGlow() {
+  const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (reduced) return;
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--gx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--gy", `${e.clientY - r.top}px`);
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, [reduced]);
+  if (reduced) return null;
+  return (
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          "radial-gradient(620px circle at var(--gx, 60%) var(--gy, 35%), rgba(233,163,59,0.08), transparent 62%)",
+      }}
+    />
+  );
+}
+
 /* ---------------- featured case card ---------------- */
 function CaseCard({ id, index }: { id: string; index: number }) {
   const c = CASES.find((x) => x.id === id)!;
@@ -144,6 +181,7 @@ export default function Home() {
       {/* ============ HERO ============ */}
       <section className="relative min-h-screen flex items-center bg-ink-950 text-paper-50 overflow-hidden noise">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
+        <HeroGlow />
         <div className="absolute -top-32 -start-32 w-[620px] h-[620px] rounded-full bg-amber-500/[0.07] blur-[130px]" aria-hidden="true" />
         <div className="absolute bottom-0 end-0 w-[520px] h-[520px] rounded-full bg-circuit-500/[0.06] blur-[120px]" aria-hidden="true" />
         <img src={IMAGES.network} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-[0.13] duo-img" />
@@ -212,7 +250,9 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-ink-900/15 border border-ink-900/15">
             {FACTS.map((f, i) => (
               <Reveal key={f.label.en} delay={i * 90} className="bg-paper-100 p-8 group hover:bg-ink-900 transition-colors duration-500">
-                <p className="font-display text-5xl lg:text-6xl font-bold text-ink-900 group-hover:text-amber-500 transition-colors">{f.value}</p>
+                <p className="font-display text-5xl lg:text-6xl font-bold text-ink-900 group-hover:text-amber-500 transition-colors">
+                  <CountUp value={f.value} />
+                </p>
                 <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.24em] text-mist-500 group-hover:text-mist-300 transition-colors">{L(f.label)}</p>
               </Reveal>
             ))}
@@ -298,7 +338,7 @@ export default function Home() {
 
       {/* ============ FIELD BAND ============ */}
       <section className="relative overflow-hidden">
-        <img src={IMAGES.rack} alt="Organized enterprise network rack with structured cabling" className="absolute inset-0 w-full h-full object-cover duo-img bg-ink-900" loading="lazy" />
+        <SmartImg src={IMAGES.rack} alt="Organized enterprise network rack with structured cabling" className="absolute inset-0 w-full h-full object-cover duo-img bg-ink-900" />
         <div className="absolute inset-0 bg-ink-950/78" aria-hidden="true" />
         <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-24 lg:py-32 text-center">
           <Reveal className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500 mb-6">YA / FIELD STANDARD</Reveal>
@@ -479,7 +519,7 @@ export default function Home() {
         <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full border border-ink-700" aria-hidden="true" />
         <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] rounded-full border border-ink-700" aria-hidden="true" />
         <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-24 lg:py-32 text-center">
-          <LogoMark className="w-14 h-14 mx-auto mb-8 float-slow" />
+          <BrandMark className="mx-auto mb-8 float-slow" />
           <h2 className="font-display font-bold tracking-tight text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.05]">
             <span className={`block transition-all duration-1000 ${finalIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
               {isAr ? "لنحلّ مشكلتك" : "Let's Solve Your"}

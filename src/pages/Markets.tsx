@@ -98,7 +98,7 @@ export default function MarketPage({ market }: { market: MarketId }) {
   return (
     <>
       <PageHero kicker={c.kicker} title={c.title} lead={c.lead} image={c.image}>
-        <Btn to="/request">{t("nav.request")}</Btn>
+        <Btn to={`/request?country=${encodeURIComponent(isSa ? "Saudi Arabia" : "Egypt")}`}>{t("nav.request")}</Btn>
         {hasWhatsApp && wa && (
           <Btn href={wa} variant="outline" arrow={false}>
             <Icon name="wa" className="w-5 h-5 text-[#3fbf6f]" /> {t("cta.talkSpecialist")}
@@ -179,7 +179,7 @@ export default function MarketPage({ market }: { market: MarketId }) {
               </div>
             </div>
             <div className="mt-6 flex gap-4 flex-wrap">
-              <Btn to="/request" className="flex-1 justify-center">{t("nav.request")}</Btn>
+              <Btn to={`/request?country=${encodeURIComponent(isSa ? "Saudi Arabia" : "Egypt")}`} className="flex-1 justify-center">{t("nav.request")}</Btn>
               <Btn to="/projects" variant="outline">{t("cta.exploreProjects")}</Btn>
             </div>
           </Reveal>

@@ -271,7 +271,13 @@ export function ProjectDetail() {
                   <p className="mt-1.5 text-[14.5px] font-medium">{t("misc.shareIdeaBody")}</p>
                 </div>
                 <div className="flex gap-3 flex-wrap shrink-0">
-                  <Btn to={`/request?service=${c.catIds[0]}`} variant="dark" className="!py-3">{t("nav.request")}</Btn>
+                  <Btn
+                    to={`/request?service=${c.catIds[0]}&context=${encodeURIComponent("case:" + L(c.title))}`}
+                    variant="dark"
+                    className="!py-3"
+                  >
+                    {t("nav.request")}
+                  </Btn>
                   {hasWhatsApp && wa && <Btn href={wa} variant="outlineLight" className="!py-3 !border-ink-950/40 !text-ink-950 hover:!bg-ink-950" arrow={false}>WhatsApp</Btn>}
                 </div>
               </div>

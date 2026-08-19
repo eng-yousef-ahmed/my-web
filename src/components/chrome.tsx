@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLang } from "../i18n";
-import { CONTACT, hasEmail, mailLink, waLink } from "../config";
+import { CONTACT, captureUtm, hasEmail, mailLink, telHref, waLink } from "../config";
 import { Btn, FlagEG, FlagSA, Icon, Logo } from "./kit";
 
 const NAV = [
@@ -14,9 +14,39 @@ const NAV = [
   { to: "/contact", labelKey: "nav.contact" },
 ];
 
+/* ---------------- reading progress ---------------- */
+function ScrollProgress() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        setP(max > 0 ? h.scrollTop / max : 0);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <div className="fixed top-0 inset-x-0 z-[70] h-[3px] pointer-events-none" aria-hidden="true">
+      <div
+        className="h-full bg-amber-500 origin-left rtl:origin-right"
+        style={{ transform: `scaleX(${p})`, transition: "transform 120ms linear" }}
+      />
+    </div>
+  );
+}
+
 /* ---------------- WhatsApp floating chooser (SA / EG / email) ---------------- */
 function WhatsAppFab() {
-  const { t, L } = useLang();
+  const { t, L, isAr } = useLang();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -33,22 +63,31 @@ function WhatsAppFab() {
     };
   }, []);
 
-  const options = [
-    {
-      key: "sa" as const,
-      flag: <FlagSA className="w-6 h-6" />,
-      country: L({ en: "Saudi Arabia", ar: "السعودية" }),
-      number: CONTACT.displaySA,
-      href: waLink("Hello TECH OF THE WORLD — I need IT support in Saudi Arabia.", "sa"),
-    },
-    {
-      key: "eg" as const,
-      flag: <FlagEG className="w-6 h-6" />,
-      country: L({ en: "Egypt", ar: "مصر" }),
-      number: CONTACT.displayEG,
-      href: waLink("Hello TECH OF THE WORLD — I need IT support in Egypt.", "eg"),
-    },
-  ];
+  /* Auto-suggest the visitor's likely market from their timezone (best-effort). */
+  const tzName = (() => {
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone ?? "";
+    } catch {
+      return "";
+    }
+  })();
+  const nearEgypt = /(cairo|egypt)/i.test(tzName);
+
+  const saOpt = {
+    key: "sa" as const,
+    flag: <FlagSA className="w-6 h-6" />,
+    country: L({ en: "Saudi Arabia", ar: "السعودية" }),
+    number: CONTACT.displaySA,
+    href: waLink("Hello TECH OF THE WORLD — I need IT support in Saudi Arabia.", "sa"),
+  };
+  const egOpt = {
+    key: "eg" as const,
+    flag: <FlagEG className="w-6 h-6" />,
+    country: L({ en: "Egypt", ar: "مصر" }),
+    number: CONTACT.displayEG,
+    href: waLink("Hello TECH OF THE WORLD — I need IT support in Egypt.", "eg"),
+  };
+  const options = nearEgypt ? [egOpt, saOpt] : [saOpt, egOpt];
 
   return (
     <div ref={ref} className="fixed bottom-6 end-6 z-50">
@@ -59,7 +98,7 @@ function WhatsAppFab() {
             <p className="text-[11.5px] text-mist-400 mt-0.5">{t("cta.urgent")}</p>
           </div>
           <div className="p-2.5 space-y-1">
-            {options.map((o) => (
+            {options.map((o, i) => (
               <a
                 key={o.key}
                 href={o.href}
@@ -69,7 +108,14 @@ function WhatsAppFab() {
               >
                 <span className="shrink-0">{o.flag}</span>
                 <span className="flex-1 leading-tight">
-                  <span className="block font-display font-semibold text-[13.5px] text-paper-50 group-hover:text-amber-400 transition-colors">{o.country}</span>
+                  <span className="flex items-center gap-2">
+                    <span className="block font-display font-semibold text-[13.5px] text-paper-50 group-hover:text-amber-400 transition-colors">{o.country}</span>
+                    {i === 0 && (
+                      <span className="font-mono text-[8.5px] uppercase tracking-[0.15em] text-amber-400 border border-amber-500/50 px-1.5 py-0.5">
+                        {isAr ? "مقترح" : "Suggested"}
+                      </span>
+                    )}
+                  </span>
                   <span className="block font-mono text-[11.5px] text-mist-400 mt-0.5" dir="ltr">{o.number}</span>
                 </span>
                 <Icon name="wa" className="w-5 h-5 text-[#3fbf6f]" />
@@ -87,6 +133,20 @@ function WhatsAppFab() {
                 </span>
               </a>
             )}
+          </div>
+          <div className="px-3 pb-3 pt-2.5 border-t border-ink-700 flex gap-2.5">
+            <a
+              href={telHref("sa")}
+              className="flex-1 inline-flex items-center justify-center gap-2 border border-ink-600 px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-mist-300 hover:border-amber-500 hover:text-amber-400 transition-colors"
+            >
+              <Icon name="phone" className="w-3.5 h-3.5" /> {isAr ? "اتصال · سعودية" : "Call · KSA"}
+            </a>
+            <a
+              href={telHref("eg")}
+              className="flex-1 inline-flex items-center justify-center gap-2 border border-ink-600 px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-mist-300 hover:border-amber-500 hover:text-amber-400 transition-colors"
+            >
+              <Icon name="phone" className="w-3.5 h-3.5" /> {isAr ? "اتصال · مصر" : "Call · EGY"}
+            </a>
           </div>
         </div>
       )}
@@ -345,9 +405,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const { t } = useLang();
 
   useEffect(() => {
-    if (location.hash.includes("#/")) return; // in-page anchor on services page
+    captureUtm(); // attach marketing source to every future outbound message
+  }, []);
+
+  useEffect(() => {
+    if (location.hash) return; // in-page anchor (e.g. /services#networks) — let it scroll
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   // In-page anchor handling for /services#section
   useEffect(() => {
@@ -370,8 +434,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       >
         {t("common.skip")}
       </a>
+      <ScrollProgress />
       <Header />
-      <main id="main-content" className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">
+        <div key={location.pathname} className="page-enter">{children}</div>
+      </main>
       <Footer />
       <WhatsAppFab />
     </div>

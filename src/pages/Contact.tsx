@@ -1,6 +1,6 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
-import { CONTACT, hasEmail, mailLink, waLink } from "../config";
+import { CONTACT, hasEmail, mailLink, telHref, vCardDataUrl, waLink } from "../config";
 import { FAQS } from "../data/content";
 import { Btn, FaqList, FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 import { ServiceRequestForm } from "../components/ServiceRequestForm";
@@ -36,6 +36,13 @@ function WaCard({ market, delay }: { market: "sa" | "eg"; delay: number }) {
         >
           <Icon name="wa" className="w-4.5 h-4.5" />
           {isAr ? "ابدأ محادثة" : "Start a chat"}
+        </a>
+        <a
+          href={telHref(market)}
+          className="relative mt-3 inline-flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-mist-400 hover:text-amber-400 transition-colors"
+        >
+          <Icon name="phone" className="w-3.5 h-3.5" />
+          {isAr ? "أو اتصل مباشرة" : "Or call directly"}
         </a>
       </div>
     </Reveal>
@@ -156,6 +163,26 @@ export function Contact() {
               </div>
             ))}
           </Reveal>
+
+          <Reveal delay={120} className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <a
+              href={vCardDataUrl()}
+              download="tech-of-the-world.vcf"
+              className="inline-flex items-center gap-3 border border-ink-900/25 px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:bg-ink-900 hover:text-amber-400 transition-all duration-300"
+            >
+              <Icon name="doc" className="w-4.5 h-4.5" />
+              {isAr ? "احفظ بطاقة التواصل (vCard)" : "Save contact card (vCard)"}
+            </a>
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist-500">
+              {isAr ? "خطوط مباشرة:" : "Direct lines:"}
+            </span>
+            <a href={telHref("sa")} className="font-mono text-[13px] font-medium text-ink-800 hover:text-amber-600 transition-colors" dir="ltr">
+              {CONTACT.displaySA}
+            </a>
+            <a href={telHref("eg")} className="font-mono text-[13px] font-medium text-ink-800 hover:text-amber-600 transition-colors" dir="ltr">
+              {CONTACT.displayEG}
+            </a>
+          </Reveal>
         </div>
       </section>
 
@@ -189,6 +216,10 @@ export function Request() {
   );
   const params = new URLSearchParams(window.location.hash.split("?")[1] ?? "");
   const prefill = params.get("service") ?? undefined;
+  const rawCountry = params.get("country") ?? "";
+  const prefillCountry =
+    rawCountry === "Saudi Arabia" || rawCountry === "Egypt" ? rawCountry : undefined;
+  const context = params.get("context") ?? undefined;
 
   return (
     <>
@@ -203,7 +234,7 @@ export function Request() {
       <section className="bg-paper-100 text-ink-900 grid-bg-light">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-14 lg:py-20 grid lg:grid-cols-[1fr_360px] gap-12 items-start">
           <div className="chamfer bg-ink-950 p-3 sm:p-4">
-            <ServiceRequestForm prefillService={prefill} />
+            <ServiceRequestForm prefillService={prefill} prefillCountry={prefillCountry} context={context} />
           </div>
           <aside className="space-y-6 lg:sticky lg:top-32">
             <Reveal>

@@ -30,11 +30,32 @@ const initial: FormState = {
   attachment: "",
 };
 
-export function ServiceRequestForm({ prefillService }: { prefillService?: string }) {
+export function ServiceRequestForm({
+  prefillService,
+  prefillCountry,
+  context,
+}: {
+  prefillService?: string;
+  prefillCountry?: string;
+  context?: string;
+}) {
   const { t, L, isAr } = useLang();
-  const [form, setForm] = useState<FormState>({ ...initial, service: prefillService ?? "" });
+  const [form, setForm] = useState<FormState>({
+    ...initial,
+    service: prefillService ?? "",
+    country: prefillCountry === "Saudi Arabia" || prefillCountry === "Egypt" ? prefillCountry : "",
+  });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
+
+  /* Human-readable label for where the visitor came from (auto handoff). */
+  const contextLabel = (ctx: string): string => {
+    const [kind, ...rest] = ctx.split(":");
+    const body = rest.join(":").trim();
+    if (kind === "case") return `${isAr ? "دراسة حالة" : "Case study"} — ${body}`;
+    if (kind === "industry") return `${isAr ? "القطاع" : "Industry"} — ${body}`;
+    return body;
+  };
 
   const serviceOptions = useMemo(
     () => [...SERVICE_CATEGORIES.map((c) => ({ value: c.id, label: L(c.name) })), { value: "other", label: t("form.other") }],
@@ -72,6 +93,7 @@ export function ServiceRequestForm({ prefillService }: { prefillService?: string
       `${t("form.phone")}: ${form.phone}`,
       `${t("form.email")}: ${form.email}`,
       `${t("form.service")}: ${svc}`,
+      context ? `${isAr ? "السياق" : "Context"}: ${contextLabel(context)}` : "",
       `${t("form.urgency")}: ${t(`form.${form.urgency}`)}`,
       form.attachment ? `Attachment: ${form.attachment}` : "",
       `----------------------------------------`,
@@ -163,6 +185,11 @@ export function ServiceRequestForm({ prefillService }: { prefillService?: string
   return (
     <form onSubmit={onSubmit} noValidate className="chamfer bg-ink-850 border border-ink-600 p-8 sm:p-10 relative">
       <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-amber-500 via-amber-500/40 to-transparent" aria-hidden="true" />
+      {context && (
+        <p className="mb-7 inline-flex items-center gap-2.5 border border-amber-500/40 bg-amber-500/10 text-amber-300 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em]">
+          <Icon name="bolt" className="w-4 h-4" /> {contextLabel(context)}
+        </p>
+      )}
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="f-name" className={labelCls}>{t("form.fullName")} *</label>
