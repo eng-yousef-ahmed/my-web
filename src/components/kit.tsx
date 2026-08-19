@@ -515,32 +515,32 @@ export function SectionHeading({
   kicker,
   title,
   lead,
-  tone = "light",
+  tone: _tone,
   className = "",
 }: {
   kicker: string;
   title: B;
   lead?: B;
+  /** Deprecated — colors now adapt automatically to the section surface. */
   tone?: "light" | "dark";
   className?: string;
 }) {
   const { L } = useLang();
-  /* tone = tone of the TEXT. "light" text sits on dark sections,
-     "dark" text sits on light sections. */
-  const titleColor = tone === "light" ? "text-paper-50" : "text-ink-900";
-  const leadColor = tone === "light" ? "text-mist-300" : "text-mist-500";
-  const kickerColor = tone === "light" ? "text-amber-400" : "text-amber-600";
   return (
     <div className={`max-w-3xl ${className}`}>
       <Reveal className="flex items-center gap-3 mb-5">
-        <span className={`h-px w-10 ${tone === "light" ? "bg-amber-400" : "bg-amber-600"}`} />
-        <span className={`font-mono text-[11px] uppercase tracking-[0.3em] ${kickerColor}`}>{kicker}</span>
+        <span className="h-px w-10 bg-amber-500" />
+        {/* kicker auto-adapts: bright amber on dark surfaces, dark amber on light */}
+        <span className="text-kicker font-mono text-[11px] uppercase tracking-[0.3em]">{kicker}</span>
       </Reveal>
       <Reveal line as="h2" delay={80}>
-        <span className={`font-display text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.08] ${titleColor}`}>{L(title)}</span>
+        {/* title inherits its color from the section wrapper:
+            white on dark sections, black on light ones — can never mismatch */}
+        <span className="font-display text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.08]">{L(title)}</span>
       </Reveal>
       {lead && (
-        <Reveal as="p" delay={160} className={`mt-5 text-[16.5px] leading-relaxed ${leadColor}`}>
+        /* mist re-tints itself per surface via CSS variables (dark text on light, bright on dark) */
+        <Reveal as="p" delay={160} className="mt-5 text-[16.5px] leading-relaxed text-mist-500">
           {L(lead)}
         </Reveal>
       )}

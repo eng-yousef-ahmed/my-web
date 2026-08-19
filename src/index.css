@@ -272,6 +272,15 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   --color-mist-500: #93a6b6;
 }
 
+/* kicker labels: bright amber on dark surfaces (default), dark amber on light */
+:root { --ya-kicker: #f0b35a; }
+.grid-bg-light,
+.bg-paper-50,
+.bg-paper-100,
+.bg-paper-200,
+.bg-paper-300 { --ya-kicker: #8f5a12; }
+.text-kicker { color: var(--ya-kicker); }
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
