@@ -4,6 +4,7 @@ import { useLang } from "../i18n";
 import { CONTACT, captureUtm, hasEmail, mailLink, telHref, waLink } from "../config";
 import { Btn, FlagEG, FlagSA, Icon, Logo } from "./kit";
 import { Cursor } from "./fx";
+import { Assistant } from "./Assistant";
 
 const NAV = [
   { to: "/", labelKey: "nav.home" },
@@ -442,6 +443,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div key={location.pathname} className="page-enter">{children}</div>
       </main>
       <Footer />
+      <Assistant />
       <WhatsAppFab />
     </div>
   );
