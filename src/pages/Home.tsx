@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta, usePrefersReducedMotion } from "../i18n";
-import { CASES, MARKET_LABEL } from "../data/cases";
+import { MARKET_LABEL, type CaseStudy } from "../data/cases";
+import { useAllProjects } from "../data/projectLoader";
 import { FACTS, INDUSTRIES, SERVICE_CATEGORIES, STEPS, TECH_GROUPS, TECH_TICKER, WHY_US, EXTRA_INDUSTRIES } from "../data/content";
 import { BrandMark, Btn, CountUp, FlagEG, FlagSA, Icon, LogoMark, Marquee, Reveal, Scramble, SectionHeading, SmartImg, useInView } from "../components/kit";
 import { waLink, hasWhatsApp, IMAGES } from "../config";
@@ -119,14 +120,23 @@ function HeroGlow() {
 }
 
 /* ---------------- featured case card ---------------- */
-function CaseCard({ id, index }: { id: string; index: number }) {
-  const c = CASES.find((x) => x.id === id)!;
+function CaseCard({ c, index }: { c: CaseStudy; index: number }) {
   const { L, t } = useLang();
+  const cover = c.images?.[0];
   return (
     <Reveal delay={(index % 2) * 100}>
       <Tilt max={5} className="h-full">
       <Link to={`/projects/${c.id}`} className="group block chamfer-sm bg-paper-50 border border-ink-900/12 card-lift hover:border-ink-900/40 hover:shadow-[0_24px_60px_-30px_rgba(10,20,32,0.45)] h-full">
         <div className="relative overflow-hidden border-b border-ink-900/10">
+          {cover ? (
+            <div className="relative h-[132px] bg-ink-900 overflow-hidden">
+              <img src={cover.file} alt={cover.caption ? L(cover.caption) : L(c.title)} loading="lazy" className="absolute inset-0 w-full h-full object-cover duo-img transition-transform duration-700 group-hover:scale-[1.05]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" aria-hidden="true" />
+              <span className="absolute bottom-2.5 start-2.5 font-mono text-[9.5px] uppercase tracking-[0.18em] bg-ink-950/85 text-paper-50 px-2 py-1 border border-ink-600">
+                {c.images && c.images.length > 1 ? `${c.images.length} ${L({ en: "photos", ar: "صور" })}` : L({ en: "Field photo", ar: "صورة ميدانية" })}
+              </span>
+            </div>
+          ) : (
           <svg viewBox="0 0 400 140" className="w-full h-[132px] bg-ink-900" aria-hidden="true">
             <defs>
               <pattern id={`p-${c.id}`} width="26" height="26" patternUnits="userSpaceOnUse">
@@ -149,6 +159,7 @@ function CaseCard({ id, index }: { id: string; index: number }) {
               </text>
             ))}
           </svg>
+          )}
           <span className="absolute top-3 end-3 font-mono text-[10px] uppercase tracking-[0.2em] bg-ink-950/85 text-amber-400 px-2.5 py-1 border border-ink-600">
             {L(MARKET_LABEL[c.market])}
           </span>
@@ -176,7 +187,8 @@ export default function Home() {
     "Technology That Moves Business Forward. IT infrastructure, networks, Microsoft & cloud, CCTV and access control for businesses in Saudi Arabia and Egypt."
   );
   const wa = waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.");
-  const featured = CASES.filter((c) => c.featured).map((c) => c.id);
+  const { projects } = useAllProjects();
+  const featured = projects.filter((c) => c.featured);
   const { ref: finalRef, inView: finalIn } = useInView<HTMLDivElement>();
 
   return (
@@ -333,8 +345,8 @@ export default function Home() {
             <Btn to="/projects" variant="outlineLight" className="mb-2">{t("cta.exploreProjects")}</Btn>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            {featured.map((id, i) => (
-              <CaseCard key={id} id={id} index={i} />
+            {featured.map((c, i) => (
+              <CaseCard key={c.id} c={c} index={i} />
             ))}
           </div>
         </div>

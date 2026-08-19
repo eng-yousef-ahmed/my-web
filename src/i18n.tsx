@@ -121,7 +121,7 @@ const STR: Record<string, B> = {
   "footer.top": { en: "Back to top", ar: "العودة للأعلى" },
   "footer.waNote": {
     en: "One-tap WhatsApp chat activates once the business number is configured.",
-    ar: "يتفعّل_chat واتساب الفوري بعد ضبط رقم الأعمال.",
+    ar: "تُفعَّل محادثة واتساب الفورية بعد ضبط رقم الأعمال.",
   },
 
   // misc sections

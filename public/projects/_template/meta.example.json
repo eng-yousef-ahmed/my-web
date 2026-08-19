@@ -1,0 +1,45 @@
+{
+  "title": {
+    "en": "Project Name — English",
+    "ar": "اسم المشروع — بالعربية"
+  },
+  "sector": {
+    "en": "Hospitality",
+    "ar": "الضيافة"
+  },
+  "market": "sa",
+  "featured": false,
+  "catIds": ["it-infrastructure", "networks"],
+  "summary": {
+    "en": "One or two lines shown on the project card.",
+    "ar": "سطر أو سطران يظهران على كارت المشروع."
+  },
+  "overview": {
+    "en": "Full overview paragraph for the case-study page.",
+    "ar": "فقرة النظرة العامة لصفحة دراسة الحالة."
+  },
+  "challenge": {
+    "en": "What made this project hard?",
+    "ar": "ما الذي جعل هذا المشروع صعبًا؟"
+  },
+  "solution": {
+    "en": "How was it solved?",
+    "ar": "كيف تم الحل؟"
+  },
+  "implementation": [
+    { "en": "Step one", "ar": "الخطوة الأولى" },
+    { "en": "Step two", "ar": "الخطوة الثانية" }
+  ],
+  "technologies": ["MikroTik", "CCTV", "Wi-Fi"],
+  "role": {
+    "en": "Our role in one sentence.",
+    "ar": "دورنا في جملة واحدة."
+  },
+  "results": [
+    { "en": "Outcome one", "ar": "النتيجة الأولى" }
+  ],
+  "images": [
+    { "file": "images/01.jpg", "caption": { "en": "Server room", "ar": "غرفة الخوادم" } },
+    { "file": "images/02.jpg", "caption": { "en": "Cabling", "ar": "التوصيلات" } }
+  ]
+}

@@ -30,7 +30,7 @@ export const ARTICLES: Article[] = [
       },
       {
         en: "Active Directory gives the business one source of truth: who exists, what they can access, and which policies apply to their machine. Done properly, onboarding becomes a routine, offboarding becomes a checklist, and security stops depending on memory.",
-        ar: "يمنح أكتيف ديريكتوري العمل مصدر حقيقة واحدًا: من الموجود، وماذا يستطيع الوصول إليه، وأي السياسات تنطبق على جهازه. عند تنفيذه بشكل صحيح، يصبح التوظيف روتينًا، وإنهاء الخدمة قائمة تحقق، ويتوقف الأمن عن الاعتماد على الذاكرة.",
+        ar: "يمنح أكتيف ديريكتوري العمل مصدر حقيقة واحدًا: من هو موجود، وما الذي يحق له الوصول إليه، وأي السياسات تنطبق على جهازه. وعند تنفيذه بشكل صحيح، يصبح ضم موظف جديد روتينًا، وإنهاء الخدمة قائمة تحقق، ويتوقف الأمن عن الاعتماد على الذاكرة.",
       },
       {
         en: "The disciplines that matter most are unglamorous: consistent naming, organized OUs, Group Policies that actually standardize the estate, and admin accounts separated from daily-use accounts. Environments fail from neglect of these basics long before they fail from anything exotic.",

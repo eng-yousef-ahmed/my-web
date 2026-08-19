@@ -1,5 +1,8 @@
 import type { B } from "../i18n";
 
+/** صورة مشروع من مجلد المحتوى — public/projects/<id>/images/ */
+export type ProjectImage = { file: string; caption?: B };
+
 export type CaseStudy = {
   id: string;
   title: B;
@@ -15,6 +18,8 @@ export type CaseStudy = {
   technologies: string[];
   role: B;
   results: B[];
+  /** تُمْلأ تلقائيًا من مجلد المشروع (بدون كود) */
+  images?: ProjectImage[];
 };
 
 export const CASES: CaseStudy[] = [

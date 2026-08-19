@@ -11,7 +11,7 @@ import { Icon } from "./kit";
    conversation to the team on WhatsApp.
    ============================================================ */
 
-type Mood = "idle" | "happy" | "talking" | "thinking";
+type Mood = "idle" | "happy" | "talking" | "thinking" | "urgent" | "dance";
 
 /* ---------------- the robot itself (pure SVG, animated) ---------------- */
 export function PotatoBot({
@@ -50,7 +50,9 @@ export function PotatoBot({
     return () => window.removeEventListener("mousemove", onMove);
   }, [track, reduced]);
 
-  const waving = mood === "happy" || mood === "talking";
+  const waving = mood === "happy" || mood === "talking" || mood === "dance";
+  const urgent = mood === "urgent";
+  const eyeFill = urgent ? "#ff9b8e" : mood === "thinking" ? "#e8b96a" : "#aef3e4";
 
   return (
     <svg
@@ -77,14 +79,17 @@ export function PotatoBot({
       <ellipse cx="60" cy="124" rx="25" ry="5.5" fill="#020609" opacity="0.45" />
       <ellipse cx="60" cy="112.5" rx="13" ry="3.2" fill="#6cc7b4" opacity="0.4" className="bot-led" />
 
+      <g className={mood === "dance" ? "bot-dance" : ""}>
       <g className="bot-float">
         {/* antenna */}
         <path d="M60 22 V10" stroke="#8f5a12" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="60" cy="7.5" r="6.5" fill="#e9a33b" opacity="0.22" className={mood === "thinking" ? "bot-led fast" : "bot-led"} />
-        <circle cx="60" cy="7.5" r="3.8" fill="#f0b35a" className={mood === "thinking" ? "bot-led fast" : "bot-led"} />
+        <circle cx="60" cy="7.5" r="6.5" fill={urgent ? "#ff6b5e" : "#e9a33b"} opacity="0.22" className={mood === "thinking" || urgent ? "bot-led fast" : "bot-led"} />
+        <circle cx="60" cy="7.5" r="3.8" fill={urgent ? "#ff6b5e" : "#f0b35a"} className={mood === "thinking" || urgent ? "bot-led fast" : "bot-led"} />
 
-        {/* left arm */}
-        <path d="M24 64 q-10 5 -9 15" stroke="#c07f1c" strokeWidth="7.5" strokeLinecap="round" fill="none" />
+        {/* left arm (waves along when dancing) */}
+        <g className={mood === "dance" ? "bot-wave" : ""} style={mood === "dance" ? { animationDirection: "reverse" } : undefined}>
+          <path d="M24 64 q-10 5 -9 15" stroke="#c07f1c" strokeWidth="7.5" strokeLinecap="round" fill="none" />
+        </g>
         {/* right arm (waves when happy / talking) */}
         <g className={waving ? "bot-wave" : ""}>
           <path d="M96 62 q11 -3 16 -12" stroke="#c07f1c" strokeWidth="7.5" strokeLinecap="round" fill="none" />
@@ -118,19 +123,32 @@ export function PotatoBot({
 
         {/* eyes (tracked pupils + blinking LEDs) */}
         <g ref={eyesRef} className="bot-pupil">
-          <circle cx="50" cy="54.5" r="7.2" fill="#7fe8d4" opacity="0.2" />
-          <circle cx="70" cy="54.5" r="7.2" fill="#7fe8d4" opacity="0.2" />
-          <circle cx="50" cy="54.5" r="4.1" fill={mood === "thinking" ? "#e8b96a" : "#aef3e4"} className="bot-eye" />
-          <circle cx="70" cy="54.5" r="4.1" fill={mood === "thinking" ? "#e8b96a" : "#aef3e4"} className="bot-eye bot-eye-b" />
+          <circle cx="50" cy="54.5" r="7.2" fill={urgent ? "#ff6b5e" : "#7fe8d4"} opacity="0.2" />
+          <circle cx="70" cy="54.5" r="7.2" fill={urgent ? "#ff6b5e" : "#7fe8d4"} opacity="0.2" />
+          <circle cx="50" cy="54.5" r="4.1" fill={eyeFill} className="bot-eye" />
+          <circle cx="70" cy="54.5" r="4.1" fill={eyeFill} className="bot-eye bot-eye-b" />
         </g>
 
-        {/* blush */}
-        <circle cx="38" cy="71" r="4" fill="#e07b39" opacity="0.35" />
-        <circle cx="82" cy="71" r="4" fill="#e07b39" opacity="0.35" />
+        {/* blush (hides when worried) */}
+        {!urgent && (
+          <>
+            <circle cx="38" cy="71" r="4" fill="#e07b39" opacity="0.35" />
+            <circle cx="82" cy="71" r="4" fill="#e07b39" opacity="0.35" />
+          </>
+        )}
+
+        {/* sweat drop in emergency mode */}
+        {urgent && (
+          <path d="M97 36 q3.4 5.6 0 8 q-3.4-2.4 0-8 Z" fill="#7fe8d4" className="bot-led fast" />
+        )}
 
         {/* mouth by mood */}
         {mood === "thinking" ? (
           <circle cx="60" cy="76.5" r="3" fill="#8f5a12" />
+        ) : urgent ? (
+          <path d="M52 77.5 Q56 73.5 60 77.5 Q64 81.5 68 77.5" stroke="#8f5a12" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+        ) : mood === "dance" ? (
+          <path d="M47.5 72.5 Q60 89.5 72.5 72.5 Q60 80 47.5 72.5 Z" fill="#8f5a12" />
         ) : mood === "happy" || mood === "talking" ? (
           <path
             d="M49.5 73 Q60 86.5 70.5 73 Q60 78.5 49.5 73 Z"
@@ -140,6 +158,7 @@ export function PotatoBot({
         ) : (
           <path d="M52.5 74.5 Q60 80.5 67.5 74.5" stroke="#8f5a12" strokeWidth="2.6" fill="none" strokeLinecap="round" />
         )}
+      </g>
       </g>
     </svg>
   );
@@ -210,6 +229,12 @@ const STR = {
     closeLabel: "إغلاق المحادثة",
     typingLabel: "بطاطا بيكتب…",
     askAgain: "اسأل أي حاجة تانية!",
+    moodIdle: "جاهز وبيفكر فيك",
+    moodHappy: "متصل الآن — يرد في ثواني",
+    moodThinking: "بيفكر…",
+    moodUrgent: "وضع الطوارئ!",
+    moodDance: "في نوبة فرح",
+    backAgain: "وحشتني!",
   },
   en: {
     name: "Batata",
@@ -254,6 +279,12 @@ const STR = {
     closeLabel: "Close chat",
     typingLabel: "Batata is typing…",
     askAgain: "Ask me anything else!",
+    moodIdle: "Ready when you are",
+    moodHappy: "Online — replies in seconds",
+    moodThinking: "Thinking…",
+    moodUrgent: "Emergency mode!",
+    moodDance: "In a happy mood",
+    backAgain: "I missed you!",
   },
 };
 
@@ -268,7 +299,32 @@ const SERVICE_HINTS: Record<string, string[]> = {
 function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   const s = STR[lang];
   const n = normalize(raw);
-  const out: { html: string; actions?: { label: string; to?: string; wa?: Market | "auto" }[] } = { html: "" };
+  const out: { html: string; mood?: Mood; actions?: { label: string; to?: string; wa?: Market | "auto" }[] } = { html: "" };
+
+  /* remember the visitor's name — Batata greets them personally next time */
+  const nameMatch = raw.trim().match(/(?:اسمي|انا اسمي|my name is|i'?m called|i am)\s+([\p{L}]{2,20})/iu);
+  if (nameMatch) {
+    const name = nameMatch[1];
+    try { localStorage.setItem("ya-visitor-name", name); } catch { /* private mode */ }
+    out.html =
+      lang === "ar"
+        ? `تشرفنا يا <b>${name}</b>! من دلوقتي إحنا أصحاب — اسألني عن أي خدمة أو سعر أو تغطية، وأنا معاك.`
+        : `Nice to meet you, <b>${name}</b>! We're friends now — ask me about any service, price or coverage and I'm on it.`;
+    out.mood = "dance";
+    out.actions = [{ label: s.goServices, to: "/services" }, { label: s.goRequest, to: "/request" }];
+    return out;
+  }
+
+  /* easter egg: calling Batata by name makes it dance */
+  if (n === "بطاطا" || n === "يا بطاطا" || n === "batata" || n === "potato" || n === "hey batata") {
+    out.html =
+      lang === "ar"
+        ? "مين ناداني؟ ده أنا! كل ما حد ينده عليا بفرح وأرقص — يلا اسألني أي حاجة عن خدماتنا، أو خلينا نرقص شوية كمان."
+        : "Who called me? That's me! I do a little dance every time someone calls my name — now ask me anything about our services, or let's keep dancing.";
+    out.mood = "dance";
+    out.actions = [{ label: s.goServices, to: "/services" }];
+    return out;
+  }
 
   if (has(n, ["خدم", "service", "بتعملو ايه", "what do you do", "مجالات", "بتقدمو"])) {
     out.html =
@@ -293,6 +349,7 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   }
   if (has(n, ["عاجل", "urgent", "طوارئ", "emergency", "عطل", "down", "واقع", "مش شغال", "not working", "مشكله كبيره", "critical", "حرج"])) {
     out.html = s.urgent;
+    out.mood = "urgent";
     out.actions = [
       { label: s.goWhatsapp, wa: market ?? "auto" },
       { label: s.goRequest, to: "/request" },
@@ -314,7 +371,7 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
       ? "الشبكات ملعبنا: <b>LAN/WAN · واي فاي للأعمال · VPN بين الفروع · ميكروتيك</b> — بنخططها بمسح فعلي للمبنى مش تخمين."
       : "Networks are our playground: <b>LAN/WAN · business Wi-Fi · site-to-site VPN · MikroTik</b> — planned from a real building survey, not guesswork.";
     out.actions = [
-      { label: s.goProjects, to: "/projects/mikrotik-vpn" },
+      { label: s.goProjects, to: "/projects/mikrotik-s2s-vpn" },
       { label: s.goRequest, to: "/request?service=networks" },
     ];
     return out;
@@ -449,8 +506,10 @@ export function Assistant() {
   const [market, setMarket] = useState<Market | null>(null);
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [history, setHistory] = useState<string[]>([]);
+  const [botMood, setBotMood] = useState<Mood>("idle");
   const scrollRef = useRef<HTMLDivElement>(null);
   const booted = useRef(false);
+  const moodTimer = useRef<number>(0);
 
   /* intro bubble shortly after load, until the user opens the chat */
   useEffect(() => {
@@ -463,13 +522,21 @@ export function Assistant() {
   }, []);
 
   useEffect(() => {
-    if (open && !booted.current) {
+    if (!open) return;
+    let savedName = "";
+    try { savedName = localStorage.getItem("ya-visitor-name") ?? ""; } catch { /* private mode */ }
+    const greeting = savedName
+      ? (lang === "ar"
+          ? `أهلًا بعودتك يا <b>${savedName}</b>! ${s.backAgain} اسألني عن أي خدمة أو سعر أو تغطية.`
+          : `Welcome back, <b>${savedName}</b>! ${s.backAgain} Ask me about any service, price or coverage.`)
+      : s.greeting;
+    if (!booted.current) {
       booted.current = true;
-      setMsgs([{ from: "bot", html: s.greeting }]);
+      setMsgs([{ from: "bot", html: greeting }]);
       return;
     }
-    if (open) setMsgs((m) => (m.length ? m : [{ from: "bot", html: s.greeting }]));
-  }, [open, s.greeting]);
+    setMsgs((m) => (m.length ? m : [{ from: "bot", html: greeting }]));
+  }, [open, s.greeting, s.backAgain, lang]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -490,6 +557,12 @@ export function Assistant() {
     window.setTimeout(() => {
       setTyping(false);
       setMsgs((prev) => [...prev, { from: "bot", html: reply.html, actions: reply.actions }]);
+      setBotMood(reply.mood ?? "happy");
+      window.clearTimeout(moodTimer.current);
+      if (reply.mood === "dance" || reply.mood === "urgent") {
+        /* expressive moods settle back to a friendly face after a moment */
+        moodTimer.current = window.setTimeout(() => setBotMood("happy"), 3200);
+      }
     }, 650 + Math.random() * 550);
   };
 
