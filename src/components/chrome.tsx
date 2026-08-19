@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLang } from "../i18n";
 import { CONTACT, captureUtm, hasEmail, mailLink, telHref, waLink } from "../config";
 import { Btn, FlagEG, FlagSA, Icon, Logo } from "./kit";
+import { Cursor } from "./fx";
 
 const NAV = [
   { to: "/", labelKey: "nav.home" },
@@ -434,6 +435,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       >
         {t("common.skip")}
       </a>
+      <Cursor />
       <ScrollProgress />
       <Header />
       <main id="main-content" className="flex-1">

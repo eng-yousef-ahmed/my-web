@@ -224,6 +224,33 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   transform: translateY(-6px);
 }
 
+/* ---------- custom cursor ring (fine pointers only) ---------- */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(233, 163, 59, 0.9);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 120;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
+  will-change: transform;
+}
+.cursor-ring.cursor-hover {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(240, 179, 90, 1);
+}
+.cursor-ring.cursor-down {
+  width: 24px;
+  height: 24px;
+}
+@media (pointer: coarse) {
+  .cursor-ring { display: none; }
+}
+
 /* ---------- page transition ---------- */
 @keyframes pageEnter {
   from { opacity: 0; transform: translateY(16px); }

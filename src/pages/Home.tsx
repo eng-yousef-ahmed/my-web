@@ -5,6 +5,7 @@ import { CASES, MARKET_LABEL } from "../data/cases";
 import { FACTS, INDUSTRIES, SERVICE_CATEGORIES, STEPS, TECH_GROUPS, TECH_TICKER, WHY_US, EXTRA_INDUSTRIES } from "../data/content";
 import { BrandMark, Btn, CountUp, FlagEG, FlagSA, Icon, LogoMark, Marquee, Reveal, Scramble, SectionHeading, SmartImg, useInView } from "../components/kit";
 import { waLink, hasWhatsApp, IMAGES } from "../config";
+import { Magnetic, NetworkCanvas, Tilt } from "../components/fx";
 
 /* ---------------- hero topology panel ---------------- */
 function TopologyPanel() {
@@ -123,6 +124,7 @@ function CaseCard({ id, index }: { id: string; index: number }) {
   const { L, t } = useLang();
   return (
     <Reveal delay={(index % 2) * 100}>
+      <Tilt max={5} className="h-full">
       <Link to={`/projects/${c.id}`} className="group block chamfer-sm bg-paper-50 border border-ink-900/12 card-lift hover:border-ink-900/40 hover:shadow-[0_24px_60px_-30px_rgba(10,20,32,0.45)] h-full">
         <div className="relative overflow-hidden border-b border-ink-900/10">
           <svg viewBox="0 0 400 140" className="w-full h-[132px] bg-ink-900" aria-hidden="true">
@@ -161,6 +163,7 @@ function CaseCard({ id, index }: { id: string; index: number }) {
           </span>
         </div>
       </Link>
+      </Tilt>
     </Reveal>
   );
 }
@@ -181,6 +184,7 @@ export default function Home() {
       {/* ============ HERO ============ */}
       <section className="relative min-h-screen flex items-center bg-ink-950 text-paper-50 overflow-hidden noise">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
+        <NetworkCanvas className="absolute inset-0 w-full h-full opacity-70" />
         <HeroGlow />
         <div className="absolute -top-32 -start-32 w-[620px] h-[620px] rounded-full bg-amber-500/[0.07] blur-[130px]" aria-hidden="true" />
         <div className="absolute bottom-0 end-0 w-[520px] h-[520px] rounded-full bg-circuit-500/[0.06] blur-[120px]" aria-hidden="true" />
@@ -204,8 +208,8 @@ export default function Home() {
                 : "We build and run the IT environments businesses depend on — infrastructure, networks, Microsoft environments and security systems — delivered remotely and on-site across Saudi Arabia and Egypt."}
             </Reveal>
             <Reveal delay={1020} className="mt-9 flex flex-wrap items-center gap-4">
-              <Btn to="/request">{t("nav.request")}</Btn>
-              <Btn to="/projects" variant="outline">{t("cta.exploreProjects")}</Btn>
+              <Magnetic><Btn to="/request">{t("nav.request")}</Btn></Magnetic>
+              <Magnetic><Btn to="/projects" variant="outline">{t("cta.exploreProjects")}</Btn></Magnetic>
             </Reveal>
             <Reveal delay={1150} className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
               <span className="font-mono text-[10.5px] uppercase tracking-[0.28em] text-mist-500">{t("common.primaryMarkets")}</span>
@@ -220,7 +224,7 @@ export default function Home() {
           </div>
           <Reveal delay={400} className="relative max-w-md w-full mx-auto lg:ms-auto">
             <div className="absolute -top-5 -start-5 w-full h-full border border-amber-500/25 chamfer" aria-hidden="true" />
-            <TopologyPanel />
+            <Tilt max={4}><TopologyPanel /></Tilt>
           </Reveal>
         </div>
 
@@ -367,6 +371,7 @@ export default function Home() {
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {WHY_US.map((w, i) => (
               <Reveal key={w.title.en} delay={(i % 3) * 90} className="h-full">
+                <Tilt max={6} className="h-full">
                 <div className="group h-full chamfer-sm bg-ink-900 border border-ink-700 p-7 card-lift hover:border-amber-500/60">
                   <div className="flex items-center justify-between">
                     <span className="w-11 h-11 grid place-items-center border border-ink-600 text-amber-500 group-hover:bg-amber-500 group-hover:text-ink-950 transition-all duration-300">
@@ -377,6 +382,7 @@ export default function Home() {
                   <h3 className="mt-5 font-display text-lg font-bold">{L(w.title)}</h3>
                   <p className="mt-2.5 text-[14px] leading-relaxed text-mist-300">{L(w.body)}</p>
                 </div>
+                </Tilt>
               </Reveal>
             ))}
           </div>
