@@ -525,13 +525,16 @@ export function SectionHeading({
   className?: string;
 }) {
   const { L } = useLang();
-  const titleColor = tone === "light" ? "text-ink-900" : "text-paper-50";
-  const leadColor = tone === "light" ? "text-mist-500" : "text-mist-300";
+  /* tone = tone of the TEXT. "light" text sits on dark sections,
+     "dark" text sits on light sections. */
+  const titleColor = tone === "light" ? "text-paper-50" : "text-ink-900";
+  const leadColor = tone === "light" ? "text-mist-300" : "text-mist-500";
+  const kickerColor = tone === "light" ? "text-amber-400" : "text-amber-600";
   return (
     <div className={`max-w-3xl ${className}`}>
       <Reveal className="flex items-center gap-3 mb-5">
-        <span className="h-px w-10 bg-amber-500" />
-        <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-600">{kicker}</span>
+        <span className={`h-px w-10 ${tone === "light" ? "bg-amber-400" : "bg-amber-600"}`} />
+        <span className={`font-mono text-[11px] uppercase tracking-[0.3em] ${kickerColor}`}>{kicker}</span>
       </Reveal>
       <Reveal line as="h2" delay={80}>
         <span className={`font-display text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.08] ${titleColor}`}>{L(title)}</span>

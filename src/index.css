@@ -8,15 +8,12 @@
   --color-ink-700: #16283c;
   --color-ink-600: #1f344c;
 
-  --color-mist-500: #74899b;
-  --color-mist-400: #8ba1b2;
-  --color-mist-300: #a9bac8;
-  --color-mist-200: #c9d5df;
-
-  /* readable body grays for LIGHT sections (contrast ≥ 6:1 on paper) */
-  --color-steel-500: #55697c;
-  --color-steel-600: #47596b;
-  --color-steel-700: #394a5a;
+  /* "mist" greys — base values are tuned for DARK sections: bright,
+     white-leaning body text that never disappears into the ink. */
+  --color-mist-500: #93a6b6;
+  --color-mist-400: #b2c1cd;
+  --color-mist-300: #d1dce5;
+  --color-mist-200: #e8eff4;
 
   --color-paper-50: #f3f6f5;
   --color-paper-100: #eaf0ee;
@@ -239,32 +236,41 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   box-shadow: 0 26px 50px -26px rgba(2, 8, 14, 0.55);
 }
 
-/* ---------- adaptive text contrast ----------
-   Light sections declare `text-ink-900` on their wrapper; inside them the
-   secondary greys automatically resolve to a darker "steel" tone so body
-   text reads comfortably (≈6:1 on paper, no eye strain, never pure black).
-   Dark cards nested inside light sections (bg-ink-*) restore the lifted
-   "mist" grey so their text stays bright enough. */
-.text-ink-900 .text-mist-500 { color: var(--color-steel-600); }
-.text-ink-900 .text-mist-400 { color: var(--color-steel-500); }
-.bg-ink-700 .text-mist-500,
-.bg-ink-800 .text-mist-500,
-.bg-ink-850 .text-mist-500,
-.bg-ink-900 .text-mist-500,
-.bg-ink-950 .text-mist-500 { color: var(--color-mist-500); }
-.bg-ink-700 .text-mist-400,
-.bg-ink-800 .text-mist-400,
-.bg-ink-850 .text-mist-400,
-.bg-ink-900 .text-mist-400,
-.bg-ink-950 .text-mist-400 { color: var(--color-mist-400); }
+/* ---------- adaptive text contrast (CSS-variable based) ----------
+   Every `text-mist-*` utility reads `var(--color-mist-*)`, so re-declaring
+   the variable on a container re-tints ALL of its text at once — and the
+   value inherits, so nesting resolves itself with zero exceptions:
 
-/* tiny mono labels on light backgrounds need the darkest steel */
-.text-ink-900 .font-mono.text-mist-500 { color: var(--color-steel-700); }
-.bg-ink-700 .font-mono.text-mist-500,
-.bg-ink-800 .font-mono.text-mist-500,
-.bg-ink-850 .font-mono.text-mist-500,
-.bg-ink-900 .font-mono.text-mist-500,
-.bg-ink-950 .font-mono.text-mist-500 { color: var(--color-mist-500); }
+   • LIGHT surfaces  → near-black text (reads as black, ≈13:1 on paper)
+   • DARK  surfaces  → bright white-leaning text (≈7–15:1 on ink)
+   • a dark card inside a light section re-declares the bright values on
+     itself, overriding the inherited black for its own subtree, and the
+     reverse is also true — no "invisible text on matching background". */
+
+/* LIGHT surfaces -> near-black text */
+.grid-bg-light,
+.bg-paper-50,
+.bg-paper-100,
+.bg-paper-200,
+.bg-paper-300 {
+  --color-mist-200: #2e3d49;
+  --color-mist-300: #22303b;
+  --color-mist-400: #182530;
+  --color-mist-500: #0e1922;
+}
+
+/* DARK surfaces -> bright, white-leaning text */
+.bg-ink-600,
+.bg-ink-700,
+.bg-ink-800,
+.bg-ink-850,
+.bg-ink-900,
+.bg-ink-950 {
+  --color-mist-200: #e8eff4;
+  --color-mist-300: #d1dce5;
+  --color-mist-400: #b2c1cd;
+  --color-mist-500: #93a6b6;
+}
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
