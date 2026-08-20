@@ -29,6 +29,8 @@ export const CONTACT = {
   displayEG: "+20 120 336 1192",
   email: (env.VITE_CONTACT_EMAIL || "TechOfTheWorled92@gmail.com").trim(),
   formEndpoint: (env.VITE_FORM_ENDPOINT || "").trim(),
+  linkedin: (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed").trim(),
+  linkedinHandle: "eng-yousef-ahmed",
 };
 
 export const hasWhatsApp = true;
@@ -99,6 +101,7 @@ export function vCardDataUrl(): string {
     `TEL;TYPE=CELL,VOICE:+${CONTACT.whatsappEG}`,
     `EMAIL:${CONTACT.email}`,
     `URL:https://wa.me/${CONTACT.whatsappSA}`,
+    `URL:${CONTACT.linkedin}`,
     "NOTE:Technology That Moves Business Forward — IT services in Saudi Arabia & Egypt",
     "END:VCARD",
   ];

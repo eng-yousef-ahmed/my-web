@@ -182,6 +182,15 @@ export function Contact() {
             <a href={telHref("eg")} className="font-mono text-[13px] font-medium text-ink-800 hover:text-amber-600 transition-colors" dir="ltr">
               {CONTACT.displayEG}
             </a>
+            <a
+              href={CONTACT.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0a66c2] hover:text-[#084d92] transition-colors"
+            >
+              <Icon name="linkedin" className="w-4.5 h-4.5" />
+              {isAr ? "لينكدإن — يوسف أحمد" : "LinkedIn — Yousef Ahmed"}
+            </a>
           </Reveal>
         </div>
       </section>

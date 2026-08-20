@@ -135,6 +135,18 @@ function WhatsAppFab() {
                 </span>
               </a>
             )}
+            <a
+              href={CONTACT.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors"
+            >
+              <span className="shrink-0 w-6 h-6 grid place-items-center bg-[#0a66c2] text-white"><Icon name="linkedin" className="w-3.5 h-3.5" strokeWidth={2} /></span>
+              <span className="flex-1 leading-tight">
+                <span className="block font-display font-semibold text-[13.5px] text-paper-50 group-hover:text-amber-400 transition-colors">LinkedIn</span>
+                <span className="block font-mono text-[11px] text-mist-400 mt-0.5">/{CONTACT.linkedinHandle}</span>
+              </span>
+            </a>
           </div>
           <div className="px-3 pb-3 pt-2.5 border-t border-ink-700 flex gap-2.5">
             <a
@@ -337,6 +349,33 @@ export function Footer() {
               <Link to="/egypt" className="flex items-center gap-2 border border-ink-600 px-3 py-2 text-[12.5px] font-medium hover:border-amber-500 hover:text-amber-400 transition-colors">
                 <FlagEG className="w-4.5 h-4.5" /> Egypt
               </Link>
+            </div>
+            <div className="mt-6 flex items-center gap-2.5">
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300"
+              >
+                <Icon name="linkedin" className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href={waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.", "sa")}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#23a55b] hover:text-[#5fd68f] hover:bg-[#23a55b]/10 transition-all duration-300"
+              >
+                <Icon name="wa" className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href={mailLink("IT Inquiry — TECH OF THE WORLD", "") ?? "#"}
+                aria-label="Email"
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-amber-500 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
+              >
+                <Icon name="mail" className="w-4.5 h-4.5" />
+              </a>
             </div>
           </div>
 

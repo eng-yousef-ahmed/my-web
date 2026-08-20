@@ -159,6 +159,13 @@ const PATHS: Record<string, React.ReactNode> = {
     </>
   ),
   send: <path d="M20.5 3.5 3.5 10l7 2.5 2.5 7Zm0 0-10 9" />,
+  linkedin: (
+    <>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <circle cx="7.7" cy="8" r="1.2" fill="currentColor" stroke="none" />
+      <path d="M7.7 11.3v5.4M11.7 16.7v-3.3a2.55 2.55 0 0 1 5.1 0v3.3M11.7 11.3v1.7" />
+    </>
+  ),
   flag: <path d="M5.5 21V4m0 0c4-2.5 8 2.5 12 0v9c-4 2.5-8-2.5-12 0" />,
   bolt: <path d="M13 3 5 13.5h5.5L11 21l8-10.5h-5.5Z" />,
 };
@@ -171,23 +178,44 @@ export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name:
   );
 }
 
-/* ================= flags (minimal inline marks) ================= */
+/* ================= flags (detailed inline marks) ================= */
 export function FlagSA({ className = "w-5 h-5" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <rect x="2" y="4" width="20" height="16" rx="2" fill="#165d31" />
-      <path d="M6 12.5c2.5-1.5 9.5-1.5 12 0M6 15.5h12" stroke="#eaf4ec" strokeWidth="1.1" strokeLinecap="round" fill="none" />
-      <path d="M17 9.2v1.6" stroke="#eaf4ec" strokeWidth="1.1" strokeLinecap="round" />
+      <rect x="1.5" y="4.5" width="21" height="15" rx="2.4" fill="#1e7a44" stroke="#0a1420" strokeOpacity="0.35" strokeWidth="0.8" />
+      {/* stylized shahada strokes */}
+      <g stroke="#f4f9f4" strokeWidth="1.05" strokeLinecap="round" fill="none" opacity="0.95">
+        <path d="M6 8.2h2.1M9.1 8.2h1.3M11.4 8.2h3.1M15.5 8.2h2.5" />
+        <path d="M6.6 10.6h1.5M9 10.6h2.7M12.7 10.6h1.5M15.1 10.6h2.9" />
+        <path d="M7.4 12.9h3.3M11.8 12.9h2.1M15 12.9h1.9" />
+      </g>
+      {/* sword — blade toward the hoist, hilt on the fly side */}
+      <g fill="#f4f9f4">
+        <path d="M5.1 15.55 h11.5 l1.9 0.95 -1.9 0.95 H5.1 q-1.05 -0.95 0 -1.9 Z" />
+        <rect x="17.35" y="14.6" width="1.15" height="3.7" rx="0.45" />
+        <path d="M18.9 14.85 h1.9 a0.6 0.6 0 0 1 0.6 0.6 v2 a0.6 0.6 0 0 1 -0.6 0.6 h-1.9 Z" />
+        <circle cx="21" cy="16.45" r="0.75" />
+      </g>
     </svg>
   );
 }
 export function FlagEG({ className = "w-5 h-5" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <rect x="2" y="4" width="20" height="5.4" fill="#c8423b" />
-      <rect x="2" y="9.4" width="20" height="5.2" fill="#f2efe9" />
-      <rect x="2" y="14.6" width="20" height="5.4" fill="#262a2e" />
-      <path d="M12 10.4l.8 1.6 1.2.2-.9 1 .2 1.3-1.3-.6-1.3.6.2-1.3-.9-1 1.2-.2z" fill="#c9a24b" />
+      {/* tricolor bands with rounded corners (no clip ids needed) */}
+      <path d="M1.5 6.9 a2.4 2.4 0 0 1 2.4 -2.4 h16.2 a2.4 2.4 0 0 1 2.4 2.4 v2.6 h-21 Z" fill="#ce1126" />
+      <rect x="1.5" y="9.5" width="21" height="5" fill="#f7f4ee" />
+      <path d="M1.5 14.5 h21 v2.6 a2.4 2.4 0 0 1 -2.4 2.4 h-16.2 a2.4 2.4 0 0 1 -2.4 -2.4 Z" fill="#23272b" />
+      <rect x="1.5" y="4.5" width="21" height="15" rx="2.4" fill="none" stroke="#0a1420" strokeOpacity="0.35" strokeWidth="0.8" />
+      {/* Eagle of Saladin — simplified golden emblem */}
+      <g fill="#c99b3f" stroke="#8a6420" strokeWidth="0.35">
+        <circle cx="12" cy="9.7" r="0.9" />
+        <path d="M11.9 9.05 l0.95 0.75 h-1.9 Z" />
+        <path d="M11.15 10.6 h1.7 l0.5 3.15 h-2.7 Z" />
+        <path d="M11.1 10.8 C9 11.85 7.35 11.55 6.15 10.15 C6.65 12.95 8.7 14.15 11.3 14.2 Z" />
+        <path d="M12.9 10.8 C15 11.85 16.65 11.55 17.85 10.15 C17.35 12.95 15.3 14.15 12.7 14.2 Z" />
+        <path d="M10.9 13.95 h2.2 l0.55 1.75 h-3.3 Z" />
+      </g>
     </svg>
   );
 }

@@ -584,7 +584,8 @@ export function Assistant() {
     });
   };
 
-  const mood: Mood = typing ? "thinking" : open ? "happy" : "idle";
+  const mood: Mood = typing ? "thinking" : open ? (botMood === "idle" ? "happy" : botMood) : "idle";
+  const statusLine = typing ? s.typingLabel : botMood === "urgent" ? s.moodUrgent : botMood === "dance" ? s.moodDance : s.online;
 
   return (
     <>
@@ -609,7 +610,7 @@ export function Assistant() {
           className="relative block cursor-pointer outline-offset-4 drop-shadow-[0_14px_25px_rgba(0,0,0,0.55)] hover:drop-shadow-[0_18px_35px_rgba(233,163,59,0.35)] transition-all duration-300 hover:scale-105 active:scale-95"
         >
           <span className={bounced ? "block bot-bounce" : "block"}>
-            <PotatoBot size={74} mood={open ? "happy" : "idle"} track={!open} />
+            <PotatoBot size={74} mood={mood} track={!open} />
           </span>
           {!open && (
             <span className="absolute top-1 end-1 flex w-3 h-3" aria-hidden="true">
@@ -639,8 +640,8 @@ export function Assistant() {
             <div className="flex-1 min-w-0">
               <p className="font-display font-bold text-[15.5px] text-paper-50 leading-tight">{s.panelTitle}</p>
               <p className="text-[11px] text-mist-300 mt-0.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#3fbf6f] led" aria-hidden="true" />
-                {typing ? s.typingLabel : s.online}
+                <span className={`w-1.5 h-1.5 rounded-full led ${botMood === "urgent" ? "bg-red-400" : "bg-[#3fbf6f]"}`} aria-hidden="true" />
+                {statusLine}
               </p>
             </div>
             <button

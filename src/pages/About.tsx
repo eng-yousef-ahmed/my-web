@@ -1,7 +1,7 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
 import { Btn, FlagEG, FlagSA, Icon, LogoMark, PageHero, Reveal, SectionHeading } from "../components/kit";
-import { IMAGES } from "../config";
+import { IMAGES, CONTACT } from "../config";
 
 const PRINCIPLES = [
   {
@@ -126,6 +126,16 @@ export default function About() {
                     </div>
                   ))}
                 </div>
+                <a
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-7 group inline-flex items-center gap-3 border border-[#0a66c2]/60 bg-[#0a66c2]/10 text-[#5ea8e8] px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.14em] hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2] transition-all duration-300"
+                >
+                  <Icon name="linkedin" className="w-4.5 h-4.5" />
+                  LinkedIn — /{CONTACT.linkedinHandle}
+                  <Icon name="arrow" className="w-3.5 h-3.5 rtl:-scale-x-100 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" strokeWidth={2.2} />
+                </a>
               </div>
             </div>
           </Reveal>
