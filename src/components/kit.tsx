@@ -169,6 +169,20 @@ const PATHS: Record<string, React.ReactNode> = {
   ),
   flag: <path d="M5.5 21V4m0 0c4-2.5 8 2.5 12 0v9c-4 2.5-8-2.5-12 0" />,
   bolt: <path d="M13 3 5 13.5h5.5L11 21l8-10.5h-5.5Z" />,
+  printer: (
+    <>
+      <path d="M7 8V3.5h10V8M7 17H4.5a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H17" />
+      <rect x="7" y="14.5" width="10" height="6" />
+      <circle cx="17.5" cy="11" r="0.9" fill="currentColor" stroke="none" />
+    </>
+  ),
+  star: <path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.8Z" />,
+  key: (
+    <>
+      <circle cx="8" cy="8.5" r="4" />
+      <path d="m11 11.5 8.5 8.5M17 17.5l2-2M14.5 15l2-2" />
+    </>
+  ),
 };
 
 export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name: string; className?: string; strokeWidth?: number }) {
@@ -194,6 +208,36 @@ export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name:
  * window.open, no interception — so the browser navigates natively and the
  * link behaves identically to every other external link on the site.
  */
+/**
+ * On a real (top-level) deployment the anchor stays 100% native — zero JS
+ * interference, exactly like the WhatsApp links.
+ *
+ * Inside an embedded preview iframe some hosts silently swallow
+ * `target="_blank"` navigations to certain domains. In that case only, we
+ * guard the click: try a popup, and if nothing happened, navigate anyway
+ * (top frame first, then this frame) so the link ALWAYS does something.
+ */
+export function openGuarded(url: string) {
+  return (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window === "undefined" || window.self === window.top) return;
+    e.preventDefault();
+    let win: Window | null = null;
+    try {
+      win = window.open(url, "_blank", "noopener,noreferrer");
+    } catch {
+      win = null;
+    }
+    window.setTimeout(() => {
+      if (!document.hasFocus()) return; // a new tab/window opened — done
+      try {
+        window.top!.location.href = url;
+      } catch {
+        window.location.href = url;
+      }
+    }, 700);
+  };
+}
+
 export function LinkedInLink({
   url,
   handle,
@@ -211,6 +255,7 @@ export function LinkedInLink({
 }) {
   const { isAr } = useLang();
   const aria = isAr ? labelAr : labelEn;
+  const guard = openGuarded(url);
 
   if (variant === "icon") {
     return (
@@ -220,6 +265,7 @@ export function LinkedInLink({
         rel="noopener noreferrer"
         aria-label={aria}
         title="LinkedIn"
+        onClick={guard}
         className={`w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300 ${className}`}
       >
         <Icon name="linkedin" className="w-4.5 h-4.5" />
@@ -234,6 +280,7 @@ export function LinkedInLink({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={aria}
+        onClick={guard}
         className={`inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.2em] text-mist-300 hover:text-[#5ea8e8] transition-colors ${className}`}
       >
         <Icon name="linkedin" className="w-4 h-4" /> LinkedIn
@@ -248,6 +295,7 @@ export function LinkedInLink({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={aria}
+        onClick={guard}
         className={`group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors ${className}`}
       >
         <span className="shrink-0 w-6 h-6 grid place-items-center bg-[#0a66c2] text-white">
@@ -268,6 +316,7 @@ export function LinkedInLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={aria}
+      onClick={guard}
       className={`group inline-flex items-center gap-3 border border-[#0a66c2]/60 bg-[#0a66c2]/10 text-[#5ea8e8] px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.14em] hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2] transition-all duration-300 ${className}`}
     >
       <Icon name="linkedin" className="w-4.5 h-4.5" />

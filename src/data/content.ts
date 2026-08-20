@@ -230,8 +230,8 @@ export const INDUSTRIES: Industry[] = [
       { en: "CCTV and access control for sites, yards and warehouses", ar: "مراقبة وتحكم في الدخول للمواقع والساحات والمستودعات" },
     ],
     help: {
-      en: "Rapid site-office IT setup, site-to-site VPN back to head office, CCTV and attendance systems that survive harsh site conditions.",
-      ar: "تجهيز سريع لتقنية مكاتب المواقع، وربط VPN بالمكتب الرئيسي، وأنظمة مراقبة وحضور تتحمّل ظروف المواقع القاسية.",
+      en: "Rapid site-office IT setup, site-to-site VPN back to head office, CCTV and attendance systems that survive harsh site conditions — field-proven on Jeddah's Sumou Towers project, supporting 500+ users on-site.",
+      ar: "تجهيز سريع لتقنية مكاتب المواقع، وربط VPN بالمكتب الرئيسي، وأنظمة مراقبة وحضور تتحمّل ظروف المواقع القاسية — خبرة ميدانية مثبتة في مشروع أبراج سمو بجدة بدعم أكثر من 500 مستخدم في الموقع.",
     },
   },
   {
@@ -269,8 +269,8 @@ export const INDUSTRIES: Industry[] = [
       { en: "Many branches, little local IT knowledge", ar: "فروع كثيرة ومعرفة تقنية محلية محدودة" },
     ],
     help: {
-      en: "Resilient branch connectivity with failover, CCTV designed for real coverage rather than camera counts, and centralized management of all locations.",
-      ar: "اتصال مرن للفروع مع مسارات بديلة، ومراقبة مصممة لتغطية حقيقية لا لعدد الكاميرات، وإدارة مركزية لكل الفروع.",
+      en: "Resilient branch connectivity with failover, POS-aware support, CCTV designed for real coverage rather than camera counts, and centralized management of all locations — the model we ran across Zahran Market's retail branches for five years.",
+      ar: "اتصال مرن للفروع مع مسارات بديلة، ودعم يفهم أنظمة نقاط البيع، ومراقبة مصممة لتغطية حقيقية لا لعدد الكاميرات، وإدارة مركزية لكل الفروع — وهو النموذج الذي شغّلناه في فروع أسواق زهران لخمس سنوات.",
     },
   },
   {
@@ -282,8 +282,8 @@ export const INDUSTRIES: Industry[] = [
       { en: "No internal IT department, but real IT needs", ar: "لا يوجد قسم تقنية داخلي، لكن الاحتياجات حقيقية" },
     ],
     help: {
-      en: "Active Directory and Microsoft 365 administered properly — identities, devices, SharePoint and OneDrive — plus a support channel your team can rely on.",
-      ar: "إدارة صحيحة لأكتيف ديريكتوري ومايكروسوفت 365 — هويات وأجهزة وشير بوينت وون درايف — مع قناة دعم يعتمد عليها فريقك.",
+      en: "Active Directory and Microsoft 365 administered properly — identities, devices, SharePoint and OneDrive — plus a support channel your team can rely on, including executive (VIP) support for leadership.",
+      ar: "إدارة صحيحة لأكتيف ديريكتوري ومايكروسوفت 365 — هويات وأجهزة وشير بوينت وون درايف — مع قناة دعم يعتمد عليها فريقك، تشمل دعمًا تنفيذيًا (VIP) للإدارة العليا.",
     },
   },
   {
@@ -313,29 +313,30 @@ export type TechGroup = { name: B; items: string[] };
 export const TECH_GROUPS: TechGroup[] = [
   {
     name: { en: "Platforms & Identity", ar: "المنصات والهوية" },
-    items: ["Microsoft", "Windows Server", "Active Directory", "Group Policy"],
+    items: ["Windows Server 2012/2016/2019", "Active Directory", "Group Policy", "Windows 10 / 11"],
   },
   {
     name: { en: "Productivity & Cloud", ar: "الإنتاجية والسحابة" },
-    items: ["Microsoft 365", "OneDrive", "SharePoint", "Exchange Online"],
+    items: ["Microsoft 365", "Exchange Online", "Teams", "SharePoint", "OneDrive"],
   },
   {
     name: { en: "Networking", ar: "الشبكات" },
-    items: ["MikroTik RouterOS", "LAN / WAN", "Business Wi-Fi", "Site-to-Site VPN"],
+    items: ["MikroTik RouterOS", "TCP/IP · DNS · DHCP", "HP Switches", "Business Wi-Fi", "Site-to-Site VPN"],
   },
   {
     name: { en: "Surveillance & Access", ar: "المراقبة والتحكم" },
-    items: ["Hikvision", "Dahua", "NVR / DVR", "ZKTeco Biometrics"],
+    items: ["Hikvision · Dahua", "NVR / DVR", "ZKTeco Biometrics", "Access Control", "IP Telephony"],
   },
   {
     name: { en: "Operations & Monitoring", ar: "العمليات والمراقبة" },
-    items: ["ManageEngine", "PRTG", "Structured Cabling", "Service Desk Practice"],
+    items: ["ManageEngine ServiceDesk", "PRTG", "AnyDesk · TeamViewer · RDP", "Enterprise Printing"],
   },
 ];
 
 export const TECH_TICKER = [
-  "Microsoft", "Windows Server", "Active Directory", "Microsoft 365", "SharePoint", "OneDrive",
-  "MikroTik", "Hikvision", "Dahua", "ZKTeco", "ManageEngine", "PRTG",
+  "Microsoft", "Windows Server", "Active Directory", "Microsoft 365", "Exchange Online", "Teams",
+  "SharePoint", "OneDrive", "MikroTik", "HP Switches", "Hikvision", "Dahua", "ZKTeco",
+  "ManageEngine", "PRTG", "PowerShell", "VMware",
 ];
 
 /* ---------------- FAQ ---------------- */
@@ -391,4 +392,12 @@ export const FACTS: { value: string; label: B }[] = [
   { value: "11", label: { en: "Core services", ar: "خدمات أساسية" } },
   { value: "02", label: { en: "Markets served", ar: "أسواق مخدومة" } },
   { value: "08", label: { en: "Documented case studies", ar: "دراسات حالة موثقة" } },
+];
+
+/* ---------------- Founder experience metrics (verified from CV) ---------------- */
+export const FOUNDER_METRICS: { value: string; suffix: string; label: B }[] = [
+  { value: "9", suffix: "+", label: { en: "Years of enterprise IT experience", ar: "سنوات من الخبرة التقنية المؤسسية" } },
+  { value: "500", suffix: "+", label: { en: "Users supported in Windows Domain environments", ar: "مستخدم ندعمهم في بيئات الدومين" } },
+  { value: "500", suffix: "+", label: { en: "Endpoints under management", ar: "جهاز طرفي تحت الإدارة" } },
+  { value: "65", suffix: "%", label: { en: "Reduction in recurring incidents (50–65%)", ar: "انخفاض في الأعطال المتكررة (50–65%)" } },
 ];
