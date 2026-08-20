@@ -185,7 +185,7 @@ export function Contact() {
             <a
               href={CONTACT.linkedin}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0a66c2] hover:text-[#084d92] transition-colors"
             >
               <Icon name="linkedin" className="w-4.5 h-4.5" />

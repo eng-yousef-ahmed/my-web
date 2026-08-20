@@ -129,7 +129,7 @@ export default function About() {
                 <a
                   href={CONTACT.linkedin}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="mt-7 group inline-flex items-center gap-3 border border-[#0a66c2]/60 bg-[#0a66c2]/10 text-[#5ea8e8] px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.14em] hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2] transition-all duration-300"
                 >
                   <Icon name="linkedin" className="w-4.5 h-4.5" />

@@ -138,7 +138,7 @@ function WhatsAppFab() {
             <a
               href={CONTACT.linkedin}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors"
             >
               <span className="shrink-0 w-6 h-6 grid place-items-center bg-[#0a66c2] text-white"><Icon name="linkedin" className="w-3.5 h-3.5" strokeWidth={2} /></span>
@@ -354,7 +354,7 @@ export function Footer() {
               <a
                 href={CONTACT.linkedin}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300"
               >
