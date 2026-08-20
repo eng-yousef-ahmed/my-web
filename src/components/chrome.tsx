@@ -287,7 +287,7 @@ export function Header() {
 
 /* ---------------- Footer ---------------- */
 export function Footer() {
-  const { t, L } = useLang();
+  const { t, L, lang } = useLang();
   const year = new Date().getFullYear();
 
   const cols = [
@@ -337,6 +337,24 @@ export function Footer() {
               <Link to="/egypt" className="flex items-center gap-2 border border-ink-600 px-3 py-2 text-[12.5px] font-medium hover:border-amber-500 hover:text-amber-400 transition-colors">
                 <FlagEG className="w-4.5 h-4.5" /> Egypt
               </Link>
+            </div>
+            <div className="mt-6 flex items-center gap-2.5">
+              <a
+                href={waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.", "sa")}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#23a55b] hover:text-[#5fd68f] hover:bg-[#23a55b]/10 transition-all duration-300"
+              >
+                <Icon name="wa" className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href={mailLink("IT Inquiry — TECH OF THE WORLD", "") ?? "#"}
+                aria-label="Email"
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-amber-500 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
+              >
+                <Icon name="mail" className="w-4.5 h-4.5" />
+              </a>
             </div>
           </div>
 

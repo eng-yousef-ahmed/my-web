@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLang, usePageMeta, usePrefersReducedMotion } from "../i18n";
 import { MARKET_LABEL, type CaseStudy } from "../data/cases";
 import { useAllProjects } from "../data/projectLoader";
-import { FACTS, INDUSTRIES, SERVICE_CATEGORIES, STEPS, TECH_GROUPS, TECH_TICKER, WHY_US, EXTRA_INDUSTRIES } from "../data/content";
+import { FOUNDER_METRICS, INDUSTRIES, SERVICE_CATEGORIES, STEPS, TECH_GROUPS, TECH_TICKER, WHY_US, EXTRA_INDUSTRIES } from "../data/content";
 import { BrandMark, Btn, CountUp, FlagEG, FlagSA, Icon, LogoMark, Marquee, Reveal, Scramble, SectionHeading, SmartImg, useInView } from "../components/kit";
 import { waLink, hasWhatsApp, IMAGES } from "../config";
 import { Magnetic, NetworkCanvas, Tilt } from "../components/fx";
@@ -260,16 +260,17 @@ export default function Home() {
         </Marquee>
       </div>
 
-      {/* ============ FACTS ============ */}
+      {/* ============ EXPERIENCE METRICS (verified) ============ */}
       <section className="relative bg-paper-100 text-ink-900 grid-bg-light">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-20">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-ink-900/15 border border-ink-900/15">
-            {FACTS.map((f, i) => (
+            {FOUNDER_METRICS.map((f, i) => (
               <Reveal key={f.label.en} delay={i * 90} className="bg-paper-100 p-8 group hover:bg-ink-900 transition-colors duration-500">
                 <p className="font-display text-5xl lg:text-6xl font-bold text-ink-900 group-hover:text-amber-500 transition-colors">
                   <CountUp value={f.value} />
+                  <span className="text-amber-600 group-hover:text-amber-500">{f.suffix}</span>
                 </p>
-                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.24em] text-mist-500 group-hover:text-mist-300 transition-colors">{L(f.label)}</p>
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] leading-relaxed text-mist-500 group-hover:text-mist-300 transition-colors">{L(f.label)}</p>
               </Reveal>
             ))}
           </div>
