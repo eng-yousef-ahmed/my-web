@@ -297,6 +297,11 @@ export function ProjectDetail() {
           </Reveal>
           <Reveal className="mt-6 flex flex-wrap gap-2.5">
             <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] border border-amber-500/50 text-amber-400 px-3 py-1.5">{L(MARKET_LABEL[c.market])}</span>
+            {c.period && (
+              <span className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.2em] border border-circuit-500/50 text-circuit-300 px-3 py-1.5" dir="ltr">
+                <Icon name="clock" className="w-3.5 h-3.5" />{L(c.period)}
+              </span>
+            )}
             <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] border border-ink-600 text-mist-300 px-3 py-1.5">{L(c.sector)}</span>
             {c.catIds.map((cid) => {
               const cat = SERVICE_CATEGORIES.find((s) => s.id === cid);
