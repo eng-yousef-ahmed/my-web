@@ -187,6 +187,7 @@ export function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={externalClick(CONTACT.linkedin)}
+              aria-label={isAr ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn"}
               className="inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0a66c2] hover:text-[#084d92] transition-colors"
             >
               <Icon name="linkedin" className="w-4.5 h-4.5" />
