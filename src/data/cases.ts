@@ -18,6 +18,8 @@ export type CaseStudy = {
   technologies: string[];
   role: B;
   results: B[];
+  /** الفترة الزمنية الموثقة في السيرة الذاتية (اختياري) */
+  period?: B;
   /** تُمْلأ تلقائيًا من مجلد المشروع (بدون كود) */
   images?: ProjectImage[];
 };
@@ -30,6 +32,7 @@ export const CASES: CaseStudy[] = [
     market: "sa",
     featured: true,
     catIds: ["it-infrastructure", "networks", "security-systems"],
+    period: { en: "2024 — 2025 · Makkah, Saudi Arabia", ar: "2024 — 2025 · مكة المكرمة، السعودية" },
     summary: {
       en: "A complete temporary IT environment — network, Wi-Fi, surveillance and connectivity — delivered for a smart Hajj camp operating at peak-season scale.",
       ar: "بيئة تقنية مؤقتة متكاملة — شبكة وواي فاي ومراقبة واتصال — لمخيم حج ذكي يعمل بكامل طاقته في موسم الذروة.",
@@ -72,6 +75,7 @@ export const CASES: CaseStudy[] = [
     market: "sa",
     featured: true,
     catIds: ["it-infrastructure", "networks"],
+    period: { en: "2025 — Present · Jeddah, Saudi Arabia", ar: "2025 — الآن · جدة، السعودية" },
     summary: {
       en: "Structured cabling and network distribution across a multi-tower development — the silent layer every smart building service depends on.",
       ar: "توصيلات منظمة وتوزيع شبكي عبر أبراج متعددة — الطبقة الصامتة التي تعتمد عليها كل خدمات المباني الذكية.",
@@ -345,6 +349,97 @@ export const CASES: CaseStudy[] = [
       { en: "Every issue visible, assigned and tracked to closure", ar: "كل مشكلة مرئية ومسندة ومتابَعة حتى الإغلاق" },
       { en: "Repeat incidents identified and eliminated at the root", ar: "الحوادث المتكررة تُحدد وتُعالج من جذرها" },
       { en: "Users with a dependable, predictable way to get help", ar: "مستخدمون لديهم طريقة موثوقة ومتوقعة للحصول على المساعدة" },
+    ],
+  },
+
+  /* ================= EGYPT — documented from CV ================= */
+  {
+    id: "zahran-market",
+    title: { en: "Zahran Market — Multi-Branch Retail IT Operations", ar: "أسواق زهران — تشغيل تقنية المعلومات عبر فروع متعددة" },
+    sector: { en: "Retail", ar: "التجزئة" },
+    market: "eg",
+    featured: true,
+    catIds: ["it-infrastructure", "networks", "microsoft-cloud", "security-systems"],
+    period: { en: "2019 — 2024 · Alexandria, Egypt", ar: "2019 — 2024 · الإسكندرية، مصر" },
+    summary: {
+      en: "Five years of continuous enterprise IT operations across Zahran Market's retail branches in Alexandria — support, networks, monitoring and security systems for a multi-site business.",
+      ar: "خمس سنوات من التشغيل التقني المؤسسي المستمر عبر فروع أسواق زهران في الإسكندرية — دعم وشبكات ومراقبة وأنظمة أمن لمنشأة متعددة المواقع.",
+    },
+    overview: {
+      en: "Zahran Market runs retail operations across multiple business locations in Alexandria. The environment needed reliable, continuous IT: end-user support at every branch, infrastructure that stayed healthy under daily retail pressure, and security systems covering sites — all managed by one accountable specialist.",
+      ar: "تدير أسواق زهران عمليات تجزئة عبر مواقع عمل متعددة في الإسكندرية. احتاجت البيئة إلى تقنية معلومات موثوقة ومستمرة: دعم للمستخدمين في كل فرع، وبنية تحتية تبقى سليمة تحت ضغط التجزئة اليومي، وأنظمة أمن تغطي المواقع — وكل ذلك بإدارة متخصص واحد مسؤول.",
+    },
+    challenge: {
+      en: "Retail never waits: POS terminals, printers and branch networks must work every business day, across multiple locations at once. Without proactive monitoring, performance issues only surfaced as outages — and with branches spread across the city, every incident meant real lost selling time.",
+      ar: "التجزئة لا تنتظر: أنظمة نقاط البيع والطابعات وشبكات الفروع يجب أن تعمل كل يوم عمل، عبر مواقع متعددة في آن واحد. بدون مراقبة استباقية، كانت مشكلات الأداء لا تظهر إلا كانقطاعات — ومع فروع موزعة على المدينة، كان كل عطل يعني وقت بيع ضائعًا فعلًا.",
+    },
+    solution: {
+      en: "A single accountable IT operation across all branches: first- and second-line support for desktops, laptops, POS systems, printers and scanners; Active Directory administration for identities and access; PRTG monitoring to catch performance issues before they became outages; and installation and maintenance of CCTV, access control, biometric attendance and IP telephony.",
+      ar: "تشغيل تقني واحد مسؤول عبر كل الفروع: دعم من المستويين الأول والثاني للأجهزة وأنظمة نقاط البيع والطابعات والماسحات؛ وإدارة أكتيف ديريكتوري للهويات والصلاحيات؛ ومراقبة PRTG لاكتشاف مشكلات الأداء قبل أن تتحول إلى انقطاعات؛ وتركيب وصيانة أنظمة المراقبة والتحكم في الدخول والبصمة والحضور والهواتف.",
+    },
+    implementation: [
+      { en: "First- and second-line support for desktops, laptops, POS systems, printers, scanners and enterprise software across branches", ar: "دعم من المستويين الأول والثاني للأجهزة وأنظمة نقاط البيع والطابعات والماسحات والبرامج عبر الفروع" },
+      { en: "Active Directory administration: user provisioning, password management, shared folders, security groups and NTFS permissions", ar: "إدارة أكتيف ديريكتوري: تجهيز المستخدمين وإدارة كلمات المرور والمجلدات المشتركة ومجموعات الأمان وصلاحيات NTFS" },
+      { en: "User onboarding: accounts, workstations, software and POS terminals configured for secure access to business systems", ar: "تجهيز المستخدمين: حسابات وأجهزة عمل وبرامج وأنظمة نقاط بيع مُعدة للوصول الآمن لأنظمة العمل" },
+      { en: "Infrastructure monitoring with PRTG Network Monitor — proactively identifying performance issues", ar: "مراقبة البنية التحتية عبر PRTG — اكتشاف استباقي لمشكلات الأداء" },
+      { en: "Network support: TCP/IP, DNS, DHCP, HP switches, structured cabling and wireless networking", ar: "دعم الشبكات: TCP/IP وDNS وDHCP ومفاتيح HP والتوصيلات المنظمة والشبكات اللاسلكية" },
+      { en: "Installation and maintenance of CCTV, access control, biometric attendance devices, IP telephony and enterprise hardware", ar: "تركيب وصيانة المراقبة والتحكم في الدخول وأجهزة البصمة والحضور والهواتف والأجهزة المؤسسية" },
+      { en: "Workstation deployment, OS installation, hardware upgrades and endpoint lifecycle support", ar: "نشر أجهزة العمل وتثبيت أنظمة التشغيل وترقية العتاد ودعم دورة حياة الأجهزة الطرفية" },
+      { en: "IT asset inventory, technical documentation and maintenance records", ar: "جرد الأصول التقنية والتوثيق الفني وسجلات الصيانة" },
+    ],
+    technologies: ["Active Directory", "PRTG", "HP Switches", "TCP/IP · DNS · DHCP", "Structured Cabling", "CCTV", "Access Control", "Biometric Attendance", "IP Telephony", "POS Systems", "Enterprise Printing"],
+    role: {
+      en: "IT Support & Network Specialist — the accountable owner of the retail group's day-to-day IT across multiple business locations: support delivery, infrastructure monitoring, network and printing operations, and the installation and upkeep of security and telephony systems.",
+      ar: "أخصائي دعم تقني وشبكات — المسؤول عن التشغيل اليومي لتقنية المعلومات في المجموعة عبر مواقع العمل المتعددة: تقديم الدعم ومراقبة البنية التحتية وتشغيل الشبكات والطباعة وتركيب وصيانة أنظمة الأمن والهواتف.",
+    },
+    results: [
+      { en: "Continuous first- and second-line support across multiple business locations", ar: "دعم مستمر من المستويين الأول والثاني عبر مواقع العمل المتعددة" },
+      { en: "Performance issues identified proactively through PRTG, improving system availability", ar: "اكتشاف استباقي لمشكلات الأداء عبر PRTG بما حسّن توافر الأنظمة" },
+      { en: "Security and attendance infrastructure installed and maintained across sites", ar: "بنية أمن وحضور مركبة ومُصانة عبر المواقع" },
+      { en: "Accurate asset inventory, documentation and maintenance records for lifecycle management", ar: "جرد أصول دقيق وتوثيق وسجلات صيانة لإدارة دورة الحياة" },
+    ],
+  },
+  {
+    id: "united-abco",
+    title: { en: "United Abco Company — On-Site Corporate IT Support", ar: "أبكو المتحدة — دعم تقني ميداني في بيئة شركات" },
+    sector: { en: "Corporate IT Services", ar: "خدمات تقنية للشركات" },
+    market: "eg",
+    featured: true,
+    catIds: ["it-infrastructure", "networks", "microsoft-cloud"],
+    period: { en: "2015 — 2018 · Alexandria, Egypt", ar: "2015 — 2018 · الإسكندرية، مصر" },
+    summary: {
+      en: "On-site end-user IT support at United Abco Company, delivered through Arab Computers Company (ACC) — IMAC operations, domain support and day-to-day IT continuity in a corporate environment.",
+      ar: "دعم تقني ميداني للمستخدمين في شركة أبكو المتحدة عبر الشركة العربية للحاسبات (ACC) — عمليات IMAC ودعم الدومين واستمرارية تقنية المعلومات اليومية في بيئة شركات.",
+    },
+    overview: {
+      en: "United Abco Company needed dependable, on-site IT for its end users — workstations that worked, connectivity that held, and a specialist on the ground handling requests as they happened. The engagement ran through Arab Computers Company (ACC), with the specialist embedded at the client site.",
+      ar: "احتاجت شركة أبكو المتحدة إلى دعم تقني ميداني موثوق لمستخدميها — أجهزة تعمل واتصال مستقر ومتخصص في الموقع يتعامل مع الطلبات فور حدوثها. جرى العمل عبر الشركة العربية للحاسبات (ACC) مع تواجد المتخصص داخل مقر العميل.",
+    },
+    challenge: {
+      en: "In a corporate environment, small IT failures quickly become blocked work. The requirement was uninterrupted IT operations — hardware, operating systems, connectivity and user requests all handled on-site, to SLA targets, without the business feeling the friction.",
+      ar: "في بيئة الشركات، تتحول الأعطال التقنية الصغيرة سريعًا إلى عمل متعطل. كان المطلوب عمليات تقنية بلا انقطاع — أجهزة وأنظمة تشغيل واتصال وطلبات مستخدمين تُعالج ميدانيًا ووفق أهداف الخدمة، دون أن يشعر العمل بأي احتكاك.",
+    },
+    solution: {
+      en: "A dedicated on-site specialist running the full user environment: installation, configuration and maintenance of desktops, laptops and Windows operating systems; LAN/Wi-Fi connectivity, printers and peripheral devices; IMAC activities (Install, Move, Add, Change); and Active Directory account administration with workstation domain support.",
+      ar: "متخصص ميداني مخصص يدير بيئة المستخدمين كاملة: تركيب وتكوين وصيانة الأجهزة المكتبية والمحمولة وأنظمة ويندوز؛ واتصال LAN/Wi-Fi والطابعات والأجهزة الطرفية؛ وعمليات IMAC (تركيب، نقل، إضافة، تغيير)؛ وإدارة حسابات أكتيف ديريكتوري مع دعم انضمام الأجهزة للدومين.",
+    },
+    implementation: [
+      { en: "On-site first- and second-line technical support delivered to SLA targets", ar: "دعم تقني ميداني من المستويين الأول والثاني وفق أهداف الخدمة" },
+      { en: "Installation, configuration and maintenance of desktops, laptops and Windows operating systems", ar: "تركيب وتكوين وصيانة الأجهزة المكتبية والمحمولة وأنظمة ويندوز" },
+      { en: "LAN/Wi-Fi connectivity, printers and peripheral device support", ar: "دعم اتصال LAN/Wi-Fi والطابعات والأجهزة الطرفية" },
+      { en: "IMAC operations — Install, Move, Add, Change — across the user estate", ar: "عمليات IMAC — تركيب ونقل وإضافة وتغيير — عبر أجهزة المستخدمين" },
+      { en: "Active Directory user account administration, password resets and workstation domain support", ar: "إدارة حسابات المستخدمين في أكتيف ديريكتوري وإعادة تعيين كلمات المرور ودعم دومين الأجهزة" },
+      { en: "User request handling, hardware replacement and software installation", ar: "معالجة طلبات المستخدمين واستبدال العتاد وتثبيت البرامج" },
+    ],
+    technologies: ["Windows OS", "LAN / Wi-Fi", "Active Directory", "Enterprise Printing", "Peripheral Devices"],
+    role: {
+      en: "Network & Devices Specialist (أخصائي شبكات وأجهزة) — on-site at United Abco Company through Arab Computers Company (ACC), coordinating with customer representatives to keep IT operations uninterrupted.",
+      ar: "أخصائي شبكات وأجهزة — بمقر شركة أبكو المتحدة عبر الشركة العربية للحاسبات (ACC)، بالتنسيق مع ممثلي العميل للحفاظ على استمرارية العمليات التقنية.",
+    },
+    results: [
+      { en: "First- and second-line support consistently meeting SLA targets", ar: "دعم من المستويين الأول والثاني يحقق أهداف الخدمة باستمرار" },
+      { en: "Uninterrupted IT operations through on-site coordination with customer representatives", ar: "عمليات تقنية بلا انقطاع عبر التنسيق الميداني مع ممثلي العميل" },
+      { en: "Managed user requests, hardware replacement and software installation handled end to end", ar: "طلبات المستخدمين واستبدال العتاد وتثبيت البرامج معالجة من البداية للنهاية" },
     ],
   },
 ];

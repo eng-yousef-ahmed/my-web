@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
 import type { B } from "../i18n";
 import { Btn, FlagEG, FlagSA, Icon, LogoMark, PageHero, Reveal, SectionHeading } from "../components/kit";
 import { IMAGES, CONTACT } from "../config";
+import { CAREER, CERTS, EDUCATION, LANGUAGES } from "../data/career";
 
 /* ---------------- founder CV data (verified) ---------------- */
 const EXPERTISE: { icon: string; t: B }[] = [
@@ -18,62 +20,6 @@ const EXPERTISE: { icon: string; t: B }[] = [
   { icon: "alert", t: { en: "Incident & Problem Management", ar: "إدارة الحوادث والمشكلات" } },
   { icon: "box", t: { en: "IT Asset Management", ar: "إدارة الأصول التقنية" } },
   { icon: "star", t: { en: "Executive (VIP) Support", ar: "دعم التنفيذيين (VIP)" } },
-];
-
-const CAREER: { period: string; role: B; org: B; loc: B; points: B[] }[] = [
-  {
-    period: "2025 — Present",
-    role: { en: "Senior IT Support Specialist", ar: "أخصائي دعم تقني أول" },
-    org: { en: "Buna Al Khaleej Contracting — Sumou Towers Project", ar: "بنيان الخليج للمقاولات — مشروع أبراج سمو" },
-    loc: { en: "Jeddah, Saudi Arabia", ar: "جدة، السعودية" },
-    points: [
-      { en: "Enterprise IT support for 500+ end users in a Windows Domain environment", ar: "دعم تقني مؤسسي لأكثر من 500 مستخدم في بيئة دومين ويندوز" },
-      { en: "Administered Active Directory, Microsoft 365 and enterprise printing infrastructure", ar: "إدارة أكتيف ديريكتوري ومايكروسوفت 365 وبنية الطباعة المؤسسية" },
-      { en: "Reduced recurring incidents by 50–65% via preventive maintenance & monitoring", ar: "خفض الأعطال المتكررة بنسبة 50–65% عبر الصيانة الوقائية والمراقبة" },
-      { en: "Executive (VIP) support for senior management with high SLA compliance", ar: "دعم تنفيذي (VIP) للإدارة العليا مع التزام عالٍ بمستويات الخدمة" },
-    ],
-  },
-  {
-    period: "2024 — 2025",
-    role: { en: "IT Operations Supervisor — Enterprise IT Support", ar: "مشرف عمليات تقنية المعلومات" },
-    org: { en: "Golden Velvet Establishment — Rawaf Mina Project", ar: "مؤسسة جولدن فلفت — مشروع رواف منى" },
-    loc: { en: "Makkah, Saudi Arabia", ar: "مكة المكرمة، السعودية" },
-    points: [
-      { en: "Led 6+ IT technicians during one of Saudi Arabia's largest seasonal projects", ar: "قيادة فريق من 6+ فنيين خلال أحد أكبر المشاريع الموسمية في السعودية" },
-      { en: "Managed incident response, preventive maintenance and infrastructure readiness", ar: "إدارة الاستجابة للحوادث والصيانة الوقائية وجاهزية البنية التحتية" },
-      { en: "Supported desktops, networking, CCTV, access control, biometrics and IP telephony", ar: "دعم الأجهزة والشبكات والمراقبة والتحكم في الدخول والبصمة والهواتف" },
-    ],
-  },
-  {
-    period: "2019 — 2024",
-    role: { en: "IT Support & Network Specialist", ar: "أخصائي دعم تقني وشبكات" },
-    org: { en: "Zahran Market", ar: "أسواق زهران" },
-    loc: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
-    points: [
-      { en: "First- and second-line support across multiple retail branches incl. POS systems", ar: "دعم من المستويين الأول والثاني عبر فروع تجزئة متعددة شاملة أنظمة نقاط البيع" },
-      { en: "Monitored enterprise infrastructure with PRTG and administered Active Directory", ar: "مراقبة البنية التحتية عبر PRTG وإدارة أكتيف ديريكتوري" },
-      { en: "Installed & maintained CCTV, access control, biometric attendance and IP telephony", ar: "تركيب وصيانة المراقبة والتحكم في الدخول والبصمة والحضور والهواتف" },
-    ],
-  },
-  {
-    period: "2015 — 2018",
-    role: { en: "IT Support & Network Specialist", ar: "أخصائي دعم تقني وشبكات" },
-    org: { en: "Arab Computers Company (ACC) — on-site at United Abco", ar: "شركة أراب كمبيوترز — بمقر يونايتد أبكو" },
-    loc: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
-    points: [
-      { en: "On-site corporate end-user support meeting SLA targets", ar: "دعم ميداني للمستخدمين في بيئة شركات مع تحقيق أهداف الخدمة" },
-      { en: "Installed and maintained desktops, laptops, Windows OS and LAN/Wi-Fi", ar: "تركيب وصيانة الأجهزة وأنظمة ويندوز والشبكات المحلية والواي فاي" },
-    ],
-  },
-];
-
-const CERTS: B[] = [
-  { en: "Cisco Networking Academy — IT Support Specialist", ar: "أكاديمية سيسكو — أخصائي دعم تقني" },
-  { en: "Cisco Networking Academy — Network Technician", ar: "أكاديمية سيسكو — فني شبكات" },
-  { en: "Networking Basics & Operating Systems Basics", ar: "أساسيات الشبكات وأنظمة التشغيل" },
-  { en: "IT Customer Support & Computer Hardware Basics", ar: "دعم عملاء التقنية وأساسيات العتاد" },
-  { en: "CCNA Studies & VMware Virtualization (Lab)", ar: "دراسات CCNA وافتراضية VMware (عملي)" },
-  { en: "PowerShell Fundamentals", ar: "أساسيات باورشيل" },
 ];
 
 const PRINCIPLES = [
@@ -172,7 +118,7 @@ export default function About() {
                   </span>
                   <div>
                     <p className="font-mono text-[10.5px] uppercase tracking-[0.26em] text-amber-500">{isAr ? "المؤسس" : "Founder"}</p>
-                    <h2 className="font-display text-2xl font-bold mt-1">Yousef Ahmed Mohamed</h2>
+                    <h2 className="font-display text-2xl font-bold mt-1">Eng. Yousef Ahmed Mohamed</h2>
                     <p className="text-mist-300 text-[13.5px] mt-0.5">{isAr ? "مؤسس وأخصائي دعم تقني أول — بنية تحتية مؤسسية" : "Founder & Senior IT Support Specialist"}</p>
                     <p className="text-mist-500 text-[12px] mt-1.5 flex items-center gap-1.5"><Icon name="pin" className="w-3.5 h-3.5 text-amber-500" />{isAr ? "جدة، السعودية" : "Jeddah, Saudi Arabia"}</p>
                   </div>
@@ -263,7 +209,10 @@ export default function About() {
                         </div>
                         <div className="text-end">
                           <span className="inline-block font-mono text-[11px] uppercase tracking-[0.18em] bg-ink-900 text-paper-50 px-3 py-1.5">{c.period}</span>
-                          <p className="mt-1.5 text-[12.5px] text-mist-500 flex items-center gap-1.5 justify-end"><Icon name="pin" className="w-3.5 h-3.5" />{L(c.loc)}</p>
+                          <p className="mt-1.5 text-[12.5px] text-mist-500 flex items-center gap-1.5 justify-end">
+                            {c.market === "eg" ? <FlagEG className="w-4.5 h-4.5" /> : <FlagSA className="w-4.5 h-4.5" />}
+                            <Icon name="pin" className="w-3.5 h-3.5" />{L(c.loc)}
+                          </p>
                         </div>
                       </div>
                       <ul className="mt-5 space-y-2.5">
@@ -273,6 +222,15 @@ export default function About() {
                           </li>
                         ))}
                       </ul>
+                      {c.caseId && (
+                        <Link
+                          to={`/projects/${c.caseId}`}
+                          className="group mt-5 pt-4 border-t border-ink-900/10 inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-900 hover:text-amber-600 transition-colors"
+                        >
+                          {isAr ? "اقرأ دراسة الحالة الموثقة" : "Read the documented case study"}
+                          <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" strokeWidth={2} />
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </Reveal>
@@ -296,15 +254,36 @@ export default function About() {
               }}
             />
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {CERTS.map((c, i) => (
-              <Reveal key={c.en} delay={(i % 2) * 80}>
-                <div className="flex items-center gap-4 border border-ink-700 bg-ink-950 p-5 h-full hover:border-amber-500/60 transition-colors">
-                  <span className="w-9 h-9 shrink-0 grid place-items-center bg-amber-500/15 text-amber-400"><Icon name="shield" className="w-4.5 h-4.5" /></span>
-                  <span className="text-[14px] font-medium leading-snug text-mist-200">{L(c)}</span>
+          <div>
+            <Reveal className="mb-4">
+              <div className="flex items-center gap-4 chamfer-sm border border-amber-500/50 bg-amber-500/10 p-5">
+                <span className="w-9 h-9 shrink-0 grid place-items-center bg-amber-500 text-ink-950"><Icon name="foundation" className="w-4.5 h-4.5" /></span>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-400">{isAr ? "التعليم" : "Education"}</p>
+                  <p className="text-[14px] font-medium leading-snug text-mist-200 mt-1">{L(EDUCATION)}</p>
                 </div>
-              </Reveal>
-            ))}
+              </div>
+            </Reveal>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {CERTS.map((c, i) => (
+                <Reveal key={c.en} delay={(i % 2) * 80}>
+                  <div className="flex items-center gap-4 border border-ink-700 bg-ink-950 p-5 h-full hover:border-amber-500/60 transition-colors">
+                    <span className="w-9 h-9 shrink-0 grid place-items-center bg-amber-500/15 text-amber-400"><Icon name="shield" className="w-4.5 h-4.5" /></span>
+                    <span className="text-[14px] font-medium leading-snug text-mist-200">{L(c)}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal className="mt-4" delay={120}>
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-2 border border-ink-700 bg-ink-950 p-5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-400">{isAr ? "اللغات" : "Languages"}</span>
+                {LANGUAGES.map((lang) => (
+                  <span key={lang.en} className="flex items-center gap-2.5 text-[13.5px] font-medium text-mist-200">
+                    <Icon name="globe" className="w-4 h-4 text-amber-500" />{L(lang)}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

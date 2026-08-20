@@ -29,6 +29,12 @@ export const CONTACT = {
   displayEG: "+20 120 336 1192",
   email: (env.VITE_CONTACT_EMAIL || "TechOfTheWorled92@gmail.com").trim(),
   formEndpoint: (env.VITE_FORM_ENDPOINT || "").trim(),
+
+  /* ---- business-card identity (single source of truth for the card + .vcf) ---- */
+  cardName: (env.VITE_CARD_NAME || "YOUSEF AHMED MOHMED").trim(),
+  cardTitle: (env.VITE_CARD_TITLE || "IT HELP DESK").trim(),
+  cardEmail: (env.VITE_CARD_EMAIL || "youseefa77@gmail.com").trim(),
+  website: (env.VITE_WEBSITE_URL || "https://tech-of-the-world.netlify.app").trim(),
 };
 
 export const hasWhatsApp = true;
@@ -89,20 +95,31 @@ export const telHref = (market: Market): string =>
 
 /** A downloadable vCard so one tap saves both lines + email into the visitor's phone. */
 export function vCardDataUrl(): string {
+  const nameParts = CONTACT.cardName.trim().split(/\s+/);
+  const family = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
+  const given = nameParts.length > 1 ? nameParts.slice(0, -1).join(" ") : CONTACT.cardName;
   const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
-    "FN:TECH OF THE WORLD",
-    "ORG:TECH OF THE WORLD",
-    `TITLE:${CONFIG.positioning}`,
-    `TEL;TYPE=CELL,VOICE:+${CONTACT.whatsappSA}`,
-    `TEL;TYPE=CELL,VOICE:+${CONTACT.whatsappEG}`,
-    `EMAIL:${CONTACT.email}`,
+    `FN:${CONTACT.cardName}`,
+    `N:${family};${given};;;`,
+    `ORG:${CONFIG.brand}`,
+    `TITLE:${CONTACT.cardTitle}`,
+    `TEL;TYPE=CELL:+${CONTACT.whatsappEG}`,
+    `TEL;TYPE=CELL,WORK:+${CONTACT.whatsappSA}`,
+    `EMAIL:${CONTACT.cardEmail}`,
+    `URL:${CONTACT.website}`,
+    `URL:https://wa.me/${CONTACT.whatsappEG}`,
     `URL:https://wa.me/${CONTACT.whatsappSA}`,
-    "NOTE:Technology That Moves Business Forward — IT services in Saudi Arabia & Egypt",
+    `NOTE:Technology That Moves Business Forward — WhatsApp: +${CONTACT.whatsappEG} (Egypt) / +${CONTACT.whatsappSA} (Saudi Arabia). IT services in Saudi Arabia & Egypt.`,
     "END:VCARD",
   ];
-  return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\n"))}`;
+  return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
+}
+
+/** Human display form of the website URL (no protocol, no trailing slash). */
+export function websiteDisplay(): string {
+  return CONTACT.website.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/+$/, "");
 }
 
 /** Generated brand imagery (dark, duotone-graded in CSS). */

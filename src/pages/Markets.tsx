@@ -55,17 +55,17 @@ const CONTENT: Record<
       ar: "تقنية موثوقة للشركات المصرية التي تجاوزت مرحلة الارتجال.",
     },
     lead: {
-      en: "Egyptian SMBs are digitizing fast — and often inherit environments built piece by piece. We bring structure: documented, monitored IT that scales with the business instead of breaking under it.",
-      ar: "تتحول الشركات المصرية الصغيرة والمتوسطة رقميًا بسرعة — وغالبًا ترث بيئات بُنيت قطعة قطعة. نحن نعيد إليها البنية: تقنية موثقة ومُراقبة تنمو مع العمل بدل أن تنكسر تحته.",
+      en: "Egypt is where this experience began: five years running multi-branch retail IT for Zahran Market in Alexandria, and three years of on-site corporate support at United Abco Company. We bring that field-proven structure to every Egyptian business we serve.",
+      ar: "مصر هي بداية هذه الخبرة: خمس سنوات في تشغيل تقنية المعلومات عبر فروع أسواق زهران بالإسكندرية، وثلاث سنوات من الدعم الميداني للشركات في أبكو المتحدة. ننقل هذه البنية المثبتة ميدانيًا إلى كل عمل نخدمه في مصر.",
     },
     image: IMAGES.network,
     focus: [
-      { icon: "rack", name: { en: "IT Support & Maintenance", ar: "الدعم التقني والصيانة" }, desc: { en: "Preventive maintenance and troubleshooting that keep existing environments healthy.", ar: "صيانة وقائية واستكشاف أعطال يُبقي البيئات القائمة سليمة." } },
-      { icon: "cloud", name: { en: "Microsoft 365 & Identity", ar: "مايكروسوفت 365 والهوية" }, desc: { en: "Tenants, OneDrive and SharePoint structured so files and access stay under control.", ar: "مستأجرات وون درايف وشير بوينت منظمة بحيث تبقى الملفات والصلاحيات تحت السيطرة." } },
-      { icon: "network", name: { en: "Networks & Branch VPN", ar: "الشبكات وVPN الفروع" }, desc: { en: "Cost-smart connectivity that joins branches and warehouses into one private network.", ar: "اتصال ذكي التكلفة يربط الفروع والمستودعات في شبكة خاصة واحدة." } },
-      { icon: "cctv", name: { en: "CCTV Systems", ar: "أنظمة المراقبة" }, desc: { en: "Surveillance for retail floors, clinics, offices and stock areas — built to be reviewed.", ar: "مراقبة لصالات التجزئة والعيادات والمكاتب والمخازن — مبنية لتُراجع." } },
-      { icon: "wrench", name: { en: "Environment Stabilization", ar: "تثبيت البيئات" }, desc: { en: "Taking over undocumented environments and turning them into managed ones.", ar: "استلام بيئات غير موثقة وتحويلها إلى بيئات مُدارة." } },
-      { icon: "compass", name: { en: "Pragmatic Consultancy", ar: "استشارات عملية" }, desc: { en: "Recommendations that respect real budgets and real growth plans.", ar: "توصيات تحترم الميزانيات الحقيقية وخطط النمو الحقيقية." } },
+      { icon: "rack", name: { en: "IT Support & Maintenance", ar: "الدعم التقني والصيانة" }, desc: { en: "First- and second-line support, preventive maintenance and endpoint lifecycle — the daily practice honed across years of branch operations.", ar: "دعم من المستويين الأول والثاني وصيانة وقائية ودورة حياة الأجهزة — الممارسة اليومية التي صُقلت عبر سنوات تشغيل الفروع." } },
+      { icon: "cloud", name: { en: "Microsoft & Identity", ar: "مايكروسوفت والهوية" }, desc: { en: "Active Directory administration — provisioning, security groups, shared folders and NTFS permissions — kept clean and accountable.", ar: "إدارة أكتيف ديريكتوري — تجهيز المستخدمين ومجموعات الأمان والمجلدات المشتركة وصلاحيات NTFS — بشكل منظم ومسؤول." } },
+      { icon: "network", name: { en: "Networks & Monitoring", ar: "الشبكات والمراقبة" }, desc: { en: "TCP/IP, DNS, DHCP, HP switches, structured cabling and Wi-Fi — monitored with PRTG so problems are caught before they spread.", ar: "TCP/IP وDNS وDHCP ومفاتيح HP والتوصيلات المنظمة والواي فاي — بمراقبة PRTG لاكتشاف المشكلات قبل انتشارها." } },
+      { icon: "cctv", name: { en: "CCTV & Attendance", ar: "المراقبة والحضور" }, desc: { en: "CCTV, access control and biometric attendance installed and maintained for retail floors, offices and stock areas.", ar: "مراقبة وتحكم في الدخول وبصمة حضور مُركبة ومُصانة لصالات التجزئة والمكاتب والمخازن." } },
+      { icon: "cart", name: { en: "Retail & POS Environments", ar: "بيئات التجزئة ونقاط البيع" }, desc: { en: "POS terminals, printers and scanners kept selling — onboarding, deployment and support that respect business hours.", ar: "أنظمة نقاط البيع والطابعات والماسحات تبقى جاهزة للبيع — تجهيز ونشر ودعم يحترم ساعات العمل." } },
+      { icon: "compass", name: { en: "Pragmatic Consultancy", ar: "استشارات عملية" }, desc: { en: "Recommendations that respect real budgets and real growth plans — the cost-aware approach Egyptian businesses need.", ar: "توصيات تحترم الميزانيات الحقيقية وخطط النمو الحقيقية — المنهجية المراعية للتكلفة التي تحتاجها الشركات المصرية." } },
     ],
     model: [
       { en: "Remote-first support — most issues resolved without a site visit", ar: "دعم يبدأ عن بُعد — معظم المشكلات تُحل دون زيارة ميدانية" },
@@ -73,8 +73,8 @@ const CONTENT: Record<
       { en: "Cost-aware scoping: pay for structure, not for spectacle", ar: "نطاق يراعي التكلفة: تدفع مقابل البنية لا مقابل الاستعراض" },
     ],
     note: {
-      en: "In Egypt we often start where others stop: environments assembled over years without documentation. The enterprise support & service-desk practice was built for exactly this situation.",
-      ar: "في مصر نبدأ غالبًا من حيث يتوقف الآخرون: بيئات تجمعت على مدى سنوات بلا توثيق. منهجية الدعم المؤسسي ومكتب الخدمة بُنيت لهذا الوضع بالضبط.",
+      en: "The Egypt chapter of this practice is documented work, not promises: five years (2019–2024) as the accountable IT specialist across Zahran Market's retail branches in Alexandria — POS, networks, PRTG monitoring, CCTV and attendance systems — preceded by three years (2015–2018) of on-site corporate support at United Abco Company through Arab Computers Company.",
+      ar: "الفصل المصري من هذه الخبرة عمل موثق لا وعود: خمس سنوات (2019–2024) كأخصائي التقنية المسؤول عبر فروع أسواق زهران بالإسكندرية — نقاط البيع والشبكات ومراقبة PRTG وأنظمة المراقبة والحضور — سبقتها ثلاث سنوات (2015–2018) من الدعم الميداني للشركات في أبكو المتحدة عبر الشركة العربية للحاسبات.",
     },
   },
 };

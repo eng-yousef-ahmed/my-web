@@ -1,6 +1,7 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
-import { CONTACT, hasEmail, mailLink, telHref, vCardDataUrl, waLink } from "../config";
+import { CONTACT, hasEmail, mailLink, telHref, waLink } from "../config";
+import { BusinessCard } from "../components/BusinessCard";
 import { FAQS } from "../data/content";
 import { Btn, FaqList, FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 import { ServiceRequestForm } from "../components/ServiceRequestForm";
@@ -164,24 +165,17 @@ export function Contact() {
             ))}
           </Reveal>
 
-          <Reveal delay={120} className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-4">
-            <a
-              href={vCardDataUrl()}
-              download="tech-of-the-world.vcf"
-              className="inline-flex items-center gap-3 border border-ink-900/25 px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:bg-ink-900 hover:text-amber-400 transition-all duration-300"
-            >
-              <Icon name="doc" className="w-4.5 h-4.5" />
-              {isAr ? "احفظ بطاقة التواصل (vCard)" : "Save contact card (vCard)"}
-            </a>
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist-500">
-              {isAr ? "خطوط مباشرة:" : "Direct lines:"}
-            </span>
-            <a href={telHref("sa")} className="font-mono text-[13px] font-medium text-ink-800 hover:text-amber-600 transition-colors" dir="ltr">
-              {CONTACT.displaySA}
-            </a>
-            <a href={telHref("eg")} className="font-mono text-[13px] font-medium text-ink-800 hover:text-amber-600 transition-colors" dir="ltr">
-              {CONTACT.displayEG}
-            </a>
+          {/* digital business card — live-rendered from the site's own data & logo */}
+          <Reveal delay={120} className="mt-16">
+            <div className="mb-9 text-center">
+              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-600">
+                {isAr ? "بطاقة التعارف الرقمية" : "Digital Business Card"}
+              </p>
+              <h2 className="mt-3 font-display text-2xl font-bold text-ink-900 sm:text-3xl">
+                {isAr ? "احفظنا في هاتفك بضغطة واحدة" : "Keep us one tap away"}
+              </h2>
+            </div>
+            <BusinessCard />
           </Reveal>
         </div>
       </section>
