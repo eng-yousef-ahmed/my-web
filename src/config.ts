@@ -40,6 +40,18 @@ export const CONTACT = {
 export const hasWhatsApp = true;
 export const hasEmail = CONTACT.email.length > 0;
 
+/* ================= founder CV (downloadable) =================
+ * Two PDFs (Arabic + English) served from /public/assets/cv/.
+ * Replace the files there with the real CVs at any time — the
+ * download buttons (inside Batata and elsewhere) point at these
+ * paths, so NO code change is ever needed to update the CV.
+ */
+const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+export const CV_FILES = {
+  ar: `${base}/assets/cv/Yousef-Ahmed-CV-AR.pdf`,
+  en: `${base}/assets/cv/Yousef-Ahmed-CV-EN.pdf`,
+};
+
 /* ================= outbound automation =================
  * UTM parameters from the landing URL are captured once per session and
  * appended to every WhatsApp / email message the site generates — so each

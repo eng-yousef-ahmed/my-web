@@ -1,7 +1,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePrefersReducedMotion } from "../i18n";
-import { waLink } from "../config";
+import { waLink, CV_FILES } from "../config";
 import { Icon } from "./kit";
 
 /* ============================================================
@@ -223,7 +223,7 @@ const STR = {
     unknown:
       "مش متأكد فهمتك 100% — بس ده تخصص البشر عندنا! اختار أقرب حاجة ليك تحت، أو حوّلنا مباشرة لواحد من الفريق.",
     formHint: "اكتب في النموذج إنك جاي من المحادثة عشان نكمل من نفس النقطة.",
-    sugg: ["الخدمات عندكم إيه؟", "كام الأسعار؟", "عندي مشكلة عاجلة", "بتغطوا مصر؟", "عايز كاميرات مراقبة", "عايز تقييم لبيئتي"],
+    sugg: ["الخدمات عندكم إيه؟", "كام الأسعار؟", "عندي مشكلة عاجلة", "بتغطوا مصر؟", "عايز كاميرات مراقبة", "عايز تقييم لبيئتي", "ابعتلي سيرتك الذاتية"],
     bubble: "أنا بطاطا! تحتاج مساعدة؟",
     openLabel: "افتح المحادثة مع بطاطا",
     closeLabel: "إغلاق المحادثة",
@@ -235,6 +235,11 @@ const STR = {
     moodUrgent: "وضع الطوارئ!",
     moodDance: "في نوبة فرح",
     backAgain: "وحشتني!",
+    cvTitle: "السيرة الذاتية",
+    cvAr: "عربي PDF",
+    cvEn: "إنجليزي PDF",
+    cvReply:
+      "أكيد! دي <b>السيرة الذاتية</b> للمهندس يوسف أحمد — مؤسس TECH OF THE WORLD — خبرة 9+ سنين في الدعم التقني المؤسسي وبيئات مايكروسوفت والشبكات وأنظمة الأمن في السعودية ومصر. حمّلها بالنسخة اللي تناسبك:",
   },
   en: {
     name: "Batata",
@@ -273,7 +278,7 @@ const STR = {
     unknown:
       "I'm not 100% sure I got that — but that's what our humans are for! Pick the closest option below, or go straight to the team.",
     formHint: "Mention in the form that you're coming from the chat so we continue where we left off.",
-    sugg: ["What services do you offer?", "How much does it cost?", "I have an urgent issue", "Do you cover Egypt?", "I need CCTV cameras", "I want an IT assessment"],
+    sugg: ["What services do you offer?", "How much does it cost?", "I have an urgent issue", "Do you cover Egypt?", "I need CCTV cameras", "I want an IT assessment", "Send me your CV"],
     bubble: "I'm Batata! Need a hand?",
     openLabel: "Open chat with Batata",
     closeLabel: "Close chat",
@@ -285,6 +290,11 @@ const STR = {
     moodUrgent: "Emergency mode!",
     moodDance: "In a happy mood",
     backAgain: "I missed you!",
+    cvTitle: "Founder CV",
+    cvAr: "Arabic PDF",
+    cvEn: "English PDF",
+    cvReply:
+      "Of course! Here's the <b>CV of Eng. Yousef Ahmed</b> — founder of TECH OF THE WORLD — 9+ years of enterprise IT support, Microsoft environments, networking and security systems across Saudi Arabia and Egypt. Grab the version that suits you:",
   },
 };
 
@@ -299,7 +309,7 @@ const SERVICE_HINTS: Record<string, string[]> = {
 function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   const s = STR[lang];
   const n = normalize(raw);
-  const out: { html: string; mood?: Mood; actions?: { label: string; to?: string; wa?: Market | "auto" }[] } = { html: "" };
+  const out: { html: string; mood?: Mood; actions?: { label: string; to?: string; wa?: Market | "auto"; dl?: string }[] } = { html: "" };
 
   /* remember the visitor's name — Batata greets them personally next time */
   const nameMatch = raw.trim().match(/(?:اسمي|انا اسمي|my name is|i'?m called|i am)\s+([\p{L}]{2,20})/iu);
@@ -323,6 +333,16 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
         : "Who called me? That's me! I do a little dance every time someone calls my name — now ask me anything about our services, or let's keep dancing.";
     out.mood = "dance";
     out.actions = [{ label: s.goServices, to: "/services" }];
+    return out;
+  }
+
+  /* asking for the founder's CV — offer both languages as downloads */
+  if (has(n, ["سيره", "سيرة", "سي في", "السي", "cv", "resume", "curriculum", "خبراتك", "سيرتك", "profile"])) {
+    out.html = s.cvReply;
+    out.actions = [
+      { label: s.cvEn, dl: CV_FILES.en },
+      { label: s.cvAr, dl: CV_FILES.ar },
+    ];
     return out;
   }
 
@@ -466,7 +486,7 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
 }
 
 /* ---------------- messages ---------------- */
-type Msg = { from: "user" | "bot"; html: string; actions?: { label: string; to?: string; wa?: Market | "auto" }[] };
+type Msg = { from: "user" | "bot"; html: string; actions?: { label: string; to?: string; wa?: Market | "auto"; dl?: string }[] };
 
 function ActionChips({ msg }: { msg: Msg }) {
   const { isAr } = useLang();
@@ -474,6 +494,13 @@ function ActionChips({ msg }: { msg: Msg }) {
   return (
     <div className="mt-2.5 flex flex-wrap gap-2">
       {msg.actions.map((a, i) => {
+        if (a.dl) {
+          return (
+            <a key={i} href={a.dl} download className="bot-chip bot-chip-cv">
+              <Icon name="doc" className="w-3.5 h-3.5" /> {a.label}
+            </a>
+          );
+        }
         const market: Market = a.wa === "auto" ? "sa" : a.wa!;
         if (a.wa) {
           const href = waLink("Hello TECH OF THE WORLD — " + (isAr ? "محوَّل من المساعد (بطاطا)." : "referred by the assistant (Batata)."), market);
@@ -723,6 +750,30 @@ export function Assistant() {
             >
               <Icon name="doc" className="w-4 h-4" /> {s.goRequest}
             </Link>
+          </div>
+
+          {/* founder CV downloads (AR / EN) — always available */}
+          <div
+            className="shrink-0 px-4 pb-3 pt-1 flex items-center gap-2.5"
+            style={{ background: "var(--color-ink-950)" }}
+          >
+            <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-500 shrink-0">
+              {s.cvTitle}
+            </span>
+            <a
+              href={CV_FILES.ar}
+              download
+              className="bot-chip bot-chip-cv !py-1.5 !px-3 !text-[10.5px] flex-1 justify-center"
+            >
+              <Icon name="doc" className="w-3 h-3" /> {s.cvAr}
+            </a>
+            <a
+              href={CV_FILES.en}
+              download
+              className="bot-chip bot-chip-cv !py-1.5 !px-3 !text-[10.5px] flex-1 justify-center"
+            >
+              <Icon name="doc" className="w-3 h-3" /> {s.cvEn}
+            </a>
           </div>
 
           {/* input */}

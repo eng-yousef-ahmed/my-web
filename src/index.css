@@ -421,6 +421,15 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   background: #23a55b;
   color: #ffffff;
 }
+.bot-chip-cv {
+  border-color: var(--color-mist-500);
+  color: var(--color-mist-200);
+}
+.bot-chip-cv:hover {
+  background: var(--color-ink-700);
+  border-color: var(--color-amber-500);
+  color: var(--color-amber-400);
+}
 
 /* suggestions strip: auto-scrolls so every chip stays reachable, pauses on hover/focus */
 @keyframes botSugg {

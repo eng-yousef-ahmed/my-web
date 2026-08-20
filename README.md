@@ -34,6 +34,17 @@ Drop your logo files into the `public/` folder and they are picked up automatica
 - Recommended height ~40–60px (rendered at `h-10`/`h-16`, width auto). Transparent background.
 - The logo is detected at runtime and also replaces the YA mark in the final CTA **and in the digital business card** (Contact page) — one asset swap updates the whole site.
 
+## Updating the founder CV (no code edits)
+
+The downloadable CVs (Arabic + English) live in `public/assets/cv/`. The download buttons inside Batata point at these exact paths:
+
+| File | Language |
+| --- | --- |
+| `public/assets/cv/Yousef-Ahmed-CV-AR.pdf` | Arabic |
+| `public/assets/cv/Yousef-Ahmed-CV-EN.pdf` | English |
+
+To update a CV, simply **replace the PDF file** at that path (keep the same filename). The download buttons update automatically — no code change needed. Works on the deployed site too: upload the new PDFs to the same location on your host.
+
 ## Configuration (environment variables)
 
 See `.env.example`. Copy to `.env.local`:
