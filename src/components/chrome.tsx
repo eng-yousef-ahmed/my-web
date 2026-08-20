@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLang } from "../i18n";
 import { CONTACT, captureUtm, hasEmail, mailLink, telHref, waLink } from "../config";
-import { Btn, FlagEG, FlagSA, Icon, LinkedInLink, Logo } from "./kit";
+import { Btn, FlagEG, FlagSA, Icon, Logo } from "./kit";
 import { Cursor } from "./fx";
 import { Assistant } from "./Assistant";
 
@@ -135,7 +135,6 @@ function WhatsAppFab() {
                 </span>
               </a>
             )}
-            <LinkedInLink variant="row" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} />
           </div>
           <div className="px-3 pb-3 pt-2.5 border-t border-ink-700 flex gap-2.5">
             <a
@@ -217,7 +216,6 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <LinkedInLink variant="icon" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} className="!w-9 !h-9" />
           <button
             onClick={toggle}
             className="nav-draw font-mono text-[12px] font-semibold uppercase tracking-[0.2em] text-mist-200 hover:text-amber-400 transition-colors cursor-pointer"
@@ -274,15 +272,12 @@ export function Header() {
           </div>
           <div className="mt-6 flex flex-col gap-4">
             <Btn to="/request" className="justify-center">{t("nav.request")}</Btn>
-            <div className="flex items-center justify-center gap-6">
-              <LinkedInLink variant="chip" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} />
-              <button
-                onClick={toggle}
-                className="font-mono text-[12px] uppercase tracking-[0.25em] text-mist-300 hover:text-amber-400 transition-colors cursor-pointer"
-              >
-                {t("common.langLabel")}
-              </button>
-            </div>
+            <button
+              onClick={toggle}
+              className="mx-auto font-mono text-[12px] uppercase tracking-[0.25em] text-mist-300 hover:text-amber-400 transition-colors cursor-pointer"
+            >
+              {t("common.langLabel")}
+            </button>
           </div>
         </nav>
       </div>
@@ -344,7 +339,6 @@ export function Footer() {
               </Link>
             </div>
             <div className="mt-6 flex items-center gap-2.5">
-              <LinkedInLink variant="icon" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} />
               <a
                 href={waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.", "sa")}
                 target="_blank"

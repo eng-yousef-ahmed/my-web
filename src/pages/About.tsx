@@ -1,7 +1,7 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
 import type { B } from "../i18n";
-import { Btn, FlagEG, FlagSA, Icon, LinkedInLink, LogoMark, PageHero, Reveal, SectionHeading } from "../components/kit";
+import { Btn, FlagEG, FlagSA, Icon, LogoMark, PageHero, Reveal, SectionHeading } from "../components/kit";
 import { IMAGES, CONTACT } from "../config";
 
 /* ---------------- founder CV data (verified) ---------------- */
@@ -200,7 +200,6 @@ export default function About() {
                     </div>
                   ))}
                 </div>
-                <LinkedInLink variant="button" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} className="mt-7" />
               </div>
             </div>
           </Reveal>
