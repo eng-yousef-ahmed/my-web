@@ -2,7 +2,7 @@ import React from "react";
 import { useLang, usePageMeta } from "../i18n";
 import { CONTACT, hasEmail, mailLink, telHref, vCardDataUrl, waLink } from "../config";
 import { FAQS } from "../data/content";
-import { Btn, FaqList, FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
+import { Btn, FaqList, FlagEG, FlagSA, Icon, PageHero, Reveal, externalClick } from "../components/kit";
 import { ServiceRequestForm } from "../components/ServiceRequestForm";
 
 function WaCard({ market, delay }: { market: "sa" | "eg"; delay: number }) {
@@ -186,6 +186,7 @@ export function Contact() {
               href={CONTACT.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={externalClick(CONTACT.linkedin)}
               className="inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0a66c2] hover:text-[#084d92] transition-colors"
             >
               <Icon name="linkedin" className="w-4.5 h-4.5" />

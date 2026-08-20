@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLang } from "../i18n";
 import { CONTACT, captureUtm, hasEmail, mailLink, telHref, waLink } from "../config";
-import { Btn, FlagEG, FlagSA, Icon, Logo } from "./kit";
+import { Btn, FlagEG, FlagSA, Icon, Logo, externalClick } from "./kit";
 import { Cursor } from "./fx";
 import { Assistant } from "./Assistant";
 
@@ -139,6 +139,7 @@ function WhatsAppFab() {
               href={CONTACT.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={externalClick(CONTACT.linkedin)}
               className="group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors"
             >
               <span className="shrink-0 w-6 h-6 grid place-items-center bg-[#0a66c2] text-white"><Icon name="linkedin" className="w-3.5 h-3.5" strokeWidth={2} /></span>
@@ -355,6 +356,7 @@ export function Footer() {
                 href={CONTACT.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={externalClick(CONTACT.linkedin)}
                 aria-label="LinkedIn"
                 className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300"
               >

@@ -178,6 +178,21 @@ export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name:
   );
 }
 
+/**
+ * Bulletproof external-link opener.
+ * Some environments (embedded previews, sandboxed iframes, aggressive popup
+ * blockers) silently swallow `target="_blank"`. This handler opens the URL as
+ * a user gesture; if that is blocked it falls back to same-tab navigation so
+ * the link always does something.
+ */
+export function externalClick(url: string) {
+  return (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const win = window.open(url, "_blank", "noopener,noreferrer");
+    if (!win) window.location.href = url;
+  };
+}
+
 /* ================= flags (detailed inline marks) ================= */
 export function FlagSA({ className = "w-5 h-5" }: { className?: string }) {
   return (
