@@ -406,6 +406,27 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   color: #ffffff;
 }
 
+/* suggestions strip: auto-scrolls so every chip stays reachable, pauses on hover/focus */
+@keyframes botSugg {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.bot-sugg-track {
+  display: flex;
+  width: max-content;
+  animation: botSugg 26s linear infinite;
+}
+.bot-sugg:hover .bot-sugg-track,
+.bot-sugg:focus-within .bot-sugg-track {
+  animation-play-state: paused;
+}
+html[dir="rtl"] .bot-sugg-track { animation-direction: reverse; }
+@media (prefers-reduced-motion: reduce) {
+  .bot-sugg { overflow-x: auto; }
+  .bot-sugg-track { animation: none; }
+  .bot-sugg-track > div[aria-hidden="true"] { display: none; }
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

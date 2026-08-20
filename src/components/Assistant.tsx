@@ -223,7 +223,7 @@ const STR = {
     unknown:
       "مش متأكد فهمتك 100% — بس ده تخصص البشر عندنا! اختار أقرب حاجة ليك تحت، أو حوّلنا مباشرة لواحد من الفريق.",
     formHint: "اكتب في النموذج إنك جاي من المحادثة عشان نكمل من نفس النقطة.",
-    sugg: ["الخدمات عندكم إيه؟", "كام الأسعار؟", "عندي مشكلة عاجلة", "بتغطوا مصر؟"],
+    sugg: ["الخدمات عندكم إيه؟", "كام الأسعار؟", "عندي مشكلة عاجلة", "بتغطوا مصر؟", "عايز كاميرات مراقبة", "عايز تقييم لبيئتي"],
     bubble: "أنا بطاطا! تحتاج مساعدة؟",
     openLabel: "افتح المحادثة مع بطاطا",
     closeLabel: "إغلاق المحادثة",
@@ -273,7 +273,7 @@ const STR = {
     unknown:
       "I'm not 100% sure I got that — but that's what our humans are for! Pick the closest option below, or go straight to the team.",
     formHint: "Mention in the form that you're coming from the chat so we continue where we left off.",
-    sugg: ["What services do you offer?", "How much does it cost?", "I have an urgent issue", "Do you cover Egypt?"],
+    sugg: ["What services do you offer?", "How much does it cost?", "I have an urgent issue", "Do you cover Egypt?", "I need CCTV cameras", "I want an IT assessment"],
     bubble: "I'm Batata! Need a hand?",
     openLabel: "Open chat with Batata",
     closeLabel: "Close chat",
@@ -682,18 +682,27 @@ export function Assistant() {
             )}
           </div>
 
-          {/* suggestions */}
+          {/* suggestions — auto-scrolling strip so every option stays reachable */}
           {msgs.length <= 2 && !typing && (
-            <div className="shrink-0 px-4 pb-3 flex gap-2 overflow-x-auto" style={{ background: "var(--color-ink-950)" }}>
-              {s.sugg.map((q) => (
-                <button
-                  key={q}
-                  onClick={() => send(q)}
-                  className="shrink-0 border border-ink-600 text-mist-300 px-3.5 py-2 text-[12px] font-medium hover:border-amber-500 hover:text-amber-400 transition-colors cursor-pointer"
-                >
-                  {q}
-                </button>
-              ))}
+            <div className="bot-sugg shrink-0 relative overflow-hidden px-4 pb-3" style={{ background: "var(--color-ink-950)" }}>
+              <div className="bot-sugg-track">
+                {[0, 1].map((copy) => (
+                  <div key={copy} className="flex shrink-0 gap-2 pe-2" aria-hidden={copy === 1 ? "true" : undefined}>
+                    {s.sugg.map((q) => (
+                      <button
+                        key={q}
+                        onClick={() => send(q)}
+                        tabIndex={copy === 1 ? -1 : undefined}
+                        className="shrink-0 whitespace-nowrap border border-ink-600 text-mist-300 px-3.5 py-2 text-[12px] font-medium hover:border-amber-500 hover:text-amber-400 hover:bg-amber-500/10 active:scale-95 transition-all cursor-pointer"
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <span className="pointer-events-none absolute inset-y-0 start-0 z-10 w-7 bg-gradient-to-r from-[#060d16] to-transparent" aria-hidden="true" />
+              <span className="pointer-events-none absolute inset-y-0 end-0 z-10 w-7 bg-gradient-to-l from-[#060d16] to-transparent" aria-hidden="true" />
             </div>
           )}
 
