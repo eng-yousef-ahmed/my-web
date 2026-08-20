@@ -113,16 +113,16 @@ export function Contact() {
                   <span className="min-w-0">
                     <span className="flex items-center gap-3">
                       {c.flag}
-                      <span className="font-display text-lg font-bold text-ink-900 group-hover:text-paper-50 transition-colors truncate">
+                      <span className="font-display text-lg font-bold text-ink-900 group-hover:text-amber-700 transition-colors truncate">
                         {L(c.title)}
                       </span>
                     </span>
-                    <span className="mt-1 block text-[13.5px] leading-relaxed text-mist-500 group-hover:text-mist-300 transition-colors">
+                    <span className="mt-1 block text-[13.5px] leading-relaxed text-mist-500 transition-colors">
                       {L(c.sub)}
                     </span>
                   </span>
                   <span
-                    className="hidden md:block font-mono text-[13px] text-mist-500 group-hover:text-paper-50 transition-colors whitespace-nowrap"
+                    className="hidden md:block font-mono text-[13px] text-mist-500 group-hover:text-amber-700 transition-colors whitespace-nowrap"
                     dir="ltr"
                   >
                     {c.value}
@@ -132,7 +132,7 @@ export function Contact() {
                   </span>
                 </>
               );
-              const cls = `group grid grid-cols-[auto_1fr_auto] sm:grid-cols-[44px_48px_1fr_auto] items-center gap-4 sm:gap-6 border-b border-ink-900/12 py-6 px-4 sm:px-6 transition-colors duration-300 hover:bg-ink-900`;
+              const cls = `group grid grid-cols-[auto_1fr_auto] sm:grid-cols-[44px_48px_1fr_auto] items-center gap-4 sm:gap-6 border-b border-ink-900/12 py-6 px-4 sm:px-6 transition-colors duration-300 hover:bg-amber-500/[0.08]`;
               return (
                 <div key={c.n} style={{ ["--rv-delay" as string]: `${i * 70}ms` }}>
                   {c.to ? (

@@ -32,7 +32,7 @@ export const CONTACT = {
 
   /* ---- business-card identity (single source of truth for the card + .vcf) ---- */
   cardName: (env.VITE_CARD_NAME || "YOUSEF AHMED MOHMED").trim(),
-  cardTitle: (env.VITE_CARD_TITLE || "IT HELP DESK").trim(),
+  cardTitle: (env.VITE_CARD_TITLE || "Senior IT Support Specialist").trim(),
   cardEmail: (env.VITE_CARD_EMAIL || "youseefa77@gmail.com").trim(),
   website: (env.VITE_WEBSITE_URL || "https://tech-of-the-world.netlify.app").trim(),
 };
