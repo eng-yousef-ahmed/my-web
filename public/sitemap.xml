@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TECH OF THE WORLD sitemap.
+  The deployed SPA uses hash-based routes for the static preview; when
+  deployed behind a host with rewrites (Vercel/Netlify), replace with
+  clean-path URLs for optimal crawlability.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://tech-of-the-world.example/</loc><priority>1.0</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/services</loc><priority>0.9</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/projects</loc><priority>0.9</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/industries</loc><priority>0.8</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/insights</loc><priority>0.8</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/about</loc><priority>0.8</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/saudi-arabia</loc><priority>0.9</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/egypt</loc><priority>0.9</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://tech-of-the-world.example/#/request</loc><priority>1.0</priority></url>
+</urlset>

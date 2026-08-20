@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <path d="M8 2h26l12 12v26a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6Z" fill="#0A1420"/>
+  <path d="M34 2l12 12H34Z" fill="#E9A33B"/>
+  <path d="M8 2h26l12 12v26a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6Z" fill="none" stroke="#F3F6F5" stroke-width="2"/>
+  <text x="22" y="31.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="16" fill="#F3F6F5" letter-spacing="0.5">YA</text>
+  <rect x="8" y="37" width="7" height="2.4" fill="#E9A33B"/>
+</svg>
