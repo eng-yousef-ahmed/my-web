@@ -299,7 +299,9 @@ function resolveCustomLogo(tone: "light" | "dark"): Promise<string | null> {
   return customLogoCache[tone]!;
 }
 
-function useCustomLogo(tone: "light" | "dark"): string | null {
+/** Shared logo-source hook — every consumer (header, brand mark, business card)
+ *  resolves the logo from the SAME files under /public (logo-light|dark|logo .svg/.png). */
+export function useCustomLogo(tone: "light" | "dark"): string | null {
   const [src, setSrc] = useState<string | null>(null);
   useEffect(() => {
     let active = true;

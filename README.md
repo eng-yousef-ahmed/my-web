@@ -32,7 +32,7 @@ Drop your logo files into the `public/` folder and they are picked up automatica
 - `.svg` is preferred; `.png` works too. The first format that exists wins (tone-specific before universal).
 - If a file is absent, the built-in **YA** mark + wordmark is used as a fallback.
 - Recommended height ~40–60px (rendered at `h-10`/`h-16`, width auto). Transparent background.
-- The logo is detected at runtime and also replaces the YA mark in the final CTA — no code edits, ever.
+- The logo is detected at runtime and also replaces the YA mark in the final CTA **and in the digital business card** (Contact page) — one asset swap updates the whole site.
 
 ## Configuration (environment variables)
 
