@@ -186,12 +186,98 @@ export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name:
  * a user gesture; if that is blocked it falls back to same-tab navigation so
  * the link always does something.
  */
-export function externalClick(url: string) {
-  return (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const win = window.open(url, "_blank", "noopener,noreferrer");
-    if (!win) window.location.href = url;
-  };
+/**
+ * LinkedIn link — a single, clean anchor with NO click handlers.
+ *
+ * It uses the exact same mechanism as the working WhatsApp links: a plain
+ * <a href target="_blank" rel="noopener noreferrer">. No preventDefault, no
+ * window.open, no interception — so the browser navigates natively and the
+ * link behaves identically to every other external link on the site.
+ */
+export function LinkedInLink({
+  url,
+  handle,
+  variant = "icon",
+  className = "",
+  labelAr = "تواصل مع يوسف أحمد على لينكدإن",
+  labelEn = "Connect with Yousef Ahmed on LinkedIn",
+}: {
+  url: string;
+  handle: string;
+  variant?: "icon" | "chip" | "row" | "button";
+  className?: string;
+  labelAr?: string;
+  labelEn?: string;
+}) {
+  const { isAr } = useLang();
+  const aria = isAr ? labelAr : labelEn;
+
+  if (variant === "icon") {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={aria}
+        title="LinkedIn"
+        className={`w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300 ${className}`}
+      >
+        <Icon name="linkedin" className="w-4.5 h-4.5" />
+      </a>
+    );
+  }
+
+  if (variant === "chip") {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={aria}
+        className={`inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.2em] text-mist-300 hover:text-[#5ea8e8] transition-colors ${className}`}
+      >
+        <Icon name="linkedin" className="w-4 h-4" /> LinkedIn
+      </a>
+    );
+  }
+
+  if (variant === "row") {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={aria}
+        className={`group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors ${className}`}
+      >
+        <span className="shrink-0 w-6 h-6 grid place-items-center bg-[#0a66c2] text-white">
+          <Icon name="linkedin" className="w-3.5 h-3.5" strokeWidth={2} />
+        </span>
+        <span className="flex-1 leading-tight">
+          <span className="block font-display font-semibold text-[13.5px] text-paper-50 group-hover:text-amber-400 transition-colors">LinkedIn</span>
+          <span className="block font-mono text-[11px] text-mist-400 mt-0.5" dir="ltr">/{handle}</span>
+        </span>
+      </a>
+    );
+  }
+
+  /* variant === "button" — the founder CTA */
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={aria}
+      className={`group inline-flex items-center gap-3 border border-[#0a66c2]/60 bg-[#0a66c2]/10 text-[#5ea8e8] px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.14em] hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2] transition-all duration-300 ${className}`}
+    >
+      <Icon name="linkedin" className="w-4.5 h-4.5" />
+      <span className="text-start">
+        <span className="block">{isAr ? "تواصل مع يوسف على لينكدإن" : "Connect with Yousef on LinkedIn"}</span>
+        <span className="block font-mono normal-case tracking-normal text-[10px] opacity-75 mt-0.5" dir="ltr">/{handle}</span>
+      </span>
+      <Icon name="arrow" className="w-3.5 h-3.5 rtl:-scale-x-100 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" strokeWidth={2.2} />
+    </a>
+  );
 }
 
 /* ================= flags (detailed inline marks) ================= */

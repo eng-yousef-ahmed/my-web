@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLang } from "../i18n";
 import { CONTACT, captureUtm, hasEmail, mailLink, telHref, waLink } from "../config";
-import { Btn, FlagEG, FlagSA, Icon, Logo } from "./kit";
+import { Btn, FlagEG, FlagSA, Icon, LinkedInLink, Logo } from "./kit";
 import { Cursor } from "./fx";
 import { Assistant } from "./Assistant";
 
@@ -135,19 +135,7 @@ function WhatsAppFab() {
                 </span>
               </a>
             )}
-            <a
-              href={CONTACT.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={isAr ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn"}
-              className="group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors"
-            >
-              <span className="shrink-0 w-6 h-6 grid place-items-center bg-[#0a66c2] text-white"><Icon name="linkedin" className="w-3.5 h-3.5" strokeWidth={2} /></span>
-              <span className="flex-1 leading-tight">
-                <span className="block font-display font-semibold text-[13.5px] text-paper-50 group-hover:text-amber-400 transition-colors">LinkedIn</span>
-                <span className="block font-mono text-[11px] text-mist-400 mt-0.5">/{CONTACT.linkedinHandle}</span>
-              </span>
-            </a>
+            <LinkedInLink variant="row" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} />
           </div>
           <div className="px-3 pb-3 pt-2.5 border-t border-ink-700 flex gap-2.5">
             <a
@@ -229,16 +217,7 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a
-            href={CONTACT.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={lang === "ar" ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn"}
-            title="LinkedIn"
-            className="w-9 h-9 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300"
-          >
-            <Icon name="linkedin" className="w-4 h-4" />
-          </a>
+          <LinkedInLink variant="icon" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} className="!w-9 !h-9" />
           <button
             onClick={toggle}
             className="nav-draw font-mono text-[12px] font-semibold uppercase tracking-[0.2em] text-mist-200 hover:text-amber-400 transition-colors cursor-pointer"
@@ -296,15 +275,7 @@ export function Header() {
           <div className="mt-6 flex flex-col gap-4">
             <Btn to="/request" className="justify-center">{t("nav.request")}</Btn>
             <div className="flex items-center justify-center gap-6">
-              <a
-                href={CONTACT.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={lang === "ar" ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn"}
-                className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.2em] text-mist-300 hover:text-[#5ea8e8] transition-colors"
-              >
-                <Icon name="linkedin" className="w-4 h-4" /> LinkedIn
-              </a>
+              <LinkedInLink variant="chip" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} />
               <button
                 onClick={toggle}
                 className="font-mono text-[12px] uppercase tracking-[0.25em] text-mist-300 hover:text-amber-400 transition-colors cursor-pointer"
@@ -322,7 +293,6 @@ export function Header() {
 /* ---------------- Footer ---------------- */
 export function Footer() {
   const { t, L, lang } = useLang();
-  const liAria = lang === "ar" ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn";
   const year = new Date().getFullYear();
 
   const cols = [
@@ -374,16 +344,7 @@ export function Footer() {
               </Link>
             </div>
             <div className="mt-6 flex items-center gap-2.5">
-              <a
-                href={CONTACT.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={liAria}
-                title="LinkedIn"
-                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10 transition-all duration-300"
-              >
-                <Icon name="linkedin" className="w-4.5 h-4.5" />
-              </a>
+              <LinkedInLink variant="icon" url={CONTACT.linkedin} handle={CONTACT.linkedinHandle} />
               <a
                 href={waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.", "sa")}
                 target="_blank"
