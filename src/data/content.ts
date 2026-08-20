@@ -386,13 +386,7 @@ export const FAQS: Faq[] = [
   },
 ];
 
-/* ---------------- Factual brand facts (never invented) ---------------- */
-export const FACTS: { value: string; label: B }[] = [
-  { value: "05", label: { en: "Service lines", ar: "مسارات خدمية" } },
-  { value: "11", label: { en: "Core services", ar: "خدمات أساسية" } },
-  { value: "02", label: { en: "Markets served", ar: "أسواق مخدومة" } },
-  { value: "08", label: { en: "Documented case studies", ar: "دراسات حالة موثقة" } },
-];
+
 
 /* ---------------- Founder experience metrics (verified from CV) ---------------- */
 export const FOUNDER_METRICS: { value: string; suffix: string; label: B }[] = [

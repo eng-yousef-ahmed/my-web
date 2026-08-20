@@ -433,17 +433,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [location.pathname, location.hash]);
 
-  // In-page anchor handling for /services#section
+  /* In-page anchors (e.g. /services#networks).
+     With HashRouter, react-router's location.hash is just "#networks". */
   useEffect(() => {
-    const hash = location.hash; // e.g. #/services#networks
-    const inner = hash.split("#").slice(1);
-    if (inner.length > 1) {
-      const id = inner[1];
-      const timer = setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 80);
-      return () => clearTimeout(timer);
-    }
+    const id = location.hash.replace(/^#/, "");
+    if (!id) return;
+    const timer = setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
+    return () => clearTimeout(timer);
   }, [location.hash, location.pathname]);
 
   return (

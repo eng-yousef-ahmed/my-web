@@ -185,43 +185,59 @@ export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name:
   );
 }
 
-/* ================= flags (detailed inline marks) ================= */
+/* ================= flags (official designs, inline SVG) ================= */
+/** Saudi Arabia — official green field, the actual shahada in Arabic script,
+ *  and the white sword (blade toward the hoist). Uses the site's loaded Arabic fonts. */
 export function FlagSA({ className = "w-5 h-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <rect x="1.5" y="4.5" width="21" height="15" rx="2.4" fill="#1e7a44" stroke="#0a1420" strokeOpacity="0.35" strokeWidth="0.8" />
-      {/* stylized shahada strokes */}
-      <g stroke="#f4f9f4" strokeWidth="1.05" strokeLinecap="round" fill="none" opacity="0.95">
-        <path d="M6 8.2h2.1M9.1 8.2h1.3M11.4 8.2h3.1M15.5 8.2h2.5" />
-        <path d="M6.6 10.6h1.5M9 10.6h2.7M12.7 10.6h1.5M15.1 10.6h2.9" />
-        <path d="M7.4 12.9h3.3M11.8 12.9h2.1M15 12.9h1.9" />
-      </g>
-      {/* sword — blade toward the hoist, hilt on the fly side */}
-      <g fill="#f4f9f4">
-        <path d="M5.1 15.55 h11.5 l1.9 0.95 -1.9 0.95 H5.1 q-1.05 -0.95 0 -1.9 Z" />
-        <rect x="17.35" y="14.6" width="1.15" height="3.7" rx="0.45" />
-        <path d="M18.9 14.85 h1.9 a0.6 0.6 0 0 1 0.6 0.6 v2 a0.6 0.6 0 0 1 -0.6 0.6 h-1.9 Z" />
-        <circle cx="21" cy="16.45" r="0.75" />
+    <svg viewBox="0 0 300 200" className={className} role="img" aria-label="Saudi Arabia">
+      <rect width="300" height="200" fill="#165d31" />
+      <text
+        x="150"
+        y="96"
+        textAnchor="middle"
+        direction="rtl"
+        fontFamily="'Almarai','IBM Plex Sans Arabic',sans-serif"
+        fontWeight="800"
+        fontSize="44"
+        fill="#ffffff"
+        textLength="252"
+        lengthAdjust="spacingAndGlyphs"
+      >
+        لا إله إلا الله محمد رسول الله
+      </text>
+      {/* sword — blade toward the hoist (left), hilt to the right */}
+      <g fill="#ffffff">
+        <path d="M34 148 h206 a10 10 0 0 1 0 10 H34 a5 5 0 0 1 0 -10 Z" />
+        <rect x="240" y="142" width="7" height="22" rx="3.5" />
+        <rect x="249" y="148.5" width="30" height="9" rx="4.5" />
+        <circle cx="284" cy="153" r="6.5" />
       </g>
     </svg>
   );
 }
+
+/** Egypt — official red / white / black bands with the golden Eagle of Saladin. */
 export function FlagEG({ className = "w-5 h-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      {/* tricolor bands with rounded corners (no clip ids needed) */}
-      <path d="M1.5 6.9 a2.4 2.4 0 0 1 2.4 -2.4 h16.2 a2.4 2.4 0 0 1 2.4 2.4 v2.6 h-21 Z" fill="#ce1126" />
-      <rect x="1.5" y="9.5" width="21" height="5" fill="#f7f4ee" />
-      <path d="M1.5 14.5 h21 v2.6 a2.4 2.4 0 0 1 -2.4 2.4 h-16.2 a2.4 2.4 0 0 1 -2.4 -2.4 Z" fill="#23272b" />
-      <rect x="1.5" y="4.5" width="21" height="15" rx="2.4" fill="none" stroke="#0a1420" strokeOpacity="0.35" strokeWidth="0.8" />
-      {/* Eagle of Saladin — simplified golden emblem */}
-      <g fill="#c99b3f" stroke="#8a6420" strokeWidth="0.35">
-        <circle cx="12" cy="9.7" r="0.9" />
-        <path d="M11.9 9.05 l0.95 0.75 h-1.9 Z" />
-        <path d="M11.15 10.6 h1.7 l0.5 3.15 h-2.7 Z" />
-        <path d="M11.1 10.8 C9 11.85 7.35 11.55 6.15 10.15 C6.65 12.95 8.7 14.15 11.3 14.2 Z" />
-        <path d="M12.9 10.8 C15 11.85 16.65 11.55 17.85 10.15 C17.35 12.95 15.3 14.15 12.7 14.2 Z" />
-        <path d="M10.9 13.95 h2.2 l0.55 1.75 h-3.3 Z" />
+    <svg viewBox="0 0 300 200" className={className} role="img" aria-label="Egypt">
+      <rect width="300" height="67" fill="#ce1126" />
+      <rect y="67" width="300" height="66" fill="#f7f3ec" />
+      <rect y="133" width="300" height="67" fill="#141414" />
+      {/* Eagle of Saladin */}
+      <g fill="#c09300">
+        {/* head + beak (facing the hoist) */}
+        <circle cx="136" cy="84" r="7.5" />
+        <path d="M130 81.5 l-9 3 9 3.5 Z" />
+        {/* neck + body */}
+        <path d="M139 90 c4 5 6 9 7 14 l-4 22 h-6 l-5 -26 c-1 -5 2 -8 8 -10 Z" />
+        {/* wings with feather steps */}
+        <path d="M134 97 C114 88 96 90 84 100 c4 2 9 3 13 5 c-6 1 -10 3 -13 6 c13 6 27 6 38 -1 Z" />
+        <path d="M146 97 c20 -9 38 -7 50 3 c-4 2 -9 3 -13 5 c6 1 10 3 13 6 c-13 6 -27 6 -38 -1 Z" />
+        {/* tail fan */}
+        <path d="M132 130 l-6 16 h8 l4 -12 4 12 h8 l-6 -16 Z" />
+        {/* breast shield */}
+        <ellipse cx="138" cy="112" rx="6" ry="9" fill="#e8c766" stroke="#8a6420" strokeWidth="1.5" />
       </g>
     </svg>
   );

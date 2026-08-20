@@ -41,6 +41,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* keep anchored sections clear of the fixed header */
+[id] {
+  scroll-margin-top: 92px;
+}
+
 body {
   font-family: var(--font-body);
   background: var(--color-ink-950);
@@ -338,11 +343,22 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
+@keyframes botDance {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-6deg) translateY(-3px); }
+  50% { transform: rotate(0deg) translateY(0); }
+  75% { transform: rotate(6deg) translateY(-3px); }
+}
 @keyframes botDot {
   0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
   30% { transform: translateY(-4px); opacity: 1; }
 }
 .bot-float { animation: botFloat 3.4s ease-in-out infinite; }
+.bot-dance {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: botDance 0.6s ease-in-out 5;
+}
 .bot-eye {
   transform-box: fill-box;
   transform-origin: center;
@@ -404,6 +420,15 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 .bot-chip-wa:hover {
   background: #23a55b;
   color: #ffffff;
+}
+.bot-chip-cv {
+  border-color: var(--color-mist-500);
+  color: var(--color-mist-200);
+}
+.bot-chip-cv:hover {
+  background: var(--color-ink-700);
+  border-color: var(--color-amber-500);
+  color: var(--color-amber-400);
 }
 
 /* suggestions strip: auto-scrolls so every chip stays reachable, pauses on hover/focus */
