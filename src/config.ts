@@ -22,6 +22,13 @@ export const CONFIG = {
   markets: ["Saudi Arabia", "Egypt"] as const,
 };
 
+const linkedinUrl = (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed").trim();
+const linkedinHandle =
+  linkedinUrl
+    .replace(/^https?:\/\/(www\.)?linkedin\.com\//i, "")
+    .replace(/^in\//i, "")
+    .replace(/\/+$/, "") || "profile";
+
 export const CONTACT = {
   whatsappSA: digits(env.VITE_WHATSAPP_SA || "+966568992794"),
   whatsappEG: digits(env.VITE_WHATSAPP_EG || "+201203361192"),
@@ -29,8 +36,8 @@ export const CONTACT = {
   displayEG: "+20 120 336 1192",
   email: (env.VITE_CONTACT_EMAIL || "TechOfTheWorled92@gmail.com").trim(),
   formEndpoint: (env.VITE_FORM_ENDPOINT || "").trim(),
-  linkedin: (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed").trim(),
-  linkedinHandle: "eng-yousef-ahmed",
+  linkedin: linkedinUrl,
+  linkedinHandle: linkedinHandle,
 };
 
 export const hasWhatsApp = true;
