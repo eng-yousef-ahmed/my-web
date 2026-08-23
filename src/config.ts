@@ -139,4 +139,11 @@ export const IMAGES = {
   ops: "https://image.qwenlm.ai/generated-images/70296d57-3950-4428-93da-13ab4eeaffdc/_result.png",
   rack: "https://image.qwenlm.ai/generated-images/1972e502-7e3a-4038-9591-a5555f40fa7f/_result.png",
   network: "https://image.qwenlm.ai/generated-images/3903330b-f80a-46da-934a-dafeb37f8c61/_result.png",
+  /**
+   * Default hero portrait. The site ALWAYS prefers a local file dropped into
+   * `public/images/profile/` (profile.webp → profile.jpg → profile.png) — so
+   * replacing the photo later needs ZERO code changes. This remote image is
+   * only the fallback while no local file exists.
+   */
+  profile: "https://image.qwenlm.ai/generated-images/93222298-9b9d-4637-8416-d6241340729f/_result.png",
 };
