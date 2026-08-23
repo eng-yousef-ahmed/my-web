@@ -145,12 +145,6 @@ html[lang="ar"] .font-display {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.marquee-track {
-  animation: marquee 36s linear infinite;
-  will-change: transform;
-}
-.marquee-track:hover { animation-play-state: paused; }
-html[dir="rtl"] .marquee-track { animation-direction: reverse; }
 
 @keyframes led-blink {
   0%, 100% { opacity: 1; }
@@ -158,35 +152,6 @@ html[dir="rtl"] .marquee-track { animation-direction: reverse; }
 }
 .led { animation: led-blink 2.2s ease-in-out infinite; }
 .led-fast { animation: led-blink 1.1s ease-in-out infinite; }
-
-@keyframes pulse-ring {
-  0% { transform: scale(0.6); opacity: 0.9; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-.pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; transform-origin: center; }
-
-@keyframes dash-flow {
-  to { stroke-dashoffset: -240; }
-}
-.dash-flow {
-  stroke-dasharray: 6 10;
-  animation: dash-flow 6s linear infinite;
-}
-
-@keyframes scan-line {
-  0% { top: -10%; }
-  100% { top: 110%; }
-}
-.scan::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(233, 163, 59, 0.5), transparent);
-  animation: scan-line 7s linear infinite;
-  pointer-events: none;
-}
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
@@ -223,10 +188,7 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 
 /* ---------- cards ---------- */
 .card-lift {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, background-color 0.4s, box-shadow 0.4s;
-}
-.card-lift:hover {
-  transform: translateY(-6px);
+  transition: border-color 0.15s ease-out, background-color 0.15s ease-out;
 }
 
 /* ---------- custom cursor ring (fine pointers only) ---------- */
@@ -263,10 +225,7 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 }
 .page-enter { animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
-/* ---------- richer card lift ---------- */
-.card-lift:hover {
-  box-shadow: 0 26px 50px -26px rgba(2, 8, 14, 0.55);
-}
+
 
 /* ---------- adaptive text contrast (CSS-variable based) ----------
    Every `text-mist-*` utility reads `var(--color-mist-*)`, so re-declaring

@@ -4,19 +4,13 @@ import { LangProvider } from "./i18n";
 import { Layout } from "./components/chrome";
 import { LogoMark } from "./components/kit";
 
-/* Code-splitting: every page ships as its own chunk, so visitors only
-   download the page they open — faster first load on mobile networks. */
+/* Code-splitting: each page ships as its own chunk. */
 const Home = lazy(() => import("./pages/Home"));
-const Services = lazy(() => import("./pages/Services"));
+const About = lazy(() => import("./pages/About"));
 const ProjectsList = lazy(() => import("./pages/Projects").then((m) => ({ default: m.ProjectsList })));
 const ProjectDetail = lazy(() => import("./pages/Projects").then((m) => ({ default: m.ProjectDetail })));
-const About = lazy(() => import("./pages/About"));
-const Industries = lazy(() => import("./pages/Industries"));
-const InsightsList = lazy(() => import("./pages/Insights").then((m) => ({ default: m.InsightsList })));
-const InsightDetail = lazy(() => import("./pages/Insights").then((m) => ({ default: m.InsightDetail })));
-const MarketPage = lazy(() => import("./pages/Markets"));
+const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact").then((m) => ({ default: m.Contact })));
-const Request = lazy(() => import("./pages/Contact").then((m) => ({ default: m.Request })));
 
 function BootScreen() {
   return (
@@ -42,17 +36,11 @@ export default function App() {
           <Suspense fallback={<BootScreen />}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/services" element={<Services />} />
+              <Route path="/about" element={<About />} />
               <Route path="/projects" element={<ProjectsList />} />
               <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/industries" element={<Industries />} />
-              <Route path="/insights" element={<InsightsList />} />
-              <Route path="/insights/:slug" element={<InsightDetail />} />
-              <Route path="/saudi-arabia" element={<MarketPage market="sa" />} />
-              <Route path="/egypt" element={<MarketPage market="eg" />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/request" element={<Request />} />
               <Route path="*" element={<Home />} />
             </Routes>
           </Suspense>

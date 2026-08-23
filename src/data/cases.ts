@@ -1,6 +1,6 @@
 import type { B } from "../i18n";
 
-/** صورة مشروع من مجلد المحتوى — public/projects/<id>/images/ */
+/** صورة مشروع من مجلد المحتوى: public/projects/<id>/images/ */
 export type ProjectImage = { file: string; caption?: B };
 
 export type CaseStudy = {
@@ -32,22 +32,22 @@ export const CASES: CaseStudy[] = [
     market: "sa",
     featured: true,
     catIds: ["it-infrastructure", "networks", "security-systems"],
-    period: { en: "2024 — 2025 · Makkah, Saudi Arabia", ar: "2024 — 2025 · مكة المكرمة، السعودية" },
+    period: { en: "2024–2025 · Makkah, Saudi Arabia", ar: "2024–2025 · مكة المكرمة، السعودية" },
     summary: {
-      en: "A complete temporary IT environment — network, Wi-Fi, surveillance and connectivity — delivered for a smart Hajj camp operating at peak-season scale.",
-      ar: "بيئة تقنية مؤقتة متكاملة — شبكة وواي فاي ومراقبة واتصال — لمخيم حج ذكي يعمل بكامل طاقته في موسم الذروة.",
+      en: "A complete temporary IT environment (network, Wi-Fi, surveillance and connectivity) delivered for a smart Hajj camp operating at peak-season scale.",
+      ar: "بيئة تقنية مؤقتة متكاملة (شبكة وواي فاي ومراقبة واتصال) لمخيم حج ذكي يعمل بكامل طاقته في موسم الذروة.",
     },
     overview: {
-      en: "One of Saudi Arabia's largest seasonal operations: a smart Hajj camp in Makkah required a full working IT environment built from scratch within a tight seasonal window — connectivity for operations teams, Wi-Fi across the camp, and surveillance of key areas — all in a temporary setting that still had to behave like an enterprise network.",
-      ar: "أحد أكبر العمليات الموسمية في السعودية: احتاج مخيم حج ذكي في مكة المكرمة إلى بيئة تقنية كاملة تُبنى من الصفر ضمن نافذة موسمية ضيقة — اتصال لفرق التشغيل، وواي فاي في أنحاء المخيم، ومراقبة للمناطق الحيوية — في إطار مؤقت يجب أن يعمل كشبكة مؤسسية.",
+      en: "One of Saudi Arabia's largest seasonal operations: a smart Hajj camp in Makkah required a full working IT environment built from scratch within a tight seasonal window. Connectivity for operations teams, Wi-Fi across the camp, and surveillance of key areas, all in a temporary setting that still had to behave like an enterprise network.",
+      ar: "أحد أكبر العمليات الموسمية في السعودية: احتاج مخيم حج ذكي في مكة المكرمة إلى بيئة تقنية كاملة تُبنى من الصفر ضمن نافذة موسمية ضيقة. اتصال لفرق التشغيل، وواي فاي في أنحاء المخيم، ومراقبة للمناطق الحيوية، في إطار مؤقت يجب أن يعمل كشبكة مؤسسية.",
     },
     challenge: {
-      en: "Temporary infrastructure usually means fragile infrastructure. The camp had to support many simultaneous users, harsh outdoor conditions, and a hard deadline tied to the season — with no room for rework once pilgrims arrived.",
-      ar: "البنية المؤقتة تعني غالبًا بنية هشة. كان على المخيم دعم عدد كبير من المستخدمين المتزامنين في ظروف خارجية قاسية وضمن موعد نهائي مرتبط بالموسم — بلا مجال لإعادة العمل بعد وصول الحجاج.",
+      en: "Temporary infrastructure usually means fragile infrastructure. The camp had to support many simultaneous users, harsh outdoor conditions, and a hard deadline tied to the season, with no room for rework once pilgrims arrived.",
+      ar: "البنية المؤقتة تعني غالبًا بنية هشة. كان على المخيم دعم عدد كبير من المستخدمين المتزامنين في ظروف خارجية قاسية وضمن موعد نهائي مرتبط بالموسم، بلا مجال لإعادة العمل بعد وصول الحجاج.",
     },
     solution: {
-      en: "We designed the camp as a single managed network: structured distribution points per zone, business-grade Wi-Fi coverage, centrally managed routing and bandwidth control, and a CCTV layer covering operational areas — with monitoring from one point.",
-      ar: "صمّمنا المخيم كشبكة واحدة مُدارة: نقاط توزيع منظمة لكل منطقة، وتغطية واي فاي بمستوى الأعمال، وتوجيه مركزي مع إدارة للنطاق الترددي، وطبقة مراقبة للمناطق التشغيلية — بمتابعة من نقطة واحدة.",
+      en: "We designed the camp as a single managed network: structured distribution points per zone, business-grade Wi-Fi coverage, centrally managed routing and bandwidth control, and a CCTV layer covering operational areas, with monitoring from one point.",
+      ar: "صمّمنا المخيم كشبكة واحدة مُدارة: نقاط توزيع منظمة لكل منطقة، وتغطية واي فاي بمستوى الأعمال، وتوجيه مركزي مع إدارة للنطاق الترددي، وطبقة مراقبة للمناطق التشغيلية، بمتابعة من نقطة واحدة.",
     },
     implementation: [
       { en: "Network design per camp zone with labeled distribution points", ar: "تصميم الشبكة لكل منطقة مع نقاط توزيع موسومة" },
@@ -58,8 +58,8 @@ export const CASES: CaseStudy[] = [
     ],
     technologies: ["MikroTik", "Business Wi-Fi", "Structured Cabling", "CCTV", "NVR", "Access Control", "Biometric Attendance", "IP Telephony"],
     role: {
-      en: "IT Operations Supervisor: led a team of 6+ IT technicians through the season — incident response and escalations, preventive maintenance, pre-season infrastructure deployment, and day-to-day operation of desktops, printers, networking, CCTV, access control, biometric attendance and IP telephony.",
-      ar: "مشرف عمليات تقنية المعلومات: قيادة فريق من أكثر من 6 فنيين طوال الموسم — الاستجابة للحوادث والتصعيد، والصيانة الوقائية، ونشر البنية التحتية قبل الموسم، والتشغيل اليومي للأجهزة والطابعات والشبكات والمراقبة والتحكم في الدخول والبصمة والهواتف.",
+      en: "IT Operations Supervisor: led a team of 6+ IT technicians through the season. Incident response and escalations, preventive maintenance, pre-season infrastructure deployment, and day-to-day operation of desktops, printers, networking, CCTV, access control, biometric attendance and IP telephony.",
+      ar: "مشرف عمليات تقنية المعلومات: قيادة فريق من أكثر من 6 فنيين طوال الموسم. الاستجابة للحوادث والتصعيد، والصيانة الوقائية، ونشر البنية التحتية قبل الموسم، والتشغيل اليومي للأجهزة والطابعات والشبكات والمراقبة والتحكم في الدخول والبصمة والهواتف.",
     },
     results: [
       { en: "One coherent network across all camp zones instead of disconnected fragments", ar: "شبكة واحدة مترابطة عبر مناطق المخيم بدل أجزاء منفصلة" },
@@ -75,10 +75,10 @@ export const CASES: CaseStudy[] = [
     market: "sa",
     featured: true,
     catIds: ["it-infrastructure", "networks"],
-    period: { en: "2025 — Present · Jeddah, Saudi Arabia", ar: "2025 — الآن · جدة، السعودية" },
+    period: { en: "2025–Present · Jeddah, Saudi Arabia", ar: "2025–الآن · جدة، السعودية" },
     summary: {
-      en: "Structured cabling and network distribution across a multi-tower development — the silent layer every smart building service depends on.",
-      ar: "توصيلات منظمة وتوزيع شبكي عبر أبراج متعددة — الطبقة الصامتة التي تعتمد عليها كل خدمات المباني الذكية.",
+      en: "Structured cabling and network distribution across a multi-tower development, the silent layer every smart building service depends on.",
+      ar: "توصيلات منظمة وتوزيع شبكي عبر أبراج متعددة، الطبقة الصامتة التي تعتمد عليها كل خدمات المباني الذكية.",
     },
     overview: {
       en: "A multi-tower development needed its IT backbone delivered alongside construction: structured cabling, floor distribution and rack infrastructure ready before fit-out teams moved in.",
@@ -89,8 +89,8 @@ export const CASES: CaseStudy[] = [
       ar: "جداول الإنشاء تضغط كل شيء. قرارات التوصيلات المبكرة مكلفة جدًا عند مراجعتها لاحقًا، والتنسيق بين المقاولين والاستشاريين وفرق التشطيب يجب أن يبقى محكمًا.",
     },
     solution: {
-      en: "A floor-by-floor structured cabling plan with labeled pathways, consolidated distribution per zone, and rack rooms organized for future operations — documented as-built so any team can maintain it later.",
-      ar: "خطة توصيلات منظمة دورًا بدور مع مسارات موسومة، وتوزيع مجمّع لكل منطقة، وغرف racks منظمة للتشغيل المستقبلي — مع توثيق as-built يسهّل صيانة أي فريق لاحقًا.",
+      en: "A floor-by-floor structured cabling plan with labeled pathways, consolidated distribution per zone, and rack rooms organized for future operations, documented as-built so any team can maintain it later.",
+      ar: "خطة توصيلات منظمة دورًا بدور مع مسارات موسومة، وتوزيع مجمّع لكل منطقة، وغرف racks منظمة للتشغيل المستقبلي، مع توثيق as-built يسهّل صيانة أي فريق لاحقًا.",
     },
     implementation: [
       { en: "Structured cabling design aligned with construction phases", ar: "تصميم التوصيلات المنظمة بما يتوافق مع مراحل الإنشاء" },
@@ -118,8 +118,8 @@ export const CASES: CaseStudy[] = [
     featured: true,
     catIds: ["security-systems"],
     summary: {
-      en: "A centralized monitoring environment consolidating cameras from multiple areas into one operational view — built to be watched, reviewed and maintained.",
-      ar: "بيئة مراقبة مركزية تجمع كاميرات مناطق متعددة في شاشة تشغيل واحدة — مبنية للمشاهدة والمراجعة والصيانة.",
+      en: "A centralized monitoring environment consolidating cameras from multiple areas into one operational view, built to be watched, reviewed and maintained.",
+      ar: "بيئة مراقبة مركزية تجمع كاميرات مناطق متعددة في شاشة تشغيل واحدة، مبنية للمشاهدة والمراجعة والصيانة.",
     },
     overview: {
       en: "A growing operation needed its scattered cameras unified into a proper command center: a video wall for live monitoring, consolidated recording, and remote access for authorized staff.",
@@ -166,8 +166,8 @@ export const CASES: CaseStudy[] = [
       ar: "تجاوزت مؤسسة مرحلة «ركن الخوادم العشوائي» واحتاجت بيئة مركز بيانات حقيقية: غرفة مصممة ببنية racks وقلب شبكي ومنصات خوادم تُدار كنظام واحد.",
     },
     challenge: {
-      en: "Servers, storage and network gear had accumulated without a plan — undocumented connections, shared power strips, and no single view of what depended on what.",
-      ar: "تراكمت الخوادم والتخزين ومعدات الشبكة بلا خطة — توصيلات غير موثقة ومشاركات كهرباء عشوائية، وبلا رؤية واحدة لما يعتمد على ماذا.",
+      en: "Servers, storage and network gear had accumulated without a plan: undocumented connections, shared power strips, and no single view of what depended on what.",
+      ar: "تراكمت الخوادم والتخزين ومعدات الشبكة بلا خطة: توصيلات غير موثقة ومشاركات كهرباء عشوائية، وبلا رؤية واحدة لما يعتمد على ماذا.",
     },
     solution: {
       en: "We rebuilt the room with intent: organized rack layout with labeling, structured cabling, power discipline with managed distribution, a switched network core, and Windows Server platforms administered under consistent policy.",
@@ -199,16 +199,16 @@ export const CASES: CaseStudy[] = [
     featured: false,
     catIds: ["networks"],
     summary: {
-      en: "Guest Wi-Fi that reaches every room and public area, cleanly separated from the hotel's operational network — planned by survey, not by guesswork.",
-      ar: "واي فاي للضيوف يصل كل غرفة ومنطقة عامة، مفصول بوضوح عن شبكة الفندق التشغيلية — مخطط بمسح ميداني لا بالتخمين.",
+      en: "Guest Wi-Fi that reaches every room and public area, cleanly separated from the hotel's operational network. Planned by survey, not by guesswork.",
+      ar: "واي فاي للضيوف يصل كل غرفة ومنطقة عامة، مفصول بوضوح عن شبكة الفندق التشغيلية. مخطط بمسح ميداني لا بالتخمين.",
     },
     overview: {
       en: "A hotel needed dependable Wi-Fi across guest floors, lobby and public areas, without letting guest traffic anywhere near the systems that run the property.",
       ar: "احتاج فندق إلى واي فاي موثوق في أدوار الضيوف والبهو والمناطق العامة، دون السماح لحركة الضيوف بالاقتراب من الأنظمة التي تشغّل المنشأة.",
     },
     challenge: {
-      en: "Guest complaints about Wi-Fi were constant, while the property's own systems — front desk, POS, management — shared the same fragile network fabric.",
-      ar: "شكاوى الضيوف من الواي فاي كانت مستمرة، بينما أنظمة الفندق نفسها — الاستقبال ونقاط البيع والإدارة — تشارك النسيج الشبكي الهش ذاته.",
+      en: "Guest complaints about Wi-Fi were constant, while the property's own systems (front desk, POS, management) shared the same fragile network fabric.",
+      ar: "شكاوى الضيوف من الواي فاي كانت مستمرة، بينما أنظمة الفندق نفسها (الاستقبال ونقاط البيع والإدارة) تشارك النسيج الشبكي الهش ذاته.",
     },
     solution: {
       en: "A coverage plan based on the building's real structure, access points placed by survey, guest and operational networks separated with VLANs, and bandwidth policies that keep every guest online without one user consuming everything.",
@@ -239,8 +239,8 @@ export const CASES: CaseStudy[] = [
     featured: false,
     catIds: ["networks"],
     summary: {
-      en: "Branches and warehouses joined into one private network over MikroTik routers — so systems behave as if every site were in the same building.",
-      ar: "فروع ومستودعات اجتمعت في شبكة خاصة واحدة عبر راوترات ميكروتيك — لتعمل الأنظمة كأن كل المواقع في مبنى واحد.",
+      en: "Branches and warehouses joined into one private network over MikroTik routers, so systems behave as if every site were in the same building.",
+      ar: "فروع ومستودعات اجتمعت في شبكة خاصة واحدة عبر راوترات ميكروتيك، لتعمل الأنظمة كأن كل المواقع في مبنى واحد.",
     },
     overview: {
       en: "A multi-site operation needed its locations connected as one network: shared systems, file access and internal services available at every site without exposing anything to the public internet.",
@@ -251,8 +251,8 @@ export const CASES: CaseStudy[] = [
       ar: "كل موقع كان جزيرة. الموظفون يتدبرون نقل الملفات بطرق ملتوية، وأي نظام مشترك كان يحتاج ثغرات Port-Forwarding هشة لا يثق بها أحد.",
     },
     solution: {
-      en: "Site-to-site VPN tunnels on MikroTik RouterOS connecting each location into one routed private network — with routing rules, segmentation and monitoring configured per site.",
-      ar: "أنفاق VPN بين المواقع على MikroTik RouterOS تربط كل المواقع في شبكة خاصة واحدة موجّهة — مع قواعد توجيه وتقسيم ومراقبة مُجهزة لكل موقع.",
+      en: "Site-to-site VPN tunnels on MikroTik RouterOS connecting each location into one routed private network, with routing rules, segmentation and monitoring configured per site.",
+      ar: "أنفاق VPN بين المواقع على MikroTik RouterOS تربط كل المواقع في شبكة خاصة واحدة موجّهة، مع قواعد توجيه وتقسيم ومراقبة مُجهزة لكل موقع.",
     },
     implementation: [
       { en: "Router deployment and tunnel configuration per site", ar: "نشر الراوترات وتجهيز الأنفاق لكل موقع" },
@@ -279,12 +279,12 @@ export const CASES: CaseStudy[] = [
     featured: false,
     catIds: ["security-systems"],
     summary: {
-      en: "Biometric attendance and door access deployed as one system — so who is where, and who entered when, is a report away rather than a dispute.",
-      ar: "بصمة حضور وتحكم في دخول الأبواب كمنظومة واحدة — فيصبح «من أين ومتى دخل» تقريرًا جاهزًا بدل جدال.",
+      en: "Biometric attendance and door access deployed as one system, so who is where, and who entered when, is a report away rather than a dispute.",
+      ar: "بصمة حضور وتحكم في دخول الأبواب كمنظومة واحدة، فيصبح «من أين ومتى دخل» تقريرًا جاهزًا بدل جدال.",
     },
     overview: {
-      en: "An organization needed dependable attendance data and controlled entry to sensitive areas — biometric devices at doors, integrated into a single attendance and access platform.",
-      ar: "احتاجت مؤسسة إلى بيانات حضور موثوقة ودخول مُتحكم فيه للمناطق الحساسة — أجهزة بصمة على الأبواب مدمجة في منصة واحدة للحضور والدخول.",
+      en: "An organization needed dependable attendance data and controlled entry to sensitive areas: biometric devices at doors, integrated into a single attendance and access platform.",
+      ar: "احتاجت مؤسسة إلى بيانات حضور موثوقة ودخول مُتحكم فيه للمناطق الحساسة: أجهزة بصمة على الأبواب مدمجة في منصة واحدة للحضور والدخول.",
     },
     challenge: {
       en: "Paper-based or card-based attendance invited errors and disputes, and sensitive areas relied on keys that multiplied and were never tracked.",
@@ -319,8 +319,8 @@ export const CASES: CaseStudy[] = [
     featured: false,
     catIds: ["it-infrastructure", "microsoft-cloud"],
     summary: {
-      en: "Ongoing user support and environment administration run as a practice — ticketed, monitored and improved — not as firefighting.",
-      ar: "دعم مستمر للمستخدمين وإدارة للبيئة تُمارس كمنهجية — بتذاكر ومراقبة وتحسين — لا كإطفاء حرائق.",
+      en: "Ongoing user support and environment administration run as a practice (ticketed, monitored and improved), not as firefighting.",
+      ar: "دعم مستمر للمستخدمين وإدارة للبيئة تُمارس كمنهجية (بتذاكر ومراقبة وتحسين)، لا كإطفاء حرائق.",
     },
     overview: {
       en: "An organization with a large user base needed its day-to-day IT run professionally: incidents handled through a service desk, endpoints and servers monitored, and Microsoft 365 administered with routine discipline.",
@@ -331,8 +331,8 @@ export const CASES: CaseStudy[] = [
       ar: "المساعدة التقنية كانت تصل لمن يصرخ أعلى. المشكلات نفسها تعود لأن لا شيء يُتتبع، وصحة البيئة كانت تُقاس فقط عندما ينكسر شيء.",
     },
     solution: {
-      en: "A structured service desk practice with ticketing through ManageEngine, environment monitoring via PRTG, and scheduled administration of Active Directory and Microsoft 365 — with recurring health reviews that close the loop on repeat issues.",
-      ar: "منهجية مكتب خدمة منظم بتذاكر عبر ManageEngine، ومراقبة للبيئة عبر PRTG، وإدارة مجدولة لأكتيف ديريكتوري ومايكروسوفت 365 — مع مراجعات صحة دورية تغلق حلقة المشكلات المتكررة.",
+      en: "A structured service desk practice with ticketing through ManageEngine, environment monitoring via PRTG, and scheduled administration of Active Directory and Microsoft 365, with recurring health reviews that close the loop on repeat issues.",
+      ar: "منهجية مكتب خدمة منظم بتذاكر عبر ManageEngine، ومراقبة للبيئة عبر PRTG، وإدارة مجدولة لأكتيف ديريكتوري ومايكروسوفت 365، مع مراجعات صحة دورية تغلق حلقة المشكلات المتكررة.",
     },
     implementation: [
       { en: "Ticketing workflow design and rollout", ar: "تصميم سير عمل التذاكر وتطبيقه" },
@@ -352,26 +352,26 @@ export const CASES: CaseStudy[] = [
     ],
   },
 
-  /* ================= EGYPT — documented from CV ================= */
+  /* ================= EGYPT: documented from CV ================= */
   {
     id: "zahran-market",
-    title: { en: "Zahran Market — Multi-Branch Retail IT Operations", ar: "أسواق زهران — تشغيل تقنية المعلومات عبر فروع متعددة" },
+    title: { en: "Zahran Market: Multi-Branch Retail IT Operations", ar: "أسواق زهران: تشغيل تقنية المعلومات عبر فروع متعددة" },
     sector: { en: "Retail", ar: "التجزئة" },
     market: "eg",
     featured: true,
     catIds: ["it-infrastructure", "networks", "microsoft-cloud", "security-systems"],
-    period: { en: "2019 — 2024 · Alexandria, Egypt", ar: "2019 — 2024 · الإسكندرية، مصر" },
+    period: { en: "2019–2024 · Alexandria, Egypt", ar: "2019–2024 · الإسكندرية، مصر" },
     summary: {
-      en: "Five years of continuous enterprise IT operations across Zahran Market's retail branches in Alexandria — support, networks, monitoring and security systems for a multi-site business.",
-      ar: "خمس سنوات من التشغيل التقني المؤسسي المستمر عبر فروع أسواق زهران في الإسكندرية — دعم وشبكات ومراقبة وأنظمة أمن لمنشأة متعددة المواقع.",
+      en: "Five years of continuous enterprise IT operations across Zahran Market's retail branches in Alexandria: support, networks, monitoring and security systems for a multi-site business.",
+      ar: "خمس سنوات من التشغيل التقني المؤسسي المستمر عبر فروع أسواق زهران في الإسكندرية: دعم وشبكات ومراقبة وأنظمة أمن لمنشأة متعددة المواقع.",
     },
     overview: {
-      en: "Zahran Market runs retail operations across multiple business locations in Alexandria. The environment needed reliable, continuous IT: end-user support at every branch, infrastructure that stayed healthy under daily retail pressure, and security systems covering sites — all managed by one accountable specialist.",
-      ar: "تدير أسواق زهران عمليات تجزئة عبر مواقع عمل متعددة في الإسكندرية. احتاجت البيئة إلى تقنية معلومات موثوقة ومستمرة: دعم للمستخدمين في كل فرع، وبنية تحتية تبقى سليمة تحت ضغط التجزئة اليومي، وأنظمة أمن تغطي المواقع — وكل ذلك بإدارة متخصص واحد مسؤول.",
+      en: "Zahran Market runs retail operations across multiple business locations in Alexandria. The environment needed reliable, continuous IT: end-user support at every branch, infrastructure that stayed healthy under daily retail pressure, and security systems covering sites, all managed by one accountable specialist.",
+      ar: "تدير أسواق زهران عمليات تجزئة عبر مواقع عمل متعددة في الإسكندرية. احتاجت البيئة إلى تقنية معلومات موثوقة ومستمرة: دعم للمستخدمين في كل فرع، وبنية تحتية تبقى سليمة تحت ضغط التجزئة اليومي، وأنظمة أمن تغطي المواقع، وكل ذلك بإدارة متخصص واحد مسؤول.",
     },
     challenge: {
-      en: "Retail never waits: POS terminals, printers and branch networks must work every business day, across multiple locations at once. Without proactive monitoring, performance issues only surfaced as outages — and with branches spread across the city, every incident meant real lost selling time.",
-      ar: "التجزئة لا تنتظر: أنظمة نقاط البيع والطابعات وشبكات الفروع يجب أن تعمل كل يوم عمل، عبر مواقع متعددة في آن واحد. بدون مراقبة استباقية، كانت مشكلات الأداء لا تظهر إلا كانقطاعات — ومع فروع موزعة على المدينة، كان كل عطل يعني وقت بيع ضائعًا فعلًا.",
+      en: "Retail never waits: POS terminals, printers and branch networks must work every business day, across multiple locations at once. Without proactive monitoring, performance issues only surfaced as outages, and with branches spread across the city, every incident meant real lost selling time.",
+      ar: "التجزئة لا تنتظر: أنظمة نقاط البيع والطابعات وشبكات الفروع يجب أن تعمل كل يوم عمل، عبر مواقع متعددة في آن واحد. بدون مراقبة استباقية، كانت مشكلات الأداء لا تظهر إلا كانقطاعات، ومع فروع موزعة على المدينة، كان كل عطل يعني وقت بيع ضائعًا فعلًا.",
     },
     solution: {
       en: "A single accountable IT operation across all branches: first- and second-line support for desktops, laptops, POS systems, printers and scanners; Active Directory administration for identities and access; PRTG monitoring to catch performance issues before they became outages; and installation and maintenance of CCTV, access control, biometric attendance and IP telephony.",
@@ -381,7 +381,7 @@ export const CASES: CaseStudy[] = [
       { en: "First- and second-line support for desktops, laptops, POS systems, printers, scanners and enterprise software across branches", ar: "دعم من المستويين الأول والثاني للأجهزة وأنظمة نقاط البيع والطابعات والماسحات والبرامج عبر الفروع" },
       { en: "Active Directory administration: user provisioning, password management, shared folders, security groups and NTFS permissions", ar: "إدارة أكتيف ديريكتوري: تجهيز المستخدمين وإدارة كلمات المرور والمجلدات المشتركة ومجموعات الأمان وصلاحيات NTFS" },
       { en: "User onboarding: accounts, workstations, software and POS terminals configured for secure access to business systems", ar: "تجهيز المستخدمين: حسابات وأجهزة عمل وبرامج وأنظمة نقاط بيع مُعدة للوصول الآمن لأنظمة العمل" },
-      { en: "Infrastructure monitoring with PRTG Network Monitor — proactively identifying performance issues", ar: "مراقبة البنية التحتية عبر PRTG — اكتشاف استباقي لمشكلات الأداء" },
+      { en: "Infrastructure monitoring with PRTG Network Monitor, proactively identifying performance issues", ar: "مراقبة البنية التحتية عبر PRTG، مع اكتشاف استباقي لمشكلات الأداء" },
       { en: "Network support: TCP/IP, DNS, DHCP, HP switches, structured cabling and wireless networking", ar: "دعم الشبكات: TCP/IP وDNS وDHCP ومفاتيح HP والتوصيلات المنظمة والشبكات اللاسلكية" },
       { en: "Installation and maintenance of CCTV, access control, biometric attendance devices, IP telephony and enterprise hardware", ar: "تركيب وصيانة المراقبة والتحكم في الدخول وأجهزة البصمة والحضور والهواتف والأجهزة المؤسسية" },
       { en: "Workstation deployment, OS installation, hardware upgrades and endpoint lifecycle support", ar: "نشر أجهزة العمل وتثبيت أنظمة التشغيل وترقية العتاد ودعم دورة حياة الأجهزة الطرفية" },
@@ -389,8 +389,8 @@ export const CASES: CaseStudy[] = [
     ],
     technologies: ["Active Directory", "PRTG", "HP Switches", "TCP/IP · DNS · DHCP", "Structured Cabling", "CCTV", "Access Control", "Biometric Attendance", "IP Telephony", "POS Systems", "Enterprise Printing"],
     role: {
-      en: "IT Support & Network Specialist — the accountable owner of the retail group's day-to-day IT across multiple business locations: support delivery, infrastructure monitoring, network and printing operations, and the installation and upkeep of security and telephony systems.",
-      ar: "أخصائي دعم تقني وشبكات — المسؤول عن التشغيل اليومي لتقنية المعلومات في المجموعة عبر مواقع العمل المتعددة: تقديم الدعم ومراقبة البنية التحتية وتشغيل الشبكات والطباعة وتركيب وصيانة أنظمة الأمن والهواتف.",
+      en: "IT Support & Network Specialist, the accountable owner of the retail group's day-to-day IT across multiple business locations: support delivery, infrastructure monitoring, network and printing operations, and the installation and upkeep of security and telephony systems.",
+      ar: "أخصائي دعم تقني وشبكات، المسؤول عن التشغيل اليومي لتقنية المعلومات في المجموعة عبر مواقع العمل المتعددة: تقديم الدعم ومراقبة البنية التحتية وتشغيل الشبكات والطباعة وتركيب وصيانة أنظمة الأمن والهواتف.",
     },
     results: [
       { en: "Continuous first- and second-line support across multiple business locations", ar: "دعم مستمر من المستويين الأول والثاني عبر مواقع العمل المتعددة" },
@@ -401,23 +401,23 @@ export const CASES: CaseStudy[] = [
   },
   {
     id: "united-abco",
-    title: { en: "United Abco Company — On-Site Corporate IT Support", ar: "أبكو المتحدة — دعم تقني ميداني في بيئة شركات" },
+    title: { en: "United Abco Company: On-Site Corporate IT Support", ar: "أبكو المتحدة: دعم تقني ميداني في بيئة شركات" },
     sector: { en: "Corporate IT Services", ar: "خدمات تقنية للشركات" },
     market: "eg",
     featured: true,
     catIds: ["it-infrastructure", "networks", "microsoft-cloud"],
-    period: { en: "2015 — 2018 · Alexandria, Egypt", ar: "2015 — 2018 · الإسكندرية، مصر" },
+    period: { en: "2015–2018 · Alexandria, Egypt", ar: "2015–2018 · الإسكندرية، مصر" },
     summary: {
-      en: "On-site end-user IT support at United Abco Company, delivered through Arab Computers Company (ACC) — IMAC operations, domain support and day-to-day IT continuity in a corporate environment.",
-      ar: "دعم تقني ميداني للمستخدمين في شركة أبكو المتحدة عبر الشركة العربية للحاسبات (ACC) — عمليات IMAC ودعم الدومين واستمرارية تقنية المعلومات اليومية في بيئة شركات.",
+      en: "On-site end-user IT support at United Abco Company, delivered through Arab Computers Company (ACC): IMAC operations, domain support and day-to-day IT continuity in a corporate environment.",
+      ar: "دعم تقني ميداني للمستخدمين في شركة أبكو المتحدة عبر الشركة العربية للحاسبات (ACC): عمليات IMAC ودعم الدومين واستمرارية تقنية المعلومات اليومية في بيئة شركات.",
     },
     overview: {
-      en: "United Abco Company needed dependable, on-site IT for its end users — workstations that worked, connectivity that held, and a specialist on the ground handling requests as they happened. The engagement ran through Arab Computers Company (ACC), with the specialist embedded at the client site.",
-      ar: "احتاجت شركة أبكو المتحدة إلى دعم تقني ميداني موثوق لمستخدميها — أجهزة تعمل واتصال مستقر ومتخصص في الموقع يتعامل مع الطلبات فور حدوثها. جرى العمل عبر الشركة العربية للحاسبات (ACC) مع تواجد المتخصص داخل مقر العميل.",
+      en: "United Abco Company needed dependable, on-site IT for its end users: workstations that worked, connectivity that held, and a specialist on the ground handling requests as they happened. The engagement ran through Arab Computers Company (ACC), with the specialist embedded at the client site.",
+      ar: "احتاجت شركة أبكو المتحدة إلى دعم تقني ميداني موثوق لمستخدميها: أجهزة تعمل واتصال مستقر ومتخصص في الموقع يتعامل مع الطلبات فور حدوثها. جرى العمل عبر الشركة العربية للحاسبات (ACC) مع تواجد المتخصص داخل مقر العميل.",
     },
     challenge: {
-      en: "In a corporate environment, small IT failures quickly become blocked work. The requirement was uninterrupted IT operations — hardware, operating systems, connectivity and user requests all handled on-site, to SLA targets, without the business feeling the friction.",
-      ar: "في بيئة الشركات، تتحول الأعطال التقنية الصغيرة سريعًا إلى عمل متعطل. كان المطلوب عمليات تقنية بلا انقطاع — أجهزة وأنظمة تشغيل واتصال وطلبات مستخدمين تُعالج ميدانيًا ووفق أهداف الخدمة، دون أن يشعر العمل بأي احتكاك.",
+      en: "In a corporate environment, small IT failures quickly become blocked work. The requirement was uninterrupted IT operations: hardware, operating systems, connectivity and user requests all handled on-site, to SLA targets, without the business feeling the friction.",
+      ar: "في بيئة الشركات، تتحول الأعطال التقنية الصغيرة سريعًا إلى عمل متعطل. كان المطلوب عمليات تقنية بلا انقطاع: أجهزة وأنظمة تشغيل واتصال وطلبات مستخدمين تُعالج ميدانيًا ووفق أهداف الخدمة، دون أن يشعر العمل بأي احتكاك.",
     },
     solution: {
       en: "A dedicated on-site specialist running the full user environment: installation, configuration and maintenance of desktops, laptops and Windows operating systems; LAN/Wi-Fi connectivity, printers and peripheral devices; IMAC activities (Install, Move, Add, Change); and Active Directory account administration with workstation domain support.",
@@ -427,14 +427,14 @@ export const CASES: CaseStudy[] = [
       { en: "On-site first- and second-line technical support delivered to SLA targets", ar: "دعم تقني ميداني من المستويين الأول والثاني وفق أهداف الخدمة" },
       { en: "Installation, configuration and maintenance of desktops, laptops and Windows operating systems", ar: "تركيب وتكوين وصيانة الأجهزة المكتبية والمحمولة وأنظمة ويندوز" },
       { en: "LAN/Wi-Fi connectivity, printers and peripheral device support", ar: "دعم اتصال LAN/Wi-Fi والطابعات والأجهزة الطرفية" },
-      { en: "IMAC operations — Install, Move, Add, Change — across the user estate", ar: "عمليات IMAC — تركيب ونقل وإضافة وتغيير — عبر أجهزة المستخدمين" },
+      { en: "IMAC operations (Install, Move, Add, Change) across the user estate", ar: "عمليات IMAC (تركيب ونقل وإضافة وتغيير) عبر أجهزة المستخدمين" },
       { en: "Active Directory user account administration, password resets and workstation domain support", ar: "إدارة حسابات المستخدمين في أكتيف ديريكتوري وإعادة تعيين كلمات المرور ودعم دومين الأجهزة" },
       { en: "User request handling, hardware replacement and software installation", ar: "معالجة طلبات المستخدمين واستبدال العتاد وتثبيت البرامج" },
     ],
     technologies: ["Windows OS", "LAN / Wi-Fi", "Active Directory", "Enterprise Printing", "Peripheral Devices"],
     role: {
-      en: "Network & Devices Specialist (أخصائي شبكات وأجهزة) — on-site at United Abco Company through Arab Computers Company (ACC), coordinating with customer representatives to keep IT operations uninterrupted.",
-      ar: "أخصائي شبكات وأجهزة — بمقر شركة أبكو المتحدة عبر الشركة العربية للحاسبات (ACC)، بالتنسيق مع ممثلي العميل للحفاظ على استمرارية العمليات التقنية.",
+      en: "Network & Devices Specialist (أخصائي شبكات وأجهزة), on-site at United Abco Company through Arab Computers Company (ACC), coordinating with customer representatives to keep IT operations uninterrupted.",
+      ar: "أخصائي شبكات وأجهزة، بمقر شركة أبكو المتحدة عبر الشركة العربية للحاسبات (ACC)، بالتنسيق مع ممثلي العميل للحفاظ على استمرارية العمليات التقنية.",
     },
     results: [
       { en: "First- and second-line support consistently meeting SLA targets", ar: "دعم من المستويين الأول والثاني يحقق أهداف الخدمة باستمرار" },

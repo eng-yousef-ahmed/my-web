@@ -18,7 +18,7 @@ export const CONFIG = {
   brand: "TECH OF THE WORLD",
   symbol: "YA",
   tagline: "Technology That Moves Business Forward.",
-  positioning: "Professional IT Services & Technology Solutions Provider",
+  positioning: "Senior IT Support Specialist, IT infrastructure & operations",
   markets: ["Saudi Arabia", "Egypt"] as const,
 };
 
@@ -123,7 +123,7 @@ export function vCardDataUrl(): string {
     `URL:${CONTACT.website}`,
     `URL:https://wa.me/${CONTACT.whatsappEG}`,
     `URL:https://wa.me/${CONTACT.whatsappSA}`,
-    `NOTE:Technology That Moves Business Forward — WhatsApp: +${CONTACT.whatsappEG} (Egypt) / +${CONTACT.whatsappSA} (Saudi Arabia). IT services in Saudi Arabia & Egypt.`,
+    `NOTE:Technology That Moves Business Forward. WhatsApp: +${CONTACT.whatsappEG} (Egypt) / +${CONTACT.whatsappSA} (Saudi Arabia). IT services in Saudi Arabia & Egypt.`,
     "END:VCARD",
   ];
   return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
@@ -139,4 +139,11 @@ export const IMAGES = {
   ops: "https://image.qwenlm.ai/generated-images/70296d57-3950-4428-93da-13ab4eeaffdc/_result.png",
   rack: "https://image.qwenlm.ai/generated-images/1972e502-7e3a-4038-9591-a5555f40fa7f/_result.png",
   network: "https://image.qwenlm.ai/generated-images/3903330b-f80a-46da-934a-dafeb37f8c61/_result.png",
+  /**
+   * Default hero portrait. The site ALWAYS prefers a local file dropped into
+   * `public/images/profile/` (profile.webp → profile.jpg → profile.png) — so
+   * replacing the photo later needs ZERO code changes. This remote image is
+   * only the fallback while no local file exists.
+   */
+  profile: "https://image.qwenlm.ai/generated-images/93222298-9b9d-4637-8416-d6241340729f/_result.png",
 };

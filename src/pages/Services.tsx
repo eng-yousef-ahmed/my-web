@@ -1,171 +1,103 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
-import { FAQS, SERVICE_CATEGORIES, STEPS } from "../data/content";
-import { Btn, FaqList, Icon, PageHero, Reveal, SectionHeading } from "../components/kit";
-import { IMAGES } from "../config";
+import { SERVICE_CATEGORIES, SERVICE_TECH } from "../data/content";
+import { Btn, Icon, PageHero, Reveal } from "../components/kit";
 
 export default function Services() {
-  const { L, t, isAr } = useLang();
+  const { L, isAr } = useLang();
   usePageMeta(
-    isAr ? "خدماتنا | TECH OF THE WORLD — خدمات تقنية معلومات في السعودية ومصر" : "IT Services | TECH OF THE WORLD — IT Support, Infrastructure, Networks, Microsoft & Cloud, Security",
-    "Five accountable service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy — delivered remote and on-site in Saudi Arabia and Egypt."
+    isAr ? "خدماتي | TECH OF THE WORLD" : "My Services | TECH OF THE WORLD",
+    isAr
+      ? "خمسة مجالات أعمل بها: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
+      : "Five areas I work with: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."
   );
-  const [active, setActive] = useState(SERVICE_CATEGORIES[0].id);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: "-35% 0px -55% 0px" }
-    );
-    SERVICE_CATEGORIES.forEach((c) => {
-      const el = document.getElementById(c.id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, []);
 
   return (
     <>
       <PageHero
-        kicker={isAr ? "خدماتنا" : "Services"}
-        title={{ en: "Every layer of your IT, owned by one team.", ar: "كل طبقات تقنيتك، في عهدة فريق واحد." }}
-        lead={{
-          en: "From the cable in the wall to the cloud tenant your teams live in — five service lines that fit together as one accountable environment.",
-          ar: "من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك — خمسة مسارات خدمية تتكامل كبيئة واحدة مسؤولة.",
+        kicker={isAr ? "خدماتي" : "My Services"}
+        title={{
+          en: "What I work with.",
+          ar: "ما أعمل به.",
         }}
-        image={IMAGES.rack}
-      >
-        <Btn to="/request">{t("nav.request")}</Btn>
-        <Btn to="/projects" variant="outline">{t("cta.exploreProjects")}</Btn>
-      </PageHero>
+        lead={{
+          en: "Five areas that fit together as one accountable environment, from the cable in the wall to the cloud tenant your teams live in.",
+          ar: "خمسة مجالات تتكامل كبيئة واحدة مسؤولة، من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك.",
+        }}
+      />
 
-      {/* sticky index + categories */}
-      <section className="bg-paper-100 text-ink-900 grid-bg-light">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-[280px_1fr] gap-12">
+      <section className="bg-paper-100 text-ink-900">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-[240px_1fr] gap-12">
+          {/* index */}
           <aside className="hidden lg:block">
-            <div className="sticky top-32">
-              <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-mist-500 mb-5">{isAr ? "المسارات" : "Index"}</p>
-              <nav className="border-s-2 border-ink-900/10 flex flex-col" aria-label="Service categories">
-                {SERVICE_CATEGORIES.map((c, i) => (
-                  <button
-                    key={c.id}
-                    onClick={() => document.getElementById(c.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                    className={`py-3 ps-5 text-start font-display text-[15px] font-semibold transition-all relative cursor-pointer ${
-                      active === c.id ? "text-amber-600" : "text-mist-500 hover:text-ink-900"
-                    }`}
-                  >
-                    <span className={`absolute start-[-2px] top-0 bottom-0 w-[2px] bg-amber-500 transition-transform origin-top ${active === c.id ? "scale-y-100" : "scale-y-0"}`} aria-hidden="true" />
-                    <span className="font-mono text-[11px] text-amber-600 me-2">0{i + 1}</span>
-                    {L(c.name)}
-                  </button>
-                ))}
-              </nav>
-              <div className="mt-10 chamfer-sm bg-ink-900 text-paper-50 p-6">
-                <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-amber-500 mb-3">{isAr ? "لست متأكدًا؟" : "Not sure where to start?"}</p>
-                <p className="text-[14px] text-mist-300 leading-relaxed">
-                  {isAr ? "اطلب تقييمًا أوليًا وسنحدد معك المسار الصحيح." : "Request an initial assessment and we'll map the right line together."}
-                </p>
-                <Btn to="/request" className="mt-5 w-full justify-center !px-4 !py-3">{t("cta.assessment")}</Btn>
-              </div>
-            </div>
+            <nav className="sticky top-28 space-y-1" aria-label={isAr ? "مسارات الخدمات" : "Service lines"}>
+              {SERVICE_CATEGORIES.map((c, i) => (
+                <a
+                  key={c.id}
+                  href={`#/services#${c.id}`}
+                  className="group flex items-baseline gap-3 py-2.5 border-b border-ink-900/10 hover:border-amber-600/50 transition-colors"
+                >
+                  <span className="font-mono text-[11px] text-amber-700">0{i + 1}</span>
+                  <span className="font-display text-[13.5px] font-semibold text-mist-500 group-hover:text-ink-900 transition-colors">{L(c.name)}</span>
+                </a>
+              ))}
+            </nav>
           </aside>
 
-          <div className="space-y-14">
+          {/* services */}
+          <div className="space-y-16">
             {SERVICE_CATEGORIES.map((c, i) => (
-              <article key={c.id} id={c.id} className="scroll-mt-32">
-                <Reveal className="flex items-center gap-5 mb-6">
-                  <span className="w-14 h-14 shrink-0 grid place-items-center bg-ink-900 text-amber-500 chamfer-sm">
-                    <Icon name={c.icon} className="w-7 h-7" />
-                  </span>
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-amber-600">{isAr ? "مسار" : "Line"} 0{i + 1}</p>
-                    <h2 className="font-display text-2xl sm:text-3xl font-bold">{L(c.name)}</h2>
-                  </div>
-                </Reveal>
-                <div className="grid md:grid-cols-[1fr_0.85fr] gap-8">
-                  <Reveal delay={80}>
-                    <p className="font-display text-lg font-semibold text-ink-800 leading-snug">{L(c.tagline)}</p>
-                    <p className="mt-4 text-mist-500 leading-relaxed text-[15px]">{L(c.value)}</p>
-                    <div className="mt-7 flex flex-wrap gap-3">
-                      <Btn to={`/request?service=${c.id}`} className="!px-5 !py-3 !text-[12px]">{t("nav.request")}</Btn>
-                      <Btn to="/contact" variant="outlineLight" className="!px-5 !py-3 !text-[12px]">{t("cta.talkSpecialist")}</Btn>
-                    </div>
-                  </Reveal>
-                  <Reveal delay={160}>
-                    <ul className="chamfer-sm bg-paper-50 border border-ink-900/10 divide-y divide-ink-900/8">
-                      {c.items.map((item) => (
-                        <li key={item.en} className="flex items-center gap-3.5 px-5 py-3.5 text-[14.5px] font-medium text-ink-800 group hover:bg-ink-900 hover:text-paper-50 transition-colors duration-300">
-                          <Icon name="check" className="w-4 h-4 text-amber-600 group-hover:text-amber-400 shrink-0" strokeWidth={2.2} />
-                          {L(item)}
-                        </li>
-                      ))}
-                    </ul>
-                  </Reveal>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+              <Reveal key={c.id}>
+                <article id={c.id} className="scroll-mt-28">
+                  <div className="flex items-start gap-5">
+                    <span className="font-mono text-[13px] text-amber-700 mt-1.5">0{i + 1}</span>
+                    <span className="text-amber-600 mt-0.5"><Icon name={c.icon} className="w-7 h-7" /></span>
+                    <div className="flex-1 min-w-0">
+                      <h2 className="font-display text-2xl font-bold text-ink-900">{L(c.name)}</h2>
+                      <p className="mt-3 text-[15px] leading-relaxed text-mist-500 max-w-2xl">{L(c.value)}</p>
 
-      {/* process recap */}
-      <section className="bg-ink-950 text-paper-50 noise relative">
-        <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-20">
-          <SectionHeading
-            kicker={isAr ? "المنهجية" : "Delivery Method"}
-            tone="light"
-            title={{ en: "How every engagement runs.", ar: "كيف يُدار كل عمل." }}
-          />
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-4">
-            {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 80}>
-                <div className="group relative chamfer-sm border border-ink-700 bg-ink-900 p-6 h-full hover:border-amber-500/70 transition-colors">
-                  <p className="font-display text-3xl font-bold text-amber-500/90">{s.n}</p>
-                  <h3 className="mt-3 font-display font-bold">{L(s.title)}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-mist-400">{L(s.body)}</p>
-                  {i < STEPS.length - 1 && (
-                    <Icon name="arrow" className="hidden md:block absolute top-1/2 -end-4 w-4 h-4 text-amber-500/70 rtl:-scale-x-100" aria-hidden="true" />
-                  )}
-                </div>
+                      <div className="mt-7 grid md:grid-cols-[1fr_260px] gap-8">
+                        <div>
+                          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-700 mb-3.5">
+                            {isAr ? "كيف أساعد" : "What I can help with"}
+                          </p>
+                          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                            {c.items.map((it) => (
+                              <li key={it.en} className="flex gap-2.5 text-[13.5px] leading-relaxed text-ink-800">
+                                <span className="w-1 h-1 bg-amber-500 rotate-45 mt-2 shrink-0" aria-hidden="true" />
+                                {L(it)}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-700 mb-3.5">
+                            {isAr ? "تقنيات ذات صلة" : "Relevant technologies"}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {(SERVICE_TECH[c.id] ?? []).map((tch) => (
+                              <span key={tch} className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-mist-500 border border-ink-900/15 px-2.5 py-1.5">
+                                {tch}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
 
-      {/* FAQ */}
-      <section className="bg-paper-100 text-ink-900 grid-bg-light">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 grid lg:grid-cols-[0.8fr_1.2fr] gap-12">
-          <div>
-            <SectionHeading
-              kicker="FAQ"
-              tone="dark"
-              title={{ en: "Straight answers, before you ask.", ar: "إجابات صريحة قبل أن تسأل." }}
-            />
-            <Btn to="/request" variant="dark" className="mt-8">{t("nav.request")}</Btn>
-          </div>
-          <Reveal delay={120}>
-            <FaqList faqs={FAQS} />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* closing CTA */}
-      <section className="bg-ink-900 text-paper-50 border-t border-ink-700">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold">{t("misc.shareIdea")}</h2>
-            <p className="mt-2 text-mist-300 max-w-xl">{t("misc.shareIdeaBody")}</p>
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <Btn to="/request">{t("nav.request")}</Btn>
-            <Btn to="/projects" variant="outline">{t("cta.exploreProjects")}</Btn>
+            <Reveal className="pt-4 border-t border-ink-900/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <p className="text-[15px] text-mist-500 max-w-md">
+                {isAr
+                  ? "غير متأكد أي مسار يناسب حالتك؟ اشرح الموقف وسأقول لك بصدق ما تحتاجه."
+                  : "Not sure which line fits your situation? Describe the problem and I will tell you honestly what you need."}
+              </p>
+              <Btn to="/contact" className="shrink-0">{isAr ? "تواصل معي" : "Contact Me"}</Btn>
+            </Reveal>
           </div>
         </div>
       </section>

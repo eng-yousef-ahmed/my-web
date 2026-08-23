@@ -19,6 +19,15 @@ npm run dev      # local development
 npm run build    # production build → dist/
 ```
 
+## Changing the profile image (no code edits)
+
+The Home hero portrait lives in one place: **`public/images/profile/`**.
+
+Save your photo there as `yousef-ahmed.webp` (preferred) or `yousef-ahmed.jpg` —
+the site picks it up automatically and displays it at the exact same size
+(`object-fit: cover`, crop anchored to the upper half, so keep your face in the
+upper third). Full instructions in `public/images/profile/README.md`.
+
 ## Changing the logo (no code edits)
 
 Drop your logo files into the `public/` folder and they are picked up automatically:

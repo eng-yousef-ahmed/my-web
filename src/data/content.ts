@@ -20,8 +20,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ar: "البيئة التقنية المستقرة هي المحرك الصامت وراء كل يوم عمل منتج.",
     },
     value: {
-      en: "We design, deploy and run the IT environments businesses depend on — from the first workstation to the server room — with support that answers when it matters.",
-      ar: "نصمّم وننفّذ وندير بيئات تقنية المعلومات التي تعتمد عليها الشركات — من أول جهاز حتى غرفة الخوادم — مع دعم يستجيب في الوقت الحاسم.",
+      en: "I design, deploy and run the IT environments businesses depend on, from the first workstation to the server room, with support that answers when it matters.",
+      ar: "أصمّم وأنفّذ وأدير بيئات تقنية المعلومات التي تعتمد عليها الشركات، من أول جهاز حتى غرفة الخوادم، مع دعم يستجيب في الوقت الحاسم.",
     },
     items: [
       { en: "Remote IT Support", ar: "دعم تقني عن بُعد" },
@@ -39,11 +39,11 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     name: { en: "Networks", ar: "الشبكات" },
     tagline: {
       en: "When the network is right, nobody notices it. That is exactly the point.",
-      ar: "عندما تكون الشبكة مضبوطة، لا يشعر بها أحد — وهذا هو الهدف بالضبط.",
+      ar: "عندما تكون الشبكة مضبوطة، لا يشعر بها أحد، وهذا هو الهدف بالضبط.",
     },
     value: {
-      en: "LAN, WAN, Wi-Fi and VPN environments planned around how your teams actually work — reliable coverage, clean segmentation and connectivity between sites.",
-      ar: "شبكات LAN وWAN وواي فاي وVPN مخططة وفق طريقة عمل فرقك فعلًا — تغطية موثوقة، وتقسيم نظيف، وربط آمن بين المواقع.",
+      en: "LAN, WAN, Wi-Fi and VPN environments planned around how your teams actually work: reliable coverage, clean segmentation and connectivity between sites.",
+      ar: "شبكات LAN وWAN وواي فاي وVPN مخططة وفق طريقة عمل فرقك فعلًا: تغطية موثوقة، وتقسيم نظيف، وربط آمن بين المواقع.",
     },
     items: [
       { en: "LAN & WAN Design", ar: "تصميم شبكات LAN وWAN" },
@@ -59,8 +59,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: "cloud",
     name: { en: "Microsoft & Cloud", ar: "مايكروسوفت والسحابة" },
     tagline: {
-      en: "Identity, servers and productivity — administered properly, not just licensed.",
-      ar: "الهوية والخوادم والإنتاجية — تُدار بشكل صحيح، لا مجرد تراخيص مفعّلة.",
+      en: "Identity, servers and productivity, administered properly, not just licensed.",
+      ar: "الهوية والخوادم والإنتاجية تُدار بشكل صحيح، لا مجرد تراخيص مفعّلة.",
     },
     value: {
       en: "Windows Server and Active Directory environments with disciplined user management, alongside Microsoft 365, OneDrive and SharePoint that teams can actually rely on.",
@@ -80,12 +80,12 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: "cctv",
     name: { en: "Security Systems", ar: "أنظمة الأمن والمراقبة" },
     tagline: {
-      en: "See what happens in your business — from anywhere, at any time.",
-      ar: "اطّلع على ما يحدث في منشأتك — من أي مكان وفي أي وقت.",
+      en: "See what happens in your business, from anywhere, at any time.",
+      ar: "اطّلع على ما يحدث في منشأتك، من أي مكان وفي أي وقت.",
     },
     value: {
-      en: "CCTV and video surveillance, NVR/DVR recording, remote monitoring, and biometric access control with attendance — designed as one dependable system.",
-      ar: "كاميرات مراقبة وأنظمة تسجيل NVR/DVR ومراقبة عن بُعد وتحكم في الدخول بالبصمة مع الحضور والانصراف — منظومة واحدة موثوقة.",
+      en: "CCTV and video surveillance, NVR/DVR recording, remote monitoring, and biometric access control with attendance, designed as one dependable system.",
+      ar: "كاميرات مراقبة وأنظمة تسجيل NVR/DVR ومراقبة عن بُعد وتحكم في الدخول بالبصمة مع الحضور والانصراف، منظومة واحدة موثوقة.",
     },
     items: [
       { en: "CCTV & Video Surveillance", ar: "كاميرات المراقبة بالفيديو" },
@@ -102,7 +102,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     name: { en: "IT Consultancy", ar: "الاستشارات التقنية" },
     tagline: {
       en: "Clear technology direction, before money is spent on the wrong direction.",
-      ar: "توجيه تقني واضح — قبل إنفاق المال في الاتجاه الخاطئ.",
+      ar: "توجيه تقني واضح، قبل إنفاق المال في الاتجاه الخاطئ.",
     },
     value: {
       en: "Independent IT assessment, infrastructure planning and technology recommendations that translate technical decisions into business outcomes.",
@@ -134,24 +134,24 @@ export const WHY_US: Differentiator[] = [
     icon: "briefcase",
     title: { en: "Business-focused IT", ar: "تقنية في خدمة الأعمال" },
     body: {
-      en: "Every technical decision is explained in terms of uptime, risk and cost to the business — because that is what you actually buy.",
-      ar: "نشرح كل قرار تقني بلغة التشغيل والمخاطر والتكلفة — لأن هذا هو ما تشتريه فعلًا.",
+      en: "Every technical decision is explained in terms of uptime, risk and cost to the business, because that is what you actually buy.",
+      ar: "نشرح كل قرار تقني بلغة التشغيل والمخاطر والتكلفة، لأن هذا هو ما تشتريه فعلًا.",
     },
   },
   {
     icon: "globe",
     title: { en: "Saudi & Egypt experience", ar: "خبرة سعودية ومصرية" },
     body: {
-      en: "Real delivery experience across two markets — different scales, regulations and working cultures, handled with the same standard.",
-      ar: "خبرة تنفيذ حقيقية في سوقين مختلفين — بأحجام وأنظمة وثقافات عمل مختلفة، وبالمعيار نفسه من الجودة.",
+      en: "Real delivery experience across two markets, with different scales, regulations and working cultures, handled to the same standard.",
+      ar: "خبرة تنفيذ حقيقية في سوقين مختلفين، بأحجام وأنظمة وثقافات عمل مختلفة، وبالمعيار نفسه من الجودة.",
     },
   },
   {
     icon: "layers",
     title: { en: "Multi-vendor fluency", ar: "إتقان متعدد الموردين" },
     body: {
-      en: "Microsoft, MikroTik, Dahua, Hikvision, ZKTeco and more — we choose what fits the environment, not what fits a single-vendor habit.",
-      ar: "مايكروسوفت وميكروتيك وداروا وهايك فيجن وزونكاتيكو وغيرها — نختار ما يناسب بيئتك، لا ما يفرضه مورد واحد.",
+      en: "Microsoft, MikroTik, Dahua, Hikvision, ZKTeco and more. We choose what fits the environment, not what fits a single-vendor habit.",
+      ar: "مايكروسوفت وميكروتيك وداروا وهايك فيجن وزونكاتيكو وغيرها. نختار ما يناسب بيئتك، لا ما يفرضه مورد واحد.",
     },
   },
   {
@@ -187,16 +187,16 @@ export const STEPS: Step[] = [
     n: "02",
     title: { en: "Assess", ar: "التقييم" },
     body: {
-      en: "A structured look at your current environment — infrastructure, network, identity, security — with findings you can read without a translator.",
-      ar: "نظرة منهجية على بيئتك الحالية — بنية وشبكات وهوية وأمن — بنتائج واضحة لا تحتاج مترجمًا.",
+      en: "A structured look at your current environment (infrastructure, network, identity, security) with findings you can read without a translator.",
+      ar: "نظرة منهجية على بيئتك الحالية (بنية وشبكات وهوية وأمن) بنتائج واضحة لا تحتاج مترجمًا.",
     },
   },
   {
     n: "03",
     title: { en: "Plan", ar: "التخطيط" },
     body: {
-      en: "A scoped, phased plan with clear deliverables. You know what happens, when, and why — before anything is changed.",
-      ar: "خطة محددة النطاق على مراحل بمخرجات واضحة. تعرف ما سيحدث ومتى ولماذا — قبل أي تغيير.",
+      en: "A scoped, phased plan with clear deliverables. You know what happens, when, and why, before anything is changed.",
+      ar: "خطة محددة النطاق على مراحل بمخرجات واضحة. تعرف ما سيحدث ومتى ولماذا، قبل أي تغيير.",
     },
   },
   {
@@ -211,8 +211,8 @@ export const STEPS: Step[] = [
     n: "05",
     title: { en: "Support", ar: "الدعم" },
     body: {
-      en: "We stay reachable after go-live — monitoring, maintenance and improvements that keep the environment healthy long term.",
-      ar: "نظل متاحين بعد التشغيل — مراقبة وصيانة وتحسينات تبقي بيئتك سليمة على المدى الطويل.",
+      en: "We stay reachable after go-live, with monitoring, maintenance and improvements that keep the environment healthy long term.",
+      ar: "نظل متاحين بعد التشغيل، مع مراقبة وصيانة وتحسينات تبقي بيئتك سليمة على المدى الطويل.",
     },
   },
 ];
@@ -230,13 +230,13 @@ export const INDUSTRIES: Industry[] = [
       { en: "CCTV and access control for sites, yards and warehouses", ar: "مراقبة وتحكم في الدخول للمواقع والساحات والمستودعات" },
     ],
     help: {
-      en: "Rapid site-office IT setup, site-to-site VPN back to head office, CCTV and attendance systems that survive harsh site conditions — field-proven on Jeddah's Sumou Towers project, supporting 500+ users on-site.",
-      ar: "تجهيز سريع لتقنية مكاتب المواقع، وربط VPN بالمكتب الرئيسي، وأنظمة مراقبة وحضور تتحمّل ظروف المواقع القاسية — خبرة ميدانية مثبتة في مشروع أبراج سمو بجدة بدعم أكثر من 500 مستخدم في الموقع.",
+      en: "Rapid site-office IT setup, site-to-site VPN back to head office, CCTV and attendance systems that survive harsh site conditions. Field-proven on Jeddah's Sumou Towers project, supporting 500+ users on-site.",
+      ar: "تجهيز سريع لتقنية مكاتب المواقع، وربط VPN بالمكتب الرئيسي، وأنظمة مراقبة وحضور تتحمّل ظروف المواقع القاسية. خبرة ميدانية مثبتة في مشروع أبراج سمو بجدة بدعم أكثر من 500 مستخدم في الموقع.",
     },
   },
   {
     icon: "bell",
-    name: { en: "Hospitality — Hotels & Restaurants", ar: "الضيافة — فنادق ومطاعم" },
+    name: { en: "Hospitality: Hotels & Restaurants", ar: "الضيافة: فنادق ومطاعم" },
     problems: [
       { en: "Guest Wi-Fi that must simply work, everywhere", ar: "واي فاي للضيوف يجب أن يعمل ببساطة في كل مكان" },
       { en: "Separate secure networks for operations and POS systems", ar: "شبكات منفصلة وآمنة للتشغيل وأنظمة نقاط البيع" },
@@ -249,7 +249,7 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     icon: "pulse",
-    name: { en: "Healthcare — Clinics & Medical Centers", ar: "الرعاية الصحية — عيادات ومراكز طبية" },
+    name: { en: "Healthcare: Clinics & Medical Centers", ar: "الرعاية الصحية: عيادات ومراكز طبية" },
     problems: [
       { en: "Systems that cannot be allowed to go down during clinic hours", ar: "أنظمة لا يمكن أن تتوقف أثناء ساعات العيادة" },
       { en: "Patient data that must be stored and shared carefully", ar: "بيانات مرضى يجب حفظها ومشاركتها بحذر" },
@@ -269,8 +269,8 @@ export const INDUSTRIES: Industry[] = [
       { en: "Many branches, little local IT knowledge", ar: "فروع كثيرة ومعرفة تقنية محلية محدودة" },
     ],
     help: {
-      en: "Resilient branch connectivity with failover, POS-aware support, CCTV designed for real coverage rather than camera counts, and centralized management of all locations — the model we ran across Zahran Market's retail branches for five years.",
-      ar: "اتصال مرن للفروع مع مسارات بديلة، ودعم يفهم أنظمة نقاط البيع، ومراقبة مصممة لتغطية حقيقية لا لعدد الكاميرات، وإدارة مركزية لكل الفروع — وهو النموذج الذي شغّلناه في فروع أسواق زهران لخمس سنوات.",
+      en: "Resilient branch connectivity with failover, POS-aware support, CCTV designed for real coverage rather than camera counts, and centralized management of all locations. The model we ran across Zahran Market's retail branches for five years.",
+      ar: "اتصال مرن للفروع مع مسارات بديلة، ودعم يفهم أنظمة نقاط البيع، ومراقبة مصممة لتغطية حقيقية لا لعدد الكاميرات، وإدارة مركزية لكل الفروع. وهو النموذج الذي شغّلناه في فروع أسواق زهران لخمس سنوات.",
     },
   },
   {
@@ -282,8 +282,8 @@ export const INDUSTRIES: Industry[] = [
       { en: "No internal IT department, but real IT needs", ar: "لا يوجد قسم تقنية داخلي، لكن الاحتياجات حقيقية" },
     ],
     help: {
-      en: "Active Directory and Microsoft 365 administered properly — identities, devices, SharePoint and OneDrive — plus a support channel your team can rely on, including executive (VIP) support for leadership.",
-      ar: "إدارة صحيحة لأكتيف ديريكتوري ومايكروسوفت 365 — هويات وأجهزة وشير بوينت وون درايف — مع قناة دعم يعتمد عليها فريقك، تشمل دعمًا تنفيذيًا (VIP) للإدارة العليا.",
+      en: "Active Directory and Microsoft 365 administered properly (identities, devices, SharePoint and OneDrive), plus a support channel your team can rely on, including executive (VIP) support for leadership.",
+      ar: "إدارة صحيحة لأكتيف ديريكتوري ومايكروسوفت 365 (هويات وأجهزة وشير بوينت وون درايف)، مع قناة دعم يعتمد عليها فريقك، تشمل دعمًا تنفيذيًا (VIP) للإدارة العليا.",
     },
   },
   {
@@ -333,6 +333,15 @@ export const TECH_GROUPS: TechGroup[] = [
   },
 ];
 
+/** Hands-on technologies relevant to each service line (from verified experience). */
+export const SERVICE_TECH: Record<string, string[]> = {
+  "it-infrastructure": ["Windows Server", "Windows 10 / 11", "ManageEngine ServiceDesk", "Enterprise Printing", "AnyDesk · TeamViewer · RDP"],
+  networks: ["MikroTik RouterOS", "TCP/IP · DNS · DHCP", "HP Switches", "Business Wi-Fi", "Site-to-Site VPN"],
+  "microsoft-cloud": ["Active Directory", "Group Policy", "Microsoft 365", "Exchange Online", "SharePoint · OneDrive"],
+  "security-systems": ["Hikvision · Dahua", "NVR / DVR", "ZKTeco Biometrics", "Access Control", "IP Telephony"],
+  consultancy: ["IT Environment Assessment", "Infrastructure Planning", "PRTG Monitoring", "IT Asset Management"],
+};
+
 export const TECH_TICKER = [
   "Microsoft", "Windows Server", "Active Directory", "Microsoft 365", "Exchange Online", "Teams",
   "SharePoint", "OneDrive", "MikroTik", "HP Switches", "Hikvision", "Dahua", "ZKTeco",
@@ -345,22 +354,22 @@ export const FAQS: Faq[] = [
   {
     q: { en: "Do you work with small businesses, or only large companies?", ar: "هل تتعاملون مع الشركات الصغيرة أم الكبيرة فقط؟" },
     a: {
-      en: "Small and medium businesses are our core audience. Most of our work is with organizations that have real IT needs but no internal IT department — that is exactly the gap we fill.",
-      ar: "الشركات الصغيرة والمتوسطة هي جمهورنا الأساسي. أغلب أعمالنا مع مؤسسات لديها احتياجات تقنية حقيقية لكن بلا قسم تقنية داخلي — وهذه بالضبط الفجوة التي نملؤها.",
+      en: "Small and medium businesses are our core audience. Most of our work is with organizations that have real IT needs but no internal IT department. That is exactly the gap we fill.",
+      ar: "الشركات الصغيرة والمتوسطة هي جمهورنا الأساسي. أغلب أعمالنا مع مؤسسات لديها احتياجات تقنية حقيقية لكن بلا قسم تقنية داخلي، وهذه بالضبط الفجوة التي نملؤها.",
     },
   },
   {
     q: { en: "Can you support an environment you did not build?", ar: "هل تدعمون بيئة لم تنشئوها بأنفسكم؟" },
     a: {
-      en: "Yes. Many engagements start with an assessment of an existing environment, followed by stabilization — then improvement where it genuinely pays off.",
-      ar: "نعم. كثير من الأعمال تبدأ بتقييم بيئة قائمة ثم تثبيتها — ثم تحسينها حيث يستحق العائد فعلًا.",
+      en: "Yes. Many engagements start with an assessment of an existing environment, followed by stabilization, then improvement where it genuinely pays off.",
+      ar: "نعم. كثير من الأعمال تبدأ بتقييم بيئة قائمة ثم تثبيتها، ثم تحسينها حيث يستحق العائد فعلًا.",
     },
   },
   {
     q: { en: "How do projects and pricing work?", ar: "كيف تتم المشاريع وتحديد الأسعار؟" },
     a: {
-      en: "Every engagement is scoped first. You receive a clear quotation based on the actual environment and requirements — no list prices invented for a website, and no surprises mid-project.",
-      ar: "كل عمل يبدأ بتحديد النطاق، ثم يصلك عرض سعر واضح مبني على بيئتك الفعلية — لا أسعار جاهزة مخترعة، ولا مفاجآت أثناء المشروع.",
+      en: "Every engagement is scoped first. You receive a clear quotation based on the actual environment and requirements. No list prices invented for a website, and no surprises mid-project.",
+      ar: "كل عمل يبدأ بتحديد النطاق، ثم يصلك عرض سعر واضح مبني على بيئتك الفعلية. لا أسعار جاهزة مخترعة، ولا مفاجآت أثناء المشروع.",
     },
   },
   {
@@ -373,20 +382,18 @@ export const FAQS: Faq[] = [
   {
     q: { en: "How quickly can you respond to an issue?", ar: "ما سرعة استجابتكم للمشكلات؟" },
     a: {
-      en: "Response targets are agreed per engagement and urgency level. Critical issues on supported environments are treated as priority from the first message — reach us via WhatsApp for the fastest path.",
-      ar: "أهداف الاستجابة تُتفق حسب كل عمل ودرجة الإلحاح. المشكلات الحرجة في البيئات المدعومة تعامل كأولوية من أول رسالة — وأسرع طريق إلينا هو واتساب.",
+      en: "Response targets are agreed per engagement and urgency level. Critical issues on supported environments are treated as priority from the first message. Reach us via WhatsApp for the fastest path.",
+      ar: "أهداف الاستجابة تُتفق حسب كل عمل ودرجة الإلحاح. المشكلات الحرجة في البيئات المدعومة تعامل كأولوية من أول رسالة، وأسرع طريق إلينا هو واتساب.",
     },
   },
   {
     q: { en: "Where do you operate?", ar: "أين تعملون؟" },
     a: {
-      en: "Across Saudi Arabia and Egypt — remote support anywhere, and on-site delivery arranged per location and engagement.",
-      ar: "في السعودية ومصر — دعم عن بُعد في أي مكان، وتنفيذ ميداني يُرتب حسب الموقع وطبيعة العمل.",
+      en: "Across Saudi Arabia and Egypt. Remote support anywhere, and on-site delivery arranged per location and engagement.",
+      ar: "في السعودية ومصر. دعم عن بُعد في أي مكان، وتنفيذ ميداني يُرتب حسب الموقع وطبيعة العمل.",
     },
   },
 ];
-
-
 
 /* ---------------- Founder experience metrics (verified from CV) ---------------- */
 export const FOUNDER_METRICS: { value: string; suffix: string; label: B }[] = [
