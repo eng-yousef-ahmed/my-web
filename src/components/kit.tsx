@@ -245,6 +245,10 @@ export function FlagEG({ className = "w-5 h-5" }: { className?: string }) {
 
 /* ================= YA logo ================= */
 export function LogoMark({ tone = "light", className = "w-10 h-10" }: { tone?: "light" | "dark"; className?: string }) {
+  const custom = useCustomLogo(tone);
+  if (custom) {
+    return <img src={custom} alt="TECH OF THE WORLD" className={`${className} object-contain select-none`} />;
+  }
   const stroke = tone === "light" ? "#F3F6F5" : "#0A1420";
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
