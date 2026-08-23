@@ -6,14 +6,18 @@ import { IMAGES } from "../../config";
  * The portrait is loaded from the public folder so it can be replaced
  * WITHOUT touching any code — drop a new file with the same name:
  *
- *   public/images/profile/profile.webp   (preferred, checked first)
- *   public/images/profile/profile.jpg    (default)
- *   public/images/profile/profile.png    (also supported)
+ *   public/images/profile/yousef-ahmed.webp  (preferred — the stable name)
+ *   public/images/profile/yousef-ahmed.jpg
+ *   public/images/profile/profile.webp       (legacy aliases, still supported)
+ *   public/images/profile/profile.jpg
+ *   public/images/profile/profile.png
  *
- * If none exist yet, a generated default from IMAGES.profileDefault is used.
+ * If none exist yet, a generated default from IMAGES.profile is used.
  */
 const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
 const PROFILE_CANDIDATES = [
+  `${base}/images/profile/yousef-ahmed.webp`,
+  `${base}/images/profile/yousef-ahmed.jpg`,
   `${base}/images/profile/profile.webp`,
   `${base}/images/profile/profile.jpg`,
   `${base}/images/profile/profile.png`,
