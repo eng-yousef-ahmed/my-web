@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useLang } from "../i18n";
-import { CONTACT, mailLink, telHref, waLink } from "../config";
+import { CONTACT, mailLink, waLink } from "../config";
 import { FlagEG, FlagSA, Icon, Logo } from "./kit";
 import { Cursor } from "./fx";
 
@@ -152,19 +152,22 @@ export function Header() {
 
 /* ---------------- Footer ---------------- */
 export function Footer() {
-  const { t, L } = useLang();
+  const { t, L, isAr } = useLang();
   const year = new Date().getFullYear();
 
   return (
     <footer className="relative bg-ink-950 text-paper-50 border-t border-ink-700">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-14 pb-8">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_auto]">
           <div>
             <Logo tone="light" />
-            <p className="mt-5 text-[14px] leading-relaxed text-mist-300 max-w-sm">
+            <p className="mt-5 font-display text-[15px] font-bold text-paper-50">
+              {L({ en: "Yousef Ahmed — Senior IT Support Specialist", ar: "يوسف أحمد — أخصائي دعم تقني أول" })}
+            </p>
+            <p className="mt-2.5 text-[13.5px] leading-relaxed text-mist-300 max-w-sm">
               {L({
-                en: "Senior IT Support Specialist building reliable IT environments for businesses in Saudi Arabia and Egypt.",
-                ar: "أخصائي دعم تقني أول أبني بيئات تقنية معلومات موثوقة للشركات في السعودية ومصر.",
+                en: "Hands-on experience supporting and running IT environments: infrastructure, networks, Microsoft systems, security and surveillance.",
+                ar: "خبرة عملية في دعم وتشغيل بيئات IT، البنية التحتية، الشبكات وأنظمة Microsoft والأمن والمراقبة.",
               })}
             </p>
             <div className="mt-5 flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-mist-400">
@@ -189,28 +192,36 @@ export function Footer() {
 
           <div>
             <h3 className="font-mono text-[10.5px] uppercase tracking-[0.26em] text-amber-500 mb-4">{t("footer.contact")}</h3>
-            <ul className="space-y-2.5 text-[13.5px]">
-              <li>
-                <a href={waLink("Hello TECH OF THE WORLD, I need IT support in Saudi Arabia.", "sa")} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2.5 text-mist-300 hover:text-[#5fd68f] transition-colors">
-                  <FlagSA className="w-4.5 h-4.5" /> <span dir="ltr">{CONTACT.displaySA}</span>
-                </a>
-              </li>
-              <li>
-                <a href={waLink("Hello TECH OF THE WORLD, I need IT support in Egypt.", "eg")} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2.5 text-mist-300 hover:text-[#5fd68f] transition-colors">
-                  <FlagEG className="w-4.5 h-4.5" /> <span dir="ltr">{CONTACT.displayEG}</span>
-                </a>
-              </li>
-              <li>
-                <a href={mailLink("Hello Yousef", "") ?? "#"} className="inline-flex items-center gap-2.5 text-mist-300 hover:text-amber-400 transition-colors break-all">
-                  <Icon name="mail" className="w-4 h-4 shrink-0" /> {CONTACT.email}
-                </a>
-              </li>
-              <li className="pt-1">
-                <a href={telHref("sa")} className="text-mist-500 hover:text-mist-300 transition-colors text-[12.5px] font-mono" dir="ltr">
-                  {L({ en: "Direct call", ar: "اتصال مباشر" })}: {CONTACT.displaySA}
-                </a>
-              </li>
-            </ul>
+            <div className="flex items-center gap-2.5">
+              <a
+                href={waLink(isAr ? "مرحبًا يوسف، أحتاج دعمًا تقنيًا في السعودية." : "Hello Yousef, I need IT support in Saudi Arabia.", "sa")}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`WhatsApp — Saudi Arabia (${CONTACT.displaySA})`}
+                title={`WhatsApp · ${CONTACT.displaySA}`}
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#23a55b] hover:text-[#5fd68f] transition-colors"
+              >
+                <Icon name="wa" className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href={waLink(isAr ? "مرحبًا يوسف، أحتاج دعمًا تقنيًا في مصر." : "Hello Yousef, I need IT support in Egypt.", "eg")}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`WhatsApp — Egypt (${CONTACT.displayEG})`}
+                title={`WhatsApp · ${CONTACT.displayEG}`}
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#23a55b] hover:text-[#5fd68f] transition-colors"
+              >
+                <Icon name="wa" className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href={mailLink("Hello Yousef", "") ?? "#"}
+                aria-label={`Email — ${CONTACT.email}`}
+                title={`Email · ${CONTACT.email}`}
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-amber-500 hover:text-amber-400 transition-colors"
+              >
+                <Icon name="mail" className="w-4.5 h-4.5" />
+              </a>
+            </div>
           </div>
         </div>
 

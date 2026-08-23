@@ -7,23 +7,23 @@ import { Btn, Icon, PageHero, Reveal } from "../components/kit";
 export default function Services() {
   const { L, isAr } = useLang();
   usePageMeta(
-    isAr ? "الخدمات | TECH OF THE WORLD" : "Services | TECH OF THE WORLD",
+    isAr ? "خدماتي | TECH OF THE WORLD" : "My Services | TECH OF THE WORLD",
     isAr
-      ? "خمسة مسارات: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
-      : "Five service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."
+      ? "خمسة مجالات أعمل بها: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
+      : "Five areas I work with: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."
   );
 
   return (
     <>
       <PageHero
-        kicker={isAr ? "الخدمات" : "Services"}
+        kicker={isAr ? "خدماتي" : "My Services"}
         title={{
-          en: "What I can professionally provide.",
-          ar: "ما أستطيع تقديمه باحتراف.",
+          en: "What I work with.",
+          ar: "ما أعمل به.",
         }}
         lead={{
-          en: "Five service lines that fit together as one accountable environment, from the cable in the wall to the cloud tenant your teams live in.",
-          ar: "خمسة مسارات خدمية تتكامل كبيئة واحدة مسؤولة، من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك.",
+          en: "Five areas that fit together as one accountable environment, from the cable in the wall to the cloud tenant your teams live in.",
+          ar: "خمسة مجالات تتكامل كبيئة واحدة مسؤولة، من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك.",
         }}
       />
 

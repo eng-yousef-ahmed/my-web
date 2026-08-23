@@ -146,11 +146,11 @@ export function Contact() {
   return (
     <>
       <PageHero
-        kicker={isAr ? "تواصل" : "Contact"}
+        kicker={isAr ? "تواصل معي" : "Contact Me"}
         title={{ en: "Let's talk.", ar: "لنتحدث." }}
         lead={{
-          en: "If you have an IT problem, an environment to assess, or a project to plan, tell me about it. I reply personally, usually the same day.",
-          ar: "لو عندك مشكلة تقنية، أو بيئة تريد تقييمها، أو مشروع تخطط له، أخبرني. أرد بنفسي، عادة في نفس اليوم.",
+          en: "If you'd like to discuss a project, a professional opportunity, or a technical need, I'd be glad to hear from you.",
+          ar: "إذا كنت ترغب في مناقشة مشروع، أو فرصة مهنية، أو احتياج تقني، يسعدني التواصل معك.",
         }}
       />
 

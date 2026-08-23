@@ -20,8 +20,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ar: "البيئة التقنية المستقرة هي المحرك الصامت وراء كل يوم عمل منتج.",
     },
     value: {
-      en: "We design, deploy and run the IT environments businesses depend on, from the first workstation to the server room, with support that answers when it matters.",
-      ar: "نصمّم وننفّذ وندير بيئات تقنية المعلومات التي تعتمد عليها الشركات، من أول جهاز حتى غرفة الخوادم، مع دعم يستجيب في الوقت الحاسم.",
+      en: "I design, deploy and run the IT environments businesses depend on, from the first workstation to the server room, with support that answers when it matters.",
+      ar: "أصمّم وأنفّذ وأدير بيئات تقنية المعلومات التي تعتمد عليها الشركات، من أول جهاز حتى غرفة الخوادم، مع دعم يستجيب في الوقت الحاسم.",
     },
     items: [
       { en: "Remote IT Support", ar: "دعم تقني عن بُعد" },

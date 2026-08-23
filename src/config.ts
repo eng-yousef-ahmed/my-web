@@ -18,7 +18,7 @@ export const CONFIG = {
   brand: "TECH OF THE WORLD",
   symbol: "YA",
   tagline: "Technology That Moves Business Forward.",
-  positioning: "Professional IT Services & Technology Solutions Provider",
+  positioning: "Senior IT Support Specialist, IT infrastructure & operations",
   markets: ["Saudi Arabia", "Egypt"] as const,
 };
 
