@@ -52,8 +52,8 @@ export function ServiceRequestForm({
   const contextLabel = (ctx: string): string => {
     const [kind, ...rest] = ctx.split(":");
     const body = rest.join(":").trim();
-    if (kind === "case") return `${isAr ? "دراسة حالة" : "Case study"} — ${body}`;
-    if (kind === "industry") return `${isAr ? "القطاع" : "Industry"} — ${body}`;
+    if (kind === "case") return `${isAr ? "دراسة حالة" : "Case study"}: ${body}`;
+    if (kind === "industry") return `${isAr ? "القطاع" : "Industry"}: ${body}`;
     return body;
   };
 
@@ -85,7 +85,7 @@ export function ServiceRequestForm({
   const summary = () => {
     const svc = serviceOptions.find((s) => s.value === form.service)?.label ?? form.service;
     return [
-      `${t("form.title")} — ${CONFIG.brand}`,
+      `${t("form.title")} | ${CONFIG.brand}`,
       `----------------------------------------`,
       `${t("form.fullName")}: ${form.fullName}`,
       `${t("form.company")}: ${form.company}`,
@@ -145,10 +145,10 @@ export function ServiceRequestForm({
     const primary: "sa" | "eg" = form.country === "Egypt" ? "eg" : "sa";
     const secondary: "sa" | "eg" = primary === "eg" ? "sa" : "eg";
     const opts: Record<"sa" | "eg", { flag: React.ReactNode; label: string; number: string; href: string }> = {
-      sa: { flag: <FlagSA className="w-5 h-5" />, label: isAr ? "واتساب السعودية" : "WhatsApp — KSA", number: CONTACT.displaySA, href: waLink(msg, "sa") },
-      eg: { flag: <FlagEG className="w-5 h-5" />, label: isAr ? "واتساب مصر" : "WhatsApp — Egypt", number: CONTACT.displayEG, href: waLink(msg, "eg") },
+      sa: { flag: <FlagSA className="w-5 h-5" />, label: isAr ? "واتساب السعودية" : "WhatsApp · KSA", number: CONTACT.displaySA, href: waLink(msg, "sa") },
+      eg: { flag: <FlagEG className="w-5 h-5" />, label: isAr ? "واتساب مصر" : "WhatsApp · Egypt", number: CONTACT.displayEG, href: waLink(msg, "eg") },
     };
-    const em = mailLink(`Service Request — ${form.company}`, msg);
+    const em = mailLink(`Service Request | ${form.company}`, msg);
     return (
       <div className="chamfer bg-ink-850 border border-ink-600 p-8 sm:p-10">
         <div className="flex items-center gap-3 mb-4">
@@ -205,8 +205,8 @@ export function ServiceRequestForm({
           <label htmlFor="f-country" className={labelCls}>{t("form.country")} *</label>
           <select id="f-country" className={`${inputCls(errors.country)} ${form.country ? "" : "text-mist-500"}`} value={form.country} onChange={(e) => set("country", e.target.value)} aria-invalid={!!errors.country}>
             <option value="">{t("form.selectCountry")}</option>
-            <option value="Saudi Arabia">Saudi Arabia — السعودية</option>
-            <option value="Egypt">Egypt — مصر</option>
+            <option value="Saudi Arabia">Saudi Arabia · السعودية</option>
+            <option value="Egypt">Egypt · مصر</option>
             <option value="Other">{t("form.other")}</option>
           </select>
           {errors.country && <p className={errCls}><Icon name="alert" className="w-3.5 h-3.5" />{errors.country}</p>}

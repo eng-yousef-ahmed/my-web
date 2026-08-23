@@ -6,7 +6,7 @@ import { Btn, Icon, PageHero, Reveal } from "../components/kit";
 export default function Industries() {
   const { L, t, isAr } = useLang();
   usePageMeta(
-    isAr ? "القطاعات | TECH OF THE WORLD — حلول تقنية لكل قطاع" : "Industries | TECH OF THE WORLD — IT solutions for construction, hospitality, healthcare, retail & logistics",
+    isAr ? "القطاعات | TECH OF THE WORLD | حلول تقنية لكل قطاع" : "Industries | TECH OF THE WORLD | IT solutions for construction, hospitality, healthcare, retail & logistics",
     "IT problems are industry-shaped. See how TECH OF THE WORLD supports construction, hospitality, healthcare, retail, offices and logistics businesses in Saudi Arabia and Egypt."
   );
 
@@ -16,8 +16,8 @@ export default function Industries() {
         kicker={isAr ? "القطاعات" : "Industries"}
         title={{ en: "IT problems wear industry uniforms.", ar: "مشكلات التقنية ترتدي زيّ كل قطاع." }}
         lead={{
-          en: "A hotel's Wi-Fi problem is not a warehouse's connectivity problem. We speak each industry's operational language — and bring the right infrastructure answers.",
-          ar: "مشكلة الواي فاي في الفندق ليست مشكلة الاتصال في المستودع. نتحدث لغة التشغيل الخاصة بكل قطاع — ونقدم إجابات البنية التحتية المناسبة له.",
+          en: "A hotel's Wi-Fi problem is not a warehouse's connectivity problem. We speak each industry's operational language and bring the right infrastructure answers.",
+          ar: "مشكلة الواي فاي في الفندق ليست مشكلة الاتصال في المستودع. نتحدث لغة التشغيل الخاصة بكل قطاع ونقدم إجابات البنية التحتية المناسبة له.",
         }}
       >
         <Btn to="/request">{t("nav.request")}</Btn>
@@ -83,7 +83,7 @@ export default function Industries() {
           <Reveal className="max-w-2xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500 mb-4">{isAr ? "أي مسار يناسبك؟" : "Which line fits?"}</p>
             <h2 className="font-display text-3xl sm:text-4xl font-bold leading-tight">
-              {isAr ? "معظم القطاعات تحتاج مزيجًا — وهذا تحديدًا ما نبنيه." : "Most industries need a mix — that is precisely what we build."}
+              {isAr ? "معظم القطاعات تحتاج مزيجًا، وهذا تحديدًا ما نبنيه." : "Most industries need a mix. That is precisely what we build."}
             </h2>
           </Reveal>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">

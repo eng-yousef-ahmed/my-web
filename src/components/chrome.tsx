@@ -80,17 +80,15 @@ function WhatsAppFab() {
     flag: <FlagSA className="w-6 h-6" />,
     country: L({ en: "Saudi Arabia", ar: "السعودية" }),
     number: CONTACT.displaySA,
-    href: waLink("Hello TECH OF THE WORLD — I need IT support in Saudi Arabia.", "sa"),
-  };
-  const egOpt = {
-    key: "eg" as const,
+      href: waLink("Hello TECH OF THE WORLD, I need IT support in Saudi Arabia.", "sa"),
+    };
+    const egOpt = {    key: "eg" as const,
     flag: <FlagEG className="w-6 h-6" />,
     country: L({ en: "Egypt", ar: "مصر" }),
     number: CONTACT.displayEG,
-    href: waLink("Hello TECH OF THE WORLD — I need IT support in Egypt.", "eg"),
-  };
-  const options = nearEgypt ? [egOpt, saOpt] : [saOpt, egOpt];
-
+      href: waLink("Hello TECH OF THE WORLD, I need IT support in Egypt.", "eg"),
+    };
+    const options = nearEgypt ? [egOpt, saOpt] : [saOpt, egOpt];
   return (
     <div ref={ref} className="fixed bottom-6 end-6 z-50">
       {open && (
@@ -124,11 +122,10 @@ function WhatsAppFab() {
               </a>
             ))}
             {hasEmail && (
-              <a
-                href={mailLink("IT Inquiry — TECH OF THE WORLD", "") ?? "#"}
-                className="group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors"
-              >
-                <span className="shrink-0 w-6 h-6 grid place-items-center bg-amber-500 text-ink-950"><Icon name="mail" className="w-3.5 h-3.5" strokeWidth={2} /></span>
+            <a
+              href={mailLink("IT Inquiry | TECH OF THE WORLD", "") ?? "#"}
+              className="group flex items-center gap-3.5 px-3 py-3 hover:bg-ink-700 transition-colors"
+            >                <span className="shrink-0 w-6 h-6 grid place-items-center bg-amber-500 text-ink-950"><Icon name="mail" className="w-3.5 h-3.5" strokeWidth={2} /></span>
                 <span className="flex-1 leading-tight">
                   <span className="block font-display font-semibold text-[13.5px] text-paper-50 group-hover:text-amber-400 transition-colors">Email</span>
                   <span className="block font-mono text-[11px] text-mist-400 mt-0.5 break-all">{CONTACT.email}</span>
@@ -158,7 +155,6 @@ function WhatsAppFab() {
         aria-label={t("cta.talkSpecialist")}
         className="relative w-15 h-15 md:w-16 md:h-16 grid place-items-center chamfer-sm bg-[#23a55b] text-white shadow-[0_16px_40px_-10px_rgba(35,165,91,0.6)] hover:brightness-110 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
       >
-        <span className="absolute inset-0 chamfer-sm border border-[#3fbf6f] pulse-ring" aria-hidden="true" />
         <Icon name={open ? "close" : "wa"} className="w-7 h-7" strokeWidth={1.9} />
       </button>
     </div>
@@ -194,7 +190,7 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-[72px]">
-        <Link to="/" aria-label="TECH OF THE WORLD — Home" className="shrink-0 hover:opacity-90 transition-opacity">
+        <Link to="/" aria-label="TECH OF THE WORLD, Home" className="shrink-0 hover:opacity-90 transition-opacity">
           <Logo tone="light" />
         </Link>
 
@@ -340,18 +336,16 @@ export function Footer() {
             </div>
             <div className="mt-6 flex items-center gap-2.5">
               <a
-                href={waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.", "sa")}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="WhatsApp"
-                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#23a55b] hover:text-[#5fd68f] hover:bg-[#23a55b]/10 transition-all duration-300"
+              href={waLink("Hello TECH OF THE WORLD, I would like to talk to an IT specialist.", "sa")}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#23a55b] hover:text-[#5fd68f] hover:bg-[#23a55b]/10 transition-all duration-300"
               >
                 <Icon name="wa" className="w-4.5 h-4.5" />
               </a>
               <a
-                href={mailLink("IT Inquiry — TECH OF THE WORLD", "") ?? "#"}
-                aria-label="Email"
-                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-amber-500 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
+              href={mailLink("IT Inquiry | TECH OF THE WORLD", "") ?? "#"}
+              aria-label="Email"                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-amber-500 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
               >
                 <Icon name="mail" className="w-4.5 h-4.5" />
               </a>
@@ -377,21 +371,21 @@ export function Footer() {
 
         {/* contact strip */}
         <div className="mt-14 grid sm:grid-cols-3 gap-px bg-ink-700 border border-ink-700">
-          <a href={waLink("Hello TECH OF THE WORLD — I need IT support in Saudi Arabia.", "sa")} target="_blank" rel="noreferrer" className="group bg-ink-900 p-5 flex items-center gap-4 hover:bg-ink-800 transition-colors">
+          <a href={waLink("Hello TECH OF THE WORLD, I need IT support in Saudi Arabia.", "sa")} target="_blank" rel="noreferrer" className="group bg-ink-900 p-5 flex items-center gap-4 hover:bg-ink-800 transition-colors">
             <FlagSA className="w-6 h-6 shrink-0" />
             <span>
               <span className="block font-mono text-[10px] uppercase tracking-[0.22em] text-mist-500">WhatsApp · KSA</span>
               <span className="block font-display font-semibold text-[14.5px] group-hover:text-[#5fd68f] transition-colors" dir="ltr">{CONTACT.displaySA}</span>
             </span>
           </a>
-          <a href={waLink("Hello TECH OF THE WORLD — I need IT support in Egypt.", "eg")} target="_blank" rel="noreferrer" className="group bg-ink-900 p-5 flex items-center gap-4 hover:bg-ink-800 transition-colors">
+          <a href={waLink("Hello TECH OF THE WORLD, I need IT support in Egypt.", "eg")} target="_blank" rel="noreferrer" className="group bg-ink-900 p-5 flex items-center gap-4 hover:bg-ink-800 transition-colors">
             <FlagEG className="w-6 h-6 shrink-0" />
             <span>
               <span className="block font-mono text-[10px] uppercase tracking-[0.22em] text-mist-500">WhatsApp · Egypt</span>
               <span className="block font-display font-semibold text-[14.5px] group-hover:text-[#5fd68f] transition-colors" dir="ltr">{CONTACT.displayEG}</span>
             </span>
           </a>
-          <a href={mailLink("IT Inquiry — TECH OF THE WORLD", "") ?? "#"} className="group bg-ink-900 p-5 flex items-center gap-4 hover:bg-ink-800 transition-colors">
+          <a href={mailLink("IT Inquiry | TECH OF THE WORLD", "") ?? "#"} className="group bg-ink-900 p-5 flex items-center gap-4 hover:bg-ink-800 transition-colors">
             <span className="w-6 h-6 shrink-0 grid place-items-center bg-amber-500 text-ink-950"><Icon name="mail" className="w-3.5 h-3.5" strokeWidth={2} /></span>
             <span className="min-w-0">
               <span className="block font-mono text-[10px] uppercase tracking-[0.22em] text-mist-500">Email</span>

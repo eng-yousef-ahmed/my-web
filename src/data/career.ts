@@ -1,7 +1,7 @@
 import type { B } from "../i18n";
 
 /**
- * Centralized professional history — single source of truth.
+ * Centralized professional history, the single source of truth.
  * Every fact here is taken directly from Eng. Yousef Ahmed's CV.
  * Consumed by: About page, Markets pages, case-study cross-links.
  */
@@ -18,9 +18,9 @@ export type CareerEntry = {
 
 export const CAREER: CareerEntry[] = [
   {
-    period: "2025 — Present",
+    period: "2025–Present",
     role: { en: "Senior IT Support Specialist", ar: "أخصائي دعم تقني أول" },
-    org: { en: "Buna Al Khaleej Contracting — Sumou Towers Project", ar: "بنيان الخليج للمقاولات — مشروع أبراج سمو" },
+    org: { en: "Buna Al Khaleej Contracting, Sumou Towers Project", ar: "بنيان الخليج للمقاولات، مشروع أبراج سمو" },
     loc: { en: "Jeddah, Saudi Arabia", ar: "جدة، السعودية" },
     market: "sa",
     caseId: "sumou-towers",
@@ -32,9 +32,9 @@ export const CAREER: CareerEntry[] = [
     ],
   },
   {
-    period: "2024 — 2025",
-    role: { en: "IT Operations Supervisor — Enterprise IT Support", ar: "مشرف عمليات تقنية المعلومات" },
-    org: { en: "Golden Velvet Establishment — Rawaf Mina Project", ar: "مؤسسة جولدن فلفت — مشروع رواف منى" },
+    period: "2024–2025",
+    role: { en: "IT Operations Supervisor, Enterprise IT Support", ar: "مشرف عمليات تقنية المعلومات" },
+    org: { en: "Golden Velvet Establishment, Rawaf Mina Project", ar: "مؤسسة جولدن فلفت، مشروع رواف منى" },
     loc: { en: "Makkah, Saudi Arabia", ar: "مكة المكرمة، السعودية" },
     market: "sa",
     caseId: "smart-hajj-camp",
@@ -45,7 +45,7 @@ export const CAREER: CareerEntry[] = [
     ],
   },
   {
-    period: "2019 — 2024",
+    period: "2019–2024",
     role: { en: "IT Support & Network Specialist", ar: "أخصائي دعم تقني وشبكات" },
     org: { en: "Zahran Market", ar: "أسواق زهران" },
     loc: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
@@ -59,9 +59,9 @@ export const CAREER: CareerEntry[] = [
     ],
   },
   {
-    period: "2015 — 2018",
+    period: "2015–2018",
     role: { en: "Network & Devices Specialist", ar: "أخصائي شبكات وأجهزة" },
-    org: { en: "Arab Computers Company (ACC) — on-site at United Abco Company", ar: "الشركة العربية للحاسبات (ACC) — بمقر أبكو المتحدة" },
+    org: { en: "Arab Computers Company (ACC), on-site at United Abco Company", ar: "الشركة العربية للحاسبات (ACC)، بمقر أبكو المتحدة" },
     loc: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
     market: "eg",
     caseId: "united-abco",
@@ -74,18 +74,18 @@ export const CAREER: CareerEntry[] = [
 ];
 
 export const EDUCATION: B = {
-  en: "Industrial Technical Institute — Alexandria, Egypt",
-  ar: "المعهد الفني الصناعي — الإسكندرية، مصر",
+  en: "Industrial Technical Institute, Alexandria, Egypt",
+  ar: "المعهد الفني الصناعي، الإسكندرية، مصر",
 };
 
 export const LANGUAGES: B[] = [
-  { en: "Arabic — Native", ar: "العربية — اللغة الأم" },
-  { en: "English — Professional Working Proficiency", ar: "الإنجليزية — كفاءة مهنية" },
+  { en: "Arabic (native)", ar: "العربية (اللغة الأم)" },
+  { en: "English (professional working proficiency)", ar: "الإنجليزية (كفاءة مهنية)" },
 ];
 
 export const CERTS: B[] = [
-  { en: "Cisco Networking Academy — IT Support Specialist", ar: "أكاديمية سيسكو — أخصائي دعم تقني" },
-  { en: "Cisco Networking Academy — Network Technician", ar: "أكاديمية سيسكو — فني شبكات" },
+  { en: "Cisco Networking Academy, IT Support Specialist", ar: "أكاديمية سيسكو، أخصائي دعم تقني" },
+  { en: "Cisco Networking Academy, Network Technician", ar: "أكاديمية سيسكو، فني شبكات" },
   { en: "Networking Basics & Operating Systems Basics", ar: "أساسيات الشبكات وأنظمة التشغيل" },
   { en: "IT Customer Support & Computer Hardware Basics", ar: "دعم عملاء التقنية وأساسيات العتاد" },
   { en: "CCNA Studies & VMware Virtualization (Lab)", ar: "دراسات CCNA وافتراضية VMware (عملي)" },

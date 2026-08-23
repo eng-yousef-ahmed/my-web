@@ -123,7 +123,7 @@ export function vCardDataUrl(): string {
     `URL:${CONTACT.website}`,
     `URL:https://wa.me/${CONTACT.whatsappEG}`,
     `URL:https://wa.me/${CONTACT.whatsappSA}`,
-    `NOTE:Technology That Moves Business Forward — WhatsApp: +${CONTACT.whatsappEG} (Egypt) / +${CONTACT.whatsappSA} (Saudi Arabia). IT services in Saudi Arabia & Egypt.`,
+    `NOTE:Technology That Moves Business Forward. WhatsApp: +${CONTACT.whatsappEG} (Egypt) / +${CONTACT.whatsappSA} (Saudi Arabia). IT services in Saudi Arabia & Egypt.`,
     "END:VCARD",
   ];
   return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;

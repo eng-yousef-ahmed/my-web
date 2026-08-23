@@ -34,7 +34,7 @@ const CONTENT: Record<
       { icon: "rack", name: { en: "IT Support & Infrastructure", ar: "الدعم التقني والبنية التحتية" }, desc: { en: "Environment design, deployment and day-to-day operation for offices, sites and server rooms.", ar: "تصميم البيئات وتنفيذها وتشغيلها اليومي للمكاتب والمواقع وغرف الخوادم." } },
       { icon: "network", name: { en: "Network Solutions", ar: "حلول الشبكات" }, desc: { en: "LAN/WAN, business Wi-Fi and site-to-site VPN connecting branches across the Kingdom.", ar: "شبكات LAN/WAN وواي فاي للأعمال وVPN يربط الفروع عبر المملكة." } },
       { icon: "cloud", name: { en: "Microsoft 365 & Servers", ar: "مايكروسوفت 365 والخوادم" }, desc: { en: "Active Directory, Windows Server and M365 tenants administered as one identity layer.", ar: "أكتيف ديريكتوري وويندوز سيرفر ومستأجرات M365 تُدار كطبقة هوية واحدة." } },
-      { icon: "cctv", name: { en: "CCTV & Remote Monitoring", ar: "المراقبة والكاميرات" }, desc: { en: "Surveillance and recording designed around real coverage — with remote viewing built in.", ar: "مراقبة وتسجيل مصممان حول تغطية حقيقية — مع مشاهدة عن بُعد مدمجة." } },
+      { icon: "cctv", name: { en: "CCTV & Remote Monitoring", ar: "المراقبة والكاميرات" }, desc: { en: "Surveillance and recording designed around real coverage, with remote viewing built in.", ar: "مراقبة وتسجيل مصممان حول تغطية حقيقية، مع مشاهدة عن بُعد مدمجة." } },
       { icon: "shield", name: { en: "Access Control & Biometrics", ar: "التحكم في الدخول والبصمة" }, desc: { en: "Door access and attendance systems for offices, facilities and shift-based operations.", ar: "أنظمة دخول الأبواب والحضور للمكاتب والمنشآت والعمليات القائمة على الورديات." } },
       { icon: "compass", name: { en: "IT Consultancy", ar: "الاستشارات التقنية" }, desc: { en: "Independent assessment and planning before capital is committed to technology.", ar: "تقييم وتخطيط مستقلان قبل الالتزام برأس المال تجاه التقنية." } },
     ],
@@ -44,8 +44,8 @@ const CONTENT: Record<
       { en: "Seasonal & project-based engagements handled end to end", ar: "أعمال موسمية ومشاريع تُدار من البداية للنهاية" },
     ],
     note: {
-      en: "Saudi engagements range from single-site stabilization to multi-zone seasonal infrastructure — the Smart Hajj Camp and Sumou Towers case studies show both ends of that range.",
-      ar: "تتراوح الأعمال في السعودية من تثبيت موقع واحد إلى بنية موسمية متعددة المناطق — دراستا حالة مخيم الحج الذكي وأبراج سمو توضحان طرفي هذا النطاق.",
+      en: "Saudi engagements range from single-site stabilization to multi-zone seasonal infrastructure. The Smart Hajj Camp and Sumou Towers case studies show both ends of that range.",
+      ar: "تتراوح الأعمال في السعودية من تثبيت موقع واحد إلى بنية موسمية متعددة المناطق. دراستا حالة مخيم الحج الذكي وأبراج سمو توضحان طرفي هذا النطاق.",
     },
   },
   eg: {
@@ -60,21 +60,21 @@ const CONTENT: Record<
     },
     image: IMAGES.network,
     focus: [
-      { icon: "rack", name: { en: "IT Support & Maintenance", ar: "الدعم التقني والصيانة" }, desc: { en: "First- and second-line support, preventive maintenance and endpoint lifecycle — the daily practice honed across years of branch operations.", ar: "دعم من المستويين الأول والثاني وصيانة وقائية ودورة حياة الأجهزة — الممارسة اليومية التي صُقلت عبر سنوات تشغيل الفروع." } },
-      { icon: "cloud", name: { en: "Microsoft & Identity", ar: "مايكروسوفت والهوية" }, desc: { en: "Active Directory administration — provisioning, security groups, shared folders and NTFS permissions — kept clean and accountable.", ar: "إدارة أكتيف ديريكتوري — تجهيز المستخدمين ومجموعات الأمان والمجلدات المشتركة وصلاحيات NTFS — بشكل منظم ومسؤول." } },
-      { icon: "network", name: { en: "Networks & Monitoring", ar: "الشبكات والمراقبة" }, desc: { en: "TCP/IP, DNS, DHCP, HP switches, structured cabling and Wi-Fi — monitored with PRTG so problems are caught before they spread.", ar: "TCP/IP وDNS وDHCP ومفاتيح HP والتوصيلات المنظمة والواي فاي — بمراقبة PRTG لاكتشاف المشكلات قبل انتشارها." } },
+      { icon: "rack", name: { en: "IT Support & Maintenance", ar: "الدعم التقني والصيانة" }, desc: { en: "First- and second-line support, preventive maintenance and endpoint lifecycle, the daily practice honed across years of branch operations.", ar: "دعم من المستويين الأول والثاني وصيانة وقائية ودورة حياة الأجهزة، الممارسة اليومية التي صُقلت عبر سنوات تشغيل الفروع." } },
+      { icon: "cloud", name: { en: "Microsoft & Identity", ar: "مايكروسوفت والهوية" }, desc: { en: "Active Directory administration (provisioning, security groups, shared folders and NTFS permissions) kept clean and accountable.", ar: "إدارة أكتيف ديريكتوري (تجهيز المستخدمين ومجموعات الأمان والمجلدات المشتركة وصلاحيات NTFS) بشكل منظم ومسؤول." } },
+      { icon: "network", name: { en: "Networks & Monitoring", ar: "الشبكات والمراقبة" }, desc: { en: "TCP/IP, DNS, DHCP, HP switches, structured cabling and Wi-Fi, monitored with PRTG so problems are caught before they spread.", ar: "TCP/IP وDNS وDHCP ومفاتيح HP والتوصيلات المنظمة والواي فاي، بمراقبة PRTG لاكتشاف المشكلات قبل انتشارها." } },
       { icon: "cctv", name: { en: "CCTV & Attendance", ar: "المراقبة والحضور" }, desc: { en: "CCTV, access control and biometric attendance installed and maintained for retail floors, offices and stock areas.", ar: "مراقبة وتحكم في الدخول وبصمة حضور مُركبة ومُصانة لصالات التجزئة والمكاتب والمخازن." } },
-      { icon: "cart", name: { en: "Retail & POS Environments", ar: "بيئات التجزئة ونقاط البيع" }, desc: { en: "POS terminals, printers and scanners kept selling — onboarding, deployment and support that respect business hours.", ar: "أنظمة نقاط البيع والطابعات والماسحات تبقى جاهزة للبيع — تجهيز ونشر ودعم يحترم ساعات العمل." } },
-      { icon: "compass", name: { en: "Pragmatic Consultancy", ar: "استشارات عملية" }, desc: { en: "Recommendations that respect real budgets and real growth plans — the cost-aware approach Egyptian businesses need.", ar: "توصيات تحترم الميزانيات الحقيقية وخطط النمو الحقيقية — المنهجية المراعية للتكلفة التي تحتاجها الشركات المصرية." } },
+      { icon: "cart", name: { en: "Retail & POS Environments", ar: "بيئات التجزئة ونقاط البيع" }, desc: { en: "POS terminals, printers and scanners kept selling, with onboarding, deployment and support that respect business hours.", ar: "أنظمة نقاط البيع والطابعات والماسحات تبقى جاهزة للبيع، مع تجهيز ونشر ودعم يحترم ساعات العمل." } },
+      { icon: "compass", name: { en: "Pragmatic Consultancy", ar: "استشارات عملية" }, desc: { en: "Recommendations that respect real budgets and real growth plans, the cost-aware approach Egyptian businesses need.", ar: "توصيات تحترم الميزانيات الحقيقية وخطط النمو الحقيقية، المنهجية المراعية للتكلفة التي تحتاجها الشركات المصرية." } },
     ],
     model: [
-      { en: "Remote-first support — most issues resolved without a site visit", ar: "دعم يبدأ عن بُعد — معظم المشكلات تُحل دون زيارة ميدانية" },
+      { en: "Remote-first support: most issues resolved without a site visit", ar: "دعم يبدأ عن بُعد: معظم المشكلات تُحل دون زيارة ميدانية" },
       { en: "On-site delivery for infrastructure, cabling and security systems", ar: "تنفيذ ميداني للبنية التحتية والتوصيلات وأنظمة الأمن" },
       { en: "Cost-aware scoping: pay for structure, not for spectacle", ar: "نطاق يراعي التكلفة: تدفع مقابل البنية لا مقابل الاستعراض" },
     ],
     note: {
-      en: "The Egypt chapter of this practice is documented work, not promises: five years (2019–2024) as the accountable IT specialist across Zahran Market's retail branches in Alexandria — POS, networks, PRTG monitoring, CCTV and attendance systems — preceded by three years (2015–2018) of on-site corporate support at United Abco Company through Arab Computers Company.",
-      ar: "الفصل المصري من هذه الخبرة عمل موثق لا وعود: خمس سنوات (2019–2024) كأخصائي التقنية المسؤول عبر فروع أسواق زهران بالإسكندرية — نقاط البيع والشبكات ومراقبة PRTG وأنظمة المراقبة والحضور — سبقتها ثلاث سنوات (2015–2018) من الدعم الميداني للشركات في أبكو المتحدة عبر الشركة العربية للحاسبات.",
+      en: "The Egypt chapter of this practice is documented work, not promises: five years (2019–2024) as the accountable IT specialist across Zahran Market's retail branches in Alexandria (POS, networks, PRTG monitoring, CCTV and attendance systems), preceded by three years (2015–2018) of on-site corporate support at United Abco Company through Arab Computers Company.",
+      ar: "الفصل المصري من هذه الخبرة عمل موثق لا وعود: خمس سنوات (2019–2024) كأخصائي التقنية المسؤول عبر فروع أسواق زهران بالإسكندرية (نقاط البيع والشبكات ومراقبة PRTG وأنظمة المراقبة والحضور)، سبقتها ثلاث سنوات (2015–2018) من الدعم الميداني للشركات في أبكو المتحدة عبر الشركة العربية للحاسبات.",
     },
   },
 };
@@ -88,12 +88,12 @@ export default function MarketPage({ market }: { market: MarketId }) {
       ? "IT Support & IT Services in Saudi Arabia | TECH OF THE WORLD"
       : "IT Support & IT Services in Egypt | TECH OF THE WORLD",
     isSa
-      ? "Professional IT support, infrastructure, networks, Microsoft 365, CCTV and access control for businesses across Saudi Arabia — remote and on-site."
-      : "Professional IT support, infrastructure, Microsoft 365, networks and CCTV for Egyptian businesses — pragmatic, documented, dependable."
+      ? "Professional IT support, infrastructure, networks, Microsoft 365, CCTV and access control for businesses across Saudi Arabia, remote and on-site."
+      : "Professional IT support, infrastructure, Microsoft 365, networks and CCTV for Egyptian businesses: pragmatic, documented, dependable."
   );
 
   const localCases = CASES.filter((x) => x.market === market || x.market === "both").slice(0, 3);
-  const wa = waLink(`Hello TECH OF THE WORLD — I am looking for IT services in ${isSa ? "Saudi Arabia" : "Egypt"}.`, market);
+  const wa = waLink(`Hello TECH OF THE WORLD, I am looking for IT services in ${isSa ? "Saudi Arabia" : "Egypt"}.`, market);
 
   return (
     <>

@@ -64,8 +64,8 @@ const STR: Record<string, B> = {
   // form
   "form.title": { en: "Request IT Service", ar: "طلب خدمة تقنية" },
   "form.subtitle": {
-    en: "Tell us what your business needs. We respond through WhatsApp or email — whichever you prefer.",
-    ar: "أخبرنا باحتياج عملك، وسنرد عليك عبر واتساب أو البريد الإلكتروني — أيهما تفضّل.",
+    en: "Tell us what your business needs. We respond through WhatsApp or email, whichever you prefer.",
+    ar: "أخبرنا باحتياج عملك، وسنرد عليك عبر واتساب أو البريد الإلكتروني، أيهما تفضّل.",
   },
   "form.fullName": { en: "Full Name", ar: "الاسم الكامل" },
   "form.company": { en: "Company Name", ar: "اسم الشركة" },
@@ -87,13 +87,13 @@ const STR: Record<string, B> = {
   "form.shortDesc": { en: "Please add a short description (10+ characters).", ar: "أضف وصفًا قصيرًا (١٠ أحرف على الأقل)." },
   "form.successTitle": { en: "Request received", ar: "تم استلام الطلب" },
   "form.successBody": {
-    en: "Thank you. Your request has been delivered to our team — expect a response through your preferred channel.",
+    en: "Thank you. Your request has been delivered to our team. Expect a response through your preferred channel.",
     ar: "شكرًا لك. وصل طلبك إلى فريقنا، وسنرد عليك عبر قناتك المفضلة.",
   },
   "form.draftTitle": { en: "Your request is ready to send", ar: "طلبك جاهز للإرسال" },
   "form.draftBody": {
-    en: "Direct backend delivery is not connected yet, so choose a channel below — your request details are already filled in.",
-    ar: "الإرسال المباشر غير مفعّل بعد، لذا اختر قناتك أدناه — تفاصيل طلبك معبأة مسبقًا.",
+    en: "Direct backend delivery is not connected yet, so choose a channel below. Your request details are already filled in.",
+    ar: "الإرسال المباشر غير مفعّل بعد، لذا اختر قناتك أدناه. تفاصيل طلبك معبأة مسبقًا.",
   },
   "form.failTitle": { en: "Something went wrong", ar: "حدث خطأ ما" },
   "form.failBody": {
@@ -106,7 +106,7 @@ const STR: Record<string, B> = {
   "form.selectService": { en: "Select a service…", ar: "اختر الخدمة…" },
   "form.selectCountry": { en: "Select a country…", ar: "اختر الدولة…" },
   "form.other": { en: "Other", ar: "أخرى" },
-  "form.attachmentHint": { en: "PDF, image or document — referenced with your request.", ar: "PDF أو صورة أو مستند — يُرفق مرجعه مع طلبك." },
+  "form.attachmentHint": { en: "PDF, image or document, referenced with your request.", ar: "PDF أو صورة أو مستند، يُرفق مرجعه مع طلبك." },
 
   // footer
   "footer.blurb": {
@@ -128,8 +128,8 @@ const STR: Record<string, B> = {
   "misc.faq": { en: "Frequently Asked Questions", ar: "الأسئلة الشائعة" },
   "misc.shareIdea": { en: "Let's Solve Your IT Challenge.", ar: "لنحلّ مشكلتك التقنية معًا." },
   "misc.shareIdeaBody": {
-    en: "Describe your environment, your problem, or your plan — we will respond with a practical, business-focused path forward.",
-    ar: "صِف بيئتك التقنية أو مشكلتك أو خطتك — وسنرد عليك بمسار عملي يخدم أعمالك.",
+    en: "Describe your environment, your problem, or your plan. We will respond with a practical, business-focused path forward.",
+    ar: "صِف بيئتك التقنية أو مشكلتك أو خطتك، وسنرد عليك بمسار عملي يخدم أعمالك.",
   },
 };
 

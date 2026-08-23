@@ -296,7 +296,7 @@ function resolveCustomLogo(tone: "light" | "dark"): Promise<string | null> {
           if (import.meta.env.DEV && !logoHintShown) {
             logoHintShown = true;
             console.info(
-              "[TECH OF THE WORLD] عندك لوجو جاهز؟ حطه في public/logo-light.svg (للأقسام الداكنة) و public/logo-dark.svg (للفاتحة) — أو public/logo.svg لنسختين — هيظهر تلقائيًا بدون أي تعديل في الكود."
+              "[TECH OF THE WORLD] عندك لوجو جاهز؟ حطه في public/logo-light.svg (للأقسام الداكنة) و public/logo-dark.svg (للفاتحة)، أو public/logo.svg لنسختين. هيظهر تلقائيًا بدون أي تعديل في الكود."
             );
           }
           return resolve(null);
@@ -549,13 +549,13 @@ export function Btn({
     disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
   }`;
   const styles = {
-    primary: "bg-amber-500 text-ink-950 hover:bg-amber-400 hover:shadow-[0_10px_35px_-10px_rgba(233,163,59,0.55)]",
+    primary: "bg-amber-500 text-ink-950 hover:bg-amber-400",
     outline: "border border-mist-500/50 text-paper-50 hover:border-amber-500 hover:text-amber-400",
     outlineLight: "border border-ink-900/25 text-ink-900 hover:border-ink-900 hover:bg-ink-900 hover:text-paper-50",
     dark: "bg-ink-900 text-paper-50 hover:bg-ink-700",
   }[variant];
   const arrowEl = arrow ? (
-    <Icon name="arrow" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:-scale-x-100" strokeWidth={2} />
+    <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
   ) : null;
   const cls = `${base} ${styles} ${className}`;
   if (to) return <Link to={to} className={cls} onClick={onClick}>{children}{arrowEl}</Link>;
@@ -627,7 +627,7 @@ export function PageHero({
             <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500">{kicker}</span>
           </Reveal>
           <Reveal line as="h1" delay={80}>
-            <span className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight">{L(title)}</span>
+            <span className="font-display text-3xl sm:text-4xl lg:text-[56px] font-bold leading-[1.08] tracking-tight">{L(title)}</span>
           </Reveal>
           <Reveal as="p" delay={180} className="mt-6 max-w-xl text-[17px] leading-relaxed text-mist-300">
             {L(lead)}

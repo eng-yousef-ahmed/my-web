@@ -26,7 +26,7 @@ function CaseArt({ c, index }: { c: CaseStudy; index: number }) {
       <text x="24" y="52" fontFamily="Space Grotesk, Almarai, sans-serif" fontWeight="700" fontSize="30" fill="#f3f6f5">
         {String(index + 1).padStart(2, "0")}
       </text>
-      <text x="24" y="76" fontFamily="IBM Plex Mono, monospace" fontSize="9" letterSpacing="3" fill="#7e93a6">CASE STUDY — YA</text>
+      <text x="24" y="76" fontFamily="IBM Plex Mono, monospace" fontSize="9" letterSpacing="3" fill="#7e93a6">CASE STUDY · YA</text>
     </svg>
   );
 }
@@ -149,7 +149,7 @@ export function ProjectsList() {
   const { L, t, isAr } = useLang();
   usePageMeta(
     isAr ? "المشاريع ودراسات الحالة | TECH OF THE WORLD" : "Projects & Case Studies | TECH OF THE WORLD",
-    "Real IT infrastructure engagements documented as case studies — networks, data centers, CCTV command centers, Microsoft environments and support operations across Saudi Arabia and Egypt."
+    "Real IT infrastructure engagements documented as case studies: networks, data centers, CCTV command centers, Microsoft environments and support operations across Saudi Arabia and Egypt."
   );
   const { projects } = useAllProjects();
   const [market, setMarket] = useState<"all" | "sa" | "eg" | "both">("all");
@@ -176,8 +176,8 @@ export function ProjectsList() {
         kicker={isAr ? "المشاريع" : "Projects"}
         title={{ en: "Case studies, not showcase cards.", ar: "دراسات حالة، لا بطاقات استعراضية." }}
         lead={{
-          en: "Documented engagements across Saudi Arabia and Egypt — presented with their challenges, decisions, outcomes and field photos. Client names and commercial details remain confidential.",
-          ar: "أعمال موثقة في السعودية ومصر — تُعرض بتحدياتها وقراراتها ونتائجها وصورها الميدانية، مع بقاء أسماء العملاء والتفاصيل التجارية سرية.",
+          en: "Documented engagements across Saudi Arabia and Egypt, presented with their challenges, decisions, outcomes and field photos. Client names and commercial details remain confidential.",
+          ar: "أعمال موثقة في السعودية ومصر، تُعرض بتحدياتها وقراراتها ونتائجها وصورها الميدانية، مع بقاء أسماء العملاء والتفاصيل التجارية سرية.",
         }}
         image={IMAGES.ops}
       >
@@ -229,7 +229,7 @@ export function ProjectsList() {
             ))}
           </div>
           {filtered.length === 0 && (
-            <p className="text-center text-mist-500 py-16 font-display text-lg">{isAr ? "لا توجد نتائج مطابقة — جرّب تصفية أخرى." : "No matching projects — try another filter."}</p>
+            <p className="text-center text-mist-500 py-16 font-display text-lg">{isAr ? "لا توجد نتائج مطابقة، جرّب تصفية أخرى." : "No matching projects. Try another filter."}</p>
           )}
         </div>
       </section>
@@ -282,7 +282,7 @@ export function ProjectDetail() {
     );
   }
 
-  const wa = hasWhatsApp ? waLink(`Hello TECH OF THE WORLD — I read the "${L(c.title)}" case study and have a similar requirement.`) : null;
+  const wa = hasWhatsApp ? waLink(`Hello TECH OF THE WORLD, I read the "${L(c.title)}" case study and have a similar requirement.`) : null;
   const has = (b: { en: string; ar: string }) => Boolean(b.en || b.ar);
 
   return (

@@ -8,8 +8,8 @@ import { IMAGES } from "../config";
 export default function Services() {
   const { L, t, isAr } = useLang();
   usePageMeta(
-    isAr ? "خدماتنا | TECH OF THE WORLD — خدمات تقنية معلومات في السعودية ومصر" : "IT Services | TECH OF THE WORLD — IT Support, Infrastructure, Networks, Microsoft & Cloud, Security",
-    "Five accountable service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy — delivered remote and on-site in Saudi Arabia and Egypt."
+    isAr ? "خدماتنا | TECH OF THE WORLD | خدمات تقنية معلومات في السعودية ومصر" : "IT Services | TECH OF THE WORLD | IT Support, Infrastructure, Networks, Microsoft & Cloud, Security",
+    "Five accountable service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy, delivered remote and on-site in Saudi Arabia and Egypt."
   );
   const [active, setActive] = useState(SERVICE_CATEGORIES[0].id);
 
@@ -35,8 +35,8 @@ export default function Services() {
         kicker={isAr ? "خدماتنا" : "Services"}
         title={{ en: "Every layer of your IT, owned by one team.", ar: "كل طبقات تقنيتك، في عهدة فريق واحد." }}
         lead={{
-          en: "From the cable in the wall to the cloud tenant your teams live in — five service lines that fit together as one accountable environment.",
-          ar: "من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك — خمسة مسارات خدمية تتكامل كبيئة واحدة مسؤولة.",
+          en: "From the cable in the wall to the cloud tenant your teams live in: five service lines that fit together as one accountable environment.",
+          ar: "من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك: خمسة مسارات خدمية تتكامل كبيئة واحدة مسؤولة.",
         }}
         image={IMAGES.rack}
       >

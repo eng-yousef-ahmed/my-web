@@ -33,7 +33,7 @@ export function BusinessCard() {
       {/* ---------- the card ---------- */}
       <article
         aria-label={isAr ? "بطاقة تعارف رقمية" : "Digital business card"}
-        className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white text-ink-900 shadow-[0_1px_2px_rgba(10,20,32,0.05),0_30px_70px_-35px_rgba(10,20,32,0.4)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_2px_4px_rgba(10,20,32,0.06),0_40px_90px_-35px_rgba(10,20,32,0.5)]"
+        className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white text-ink-900 shadow-[0_1px_2px_rgba(10,20,32,0.08)] transition-colors duration-150 hover:border-neutral-400"
       >
         {/* subtle technical grid */}
         <div className="pointer-events-none absolute inset-0 grid-bg-light opacity-70" aria-hidden="true" />
@@ -93,7 +93,7 @@ export function BusinessCard() {
                 <a
                   href={`tel:+${r.digits}`}
                   className="group/row -ms-2 flex min-w-0 flex-1 items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-neutral-50 sm:gap-3.5"
-                  aria-label={`${isAr ? "اتصال" : "Call"} — ${r.display}`}
+                  aria-label={`${isAr ? "اتصال" : "Call"} ${r.display}`}
                 >
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-ink-950 text-white transition-transform duration-300 group-hover/row:scale-105">
                     <Icon name="phone" className="w-4 h-4" />
@@ -111,7 +111,7 @@ export function BusinessCard() {
                   href={`https://wa.me/${r.digits}`}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`WhatsApp — ${r.display}`}
+                  aria-label={`WhatsApp ${r.display}`}
                   className="inline-flex shrink-0 items-center gap-2 rounded-md border border-ink-900/25 px-3 py-2 font-display text-[10.5px] font-semibold uppercase tracking-[0.12em] text-ink-900 transition-all duration-300 hover:border-ink-950 hover:bg-ink-950 hover:text-white active:scale-[0.96] sm:px-3.5 sm:text-[11px]"
                 >
                   <Icon name="wa" className="w-4 h-4" />
@@ -125,7 +125,7 @@ export function BusinessCard() {
               <a
                 href={`mailto:${CONTACT.cardEmail}`}
                 className="group/row -ms-2 flex min-w-0 flex-1 items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-neutral-50 sm:gap-3.5"
-                aria-label={`Email — ${CONTACT.cardEmail}`}
+                aria-label={`Email: ${CONTACT.cardEmail}`}
               >
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-ink-950 text-white transition-transform duration-300 group-hover/row:scale-105">
                   <Icon name="mail" className="w-4 h-4" />

@@ -183,10 +183,10 @@ function CaseCard({ c, index }: { c: CaseStudy; index: number }) {
 export default function Home() {
   const { L, t, isAr } = useLang();
   usePageMeta(
-    `${isAr ? "TECH OF THE WORLD | خدمات تقنية معلومات احترافية — السعودية ومصر" : "TECH OF THE WORLD | Professional IT Services & Technology Solutions — Saudi Arabia & Egypt"}`,
+    `${isAr ? "TECH OF THE WORLD | خدمات تقنية معلومات احترافية في السعودية ومصر" : "TECH OF THE WORLD | Professional IT Services & Technology Solutions in Saudi Arabia & Egypt"}`,
     "Technology That Moves Business Forward. IT infrastructure, networks, Microsoft & cloud, CCTV and access control for businesses in Saudi Arabia and Egypt."
   );
-  const wa = waLink("Hello TECH OF THE WORLD — I would like to talk to an IT specialist.");
+  const wa = waLink("Hello TECH OF THE WORLD, I would like to talk to an IT specialist.");
   const { projects } = useAllProjects();
   const featured = projects.filter((c) => c.featured);
   const { ref: finalRef, inView: finalIn } = useInView<HTMLDivElement>();
@@ -194,12 +194,10 @@ export default function Home() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="relative min-h-screen flex items-center bg-ink-950 text-paper-50 overflow-hidden noise">
+      <section className="relative min-h-[86vh] flex items-center bg-ink-950 text-paper-50 overflow-hidden noise">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
         <NetworkCanvas className="absolute inset-0 w-full h-full opacity-70" />
         <HeroGlow />
-        <div className="absolute -top-32 -start-32 w-[620px] h-[620px] rounded-full bg-amber-500/[0.07] blur-[130px]" aria-hidden="true" />
-        <div className="absolute bottom-0 end-0 w-[520px] h-[520px] rounded-full bg-circuit-500/[0.06] blur-[120px]" aria-hidden="true" />
         <img src={IMAGES.network} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-[0.13] duo-img" />
 
         <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-36 pb-20 w-full grid lg:grid-cols-[1.12fr_0.88fr] gap-14 lg:gap-10 items-center">
@@ -210,14 +208,14 @@ export default function Home() {
                 {isAr ? "مزوّد خدمات تقنية معلومات وحلول تكنولوجية" : "Professional IT Services & Technology Solutions"}
               </span>
             </Reveal>
-            <h1 className="font-display font-bold tracking-tight text-[clamp(2.4rem,6vw,4.6rem)] leading-[1.04]">
+            <h1 className="font-display font-bold tracking-tight text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
               <Scramble text={isAr ? "تقنية تحرّك الأعمال" : "Technology That Moves"} delay={150} className="block" />
               <Scramble text={isAr ? "إلى الأمام." : "Business Forward."} delay={700} className="block text-amber-500" />
             </h1>
             <Reveal as="p" delay={900} className="mt-7 max-w-xl text-[17px] leading-relaxed text-mist-300">
               {isAr
-                ? "نبني وندير بيئات تقنية المعلومات التي تعتمد عليها الشركات — البنية التحتية والشبكات وبيئات مايكروسوفت وأنظمة الأمن — عن بُعد وفي الموقع، في السعودية ومصر."
-                : "We build and run the IT environments businesses depend on — infrastructure, networks, Microsoft environments and security systems — delivered remotely and on-site across Saudi Arabia and Egypt."}
+                ? "نبني وندير بيئات تقنية المعلومات التي تعتمد عليها الشركات: البنية التحتية والشبكات وبيئات مايكروسوفت وأنظمة الأمن، عن بُعد وفي الموقع، في السعودية ومصر."
+                : "We build and run the IT environments businesses depend on: infrastructure, networks, Microsoft environments and security systems, delivered remotely and on-site across Saudi Arabia and Egypt."}
             </Reveal>
             <Reveal delay={1020} className="mt-9 flex flex-wrap items-center gap-4">
               <Magnetic><Btn to="/request">{t("nav.request")}</Btn></Magnetic>
@@ -254,7 +252,7 @@ export default function Home() {
         <Marquee>
           {TECH_TICKER.map((tech) => (
             <span key={tech} className="flex items-center gap-6 px-6 font-mono text-[12px] uppercase tracking-[0.3em] text-mist-400 whitespace-nowrap">
-              <span className="text-amber-500">✦</span>{tech}
+              <span className="text-amber-500">·</span>{tech}
             </span>
           ))}
         </Marquee>
@@ -291,15 +289,15 @@ export default function Home() {
       {/* ============ SERVICES ============ */}
       <section className="relative bg-ink-950 text-paper-50 noise">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
             <SectionHeading
               kicker={isAr ? "مسارات الخدمات" : "Service Lines"}
               tone="light"
               title={{ en: "Five lines. One accountable team.", ar: "خمسة مسارات. فريق واحد مسؤول." }}
               lead={{
-                en: "Every service we deliver belongs to one of five disciplines — so you always know who owns your environment end to end.",
-                ar: "كل خدمة نقدمها تنتمي إلى واحد من خمسة تخصصات — لتعرف دائمًا من يملك مسؤولية بيئتك من البداية للنهاية.",
+                en: "Every service we deliver belongs to one of five disciplines, so you always know who owns your environment end to end.",
+                ar: "كل خدمة نقدمها تنتمي إلى واحد من خمسة تخصصات، لتعرف دائمًا من يملك مسؤولية بيئتك من البداية للنهاية.",
               }}
             />
             <Btn to="/services" variant="outline" className="mb-2">{t("nav.services")}</Btn>
@@ -332,15 +330,15 @@ export default function Home() {
 
       {/* ============ FEATURED PROJECTS ============ */}
       <section className="relative bg-paper-100 text-ink-900 grid-bg-light">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
             <SectionHeading
               kicker={isAr ? "دراسات حالة" : "Case Studies"}
               tone="dark"
               title={{ en: "Real environments, documented work.", ar: "بيئات حقيقية وعمل موثّق." }}
               lead={{
-                en: "Selected engagements presented as they were delivered — scope, decisions and outcomes, with client details kept confidential.",
-                ar: "أعمال مختارة كما نُفذت فعلًا — النطاق والقرارات والنتائج، مع الحفاظ على سرية بيانات العملاء.",
+                en: "Selected engagements presented as they were delivered: scope, decisions and outcomes, with client details kept confidential.",
+                ar: "أعمال مختارة كما نُفذت فعلًا: النطاق والقرارات والنتائج، مع الحفاظ على سرية بيانات العملاء.",
               }}
             />
             <Btn to="/projects" variant="outlineLight" className="mb-2">{t("cta.exploreProjects")}</Btn>
@@ -357,7 +355,7 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <SmartImg src={IMAGES.rack} alt="Organized enterprise network rack with structured cabling" className="absolute inset-0 w-full h-full object-cover duo-img bg-ink-900" />
         <div className="absolute inset-0 bg-ink-950/78" aria-hidden="true" />
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-24 lg:py-32 text-center">
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-16 lg:py-24 text-center">
           <Reveal className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500 mb-6">YA / FIELD STANDARD</Reveal>
           <Reveal line as="p" delay={100}>
             <span className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-paper-50 leading-tight">
@@ -366,8 +364,8 @@ export default function Home() {
           </Reveal>
           <Reveal as="p" delay={220} className="mt-6 text-mist-300 max-w-2xl mx-auto leading-relaxed">
             {isAr
-              ? "لا نبيع أجهزة ولا ساعات عمل — نسلّم بيئات تعمل. موثقة، قابلة للإدارة، ومبنية لتستمر بعد مغادرتنا."
-              : "We don't sell boxes or bill hours — we deliver environments that work. Documented, manageable, and built to keep running after we leave."}
+              ? "لا نبيع أجهزة ولا ساعات عمل. نسلّم بيئات تعمل: موثقة، قابلة للإدارة، ومبنية لتستمر بعد مغادرتنا."
+              : "We don't sell boxes or bill hours. We deliver environments that work: documented, manageable, and built to keep running after we leave."}
           </Reveal>
         </div>
       </section>
@@ -375,7 +373,7 @@ export default function Home() {
       {/* ============ WHY US ============ */}
       <section className="relative bg-ink-950 text-paper-50 noise">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24">
           <SectionHeading
             kicker={isAr ? "لماذا نحن" : "Why TECH OF THE WORLD"}
             tone="light"
@@ -404,7 +402,7 @@ export default function Home() {
 
       {/* ============ HOW WE WORK ============ */}
       <section className="relative bg-paper-100 text-ink-900 grid-bg-light">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28 grid lg:grid-cols-[0.9fr_1.1fr] gap-14">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-[0.9fr_1.1fr] gap-14">
           <div className="lg:sticky lg:top-32 self-start">
             <SectionHeading
               kicker={isAr ? "منهجية العمل" : "How We Work"}
@@ -441,7 +439,7 @@ export default function Home() {
       {/* ============ INDUSTRIES ============ */}
       <section className="relative bg-ink-950 text-paper-50 noise">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
             <SectionHeading
               kicker={isAr ? "القطاعات" : "Industries"}
@@ -475,14 +473,14 @@ export default function Home() {
 
       {/* ============ TECH EXPERTISE ============ */}
       <section className="relative bg-paper-100 text-ink-900 grid-bg-light">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24">
           <SectionHeading
             kicker={isAr ? "الخبرة التقنية" : "Technology Expertise"}
             tone="dark"
             title={{ en: "Tools we have actually shipped with.", ar: "أدوات عملنا بها فعلًا في الميدان." }}
             lead={{
-              en: "A working stack earned through real deployments — listed because we use it, not because it impresses.",
-              ar: "حزمة تقنية اكتُسبت من تنفيذ حقيقي — نذكرها لأننا نستخدمها، لا لأنها تثير الإعجاب.",
+              en: "A working stack earned through real deployments. Listed because we use it, not because it impresses.",
+              ar: "حزمة تقنية اكتُسبت من تنفيذ حقيقي. نذكرها لأننا نستخدمها، لا لأنها تثير الإعجاب.",
             }}
           />
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-ink-900/15 border border-ink-900/15">
@@ -501,8 +499,8 @@ export default function Home() {
           </div>
           <Reveal className="mt-8 text-[13px] font-mono text-mist-500">
             {isAr
-              ? "* خبرة عملية موثقة — لا ندّعي شراكات أو شهادات رسمية غير ممنوحة."
-              : "* Verified hands-on experience — no partnership or certification claims unless formally granted."}
+              ? "* خبرة عملية موثقة. لا ندّعي شراكات أو شهادات رسمية غير ممنوحة."
+              : "* Verified hands-on experience. No partnership or certification claims unless formally granted."}
           </Reveal>
         </div>
       </section>
@@ -522,8 +520,8 @@ export default function Home() {
             </Reveal>
             <Reveal as="p" delay={160} className="mt-3 max-w-xl text-[15.5px] font-medium leading-relaxed">
               {isAr
-                ? "تقييم أولي منظم لبنيتك التحتية وشبكاتك وبيئات مايكروسوفت وأنظمتك الأمنية — بنتائج تفهمها دون مترجم."
-                : "A structured first look at your infrastructure, networks, Microsoft environments and security systems — with findings you can read without a translator."}
+                ? "تقييم أولي منظم لبنيتك التحتية وشبكاتك وبيئات مايكروسوفت وأنظمتك الأمنية، بنتائج تفهمها دون مترجم."
+                : "A structured first look at your infrastructure, networks, Microsoft environments and security systems, with findings you can read without a translator."}
             </Reveal>
           </div>
           <Reveal delay={220} className="shrink-0">
@@ -537,7 +535,7 @@ export default function Home() {
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
         <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full border border-ink-700" aria-hidden="true" />
         <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] rounded-full border border-ink-700" aria-hidden="true" />
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-24 lg:py-32 text-center">
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-8 py-16 lg:py-24 text-center">
           <BrandMark className="mx-auto mb-8 float-slow" />
           <h2 className="font-display font-bold tracking-tight text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.05]">
             <span className={`block transition-all duration-1000 ${finalIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>

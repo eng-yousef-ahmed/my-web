@@ -223,10 +223,7 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 
 /* ---------- cards ---------- */
 .card-lift {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, background-color 0.4s, box-shadow 0.4s;
-}
-.card-lift:hover {
-  transform: translateY(-6px);
+  transition: border-color 0.15s ease-out, background-color 0.15s ease-out;
 }
 
 /* ---------- custom cursor ring (fine pointers only) ---------- */
@@ -263,10 +260,7 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 }
 .page-enter { animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
-/* ---------- richer card lift ---------- */
-.card-lift:hover {
-  box-shadow: 0 26px 50px -26px rgba(2, 8, 14, 0.55);
-}
+
 
 /* ---------- adaptive text contrast (CSS-variable based) ----------
    Every `text-mist-*` utility reads `var(--color-mist-*)`, so re-declaring

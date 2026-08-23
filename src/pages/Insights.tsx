@@ -7,7 +7,7 @@ import { Btn, Icon, PageHero, Reveal } from "../components/kit";
 export function InsightsList() {
   const { L, t, isAr } = useLang();
   usePageMeta(
-    isAr ? "المعرفة | TECH OF THE WORLD — مقالات تقنية للأعمال" : "Insights | TECH OF THE WORLD — Business IT Knowledge",
+    isAr ? "المعرفة | TECH OF THE WORLD | مقالات تقنية للأعمال" : "Insights | TECH OF THE WORLD | Business IT Knowledge",
     "Practical, business-focused IT knowledge: Active Directory, Microsoft 365, Wi-Fi planning, CCTV design, preventive maintenance and site-to-site VPN."
   );
   return (
@@ -16,8 +16,8 @@ export function InsightsList() {
         kicker={isAr ? "المعرفة" : "Insights"}
         title={{ en: "IT knowledge, written for decision makers.", ar: "معرفة تقنية كُتبت لصنّاع القرار." }}
         lead={{
-          en: "Short, practical reads on the systems your business runs on — no vendor hype, no invented statistics, just what actually matters when you decide.",
-          ar: "قراءات قصيرة عملية عن الأنظمة التي يقوم عليها عملك — بلا ترويج ولا إحصاءات مخترعة، فقط ما يهم فعلًا عند اتخاذ القرار.",
+          en: "Short, practical reads on the systems your business runs on. No vendor hype, no invented statistics, just what actually matters when you decide.",
+          ar: "قراءات قصيرة عملية عن الأنظمة التي يقوم عليها عملك. بلا ترويج ولا إحصاءات مخترعة، فقط ما يهم فعلًا عند اتخاذ القرار.",
         }}
       >
         <Btn to="/request">{t("nav.request")}</Btn>

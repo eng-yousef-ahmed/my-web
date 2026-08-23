@@ -22,24 +22,24 @@ type Channel = {
 export function Contact() {
   const { t, L, isAr } = useLang();
   usePageMeta(
-    isAr ? "تواصل معنا | TECH OF THE WORLD" : "Contact | TECH OF THE WORLD — Talk to an IT Specialist",
-    "Reach TECH OF THE WORLD through WhatsApp (Saudi Arabia & Egypt), email or a structured service request — professional IT services for both markets."
+    isAr ? "تواصل معنا | TECH OF THE WORLD" : "Contact | TECH OF THE WORLD, Talk to an IT Specialist",
+    "Reach TECH OF THE WORLD through WhatsApp (Saudi Arabia & Egypt), email or a structured service request. Professional IT services for both markets."
   );
 
   const msg = (market: "sa" | "eg") =>
     isAr
-      ? `مرحبًا TECH OF THE WORLD — أحتاج دعمًا تقنيًا في ${market === "sa" ? "السعودية" : "مصر"}.`
-      : `Hello TECH OF THE WORLD — I need IT support in ${market === "sa" ? "Saudi Arabia" : "Egypt"}.`;
+      ? `مرحبًا TECH OF THE WORLD، أحتاج دعمًا تقنيًا في ${market === "sa" ? "السعودية" : "مصر"}.`
+      : `Hello TECH OF THE WORLD, I need IT support in ${market === "sa" ? "Saudi Arabia" : "Egypt"}.`;
 
   const channels: Channel[] = [
     {
       n: "01",
       icon: "wa",
       flag: <FlagSA className="w-8 h-8" />,
-      title: { en: "WhatsApp — Saudi Arabia", ar: "واتساب — السعودية" },
+      title: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" },
       sub: {
-        en: "Support, infrastructure & projects across the Kingdom — remote and on-site.",
-        ar: "الدعم والبنية التحتية والمشاريع داخل المملكة — عن بُعد وفي الموقع.",
+        en: "Support, infrastructure & projects across the Kingdom, remote and on-site.",
+        ar: "الدعم والبنية التحتية والمشاريع داخل المملكة، عن بُعد وفي الموقع.",
       },
       value: CONTACT.displaySA,
       href: waLink(msg("sa"), "sa"),
@@ -48,7 +48,7 @@ export function Contact() {
       n: "02",
       icon: "wa",
       flag: <FlagEG className="w-8 h-8" />,
-      title: { en: "WhatsApp — Egypt", ar: "واتساب — مصر" },
+      title: { en: "WhatsApp · Egypt", ar: "واتساب · مصر" },
       sub: {
         en: "IT support, Microsoft environments & security systems for Egyptian businesses.",
         ar: "الدعم التقني وبيئات مايكروسوفت وأنظمة الأمن للشركات في مصر.",
@@ -61,19 +61,19 @@ export function Contact() {
       icon: "mail",
       title: { en: "Email", ar: "البريد الإلكتروني" },
       sub: {
-        en: "Specifications, attachments and anything that needs a written trail — answered within 1–2 business days.",
-        ar: "المواصفات والمرفقات وكل ما يحتاج سجلًا مكتوبًا — نرد خلال يوم إلى يومين عمل.",
+        en: "Specifications, attachments and anything that needs a written trail. Answered within 1–2 business days.",
+        ar: "المواصفات والمرفقات وكل ما يحتاج سجلًا مكتوبًا. نرد خلال يوم إلى يومين عمل.",
       },
       value: CONTACT.email,
-      href: hasEmail ? mailLink("IT Inquiry — TECH OF THE WORLD", "") : null,
+      href: hasEmail ? mailLink("IT Inquiry | TECH OF THE WORLD", "") : null,
     },
     {
       n: "04",
       icon: "doc",
       title: { en: "Service Request Form", ar: "نموذج طلب الخدمة" },
       sub: {
-        en: "A structured request with scope and urgency — best for quotations and projects.",
-        ar: "طلب منظم بنطاق الخدمة ودرجة الإلحاح — الأنسب لعروض الأسعار والمشاريع.",
+        en: "A structured request with scope and urgency. Best for quotations and projects.",
+        ar: "طلب منظم بنطاق الخدمة ودرجة الإلحاح. الأنسب لعروض الأسعار والمشاريع.",
       },
       value: isAr ? "افتح النموذج" : "Open form",
       to: "/request",
@@ -86,8 +86,8 @@ export function Contact() {
         kicker={isAr ? "تواصل معنا" : "Contact"}
         title={{ en: "Talk to a person who has actually fixed it.", ar: "تحدّث مع شخص أصلحها فعلًا من قبل." }}
         lead={{
-          en: "Four direct lines, no queues. WhatsApp for speed — one number per market. Email for detail. A structured form when you want it documented.",
-          ar: "أربع قنوات مباشرة بلا طوابير. واتساب للسرعة — رقم لكل سوق. البريد للتفاصيل. ونموذج منظم حين تريده موثقًا.",
+          en: "Four direct lines, no queues. WhatsApp for speed, one number per market. Email for detail. A structured form when you want it documented.",
+          ar: "أربع قنوات مباشرة بلا طوابير. واتساب للسرعة، رقم لكل سوق. البريد للتفاصيل. ونموذج منظم حين تريده موثقًا.",
         }}
       >
         <Btn to="/request">{t("nav.request")}</Btn>
@@ -155,7 +155,7 @@ export function Contact() {
               {
                 icon: "pin",
                 k: { en: "Coverage", ar: "التغطية" },
-                v: { en: "Saudi Arabia & Egypt — remote anywhere, on-site per engagement.", ar: "السعودية ومصر — دعم عن بُعد في أي مكان، وميداني حسب العمل." },
+                v: { en: "Saudi Arabia & Egypt. Remote anywhere, on-site per engagement.", ar: "السعودية ومصر. دعم عن بُعد في أي مكان، وميداني حسب العمل." },
               },
               {
                 icon: "clock",
@@ -165,7 +165,7 @@ export function Contact() {
               {
                 icon: "globe",
                 k: { en: "Languages", ar: "اللغات" },
-                v: { en: "Arabic & English — documentation and delivery in both.", ar: "العربية والإنجليزية — توثيق وتسليم باللغتين." },
+                v: { en: "Arabic & English. Documentation and delivery in both.", ar: "العربية والإنجليزية. توثيق وتسليم باللغتين." },
               },
             ].map((f) => (
               <div key={f.k.en} className="flex gap-4">
@@ -194,7 +194,7 @@ export function Contact() {
             <div>
               <p className="font-display text-lg font-bold text-red-300">{t("cta.urgent")}</p>
               <p className="text-[13px] text-mist-400 mt-0.5">
-                {isAr ? "النظام متوقف؟ هات أقرب رقم — البيئات المدعومة أولوية فورية." : "System down? Take the nearest line — supported environments get immediate priority."}
+                {isAr ? "النظام متوقف؟ هات أقرب رقم. البيئات المدعومة أولوية فورية." : "System down? Take the nearest line. Supported environments get immediate priority."}
               </p>
             </div>
           </div>
@@ -207,7 +207,7 @@ export function Contact() {
             ).map((line) => (
               <span key={line.market} className="inline-flex items-stretch">
                 <a
-                  href={waLink("URGENT — " + t("cta.urgent"), line.market)}
+                  href={waLink("URGENT: " + t("cta.urgent"), line.market)}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-3 border border-red-500/50 text-red-300 px-4 py-3 font-mono text-[12.5px] hover:bg-red-500 hover:border-red-500 hover:text-white transition-all duration-300"
@@ -269,7 +269,7 @@ export function Request() {
   const { t, isAr } = useLang();
   usePageMeta(
     isAr ? "اطلب خدمة تقنية | TECH OF THE WORLD" : "Request IT Service | TECH OF THE WORLD",
-    "Request IT support, infrastructure, networks, Microsoft & cloud, CCTV or consultancy — serving Saudi Arabia and Egypt. Response via WhatsApp or email."
+    "Request IT support, infrastructure, networks, Microsoft & cloud, CCTV or consultancy, serving Saudi Arabia and Egypt. Response via WhatsApp or email."
   );
   const params = new URLSearchParams(window.location.hash.split("?")[1] ?? "");
   const prefill = params.get("service") ?? undefined;
@@ -284,8 +284,8 @@ export function Request() {
         kicker={isAr ? "طلب خدمة" : "Service Request"}
         title={{ en: "Tell us the problem. We'll bring the plan.", ar: "أخبرنا بالمشكلة. نحن نأتي بالخطة." }}
         lead={{
-          en: "One structured request is enough — service line, urgency and a plain-language description. We reply through the channel you prefer.",
-          ar: "طلب منظم واحد يكفي — مسار الخدمة ودرجة الإلحاح ووصف بلغة بسيطة. نرد عبر القناة التي تفضلها.",
+          en: "One structured request is enough: service line, urgency and a plain-language description. We reply through the channel you prefer.",
+          ar: "طلب منظم واحد يكفي: مسار الخدمة ودرجة الإلحاح ووصف بلغة بسيطة. نرد عبر القناة التي تفضلها.",
         }}
       />
       <section className="bg-paper-100 text-ink-900 grid-bg-light">
@@ -299,7 +299,7 @@ export function Request() {
                 <h2 className="font-display text-lg font-bold">{isAr ? "ماذا يحدث بعد الإرسال؟" : "What happens next?"}</h2>
                 <ol className="mt-5 space-y-4">
                   {[
-                    { en: "A technical person reviews your requirement — not an auto-responder.", ar: "شخص تقني يراجع طلبك — لا رد آلي." },
+                    { en: "A technical person reviews your requirement, not an auto-responder.", ar: "شخص تقني يراجع طلبك، لا رد آلي." },
                     { en: "We clarify scope with you on WhatsApp or email.", ar: "نوضح معك النطاق عبر واتساب أو البريد." },
                     { en: "You receive a clear quotation or assessment proposal.", ar: "يصلك عرض سعر واضح أو مقترح تقييم." },
                   ].map((s, i) => (
@@ -319,13 +319,13 @@ export function Request() {
                     <Icon name="alert" className="w-5 h-5" /> {t("cta.urgent")}
                   </p>
                   <p className="mt-2.5 text-[13.5px] leading-relaxed text-mist-300">
-                    {isAr ? "الأنظمة متوقفة الآن؟ واتساب هو الطريق الأسرع — أو اختر «حرج» في النموذج." : "Systems down right now? WhatsApp is the fastest route — or mark the form “Critical”."}
+                    {isAr ? "الأنظمة متوقفة الآن؟ واتساب هو الطريق الأسرع، أو اختر «حرج» في النموذج." : "Systems down right now? WhatsApp is the fastest route, or mark the form “Critical”."}
                   </p>
                   <div className="mt-5 flex flex-col gap-2.5">
-                    <a href={waLink("URGENT — " + t("cta.urgent"), "sa")} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2.5 chamfer-sm bg-[#23a55b] text-white px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.12em] hover:brightness-110 transition-all">
+                    <a href={waLink("URGENT: " + t("cta.urgent"), "sa")} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2.5 chamfer-sm bg-[#23a55b] text-white px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.12em] hover:brightness-110 transition-all">
                       <FlagSA className="w-4.5 h-4.5" /> <span dir="ltr">{CONTACT.displaySA}</span>
                     </a>
-                    <a href={waLink("URGENT — " + t("cta.urgent"), "eg")} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2.5 chamfer-sm border border-ink-600 text-mist-200 px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.12em] hover:border-[#23a55b] hover:text-[#5fd68f] transition-all">
+                    <a href={waLink("URGENT: " + t("cta.urgent"), "eg")} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2.5 chamfer-sm border border-ink-600 text-mist-200 px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.12em] hover:border-[#23a55b] hover:text-[#5fd68f] transition-all">
                       <FlagEG className="w-4.5 h-4.5" /> <span dir="ltr">{CONTACT.displayEG}</span>
                     </a>
                   </div>

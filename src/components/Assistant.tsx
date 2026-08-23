@@ -188,13 +188,13 @@ function detectMarket(n: string): Market | null {
 const STR = {
   ar: {
     name: "بطاطا",
-    online: "متصل الآن — يرد في ثواني",
+    online: "متصل الآن، يرد في ثواني",
     panelTitle: "بطاطا · Batata",
     panelSub: "روبوت TECH OF THE WORLD المساعد",
     placeholder: "اكتب سؤالك هنا…",
     send: "إرسال",
     greeting:
-      "أهلًا! أنا <b>بطاطا</b> — روبوت فريق TECH OF THE WORLD. اسألني عن الخدمات أو الأسعار أو التغطية، وأنا أوصلك للفريق في ثانية.",
+      "أهلًا! أنا <b>بطاطا</b>، روبوت فريق TECH OF THE WORLD. اسألني عن الخدمات أو الأسعار أو التغطية، وأنا أوصلك للفريق في ثانية.",
     servicesTitle: "عندنا 5 مسارات خدمات:",
     services: [
       ["", "تقنية المعلومات والبنية التحتية"],
@@ -209,19 +209,19 @@ const STR = {
     goProjects: "شوف شغلنا",
     goWhatsapp: "واتساب مباشر",
     prices:
-      "بما إن كل بيئة مختلفة، مفيش أسعار جاهزة — وده في صالحك. بعتلنا طلب وهيوصلك <b>عرض سعر واضح مبني على بيئتك الفعلية</b> — من غير مفاجآت.",
+      "بما إن كل بيئة مختلفة، مفيش أسعار جاهزة، وده في صالحك. بعتلنا طلب وهيوصلك <b>عرض سعر واضح مبني على بيئتك الفعلية</b>، من غير مفاجآت.",
     urgent:
-      "في الحالات العاجلة أسرع طريق هو <b>واتساب مباشر</b> — البيئات المدعومة ليها أولوية فورية.",
+      "في الحالات العاجلة أسرع طريق هو <b>واتساب مباشر</b>. البيئات المدعومة ليها أولوية فورية.",
     assessment:
-      "تقدر تطلب <b>تقييمًا تقنيًا أوليًا</b> — بنشوف بيئتك ونرجعلك بصورة واضحة وخطة عملية.",
-    markets: "بنغطي <b>السعودية ومصر</b> — دعم عن بُعد في أي مكان، وتنفيذ ميداني حسب الموقع. بتسأل من أنهي بلد؟",
-    coverage: "بنشتغل في <b>السعودية ومصر</b> — أونلاين لأي مكان، وميداني حسب طبيعة الشغل.",
+      "تقدر تطلب <b>تقييمًا تقنيًا أوليًا</b>: بنشوف بيئتك ونرجعلك بصورة واضحة وخطة عملية.",
+    markets: "بنغطي <b>السعودية ومصر</b>: دعم عن بُعد في أي مكان، وتنفيذ ميداني حسب الموقع. بتسأل من أنهي بلد؟",
+    coverage: "بنشتغل في <b>السعودية ومصر</b>: أونلاين لأي مكان، وميداني حسب طبيعة الشغل.",
     identity:
-      "أنا <b>بطاطا</b>! روبوت صغير شغال مع فريق TECH OF THE WORLD — حافظ خدماتنا الخمسة كلها عن ظهر قلب، ومهمتي أوصلك للشخص الصح بسرعة.",
+      "أنا <b>بطاطا</b>! روبوت صغير شغال مع فريق TECH OF THE WORLD، حافظ خدماتنا الخمسة كلها عن ظهر قلب، ومهمتي أوصلك للشخص الصح بسرعة.",
     handoff:
-      "تمام! هجهزلك رسالة واتساب جاهزة فيها ملخص كلامنا — بس اضغط إرسال هناك وهيوصلك الفريق فورًا.",
+      "تمام! هجهزلك رسالة واتساب جاهزة فيها ملخص كلامنا، بس اضغط إرسال هناك وهيوصلك الفريق فورًا.",
     unknown:
-      "مش متأكد فهمتك 100% — بس ده تخصص البشر عندنا! اختار أقرب حاجة ليك تحت، أو حوّلنا مباشرة لواحد من الفريق.",
+      "مش متأكد فهمتك 100%، بس ده تخصص البشر عندنا! اختار أقرب حاجة ليك تحت، أو حوّلنا مباشرة لواحد من الفريق.",
     formHint: "اكتب في النموذج إنك جاي من المحادثة عشان نكمل من نفس النقطة.",
     sugg: ["الخدمات عندكم إيه؟", "كام الأسعار؟", "عندي مشكلة عاجلة", "بتغطوا مصر؟", "عايز كاميرات مراقبة", "عايز تقييم لبيئتي", "ابعتلي سيرتك الذاتية"],
     bubble: "أنا بطاطا! تحتاج مساعدة؟",
@@ -230,7 +230,7 @@ const STR = {
     typingLabel: "بطاطا بيكتب…",
     askAgain: "اسأل أي حاجة تانية!",
     moodIdle: "جاهز وبيفكر فيك",
-    moodHappy: "متصل الآن — يرد في ثواني",
+    moodHappy: "متصل الآن، يرد في ثواني",
     moodThinking: "بيفكر…",
     moodUrgent: "وضع الطوارئ!",
     moodDance: "في نوبة فرح",
@@ -239,17 +239,17 @@ const STR = {
     cvAr: "عربي PDF",
     cvEn: "إنجليزي PDF",
     cvReply:
-      "أكيد! دي <b>السيرة الذاتية</b> للمهندس يوسف أحمد — مؤسس TECH OF THE WORLD — خبرة 9+ سنين في الدعم التقني المؤسسي وبيئات مايكروسوفت والشبكات وأنظمة الأمن في السعودية ومصر. حمّلها بالنسخة اللي تناسبك:",
+      "أكيد! دي <b>السيرة الذاتية</b> للمهندس يوسف أحمد، مؤسس TECH OF THE WORLD: خبرة 9+ سنين في الدعم التقني المؤسسي وبيئات مايكروسوفت والشبكات وأنظمة الأمن في السعودية ومصر. حمّلها بالنسخة اللي تناسبك:",
   },
   en: {
     name: "Batata",
-    online: "Online — replies in seconds",
+    online: "Online, replies in seconds",
     panelTitle: "Batata · بطاطا",
     panelSub: "TECH OF THE WORLD's helper robot",
     placeholder: "Type your question…",
     send: "Send",
     greeting:
-      "Hi! I'm <b>Batata</b> — TECH OF THE WORLD's robot helper. Ask me about services, pricing or coverage and I'll connect you to the team in a second.",
+      "Hi! I'm <b>Batata</b>, TECH OF THE WORLD's robot helper. Ask me about services, pricing or coverage and I'll connect you to the team in a second.",
     servicesTitle: "We work across 5 service lines:",
     services: [
       ["", "IT & Infrastructure"],
@@ -264,19 +264,19 @@ const STR = {
     goProjects: "See our work",
     goWhatsapp: "Direct WhatsApp",
     prices:
-      "Every environment is different, so there are no list prices — that works in your favor. Send a request and you'll get a <b>clear quotation built on your actual environment</b> — no surprises.",
+      "Every environment is different, so there are no list prices, and that works in your favor. Send a request and you'll get a <b>clear quotation built on your actual environment</b>, with no surprises.",
     urgent:
-      "For urgent cases the fastest route is <b>direct WhatsApp</b> — supported environments get immediate priority.",
+      "For urgent cases the fastest route is <b>direct WhatsApp</b>. Supported environments get immediate priority.",
     assessment:
-      "You can request an <b>initial IT assessment</b> — we review your environment and come back with a clear picture and a practical plan.",
-    markets: "We cover <b>Saudi Arabia and Egypt</b> — remote anywhere, on-site per location. Which country are you asking from?",
-    coverage: "We work across <b>Saudi Arabia and Egypt</b> — remote anywhere, on-site depending on the job.",
+      "You can request an <b>initial IT assessment</b>: we review your environment and come back with a clear picture and a practical plan.",
+    markets: "We cover <b>Saudi Arabia and Egypt</b>: remote anywhere, on-site per location. Which country are you asking from?",
+    coverage: "We work across <b>Saudi Arabia and Egypt</b>: remote anywhere, on-site depending on the job.",
     identity:
-      "I'm <b>Batata</b>! A little robot working with the TECH OF THE WORLD crew — I know all five service lines by heart, and my job is to get you to the right person fast.",
+      "I'm <b>Batata</b>! A little robot working with the TECH OF THE WORLD crew. I know all five service lines by heart, and my job is to get you to the right person fast.",
     handoff:
-      "Great! I'll prepare a WhatsApp message with a summary of our chat — just hit send there and the team picks it up immediately.",
+      "Great! I'll prepare a WhatsApp message with a summary of our chat. Just hit send there and the team picks it up immediately.",
     unknown:
-      "I'm not 100% sure I got that — but that's what our humans are for! Pick the closest option below, or go straight to the team.",
+      "I'm not 100% sure I got that, but that's what our humans are for! Pick the closest option below, or go straight to the team.",
     formHint: "Mention in the form that you're coming from the chat so we continue where we left off.",
     sugg: ["What services do you offer?", "How much does it cost?", "I have an urgent issue", "Do you cover Egypt?", "I need CCTV cameras", "I want an IT assessment", "Send me your CV"],
     bubble: "I'm Batata! Need a hand?",
@@ -285,7 +285,7 @@ const STR = {
     typingLabel: "Batata is typing…",
     askAgain: "Ask me anything else!",
     moodIdle: "Ready when you are",
-    moodHappy: "Online — replies in seconds",
+    moodHappy: "Online, replies in seconds",
     moodThinking: "Thinking…",
     moodUrgent: "Emergency mode!",
     moodDance: "In a happy mood",
@@ -294,7 +294,7 @@ const STR = {
     cvAr: "Arabic PDF",
     cvEn: "English PDF",
     cvReply:
-      "Of course! Here's the <b>CV of Eng. Yousef Ahmed</b> — founder of TECH OF THE WORLD — 9+ years of enterprise IT support, Microsoft environments, networking and security systems across Saudi Arabia and Egypt. Grab the version that suits you:",
+      "Of course! Here's the <b>CV of Eng. Yousef Ahmed</b>, founder of TECH OF THE WORLD: 9+ years of enterprise IT support, Microsoft environments, networking and security systems across Saudi Arabia and Egypt. Grab the version that suits you:",
   },
 };
 
@@ -318,8 +318,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
     try { localStorage.setItem("ya-visitor-name", name); } catch { /* private mode */ }
     out.html =
       lang === "ar"
-        ? `تشرفنا يا <b>${name}</b>! من دلوقتي إحنا أصحاب — اسألني عن أي خدمة أو سعر أو تغطية، وأنا معاك.`
-        : `Nice to meet you, <b>${name}</b>! We're friends now — ask me about any service, price or coverage and I'm on it.`;
+        ? `تشرفنا يا <b>${name}</b>! من دلوقتي إحنا أصحاب، اسألني عن أي خدمة أو سعر أو تغطية، وأنا معاك.`
+        : `Nice to meet you, <b>${name}</b>! We're friends now. Ask me about any service, price or coverage and I'm on it.`;
     out.mood = "dance";
     out.actions = [{ label: s.goServices, to: "/services" }, { label: s.goRequest, to: "/request" }];
     return out;
@@ -329,8 +329,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   if (n === "بطاطا" || n === "يا بطاطا" || n === "batata" || n === "potato" || n === "hey batata") {
     out.html =
       lang === "ar"
-        ? "مين ناداني؟ ده أنا! كل ما حد ينده عليا بفرح وأرقص — يلا اسألني أي حاجة عن خدماتنا، أو خلينا نرقص شوية كمان."
-        : "Who called me? That's me! I do a little dance every time someone calls my name — now ask me anything about our services, or let's keep dancing.";
+        ? "مين ناداني؟ ده أنا! كل ما حد ينده عليا بفرح وأرقص. يلا اسألني أي حاجة عن خدماتنا، أو خلينا نرقص شوية كمان."
+        : "Who called me? That's me! I do a little dance every time someone calls my name. Now ask me anything about our services, or let's keep dancing.";
     out.mood = "dance";
     out.actions = [{ label: s.goServices, to: "/services" }];
     return out;
@@ -378,8 +378,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   }
   if (has(n, ["كاميرا", "cctv", "مراقبة", "بصمه", "بصمة", "حضور", "انصراف", "دخول", "surveillance", "access control", "biometric"])) {
     out.html = lang === "ar"
-      ? "أنظمة الأمن دي من تخصصاتنا الأساسية: <b>كاميرات مراقبة · NVR/DVR · مراقبة عن بُعد · بصمة وحضور · تحكم في الأبواب</b> — منفذة في مشاريع حقيقية زي مراكز القيادة والفنادق."
-      : "Security systems are one of our core lines: <b>CCTV · NVR/DVR · remote monitoring · biometrics & attendance · door access</b> — delivered in real projects like command centers and hotels.";
+      ? "أنظمة الأمن دي من تخصصاتنا الأساسية: <b>كاميرات مراقبة · NVR/DVR · مراقبة عن بُعد · بصمة وحضور · تحكم في الأبواب</b>، منفذة في مشاريع حقيقية زي مراكز القيادة والفنادق."
+      : "Security systems are one of our core lines: <b>CCTV · NVR/DVR · remote monitoring · biometrics & attendance · door access</b>, delivered in real projects like command centers and hotels.";
     out.actions = [
       { label: s.goProjects, to: "/projects/cctv-command-center" },
       { label: s.goRequest, to: "/request?service=security-systems" },
@@ -388,8 +388,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   }
   if (has(n, ["شبك", "network", "واي فاي", "wifi", "vpn", "راوتر", "ميكروتيك", "mikrotik", "انترنت"])) {
     out.html = lang === "ar"
-      ? "الشبكات ملعبنا: <b>LAN/WAN · واي فاي للأعمال · VPN بين الفروع · ميكروتيك</b> — بنخططها بمسح فعلي للمبنى مش تخمين."
-      : "Networks are our playground: <b>LAN/WAN · business Wi-Fi · site-to-site VPN · MikroTik</b> — planned from a real building survey, not guesswork.";
+      ? "الشبكات ملعبنا: <b>LAN/WAN · واي فاي للأعمال · VPN بين الفروع · ميكروتيك</b>، بنخططها بمسح فعلي للمبنى مش تخمين."
+      : "Networks are our playground: <b>LAN/WAN · business Wi-Fi · site-to-site VPN · MikroTik</b>, planned from a real building survey, not guesswork.";
     out.actions = [
       { label: s.goProjects, to: "/projects/mikrotik-s2s-vpn" },
       { label: s.goRequest, to: "/request?service=networks" },
@@ -398,8 +398,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   }
   if (has(n, ["مايكروسوفت", "microsoft", "m365", "اوفيس", "office", "شير بوينت", "sharepoint", "ون درايف", "onedrive", "اكتيف ديريكتوري", "active directory", "ويندوز سيرفر", "windows server"])) {
     out.html = lang === "ar"
-      ? "بيئات مايكروسوفت بنديرها صح: <b>ويندوز سيرفر · أكتيف ديريكتوري · M365 · شير بوينت · ون درايف</b> — هوية واحدة منضبطة لكل الشركة."
-      : "We run Microsoft environments properly: <b>Windows Server · Active Directory · M365 · SharePoint · OneDrive</b> — one disciplined identity layer.";
+      ? "بيئات مايكروسوفت بنديرها صح: <b>ويندوز سيرفر · أكتيف ديريكتوري · M365 · شير بوينت · ون درايف</b>، هوية واحدة منضبطة لكل الشركة."
+      : "We run Microsoft environments properly: <b>Windows Server · Active Directory · M365 · SharePoint · OneDrive</b>, one disciplined identity layer.";
     out.actions = [
       { label: s.goRequest, to: "/request?service=microsoft-cloud" },
       { label: s.goServices, to: "/services" },
@@ -442,8 +442,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   }
   if (has(n, ["سلام", "اهلا", "مرحبا", "صباح", "مساء", "hello", "hi ", "hey", "السلام عليكم"])) {
     out.html = lang === "ar"
-      ? "أهلًا وسهلًا! أنا بطاطا — اسألني عن أي خدمة أو سعر أو تغطية، وأنا معاك."
-      : "Welcome! I'm Batata — ask me about any service, price or coverage and I'm on it.";
+      ? "أهلًا وسهلًا! أنا بطاطا، اسألني عن أي خدمة أو سعر أو تغطية، وأنا معاك."
+      : "Welcome! I'm Batata. Ask me about any service, price or coverage and I'm on it.";
     out.actions = [
       { label: s.goServices, to: "/services" },
       { label: s.goRequest, to: "/request" },
@@ -451,7 +451,7 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
     return out;
   }
   if (has(n, ["شكرا", "thanks", "thank you", "تسلم", "ميرسي"])) {
-    out.html = lang === "ar" ? "العفو! ده شغلي — " + s.askAgain : "Anytime! That's my job — " + s.askAgain;
+    out.html = lang === "ar" ? "العفو! ده شغلي. " + s.askAgain : "Anytime! That's my job. " + s.askAgain;
     return out;
   }
 
@@ -467,8 +467,8 @@ function replyFor(raw: string, lang: "ar" | "en", market: Market | null) {
   }
   if (best) {
     out.html = lang === "ar"
-      ? "يبدو إن كلامك قريب من مسار معين — تقدر تطلبه مباشرة وهيكمل معاك الفريق:"
-      : "That sounds close to one of our lines — request it directly and the team takes over:";
+      ? "يبدو إن كلامك قريب من مسار معين، تقدر تطلبه مباشرة وهيكمل معاك الفريق:"
+      : "That sounds close to one of our lines. Request it directly and the team takes over:";
     out.actions = [
       { label: s.goRequest, to: `/request?service=${best}` },
       { label: s.goServices, to: `/services#${best}` },
@@ -503,7 +503,7 @@ function ActionChips({ msg }: { msg: Msg }) {
         }
         const market: Market = a.wa === "auto" ? "sa" : a.wa!;
         if (a.wa) {
-          const href = waLink("Hello TECH OF THE WORLD — " + (isAr ? "محوَّل من المساعد (بطاطا)." : "referred by the assistant (Batata)."), market);
+          const href = waLink("Hello TECH OF THE WORLD, " + (isAr ? "محوَّل من المساعد (بطاطا)." : "referred by the assistant (Batata)."), market);
           return (
             <a key={i} href={href ?? "#"} target="_blank" rel="noreferrer" className="bot-chip bot-chip-wa">
               <Icon name="wa" className="w-3.5 h-3.5" /> {a.label}

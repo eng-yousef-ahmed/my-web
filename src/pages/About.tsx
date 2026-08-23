@@ -51,8 +51,8 @@ const PRINCIPLES = [
     icon: "clock",
     t: { en: "Long-term operation", ar: "تشغيل طويل الأمد" },
     b: {
-      en: "We hand over environments any competent team can run — documented and maintainable — because success is what happens after we leave.",
-      ar: "نسلّم بيئات يستطيع أي فريق كفء تشغيلها — موثقة وقابلة للصيانة — لأن النجاح هو ما يحدث بعد مغادرتنا.",
+      en: "We hand over environments any competent team can run, documented and maintainable, because success is what happens after we leave.",
+      ar: "نسلّم بيئات يستطيع أي فريق كفء تشغيلها، موثقة وقابلة للصيانة، لأن النجاح هو ما يحدث بعد مغادرتنا.",
     },
   },
 ];
@@ -60,8 +60,8 @@ const PRINCIPLES = [
 export default function About() {
   const { L, t, isAr } = useLang();
   usePageMeta(
-    isAr ? "من نحن | TECH OF THE WORLD — يوسف أحمد، مؤسس ومتخصص بنية تحتية تقنية" : "About | TECH OF THE WORLD — Founded by Yousef Ahmed, IT Infrastructure Specialist",
-    "TECH OF THE WORLD is a professional IT services & technology solutions provider founded by Yousef Ahmed — serving businesses in Saudi Arabia and Egypt."
+    isAr ? "من نحن | TECH OF THE WORLD | يوسف أحمد، مؤسس ومتخصص بنية تحتية تقنية" : "About | TECH OF THE WORLD | Founded by Yousef Ahmed, IT Infrastructure Specialist",
+    "TECH OF THE WORLD is a professional IT services & technology solutions provider founded by Yousef Ahmed, serving businesses in Saudi Arabia and Egypt."
   );
 
   return (
@@ -70,8 +70,8 @@ export default function About() {
         kicker={isAr ? "من نحن" : "About"}
         title={{ en: "One mission: technology that moves business forward.", ar: "مهمة واحدة: تقنية تحرّك الأعمال إلى الأمام." }}
         lead={{
-          en: "TECH OF THE WORLD exists because most businesses don't need more technology — they need technology that works, explained in terms they can act on.",
-          ar: "وُجدت TECH OF THE WORLD لأن معظم الشركات لا تحتاج مزيدًا من التقنية — بل تقنية تعمل، وتُشرح بلغة يمكنهم التحرك وفقها.",
+          en: "TECH OF THE WORLD exists because most businesses don't need more technology. They need technology that works, explained in terms they can act on.",
+          ar: "وُجدت TECH OF THE WORLD لأن معظم الشركات لا تحتاج مزيدًا من التقنية، بل تقنية تعمل، وتُشرح بلغة يمكنهم التحرك وفقها.",
         }}
         image={IMAGES.network}
       >
@@ -96,13 +96,13 @@ export default function About() {
               </p>
               <p>
                 {isAr
-                  ? "عبر سنوات من العمل في السعودية ومصر، اتضح نمط ثابت: الشركات لا تعاني من نقص الأدوات، بل من غياب من يملك المسؤولية الكاملة عن البيئة التقنية — من يفهمها، يوثقها، ويشغّلها بهدوء."
-                  : "Across years of work in Saudi Arabia and Egypt, one pattern kept repeating: businesses don't suffer from a lack of tools — they suffer from the absence of anyone owning the technology environment end to end. Someone who understands it, documents it, and keeps it running quietly."}
+                  ? "عبر سنوات من العمل في السعودية ومصر، اتضح نمط ثابت: الشركات لا تعاني من نقص الأدوات، بل من غياب من يملك المسؤولية الكاملة عن البيئة التقنية: من يفهمها، يوثقها، ويشغّلها بهدوء."
+                  : "Across years of work in Saudi Arabia and Egypt, one pattern kept repeating: businesses don't suffer from a lack of tools. They suffer from the absence of anyone owning the technology environment end to end. Someone who understands it, documents it, and keeps it running quietly."}
               </p>
               <p>
                 {isAr
-                  ? "هذا هو دورنا. نتحدث بصيغة «نحن» لأن العمل يُسلَّم كمسؤولية واحدة متكاملة — تقييم وتخطيط وتنفيذ ودعم — لا كمهام متفرقة."
-                  : "That is our role. We speak as “we” because the work is delivered as one accountable whole — assessment, planning, implementation and support — not as disconnected tasks."}
+                  ? "هذا هو دورنا. نتحدث بصيغة «نحن» لأن العمل يُسلَّم كمسؤولية واحدة متكاملة (تقييم وتخطيط وتنفيذ ودعم)، لا كمهام متفرقة."
+                  : "That is our role. We speak as “we” because the work is delivered as one accountable whole (assessment, planning, implementation and support), not as disconnected tasks."}
               </p>
             </Reveal>
           </div>
@@ -119,7 +119,7 @@ export default function About() {
                   <div>
                     <p className="font-mono text-[10.5px] uppercase tracking-[0.26em] text-amber-500">{isAr ? "المؤسس" : "Founder"}</p>
                     <h2 className="font-display text-2xl font-bold mt-1">Eng. Yousef Ahmed Mohamed</h2>
-                    <p className="text-mist-300 text-[13.5px] mt-0.5">{isAr ? "مؤسس وأخصائي دعم تقني أول — بنية تحتية مؤسسية" : "Founder & Senior IT Support Specialist"}</p>
+                    <p className="text-mist-300 text-[13.5px] mt-0.5">{isAr ? "مؤسس وأخصائي دعم تقني أول، بنية تحتية مؤسسية" : "Founder & Senior IT Support Specialist"}</p>
                     <p className="text-mist-500 text-[12px] mt-1.5 flex items-center gap-1.5"><Icon name="pin" className="w-3.5 h-3.5 text-amber-500" />{isAr ? "جدة، السعودية" : "Jeddah, Saudi Arabia"}</p>
                   </div>
                 </div>
@@ -131,8 +131,8 @@ export default function About() {
                   </p>
                   <p>
                     {isAr
-                      ? "عبر مسارات العمل الخمسة — البنية التحتية والشبكات وبيئات مايكروسوفت وأنظمة الأمن والاستشارات — يبقى المبدأ واحدًا: التقنية تخدم العمل، وليس العكس."
-                      : "Across all five service lines — infrastructure, networks, Microsoft environments, security systems and consultancy — the principle stays the same: technology serves the business, never the reverse."}
+                      ? "عبر مسارات العمل الخمسة (البنية التحتية والشبكات وبيئات مايكروسوفت وأنظمة الأمن والاستشارات) يبقى المبدأ واحدًا: التقنية تخدم العمل، وليس العكس."
+                      : "Across all five service lines (infrastructure, networks, Microsoft environments, security systems and consultancy) the principle stays the same: technology serves the business, never the reverse."}
                   </p>
                 </div>
                 <div className="mt-7 pt-6 border-t border-ink-700 grid grid-cols-2 gap-4">
@@ -161,8 +161,8 @@ export default function About() {
             tone="light"
             title={{ en: "The disciplines we run every day.", ar: "التخصصات التي نمارسها كل يوم." }}
             lead={{
-              en: "Over 9 years of hands-on enterprise IT — from the service desk to the server room.",
-              ar: "أكثر من 9 سنوات من الخبرة العملية المؤسسية — من مكتب الدعم إلى غرفة الخوادم.",
+              en: "Over 9 years of hands-on enterprise IT, from the service desk to the server room.",
+              ar: "أكثر من 9 سنوات من الخبرة العملية المؤسسية، من مكتب الدعم إلى غرفة الخوادم.",
             }}
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -188,8 +188,8 @@ export default function About() {
             tone="dark"
             title={{ en: "Nine years, two markets, one standard.", ar: "تسع سنوات، سوقان، ومعيار واحد." }}
             lead={{
-              en: "A track record built on real enterprise environments — in Saudi Arabia and Egypt.",
-              ar: "سجل مهني مبني على بيئات مؤسسية حقيقية — في السعودية ومصر.",
+              en: "A track record built on real enterprise environments in Saudi Arabia and Egypt.",
+              ar: "سجل مهني مبني على بيئات مؤسسية حقيقية في السعودية ومصر.",
             }}
           />
           <div className="mt-14 relative">
@@ -249,8 +249,8 @@ export default function About() {
               tone="light"
               title={{ en: "Learning that stays practical.", ar: "تعلّم يبقى عمليًا." }}
               lead={{
-                en: "Cisco Networking Academy paths, CCNA studies and hands-on labs — applied directly to client environments.",
-                ar: "مسارات أكاديمية سيسكو ودراسات CCNA ومعامل عملية — تُطبَّق مباشرة على بيئات العملاء.",
+                en: "Cisco Networking Academy paths, CCNA studies and hands-on labs, applied directly to client environments.",
+                ar: "مسارات أكاديمية سيسكو ودراسات CCNA ومعامل عملية، تُطبَّق مباشرة على بيئات العملاء.",
               }}
             />
           </div>
@@ -373,8 +373,8 @@ export default function About() {
                 name: { en: "Saudi Arabia", ar: "السعودية" },
                 to: "/saudi-arabia",
                 body: {
-                  en: "From seasonal mega-operations to growing enterprises — infrastructure, Microsoft environments and security systems delivered to Saudi businesses.",
-                  ar: "من العمليات الموسمية الضخمة إلى الشركات النامية — بنية تحتية وبيئات مايكروسوفت وأنظمة أمن تُسلَّم للشركات السعودية.",
+                  en: "From seasonal mega-operations to growing enterprises: infrastructure, Microsoft environments and security systems delivered to Saudi businesses.",
+                  ar: "من العمليات الموسمية الضخمة إلى الشركات النامية: بنية تحتية وبيئات مايكروسوفت وأنظمة أمن تُسلَّم للشركات السعودية.",
                 },
               },
               {
@@ -382,8 +382,8 @@ export default function About() {
                 name: { en: "Egypt", ar: "مصر" },
                 to: "/egypt",
                 body: {
-                  en: "Supporting Egyptian SMBs with dependable IT environments — pragmatic, cost-aware, and built to grow with the business.",
-                  ar: "ندعم الشركات المصرية الصغيرة والمتوسطة ببيئات تقنية موثوقة — عملية، تراعي التكلفة، ومبنية لتنمو مع العمل.",
+                  en: "Supporting Egyptian SMBs with dependable IT environments: pragmatic, cost-aware, and built to grow with the business.",
+                  ar: "ندعم الشركات المصرية الصغيرة والمتوسطة ببيئات تقنية موثوقة: عملية، تراعي التكلفة، ومبنية لتنمو مع العمل.",
                 },
               },
             ].map((m, i) => (
