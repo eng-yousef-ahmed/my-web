@@ -4,7 +4,7 @@ import { useLang, usePageMeta } from "../i18n";
 import { CAREER, EDUCATION, LANGUAGES, CERTS } from "../data/career";
 import { FOUNDER_METRICS, TECH_GROUPS } from "../data/content";
 import { CV_FILES } from "../config";
-import { Btn, FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
+import { FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 
 const FOCUS = [
   "IT Support", "Windows Server", "Active Directory", "Group Policy", "Networking", "Microsoft 365",
@@ -239,18 +239,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* ============ CTA ============ */}
-      <section className="relative bg-ink-950 text-paper-50 noise overflow-hidden">
-        <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-20 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <Reveal line as="h2">
-            <span className="font-display text-2xl font-bold leading-tight">{isAr ? "العمل يتحدث أفضل مني." : "The work speaks better than I do."}</span>
-          </Reveal>
-          <Reveal delay={120} className="shrink-0">
-            <Btn to="/projects">{isAr ? "استعرض مشاريعي" : "View My Projects"}</Btn>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
