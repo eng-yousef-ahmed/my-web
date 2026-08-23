@@ -14,7 +14,6 @@ const STR: Record<string, B> = {
   // CTAs
   "cta.readCase": { en: "View case study", ar: "عرض دراسة الحالة" },
   "cta.backToProjects": { en: "Back to projects", ar: "العودة إلى المشاريع" },
-  "cta.similarEnv": { en: "Have a similar environment?", ar: "لديك بيئة مشابهة؟" },
 
   // common
   "common.langLabel": { en: "عربي", ar: "English" },

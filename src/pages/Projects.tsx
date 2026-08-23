@@ -374,13 +374,6 @@ export function ProjectDetail() {
                 </ul>
               </div>
             </Reveal>
-            <Reveal delay={90}>
-              <div className="chamfer-sm bg-amber-500 text-ink-950 p-7">
-                <p className="font-display text-lg font-bold">{t("cta.similarEnv")}</p>
-                <p className="mt-1.5 text-[13.5px] font-medium">{isAr ? "لنناقش البيئة والمتطلبات وما يناسبها عمليًا." : "Let's discuss the environment, the requirements and what actually fits."}</p>
-                <Btn to="/contact" variant="dark" className="mt-5 justify-center !py-3">{isAr ? "لنناقش مشروعك" : "Let's Discuss a Project"}</Btn>
-              </div>
-            </Reveal>
           </aside>
         </div>
       </section>
