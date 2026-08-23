@@ -222,6 +222,16 @@ export function Footer() {
               >
                 <Icon name="mail" className="w-4.5 h-4.5" />
               </a>
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={isAr ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn"}
+                title={`LinkedIn · /${CONTACT.linkedinHandle}`}
+                className="w-10 h-10 grid place-items-center border border-ink-600 text-mist-300 hover:border-[#0a66c2] hover:text-[#5ea8e8] transition-colors"
+              >
+                <Icon name="linkedin" className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
