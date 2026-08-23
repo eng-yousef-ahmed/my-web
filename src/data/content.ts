@@ -333,6 +333,15 @@ export const TECH_GROUPS: TechGroup[] = [
   },
 ];
 
+/** Hands-on technologies relevant to each service line (from verified experience). */
+export const SERVICE_TECH: Record<string, string[]> = {
+  "it-infrastructure": ["Windows Server", "Windows 10 / 11", "ManageEngine ServiceDesk", "Enterprise Printing", "AnyDesk · TeamViewer · RDP"],
+  networks: ["MikroTik RouterOS", "TCP/IP · DNS · DHCP", "HP Switches", "Business Wi-Fi", "Site-to-Site VPN"],
+  "microsoft-cloud": ["Active Directory", "Group Policy", "Microsoft 365", "Exchange Online", "SharePoint · OneDrive"],
+  "security-systems": ["Hikvision · Dahua", "NVR / DVR", "ZKTeco Biometrics", "Access Control", "IP Telephony"],
+  consultancy: ["IT Environment Assessment", "Infrastructure Planning", "PRTG Monitoring", "IT Asset Management"],
+};
+
 export const TECH_TICKER = [
   "Microsoft", "Windows Server", "Active Directory", "Microsoft 365", "Exchange Online", "Teams",
   "SharePoint", "OneDrive", "MikroTik", "HP Switches", "Hikvision", "Dahua", "ZKTeco",

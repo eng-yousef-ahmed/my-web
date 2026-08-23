@@ -408,111 +408,7 @@ export function Reveal({
   );
 }
 
-/* ================= scramble-decode text ================= */
-const GLYPHS = "▚▞#/<>+=*%$&@YA01";
-export function Scramble({ text, className = "", delay = 0 }: { text: string; className?: string; delay?: number }) {
-  const { isAr } = useLang();
-  const reduced = usePrefersReducedMotion();
-  const { ref, inView } = useInView<HTMLSpanElement>(0.2);
-  const [out, setOut] = useState(reduced || isAr ? text : "");
 
-  useEffect(() => {
-    if (reduced || isAr) {
-      setOut(text);
-      return;
-    }
-    if (!inView) return;
-    let frame = 0;
-    let raf = 0;
-    const total = Math.max(26, text.length * 2);
-    const start = performance.now() + delay;
-    const tick = (now: number) => {
-      if (now < start) {
-        raf = requestAnimationFrame(tick);
-        return;
-      }
-      frame++;
-      const progress = frame / total;
-      const settled = Math.floor(progress * text.length);
-      let s = "";
-      for (let i = 0; i < text.length; i++) {
-        const ch = text[i];
-        if (ch === " ") { s += " "; continue; }
-        s += i < settled ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-      }
-      setOut(s);
-      if (settled < text.length) raf = requestAnimationFrame(tick);
-      else setOut(text);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [text, inView, reduced, isAr, delay]);
-
-  return (
-    <span ref={ref} className={className} aria-label={text}>
-      <span aria-hidden="true">{out || "\u00A0"}</span>
-    </span>
-  );
-}
-
-/* ================= marquee ================= */
-export function Marquee({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`overflow-hidden ${className}`} dir="ltr">
-      <div className="marquee-track flex w-max items-center gap-0">
-        <div className="flex items-center shrink-0">{children}</div>
-        <div className="flex items-center shrink-0" aria-hidden="true">{children}</div>
-      </div>
-    </div>
-  );
-}
-
-/* ================= count-up on scroll ================= */
-export function CountUp({ value, className = "", duration = 1300 }: { value: string; className?: string; duration?: number }) {
-  const reduced = usePrefersReducedMotion();
-  const { ref, inView } = useInView<HTMLSpanElement>(0.4);
-  const [txt, setTxt] = useState(value);
-
-  useEffect(() => {
-    const target = parseInt(value, 10);
-    if (reduced || isNaN(target)) {
-      setTxt(value);
-      return;
-    }
-    if (!inView) return;
-    const padLen = value.length;
-    let raf = 0;
-    const t0 = performance.now();
-    setTxt("0".repeat(padLen));
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - t0) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setTxt(String(Math.round(target * eased)).padStart(padLen, "0"));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, value, reduced, duration]);
-
-  return (
-    <span ref={ref} className={className}>
-      {txt}
-    </span>
-  );
-}
-
-/* ================= image with soft reveal ================= */
-export function SmartImg({ className = "", ...rest }: React.ImgHTMLAttributes<HTMLImageElement>) {
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <img
-      {...rest}
-      loading={rest.loading ?? "lazy"}
-      onLoad={() => setLoaded(true)}
-      className={`${className} transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}
-    />
-  );
-}
 
 /* ================= brand mark (custom logo aware) ================= */
 export function BrandMark({ tone = "light", className = "" }: { tone?: "light" | "dark"; className?: string }) {
@@ -563,119 +459,37 @@ export function Btn({
   return <button type={type ?? "button"} disabled={disabled} className={cls} onClick={onClick}>{children}{arrowEl}</button>;
 }
 
-/* ================= section heading ================= */
-export function SectionHeading({
-  kicker,
-  title,
-  lead,
-  tone: _tone,
-  className = "",
-}: {
-  kicker: string;
-  title: B;
-  lead?: B;
-  /** Deprecated — colors now adapt automatically to the section surface. */
-  tone?: "light" | "dark";
-  className?: string;
-}) {
-  const { L } = useLang();
-  return (
-    <div className={`max-w-3xl ${className}`}>
-      <Reveal className="flex items-center gap-3 mb-5">
-        <span className="h-px w-10 bg-amber-500" />
-        {/* kicker auto-adapts: bright amber on dark surfaces, dark amber on light */}
-        <span className="text-kicker font-mono text-[11px] uppercase tracking-[0.3em]">{kicker}</span>
-      </Reveal>
-      <Reveal line as="h2" delay={80}>
-        {/* title inherits its color from the section wrapper:
-            white on dark sections, black on light ones — can never mismatch */}
-        <span className="font-display text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.08]">{L(title)}</span>
-      </Reveal>
-      {lead && (
-        /* mist re-tints itself per surface via CSS variables (dark text on light, bright on dark) */
-        <Reveal as="p" delay={160} className="mt-5 text-[16.5px] leading-relaxed text-mist-500">
-          {L(lead)}
-        </Reveal>
-      )}
-    </div>
-  );
-}
-
 /* ================= page hero for sub-pages ================= */
 export function PageHero({
   kicker,
   title,
   lead,
   children,
-  image,
 }: {
   kicker: string;
   title: B;
   lead: B;
   children?: React.ReactNode;
-  image?: string;
 }) {
   const { L } = useLang();
   return (
     <header className="relative overflow-hidden bg-ink-950 text-paper-50 noise">
       <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-      <div className="absolute -top-40 start-[-10%] w-[560px] h-[560px] rounded-full bg-amber-500/[0.06] blur-[120px]" aria-hidden="true" />
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-36 pb-16 lg:pt-44 lg:pb-24 grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
-        <div>
-          <Reveal className="flex items-center gap-3 mb-6">
-            <span className="h-px w-10 bg-amber-500" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500">{kicker}</span>
-          </Reveal>
-          <Reveal line as="h1" delay={80}>
-            <span className="font-display text-3xl sm:text-4xl lg:text-[56px] font-bold leading-[1.08] tracking-tight">{L(title)}</span>
-          </Reveal>
-          <Reveal as="p" delay={180} className="mt-6 max-w-xl text-[17px] leading-relaxed text-mist-300">
-            {L(lead)}
-          </Reveal>
-          {children && <Reveal delay={260} className="mt-9 flex flex-wrap gap-4">{children}</Reveal>}
-        </div>
-        {image && (
-          <Reveal delay={200} className="relative hidden lg:block">
-            <div className="chamfer relative overflow-hidden border border-ink-700">
-              <img src={image} alt="" className="duo-img w-full h-[400px] object-cover" loading="eager" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-ink-950/20" aria-hidden="true" />
-              <div className="absolute bottom-4 inset-x-4 flex items-center justify-between font-mono text-[10.5px] uppercase tracking-[0.25em] text-mist-300">
-                <span>YA // FIELD OPS</span>
-                <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-amber-500 led" />LIVE</span>
-              </div>
-            </div>
-          </Reveal>
-        )}
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8 pt-32 pb-16 lg:pt-40 lg:pb-20">
+        <Reveal className="flex items-center gap-3 mb-6">
+          <span className="h-px w-10 bg-amber-500" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500">{kicker}</span>
+        </Reveal>
+        <Reveal line as="h1" delay={80}>
+          <span className="font-display text-3xl sm:text-4xl lg:text-[48px] font-bold leading-[1.1] tracking-tight max-w-3xl block">{L(title)}</span>
+        </Reveal>
+        <Reveal as="p" delay={180} className="mt-6 max-w-2xl text-[16px] leading-relaxed text-mist-300">
+          {L(lead)}
+        </Reveal>
+        {children && <Reveal delay={260} className="mt-8 flex flex-wrap gap-4">{children}</Reveal>}
       </div>
     </header>
   );
 }
 
-/* ================= FAQ accordion ================= */
-export function FaqList({ faqs }: { faqs: { q: B; a: B }[] }) {
-  const { L } = useLang();
-  const [open, setOpen] = useState<number | null>(0);
-  return (
-    <div className="divide-y divide-ink-900/10 border-y border-ink-900/10">
-      {faqs.map((f, i) => (
-        <div key={i}>
-          <button
-            className="w-full flex items-center justify-between gap-6 py-5 text-start cursor-pointer group"
-            onClick={() => setOpen(open === i ? null : i)}
-            aria-expanded={open === i}
-          >
-            <span className="font-display font-semibold text-[16.5px] text-ink-900 group-hover:text-amber-600 transition-colors">{L(f.q)}</span>
-            <span className={`shrink-0 w-8 h-8 grid place-items-center border border-ink-900/20 transition-all duration-300 ${open === i ? "bg-ink-900 text-amber-400 rotate-180" : "text-ink-900"}`}>
-              <Icon name="chevron" className="w-4 h-4" />
-            </span>
-          </button>
-          <div className={`grid transition-all duration-400 ease-out ${open === i ? "grid-rows-[1fr] opacity-100 pb-6" : "grid-rows-[0fr] opacity-0"}`}>
-            <div className="overflow-hidden">
-              <p className="text-mist-500 leading-relaxed max-w-2xl">{L(f.a)}</p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+

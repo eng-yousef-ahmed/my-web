@@ -5,7 +5,7 @@ import { MARKET_LABEL, type CaseStudy, type ProjectImage } from "../data/cases";
 import { useAllProjects } from "../data/projectLoader";
 import { SERVICE_CATEGORIES } from "../data/content";
 import { Btn, Icon, PageHero, Reveal } from "../components/kit";
-import { hasWhatsApp, waLink, IMAGES } from "../config";
+
 
 const PATTERNS = ["M0 26 26 0", "M13 0v26M0 13h26", "M0 0 26 26", "M13 0 26 13 13 26 0 13Z"];
 
@@ -153,16 +153,10 @@ export function ProjectsList() {
   );
   const { projects } = useAllProjects();
   const [market, setMarket] = useState<"all" | "sa" | "eg" | "both">("all");
-  const [cat, setCat] = useState("all");
 
   const filtered = useMemo(
-    () =>
-      projects.filter(
-        (c) =>
-          (market === "all" || c.market === market) &&
-          (cat === "all" || c.catIds.includes(cat))
-      ),
-    [projects, market, cat]
+    () => projects.filter((c) => market === "all" || c.market === market),
+    [projects, market]
   );
 
   const filterBtn = (on: boolean) =>
@@ -174,15 +168,12 @@ export function ProjectsList() {
     <>
       <PageHero
         kicker={isAr ? "المشاريع" : "Projects"}
-        title={{ en: "Case studies, not showcase cards.", ar: "دراسات حالة، لا بطاقات استعراضية." }}
+        title={{ en: "The work, documented.", ar: "العمل، موثّقًا." }}
         lead={{
-          en: "Documented engagements across Saudi Arabia and Egypt, presented with their challenges, decisions, outcomes and field photos. Client names and commercial details remain confidential.",
-          ar: "أعمال موثقة في السعودية ومصر، تُعرض بتحدياتها وقراراتها ونتائجها وصورها الميدانية، مع بقاء أسماء العملاء والتفاصيل التجارية سرية.",
+          en: "Case studies from Saudi Arabia and Egypt, with their challenges, decisions and outcomes. Client names and commercial details remain confidential.",
+          ar: "دراسات حالة من السعودية ومصر بتحدياتها وقراراتها ونتائجها، مع بقاء أسماء العملاء والتفاصيل التجارية سرية.",
         }}
-        image={IMAGES.ops}
-      >
-        <Btn to="/request">{t("nav.request")}</Btn>
-      </PageHero>
+      />
 
       <section className="bg-paper-100 text-ink-900 grid-bg-light">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-14 lg:py-20">
@@ -192,38 +183,30 @@ export function ProjectsList() {
                 <button key={v} onClick={() => setMarket(v)} className={filterBtn(market === v)} aria-pressed={market === v}>{label}</button>
               ))}
             </div>
-            <div className="flex flex-wrap gap-2.5" role="group" aria-label={isAr ? "تصفية حسب المسار" : "Filter by service line"}>
-              <button onClick={() => setCat("all")} className={filterBtn(cat === "all")} aria-pressed={cat === "all"}>{t("common.all")}</button>
-              {SERVICE_CATEGORIES.map((c) => (
-                <button key={c.id} onClick={() => setCat(c.id)} className={filterBtn(cat === c.id)} aria-pressed={cat === c.id}>{L(c.name)}</button>
-              ))}
-            </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="border-t border-ink-900/10">
             {filtered.map((c, i) => (
-              <Reveal key={c.id} delay={(i % 2) * 90}>
-                <Link to={`/projects/${c.id}`} className="group block chamfer-sm bg-paper-50 border border-ink-900/12 card-lift hover:border-ink-900/40 h-full overflow-hidden">
-                  <div className="relative overflow-hidden border-b border-ink-900/10">
-                    <div className="transition-transform duration-700 group-hover:scale-[1.04]"><CaseVisual c={c} index={i} /></div>
-                    <span className="absolute top-3 end-3 font-mono text-[10px] uppercase tracking-[0.2em] bg-ink-950/85 text-amber-400 px-2.5 py-1 border border-ink-600">
-                      {L(MARKET_LABEL[c.market])}
+              <Reveal key={c.id} delay={(i % 2) * 60}>
+                <Link to={`/projects/${c.id}`} className="group grid sm:grid-cols-[72px_1fr_auto] items-start gap-5 sm:gap-8 py-8 px-2 sm:px-4 border-b border-ink-900/10 hover:bg-paper-50 transition-colors">
+                  <span className="font-mono text-[13px] text-amber-700 pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="min-w-0">
+                    <span className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                      <span className="font-display text-xl font-bold text-ink-900 group-hover:text-amber-700 transition-colors">{L(c.title)}</span>
+                      <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-mist-500">{L(MARKET_LABEL[c.market])}</span>
                     </span>
-                  </div>
-                  <div className="p-6">
-                    <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-mist-500">{L(c.sector)}</p>
-                    <h3 className="mt-2.5 font-display text-[21px] font-bold leading-snug group-hover:text-amber-600 transition-colors">{L(c.title)}</h3>
-                    <p className="mt-3 text-[14.5px] leading-relaxed text-mist-500 line-clamp-2">{L(c.summary)}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {c.technologies.slice(0, 3).map((tech) => (
-                        <span key={tech} className="font-mono text-[10.5px] uppercase tracking-wider px-2.5 py-1 bg-ink-900 text-circuit-300">{tech}</span>
+                    <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-amber-700">{L(c.sector)}</span>
+                    <span className="mt-2.5 block text-[14px] leading-relaxed text-mist-500 max-w-2xl line-clamp-2">{L(c.summary)}</span>
+                    <span className="mt-3.5 flex flex-wrap gap-2">
+                      {c.technologies.slice(0, 4).map((tech) => (
+                        <span key={tech} className="font-mono text-[10px] uppercase tracking-[0.1em] text-mist-500 border border-ink-900/15 px-2 py-1">{tech}</span>
                       ))}
-                    </div>
-                    <span className="mt-5 inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.16em] group-hover:gap-3.5 transition-all">
-                      {t("cta.readCase")}
-                      <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
                     </span>
-                  </div>
+                  </span>
+                  <span className="hidden sm:inline-flex items-center gap-2 pt-1.5 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 group-hover:text-amber-700 transition-colors whitespace-nowrap">
+                    {t("cta.readCase")}
+                    <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                  </span>
                 </Link>
               </Reveal>
             ))}
@@ -236,13 +219,12 @@ export function ProjectsList() {
 
       <section className="bg-ink-950 text-paper-50 noise relative">
         <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 text-center">
-          <h2 className="font-display text-2xl sm:text-3xl font-bold">{t("cta.similarEnv")}</h2>
-          <p className="mt-3 text-mist-300 max-w-lg mx-auto">{t("misc.shareIdeaBody")}</p>
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <Btn to="/request">{t("nav.request")}</Btn>
-            <Btn to="/services" variant="outline">{t("nav.services")}</Btn>
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-14 lg:py-16 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <h2 className="font-display text-2xl font-bold">{isAr ? "لديك مشروع مشابه؟" : "Have a similar project?"}</h2>
+            <p className="mt-2.5 text-mist-300 text-[14.5px] max-w-lg">{isAr ? "لنناقش البيئة والمتطلبات وما يناسبها عمليًا." : "Let's discuss the environment, the requirements and what actually fits."}</p>
           </div>
+          <Btn to="/contact" className="shrink-0">{isAr ? "لنناقش مشروعك" : "Let's Discuss a Project"}</Btn>
         </div>
       </section>
     </>
@@ -282,7 +264,6 @@ export function ProjectDetail() {
     );
   }
 
-  const wa = hasWhatsApp ? waLink(`Hello TECH OF THE WORLD, I read the "${L(c.title)}" case study and have a similar requirement.`) : null;
   const has = (b: { en: string; ar: string }) => Boolean(b.en || b.ar);
 
   return (
@@ -407,15 +388,8 @@ export function ProjectDetail() {
             <Reveal delay={90}>
               <div className="chamfer-sm bg-amber-500 text-ink-950 p-7">
                 <p className="font-display text-lg font-bold">{t("cta.similarEnv")}</p>
-                <p className="mt-1.5 text-[13.5px] font-medium">{t("misc.shareIdeaBody")}</p>
-                <div className="mt-5 flex flex-col gap-2.5">
-                  <Btn to={`/request?service=${c.catIds[0]}&context=${encodeURIComponent("case:" + L(c.title))}`} variant="dark" className="justify-center !py-3">{t("nav.request")}</Btn>
-                  {wa && (
-                    <a href={wa} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2.5 border border-ink-950/40 px-5 py-3 font-display text-[12px] font-semibold uppercase tracking-[0.12em] hover:bg-ink-950 hover:text-amber-400 transition-all">
-                      <Icon name="wa" className="w-4.5 h-4.5" /> WhatsApp
-                    </a>
-                  )}
-                </div>
+                <p className="mt-1.5 text-[13.5px] font-medium">{isAr ? "لنناقش البيئة والمتطلبات وما يناسبها عمليًا." : "Let's discuss the environment, the requirements and what actually fits."}</p>
+                <Btn to="/contact" variant="dark" className="mt-5 justify-center !py-3">{isAr ? "لنناقش مشروعك" : "Let's Discuss a Project"}</Btn>
               </div>
             </Reveal>
           </aside>

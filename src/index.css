@@ -145,12 +145,6 @@ html[lang="ar"] .font-display {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.marquee-track {
-  animation: marquee 36s linear infinite;
-  will-change: transform;
-}
-.marquee-track:hover { animation-play-state: paused; }
-html[dir="rtl"] .marquee-track { animation-direction: reverse; }
 
 @keyframes led-blink {
   0%, 100% { opacity: 1; }
@@ -158,35 +152,6 @@ html[dir="rtl"] .marquee-track { animation-direction: reverse; }
 }
 .led { animation: led-blink 2.2s ease-in-out infinite; }
 .led-fast { animation: led-blink 1.1s ease-in-out infinite; }
-
-@keyframes pulse-ring {
-  0% { transform: scale(0.6); opacity: 0.9; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-.pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite; transform-origin: center; }
-
-@keyframes dash-flow {
-  to { stroke-dashoffset: -240; }
-}
-.dash-flow {
-  stroke-dasharray: 6 10;
-  animation: dash-flow 6s linear infinite;
-}
-
-@keyframes scan-line {
-  0% { top: -10%; }
-  100% { top: 110%; }
-}
-.scan::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(233, 163, 59, 0.5), transparent);
-  animation: scan-line 7s linear infinite;
-  pointer-events: none;
-}
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
