@@ -205,6 +205,21 @@ export function Contact() {
                   </span>
                 </a>
               </Reveal>
+              <Reveal delay={210}>
+                <a
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={isAr ? "تواصل مع يوسف أحمد على لينكدإن" : "Connect with Yousef Ahmed on LinkedIn"}
+                  className="group flex items-center gap-4 border border-ink-900/15 bg-paper-50 px-5 py-4 hover:border-amber-600/60 transition-colors"
+                >
+                  <span className="w-7 h-7 grid place-items-center shrink-0 bg-ink-900 text-amber-500"><Icon name="linkedin" className="w-4 h-4" /></span>
+                  <span className="flex-1 min-w-0">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-mist-500">LinkedIn</span>
+                    <span className="block font-display font-semibold text-[14px] text-ink-900 mt-0.5" dir="ltr">/{CONTACT.linkedinHandle}</span>
+                  </span>
+                </a>
+              </Reveal>
             </div>
             <Reveal delay={200} className="mt-8 text-[13px] leading-relaxed text-mist-500 max-w-sm">
               {L({

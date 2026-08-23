@@ -29,6 +29,8 @@ export const CONTACT = {
   displayEG: "+20 120 336 1192",
   email: (env.VITE_CONTACT_EMAIL || "TechOfTheWorled92@gmail.com").trim(),
   formEndpoint: (env.VITE_FORM_ENDPOINT || "").trim(),
+  linkedin: (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed/").trim(),
+  linkedinHandle: "eng-yousef-ahmed",
 
   /* ---- business-card identity (single source of truth for the card + .vcf) ---- */
   cardName: (env.VITE_CARD_NAME || "YOUSEF AHMED MOHMED").trim(),

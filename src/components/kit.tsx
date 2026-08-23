@@ -175,6 +175,14 @@ const PATHS: Record<string, React.ReactNode> = {
       <path d="m11 11.5 8.5 8.5M17 17.5l2-2M14.5 15l2-2" />
     </>
   ),
+  linkedin: (
+    <path
+      d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.36h4.56V23H.22V8.36zM8.34 8.36h4.37v2h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v8.01h-4.55v-7.1c0-1.7-.03-3.88-2.37-3.88-2.37 0-2.73 1.85-2.73 3.76V23H8.34V8.36z"
+      fill="currentColor"
+      stroke="none"
+      transform="translate(1.2 0) scale(0.92)"
+    />
+  ),
 };
 
 export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name: string; className?: string; strokeWidth?: number }) {
