@@ -225,6 +225,11 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
 }
 .page-enter { animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+/* ---------- social orbit ---------- */
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+.orbit-ring { animation: orbitSpin 46s linear infinite; transform-origin: center; }
+.orbit-ring-rev { animation-direction: reverse; animation-duration: 60s; }
+
 
 
 /* ---------- adaptive text contrast (CSS-variable based) ----------
