@@ -216,17 +216,6 @@ export function ProjectsList() {
           )}
         </div>
       </section>
-
-      <section className="bg-ink-950 text-paper-50 noise relative">
-        <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-14 lg:py-16 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div>
-            <h2 className="font-display text-2xl font-bold">{isAr ? "لديك مشروع مشابه؟" : "Have a similar project?"}</h2>
-            <p className="mt-2.5 text-mist-300 text-[14.5px] max-w-lg">{isAr ? "لنناقش البيئة والمتطلبات وما يناسبها عمليًا." : "Let's discuss the environment, the requirements and what actually fits."}</p>
-          </div>
-          <Btn to="/contact" className="shrink-0">{isAr ? "لنناقش مشروعك" : "Let's Discuss a Project"}</Btn>
-        </div>
-      </section>
     </>
   );
 }
