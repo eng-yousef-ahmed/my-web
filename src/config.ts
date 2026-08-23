@@ -54,6 +54,40 @@ export const CV_FILES = {
   en: `${base}/assets/cv/Yousef-Ahmed-CV-EN.pdf`,
 };
 
+/* ================= contact-card assets (replaceable, no code edits) =================
+ * Drop a file with the SAME name into the folder and the page picks it up
+ * automatically — see the README inside each folder:
+ *
+ *   public/assets/branding/logo.svg     → top logo
+ *   public/assets/profile/profile.jpg   → full-screen portrait
+ *   public/assets/qr/contact-qr.png     → QR code
+ */
+export const CARD_ASSETS = {
+  logo: [`${base}/assets/branding/logo.svg`, `${base}/assets/branding/logo.png`],
+  profile: [
+    `${base}/assets/profile/profile.jpg`,
+    `${base}/assets/profile/profile.webp`,
+    `${base}/assets/profile/profile.png`,
+    /* legacy paths still honoured so previously-dropped photos keep working */
+    `${base}/images/contact/contact-profile.webp`,
+    `${base}/images/contact/contact-profile.jpg`,
+    `${base}/images/contact/contact-profile.png`,
+  ],
+  qr: [
+    `${base}/assets/qr/contact-qr.png`,
+    `${base}/assets/qr/contact-qr.svg`,
+    `${base}/assets/qr/contact-qr.webp`,
+    `${base}/assets/qr/contact-qr.jpg`,
+  ],
+};
+
+/** Portrait crop anchor for the contact page — tune per photo via env, no code edits. */
+export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "50% 18%").trim();
+
+/** Scannable fallback QR (encodes the website URL) shown until a local file exists. */
+export const qrFallbackUrl = (data: string, size = 480) =>
+  `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&qzone=1&bgcolor=0A1420&color=F3F6F5&data=${encodeURIComponent(data)}`;
+
 /* ================= outbound automation =================
  * UTM parameters from the landing URL are captured once per session and
  * appended to every WhatsApp / email message the site generates — so each

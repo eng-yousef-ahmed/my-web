@@ -1,222 +1,236 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
-import { CONTACT, CV_FILES, mailLink, waLink } from "../config";
-import { FlagEG, FlagSA, Icon, Reveal } from "../components/kit";
-import { ContactPortrait } from "../components/profile/ContactPortrait";
+import type { B } from "../i18n";
+import {
+  CARD_ASSETS,
+  CONTACT,
+  CV_FILES,
+  IMAGES,
+  cardProfilePosition,
+  hasEmail,
+  mailLink,
+  qrFallbackUrl,
+  waLink,
+  websiteDisplay,
+} from "../config";
+import { FlagEG, FlagSA, Icon, LogoMark, Reveal, useAsset } from "../components/kit";
 
-/* ================= social orbit =================
- * One circular hub holding every channel exactly once:
- * WhatsApp (KSA) · WhatsApp (EG) · Email · LinkedIn — around a YA core.
- */
-type OrbitItem = {
+/* ================= contact channel row ================= */
+type Channel = {
   key: string;
   icon: string;
-  label: { en: string; ar: string };
+  kind: B;
+  value: string;
   href: string;
   external?: boolean;
   flag?: React.ReactNode;
-  hover: string; // hover accent classes
 };
 
-function SocialOrbit({ compact = false }: { compact?: boolean }) {
+function ChannelRow({ ch, index }: { ch: Channel; index: number }) {
   const { L } = useLang();
-  const size = compact ? "w-60 h-60 sm:w-64 sm:h-64" : "w-64 h-64 sm:w-72 sm:h-72";
+  return (
+    <Reveal delay={420 + index * 70}>
+      <a
+        href={ch.href}
+        target={ch.external ? "_blank" : undefined}
+        rel={ch.external ? "noopener noreferrer" : undefined}
+        aria-label={L(ch.kind)}
+        className="group flex items-center gap-4 py-3.5 border-b border-paper-50/10 transition-all duration-200 ease-out hover:border-amber-500/50 hover:bg-paper-50/[0.045] hover:ps-2.5"
+      >
+        <span className="relative grid place-items-center w-9 h-9 shrink-0">
+          <Icon name={ch.icon} className="w-[18px] h-[18px] text-mist-300 transition-colors duration-200 group-hover:text-amber-400" />
+          {ch.flag && (
+            <span className="absolute -bottom-0.5 -end-1 rounded-full ring-2 ring-ink-950/80 overflow-hidden leading-none">
+              {ch.flag}
+            </span>
+          )}
+        </span>
+        <span className="flex-1 min-w-0">
+          <span className="block font-mono text-[9.5px] uppercase tracking-[0.26em] text-mist-400">{L(ch.kind)}</span>
+          <span className="block font-display text-[15px] font-semibold text-paper-50 truncate transition-colors duration-200 group-hover:text-amber-300" dir="ltr">
+            {ch.value}
+          </span>
+        </span>
+        <Icon
+          name="arrow"
+          strokeWidth={2}
+          className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-amber-400"
+        />
+      </a>
+    </Reveal>
+  );
+}
 
-  const items: OrbitItem[] = [
+/* ================= the page =================
+ * One immersive composition: a full-bleed portrait, the brand logo above,
+ * the professional identity below, and a scannable QR to the side.
+ * Every visual asset (logo / photo / QR) is a replaceable public file —
+ * see public/assets/{branding,profile,qr}/README.md.
+ */
+export function Contact() {
+  const { isAr, L } = useLang();
+  usePageMeta(
+    isAr ? "تواصل معي | م. يوسف أحمد — TECH OF THE WORLD" : "Contact | Eng. Yousef Ahmed — TECH OF THE WORLD",
+    isAr
+      ? "بطاقة التعريف الرقمية للمهندس يوسف أحمد، أخصائي دعم تقني أول في السعودية ومصر — واتساب، بريد إلكتروني، لينكدإن ورمز QR."
+      : "Digital business card of Eng. Yousef Ahmed, Senior IT Support Specialist in Saudi Arabia & Egypt — WhatsApp, email, LinkedIn and a scannable QR."
+  );
+
+  const profileSrc = useAsset(CARD_ASSETS.profile, IMAGES.contactProfile);
+  const qrSrc = useAsset(CARD_ASSETS.qr, qrFallbackUrl(CONTACT.website));
+  const logoSrc = useAsset(CARD_ASSETS.logo, "");
+
+  const waMsg = L({ en: "Hello Yousef, I'd like to get in touch.", ar: "مرحبًا يوسف، أود التواصل معك." });
+  const channels: Channel[] = [
     {
       key: "wa-sa",
       icon: "wa",
-      label: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" },
-      href: waLink(L({ en: "Hello Yousef, I'd like to get in touch.", ar: "مرحبًا يوسف، أود التواصل معك." }), "sa"),
+      kind: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" },
+      value: CONTACT.displaySA,
+      href: waLink(waMsg, "sa"),
       external: true,
       flag: <FlagSA className="w-4 h-4" />,
-      hover: "hover:border-[#2fbf67] hover:text-[#5fd68f] hover:bg-[#23a55b]/10",
     },
     {
       key: "wa-eg",
       icon: "wa",
-      label: { en: "WhatsApp · Egypt", ar: "واتساب · مصر" },
-      href: waLink(L({ en: "Hello Yousef, I'd like to get in touch.", ar: "مرحبًا يوسف، أود التواصل معك." }), "eg"),
+      kind: { en: "WhatsApp · Egypt", ar: "واتساب · مصر" },
+      value: CONTACT.displayEG,
+      href: waLink(waMsg, "eg"),
       external: true,
       flag: <FlagEG className="w-4 h-4" />,
-      hover: "hover:border-[#2fbf67] hover:text-[#5fd68f] hover:bg-[#23a55b]/10",
     },
-    {
-      key: "email",
-      icon: "mail",
-      label: { en: "Email", ar: "البريد الإلكتروني" },
-      href: mailLink(L({ en: "Hello Yousef", ar: "مرحبًا يوسف" }), "") ?? "#",
-      hover: "hover:border-amber-500 hover:text-amber-400 hover:bg-amber-500/10",
-    },
+    ...(hasEmail
+      ? [
+          {
+            key: "email",
+            icon: "mail",
+            kind: { en: "Email", ar: "البريد الإلكتروني" },
+            value: CONTACT.email,
+            href: mailLink(L({ en: "Hello Yousef", ar: "مرحبًا يوسف" }), "") ?? "#",
+          } as Channel,
+        ]
+      : []),
     {
       key: "linkedin",
       icon: "linkedin",
-      label: { en: "LinkedIn", ar: "لينكدإن" },
+      kind: { en: "LinkedIn", ar: "لينكدإن" },
+      value: `/${CONTACT.linkedinHandle}`,
       href: CONTACT.linkedin,
       external: true,
-      hover: "hover:border-[#0a66c2] hover:text-[#5ea8e8] hover:bg-[#0a66c2]/10",
+    },
+    {
+      key: "website",
+      icon: "globe",
+      kind: { en: "Website", ar: "الموقع" },
+      value: websiteDisplay(),
+      href: CONTACT.website,
+      external: true,
     },
   ];
 
-  /* fixed compass slots so icons never depend on rotation */
-  const slots = [
-    "left-1/2 top-0 -translate-x-1/2",
-    "right-0 top-1/2 -translate-y-1/2",
-    "left-1/2 bottom-0 -translate-x-1/2",
-    "left-0 top-1/2 -translate-y-1/2",
-  ];
-
   return (
-    <div className={`relative ${size}`} role="list" aria-label="Contact channels">
-      {/* rotating guide rings */}
-      <div className="absolute inset-[26px] rounded-full border border-dashed border-ink-600/70 orbit-ring" aria-hidden="true" />
-      <div className="absolute inset-[54px] rounded-full border border-ink-700 orbit-ring orbit-ring-rev" aria-hidden="true" />
-      {/* faint amber halo */}
-      <div className="absolute inset-[70px] rounded-full bg-amber-500/[0.05]" aria-hidden="true" />
-
-      {/* YA core */}
-      <div className="absolute inset-0 m-auto w-24 h-24 rounded-full bg-ink-900 border border-ink-600 grid place-items-center shadow-[0_0_50px_-12px_rgba(233,163,59,0.35)]">
-        <span className="font-display text-2xl font-bold text-paper-50 tracking-tight">YA</span>
-        <span className="absolute -bottom-0.5 w-2 h-2 rounded-full bg-amber-500 led" aria-hidden="true" />
+    <section className="relative min-h-svh bg-ink-950 text-paper-50 overflow-hidden noise">
+      {/* ---------- the portrait: full-bleed, edge to edge, no frame ---------- */}
+      <div className="absolute inset-0" aria-hidden="false">
+        <img
+          src={profileSrc}
+          alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"}
+          className="kenburns absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: cardProfilePosition }}
+        />
       </div>
+      {/* readability scrims — only where the text lives */}
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/35 to-ink-950/30" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink-950/45 via-transparent to-transparent rtl:bg-gradient-to-l" aria-hidden="true" />
 
-      {/* channel satellites */}
-      {items.map((it, i) => (
-        <a
-          key={it.key}
-          role="listitem"
-          href={it.href}
-          target={it.external ? "_blank" : undefined}
-          rel={it.external ? "noopener noreferrer" : undefined}
-          title={L(it.label)}
-          aria-label={L(it.label)}
-          className={`group absolute ${slots[i]} w-14 h-14 rounded-full bg-ink-900 border border-ink-600 grid place-items-center text-mist-300 transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 ${it.hover}`}
-        >
-          <Icon name={it.icon} className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
-          {it.flag && (
-            <span className="absolute -bottom-0.5 -end-0.5 rounded-full ring-2 ring-ink-950 overflow-hidden leading-none">
-              {it.flag}
-            </span>
+      {/* corner ticks + vertical label — quiet technical framing */}
+      <span className="absolute top-24 start-6 w-7 h-7 border-t border-s border-amber-500/40 hidden md:block" aria-hidden="true" />
+      <span className="absolute top-24 end-6 w-7 h-7 border-t border-e border-amber-500/40 hidden md:block" aria-hidden="true" />
+      <span className="absolute bottom-6 start-6 w-7 h-7 border-b border-s border-amber-500/40 hidden md:block" aria-hidden="true" />
+      <p className="absolute end-7 top-1/2 -translate-y-1/2 hidden xl:block font-mono text-[9.5px] uppercase tracking-[0.4em] text-mist-400/70" style={{ writingMode: "vertical-rl" }} aria-hidden="true">
+        {isAr ? "بطاقة تعريف رقمية" : "Digital Business Card"} · YA
+      </p>
+
+      {/* ---------- content ---------- */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 min-h-svh flex flex-col justify-between pt-28 lg:pt-32 pb-8 lg:pb-10">
+        {/* logo — independent asset, blends into the scene */}
+        <Reveal className="flex justify-center">
+          {logoSrc ? (
+            <img src={logoSrc} alt="TECH OF THE WORLD" className="h-10 sm:h-12 w-auto drop-shadow-[0_2px_16px_rgba(6,13,22,0.7)]" />
+          ) : (
+            <LogoMark className="h-11 w-11" />
           )}
-          {/* hover tag */}
-          <span className="pointer-events-none absolute top-full mt-2.5 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 whitespace-nowrap font-mono text-[9.5px] uppercase tracking-[0.16em] text-mist-400 opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-            {L(it.label)}
-          </span>
-        </a>
-      ))}
-    </div>
-  );
-}
-
-/* ================= page =================
- * One screen: a full-height portrait on the LEFT (physically, in both
- * LTR & RTL) and the identity block in front of it — name, title,
- * markets, CV downloads and the social orbit. Nothing repeated.
- */
-export function Contact() {
-  const { isAr } = useLang();
-  usePageMeta(
-    isAr ? "تواصل معي | يوسف أحمد — TECH OF THE WORLD" : "Contact | Yousef Ahmed — TECH OF THE WORLD",
-    isAr
-      ? "تواصل مع يوسف أحمد، أخصائي دعم تقني أول في السعودية ومصر — واتساب، بريد إلكتروني ولينكدإن."
-      : "Reach Yousef Ahmed, Senior IT Support Specialist in Saudi Arabia & Egypt — WhatsApp, email and LinkedIn."
-  );
-
-  return (
-    <section className="relative bg-ink-950 text-paper-50 overflow-hidden noise">
-      {/* ambient layers on the content side */}
-      <div className="absolute inset-0 grid-bg" aria-hidden="true" />
-      <div
-        className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 65% 55% at 68% 48%, rgba(233,163,59,0.07), transparent 70%)" }}
-        aria-hidden="true"
-      />
-      {/* echo arcs behind the orbit */}
-      <svg
-        className="absolute top-1/2 -translate-y-1/2 end-[-8%] w-[34rem] max-w-none opacity-[0.45] pointer-events-none hidden lg:block"
-        viewBox="0 0 600 600"
-        fill="none"
-        aria-hidden="true"
-      >
-        <circle cx="300" cy="300" r="236" stroke="#16283c" strokeWidth="1" />
-        <circle cx="300" cy="300" r="288" stroke="#1f344c" strokeWidth="1" strokeDasharray="2 9" />
-        <path d="M300 12 A288 288 0 0 1 562 168" stroke="#e9a33b" strokeOpacity="0.3" strokeWidth="1.2" />
-        <circle cx="562" cy="168" r="3" fill="#e9a33b" fillOpacity="0.8" />
-      </svg>
-
-      {/* ---------- the portrait: full-height, LEFT edge, blending into the page ---------- */}
-      {/* Mobile: in-flow block on top · Desktop: absolute layer pinned to the left */}
-      <div className="relative lg:absolute lg:inset-y-0 lg:left-0 lg:w-[46%] xl:w-[48%]">
-        <Reveal delay={100} className="relative h-[52svh] sm:h-[56svh] lg:h-full overflow-hidden">
-          <ContactPortrait eager className="h-full w-full object-cover object-[50%_12%]" />
-          {/* cinematic integration — no frame, the image melts into the navy */}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/55" aria-hidden="true" />
-          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-transparent via-transparent to-ink-950" aria-hidden="true" />
-          <div className="absolute inset-0 bg-ink-950/10" aria-hidden="true" />
-          {/* tiny signature at the bottom edge */}
-          <p className="absolute bottom-5 left-6 font-mono text-[9.5px] uppercase tracking-[0.32em] text-mist-400/80 hidden sm:block">
-            TECH <span className="text-amber-500">OF</span> THE WORLD — YA
-          </p>
         </Reveal>
-      </div>
 
-      {/* ---------- identity block, in front, vertically centered ---------- */}
-      <div className="relative max-w-[1400px] mx-auto px-5 sm:px-8 min-h-[calc(100svh-52svh)] sm:min-h-[calc(100svh-56svh)] lg:min-h-svh flex flex-col justify-center lg:pt-28 lg:pb-14">
-        <div className="py-12 lg:py-0 lg:ms-auto lg:w-[54%] xl:w-[50%] flex flex-col items-center lg:items-start text-center lg:text-start">
-          <Reveal className="flex items-center gap-3.5">
-            <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-500">
-              {isAr ? "تواصل معي" : "Contact"}
-            </span>
-          </Reveal>
+        {/* identity + QR */}
+        <div className="mt-16 lg:mt-0 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16">
+          <div className="max-w-xl">
+            <Reveal delay={120} className="flex items-center gap-3.5">
+              <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.34em] text-amber-400">{isAr ? "تواصل معي" : "Contact"}</span>
+            </Reveal>
 
-          <Reveal line as="h1" delay={90} className="mt-6">
-            <span className="block font-display font-bold tracking-tight leading-[1.06] text-[clamp(2.6rem,5vw,4.25rem)]">
-              {isAr ? "يوسف أحمد" : "Yousef Ahmed"}
-            </span>
-          </Reveal>
+            <Reveal line as="h1" delay={200} className="mt-5">
+              <span className="block font-display font-bold tracking-tight leading-[1.06] text-[clamp(2.4rem,6vw,4.1rem)] drop-shadow-[0_4px_28px_rgba(6,13,22,0.8)]">
+                {isAr ? "م. يوسف أحمد" : "ENG. YOUSEF AHMED"}
+              </span>
+            </Reveal>
 
-          <Reveal delay={190} className="mt-4">
-            <p className="font-mono text-[12px] sm:text-[13px] uppercase tracking-[0.26em] text-amber-400/90">
-              {isAr ? "أخصائي دعم تقني أول" : "Senior IT Support Specialist"}
-            </p>
-          </Reveal>
+            <Reveal delay={290} className="mt-3.5">
+              <p className="font-mono text-[12px] sm:text-[13px] uppercase tracking-[0.26em] text-amber-400/95">
+                {isAr ? "أخصائي دعم تقني أول" : "Senior IT Support Specialist"}
+              </p>
+            </Reveal>
 
-          {/* markets */}
-          <Reveal delay={260} className="mt-7 flex items-center gap-3">
-            <span className="inline-flex items-center gap-2.5 border border-ink-600 bg-ink-900/70 px-4 py-2 text-[13px] font-medium text-mist-200">
-              <FlagSA className="w-5 h-5" /> {isAr ? "السعودية" : "Saudi Arabia"}
-            </span>
-            <span className="inline-flex items-center gap-2.5 border border-ink-600 bg-ink-900/70 px-4 py-2 text-[13px] font-medium text-mist-200">
-              <FlagEG className="w-5 h-5" /> {isAr ? "مصر" : "Egypt"}
-            </span>
-          </Reveal>
+            <Reveal delay={350} className="mt-6 flex items-center gap-2.5" >
+              <span className="inline-flex items-center gap-2 border border-paper-50/15 bg-ink-950/45 backdrop-blur-sm px-3.5 py-1.5 text-[12.5px] font-medium text-mist-200">
+                <FlagSA className="w-4.5 h-4.5" /> {isAr ? "السعودية" : "Saudi Arabia"}
+              </span>
+              <span className="inline-flex items-center gap-2 border border-paper-50/15 bg-ink-950/45 backdrop-blur-sm px-3.5 py-1.5 text-[12.5px] font-medium text-mist-200">
+                <FlagEG className="w-4.5 h-4.5" /> {isAr ? "مصر" : "Egypt"}
+              </span>
+            </Reveal>
 
-          {/* CV downloads */}
-          <Reveal delay={330} className="mt-9 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <a
-              href={CV_FILES.ar}
-              download
-              className="group inline-flex items-center gap-3 chamfer-sm bg-amber-500 text-ink-950 px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.14em] hover:bg-amber-400 transition-colors active:scale-[0.97]"
-            >
-              <Icon name="doc" className="w-4.5 h-4.5" />
-              {isAr ? "السيرة الذاتية · عربي" : "CV · Arabic"}
-              <Icon name="arrow" className="w-4 h-4 rotate-90 rtl:-scale-x-100 transition-transform group-hover:translate-y-0.5" strokeWidth={2} />
-            </a>
-            <a
-              href={CV_FILES.en}
-              download
-              className="group inline-flex items-center gap-3 chamfer-sm border border-mist-500/50 text-paper-50 px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.14em] hover:border-amber-500 hover:text-amber-400 transition-colors active:scale-[0.97]"
-            >
-              <Icon name="doc" className="w-4.5 h-4.5" />
-              {isAr ? "السيرة الذاتية · إنجليزي" : "CV · English"}
-              <Icon name="arrow" className="w-4 h-4 rotate-90 rtl:-scale-x-100 transition-transform group-hover:translate-y-0.5" strokeWidth={2} />
-            </a>
-          </Reveal>
+            {/* channels — each appears exactly once */}
+            <div className="mt-8">
+              {channels.map((ch, i) => (
+                <ChannelRow key={ch.key} ch={ch} index={i} />
+              ))}
+            </div>
 
-          {/* social orbit */}
-          <Reveal delay={420} className="mt-14 lg:mt-16">
-            <SocialOrbit />
+            {/* CV downloads (kept from the previous build, as quiet links) */}
+            <Reveal delay={480 + channels.length * 70} className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2.5">
+              <span className="font-mono text-[9.5px] uppercase tracking-[0.26em] text-mist-500">{isAr ? "السيرة الذاتية" : "CV"}</span>
+              <a href={CV_FILES.ar} download className="group inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-mist-300 transition-colors hover:text-amber-400">
+                <Icon name="doc" className="w-4 h-4 text-amber-500/80" /> {isAr ? "عربي" : "Arabic"}
+                <Icon name="arrow" className="w-3.5 h-3.5 rotate-90 rtl:-scale-x-100 opacity-0 -translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0" strokeWidth={2.2} />
+              </a>
+              <a href={CV_FILES.en} download className="group inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-mist-300 transition-colors hover:text-amber-400">
+                <Icon name="doc" className="w-4 h-4 text-amber-500/80" /> {isAr ? "إنجليزي" : "English"}
+                <Icon name="arrow" className="w-3.5 h-3.5 rotate-90 rtl:-scale-x-100 opacity-0 -translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0" strokeWidth={2.2} />
+              </a>
+            </Reveal>
+          </div>
+
+          {/* QR — lower-end on desktop, flows under the channels on mobile */}
+          <Reveal delay={620} className="mt-12 lg:mt-0 mx-auto lg:mx-0 lg:justify-self-end">
+            <div className="relative w-[158px] sm:w-[176px]">
+              <span className="absolute -top-2 -start-2 w-5 h-5 border-t border-s border-amber-500/70" aria-hidden="true" />
+              <span className="absolute -bottom-2 -end-2 w-5 h-5 border-b border-e border-amber-500/70" aria-hidden="true" />
+              <div className="chamfer-sm bg-ink-950/60 backdrop-blur-md border border-paper-50/15 p-3.5 transition-colors duration-300 hover:border-amber-500/40">
+                <img
+                  src={qrSrc}
+                  alt={isAr ? "رمز QR — امسحه للتواصل مع يوسف أحمد" : "QR code — scan to connect with Yousef Ahmed"}
+                  width={160}
+                  height={160}
+                  className="block w-full h-auto"
+                />
+              </div>
+              <p className="mt-3 text-center font-mono text-[9px] uppercase tracking-[0.3em] text-mist-400">
+                {isAr ? "امسح للتواصل" : "Scan to connect"}
+              </p>
+            </div>
           </Reveal>
         </div>
       </div>

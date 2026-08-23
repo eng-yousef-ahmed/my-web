@@ -284,6 +284,50 @@ export function LogoMark({ tone = "light", className = "w-10 h-10" }: { tone?: "
   );
 }
 
+/* ---------- first-available asset resolver ----------
+ * Probes a list of public paths in order and resolves the first file that
+ * actually exists, falling back to a provided default. Lets any page bind
+ * to a replaceable asset folder with zero code edits later.
+ */
+const assetCache = new Map<string, Promise<string>>();
+
+export function useAsset(candidates: string[], fallback: string): string {
+  const key = candidates.join("|");
+  const [src, setSrc] = useState(fallback);
+
+  useEffect(() => {
+    if (!assetCache.has(key)) {
+      assetCache.set(
+        key,
+        new Promise((resolve) => {
+          let i = 0;
+          const next = () => {
+            if (i >= candidates.length) return resolve(fallback);
+            const img = new Image();
+            img.onload = () => resolve(candidates[i]);
+            img.onerror = () => {
+              i++;
+              next();
+            };
+            img.src = candidates[i];
+          };
+          next();
+        })
+      );
+    }
+    let active = true;
+    assetCache.get(key)!.then((s) => {
+      if (active) setSrc(s);
+    });
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, fallback]);
+
+  return src;
+}
+
 /* ---------- swappable brand logo (no code change needed) ----------
  * Drop your own logo into the `public/` folder and it is picked up
  * automatically — no code edits required:

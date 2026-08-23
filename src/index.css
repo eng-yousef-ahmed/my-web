@@ -164,6 +164,16 @@ html[lang="ar"] .font-display {
 }
 .float-slow { animation: float-slow 7s ease-in-out infinite; }
 
+/* very slow cinematic breathing for full-bleed portraits */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+.kenburns {
+  animation: kenburns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
 /* ---------- underline draw for nav ---------- */
 .nav-draw {
   position: relative;
