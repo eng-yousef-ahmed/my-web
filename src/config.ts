@@ -148,4 +148,13 @@ export const IMAGES = {
    * only the fallback while no local file exists.
    */
   profile: "https://image.qwenlm.ai/generated-images/93222298-9b9d-4637-8416-d6241340729f/_result.png",
+
+  /**
+   * Default portrait for the CONTACT page — deliberately a different photo than
+   * the Home hero. The site ALWAYS prefers a local file dropped into
+   * `public/images/contact/` (contact-profile.webp → .jpg → .png), so swapping
+   * the photo later needs ZERO code changes and stays fully independent of the
+   * Home image. This remote image is only the fallback.
+   */
+  contactProfile: "https://image.qwenlm.ai/generated-images/be05a0df-9390-49f2-8122-43d19f24a0b0/_result.png",
 };
