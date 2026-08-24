@@ -144,20 +144,17 @@ export function Contact() {
             className="kenburns absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: cardProfilePosition }}
           />
-          {/* the melt — the image dissolves toward the content side, bottom and top */}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/45" aria-hidden="true" />
-          <div className="absolute inset-0 hidden lg:block bg-gradient-to-l from-ink-950 via-ink-950/30 to-transparent" aria-hidden="true" />
+          {/* the melt — the image dissolves softly toward the content side, bottom and top.
+              No hairline, no corner ticks: the photo simply fades into the page. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-[38%] via-ink-950/40 to-ink-950/50" aria-hidden="true" />
+          <div className="absolute inset-0 hidden lg:block bg-gradient-to-l from-ink-950 via-[34%] via-ink-950/60 to-transparent" aria-hidden="true" />
           <div className="absolute inset-0 bg-ink-950/10" aria-hidden="true" />
-          {/* warm rim light on the inner edge + hairline */}
+          {/* a faint warm rim light hugging the inner edge — atmosphere, not a border */}
           <div
-            className="absolute inset-y-0 right-0 w-40 hidden lg:block pointer-events-none"
-            style={{ background: "linear-gradient(to left, rgba(233,163,59,0.10), transparent)" }}
+            className="absolute inset-y-0 right-0 w-56 hidden lg:block pointer-events-none"
+            style={{ background: "linear-gradient(to left, rgba(233,163,59,0.07), transparent)" }}
             aria-hidden="true"
           />
-          <span className="absolute inset-y-0 right-0 w-px bg-amber-500/25 hidden lg:block" aria-hidden="true" />
-          {/* quiet corner ticks on the photo itself */}
-          <span className="absolute top-5 left-5 w-6 h-6 border-t border-l border-amber-500/40" aria-hidden="true" />
-          <span className="absolute bottom-5 left-5 w-6 h-6 border-b border-l border-amber-500/40 hidden lg:block" aria-hidden="true" />
         </div>
 
         {/* ============ RIGHT HALF — identity, channels, CV, QR ============ */}
