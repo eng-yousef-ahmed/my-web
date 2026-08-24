@@ -117,24 +117,24 @@ export function SmartQR({
   /* a dropped-in file always wins */
   if (userQr) {
     return (
-      <img
-        src={userQr}
-        alt="QR — بطاقة التواصل الرقمية"
-        width={size}
-        height={size}
-        className={`block w-full h-auto ${className}`}
-        style={{ objectFit: "contain" }}
-      />
+      <div className={`relative aspect-square w-full overflow-hidden ${className}`}>
+        <img
+          src={userQr}
+          alt="QR — بطاقة التواصل الرقمية"
+          className="absolute inset-0 h-full w-full object-contain"
+        />
+      </div>
     );
   }
 
   return (
-    <canvas
-      ref={canvasRef}
-      role="img"
-      aria-label="QR code — scan to open the digital contact card"
-      className={`block w-full h-auto ${className} transition-opacity duration-500 ${ready ? "opacity-100" : "opacity-0"}`}
-      style={{ width: size, maxWidth: "100%", aspectRatio: "1 / 1" }}
-    />
+    <div className={`relative aspect-square w-full overflow-hidden ${className}`}>
+      <canvas
+        ref={canvasRef}
+        role="img"
+        aria-label="QR code — scan to open the digital contact card"
+        className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${ready ? "opacity-100" : "opacity-0"}`}
+      />
+    </div>
   );
 }

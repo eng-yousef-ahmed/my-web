@@ -333,7 +333,7 @@ export function Contact() {
                   : "Scan the code — it opens my digital business card with the full contact details and photo."}
               </p>
 
-              <div className="mt-6 mx-auto w-full max-w-[240px] rounded-2xl bg-paper-50 p-3.5 shadow-[0_18px_50px_-24px_rgba(59,139,245,0.45)]">
+              <div className="mt-6 mx-auto aspect-square w-full max-w-[240px] rounded-2xl bg-paper-50 p-3.5 shadow-[0_18px_50px_-24px_rgba(59,139,245,0.45)]">
                 <SmartQR size={240} />
               </div>
 
