@@ -1,60 +1,38 @@
 /**
- * TECH OF THE WORLD — central, environment-driven configuration & outbound helpers.
+ * TECH OF THE WORLD — central, environment-driven configuration.
  *
- * Contact channels ship with the verified business numbers below and can be
- * overridden at build time via environment variables (see .env.example):
- *   VITE_WHATSAPP_SA     — Saudi WhatsApp number (digits, international format)
- *   VITE_WHATSAPP_EG     — Egypt WhatsApp number (digits, international format)
- *   VITE_CONTACT_EMAIL   — public business email address
- *   VITE_FORM_ENDPOINT   — optional backend endpoint receiving the
- *                          service-request form as a JSON POST
+ * All contact data and replaceable-asset paths live here, so nothing is
+ * hard-coded inside components. Environment variables can override any
+ * value at build time (see .env.example).
  */
 export type Market = "sa" | "eg";
 
 const env = import.meta.env as Record<string, string | undefined>;
 const digits = (s: string) => s.replace(/\D/g, "");
+const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
 
 export const CONFIG = {
   brand: "TECH OF THE WORLD",
   symbol: "YA",
   tagline: "Technology That Moves Business Forward.",
-  positioning: "Senior IT Support Specialist, IT infrastructure & operations",
   markets: ["Saudi Arabia", "Egypt"] as const,
 };
 
+/* ================= verified contact data ================= */
 export const CONTACT = {
   whatsappSA: digits(env.VITE_WHATSAPP_SA || "+966568992794"),
   whatsappEG: digits(env.VITE_WHATSAPP_EG || "+201203361192"),
   displaySA: "+966 56 899 2794",
   displayEG: "+20 120 336 1192",
   email: (env.VITE_CONTACT_EMAIL || "TechOfTheWorled92@gmail.com").trim(),
-  formEndpoint: (env.VITE_FORM_ENDPOINT || "").trim(),
   linkedin: (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed/").trim(),
   linkedinHandle: "eng-yousef-ahmed",
-
-  /* ---- business-card identity (single source of truth for the card + .vcf) ---- */
-  cardName: (env.VITE_CARD_NAME || "YOUSEF AHMED MOHMED").trim(),
-  cardTitle: (env.VITE_CARD_TITLE || "Senior IT Support Specialist").trim(),
-  cardEmail: (env.VITE_CARD_EMAIL || "youseefa77@gmail.com").trim(),
   website: (env.VITE_WEBSITE_URL || "https://tech-of-the-world.netlify.app").trim(),
 };
 
-export const hasWhatsApp = true;
 export const hasEmail = CONTACT.email.length > 0;
 
-/* ================= founder CV (downloadable) =================
- * Two PDFs (Arabic + English) served from /public/assets/cv/.
- * Replace the files there with the real CVs at any time — the
- * download buttons (inside Batata and elsewhere) point at these
- * paths, so NO code change is ever needed to update the CV.
- */
-const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
-export const CV_FILES = {
-  ar: `${base}/assets/cv/Yousef-Ahmed-CV-AR.pdf`,
-  en: `${base}/assets/cv/Yousef-Ahmed-CV-EN.pdf`,
-};
-
-/* ================= contact-card identity (single source of truth) ================= */
+/* ================= business-card identity ================= */
 export const CARD = {
   name: "Yousef Ahmed",
   nameAr: "يوسف أحمد",
@@ -73,35 +51,45 @@ export const CARD = {
 /** Optional GitHub profile — the social icon only renders when configured (no fake URLs). */
 export const githubUrl = (env.VITE_GITHUB_URL || "").trim();
 
-/* ================= contact-card assets (replaceable, no code edits) =================
- * Drop a file with the SAME name into the folder and the page picks it up
- * automatically — see the README inside the folder:
- *
- *   public/images/contact/profile.webp      → contact-page portrait
+/* ================= founder CV (downloadable) =================
+ * Two PDFs (Arabic + English) served from /public/assets/cv/.
+ * Replace the files there with the real CVs at any time — NO code change needed.
  */
+export const CV_FILES = {
+  ar: `${base}/assets/cv/Yousef-Ahmed-CV-AR.pdf`,
+  en: `${base}/assets/cv/Yousef-Ahmed-CV-EN.pdf`,
+};
+
+/* ================= replaceable image assets (no code edits) =================
+ * Drop a file with the SAME name into the folder and the page picks it up
+ * automatically. See the README inside each folder:
+ *
+ *   public/images/profile/   → Home page full-screen portrait
+ *   public/images/contact/   → Contact page portrait
+ */
+export const HOME_ASSETS = {
+  profile: [
+    `${base}/images/profile/yousef-ahmed.webp`,
+    `${base}/images/profile/yousef-ahmed.jpg`,
+    `${base}/images/profile/profile.webp`,
+    `${base}/images/profile/profile.jpg`,
+    `${base}/images/profile/profile.png`,
+  ],
+};
+
 export const CARD_ASSETS = {
   profile: [
     `${base}/images/contact/profile.webp`,
     `${base}/images/contact/profile.jpg`,
     `${base}/images/contact/profile.png`,
-    /* earlier drop-locations still honoured so existing photos keep working */
-    `${base}/assets/profile/profile.jpg`,
-    `${base}/assets/profile/profile.webp`,
-    `${base}/assets/profile/profile.png`,
-    `${base}/images/contact/contact-profile.webp`,
-    `${base}/images/contact/contact-profile.jpg`,
-    `${base}/images/contact/contact-profile.png`,
   ],
 };
 
-/** Portrait crop anchor for the contact page — tune per photo via env, no code edits. */
+/** Portrait crop anchor — tune per photo via env, no code edits. */
+export const homeProfilePosition = (env.VITE_HOME_PROFILE_POSITION || "50% 12%").trim();
 export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "50% 18%").trim();
 
-/* ================= outbound automation =================
- * UTM parameters from the landing URL are captured once per session and
- * appended to every WhatsApp / email message the site generates — so each
- * inbound lead arrives with its marketing source attached. No setup needed.
- */
+/* ================= outbound helpers ================= */
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign"] as const;
 
 /** Call once on app boot (HashRouter puts the query after "#/route?"). */
@@ -150,7 +138,7 @@ export function mailLink(subject: string, body: string): string | null {
 export const telHref = (market: Market): string =>
   `tel:+${market === "eg" ? CONTACT.whatsappEG : CONTACT.whatsappSA}`;
 
-/** vCard built from the contact-card identity — one tap saves the profile into the visitor's phone. */
+/** vCard built from the card identity — one tap saves the profile into the visitor's phone. */
 export function contactCardVcf(): string {
   const lines = [
     "BEGIN:VCARD",
@@ -165,7 +153,7 @@ export function contactCardVcf(): string {
     `NOTE:${CARD.title} — ${CARD.location.en}. WhatsApp: +${CARD.whatsappDigits}`,
     "END:VCARD",
   ];
-  return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
+  return `text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
 }
 
 /** Human display form of the website URL (no protocol, no trailing slash). */
@@ -173,25 +161,12 @@ export function websiteDisplay(): string {
   return CONTACT.website.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/+$/, "");
 }
 
-/** Generated brand imagery (dark, duotone-graded in CSS). */
+/* ================= generated imagery (fallbacks only) =================
+ * Real photos always come from the public folders above. These generated
+ * images are only used while no local file exists yet.
+ */
 export const IMAGES = {
-  ops: "https://image.qwenlm.ai/generated-images/70296d57-3950-4428-93da-13ab4eeaffdc/_result.png",
-  rack: "https://image.qwenlm.ai/generated-images/1972e502-7e3a-4038-9591-a5555f40fa7f/_result.png",
-  network: "https://image.qwenlm.ai/generated-images/3903330b-f80a-46da-934a-dafeb37f8c61/_result.png",
-  /**
-   * Default hero portrait. The site ALWAYS prefers a local file dropped into
-   * `public/images/profile/` (profile.webp → profile.jpg → profile.png) — so
-   * replacing the photo later needs ZERO code changes. This remote image is
-   * only the fallback while no local file exists.
-   */
-  profile: "https://image.qwenlm.ai/generated-images/93222298-9b9d-4637-8416-d6241340729f/_result.png",
-
-  /**
-   * Default portrait for the CONTACT page — deliberately a different photo than
-   * the Home hero. The site ALWAYS prefers a local file dropped into
-   * `public/images/contact/` (contact-profile.webp → .jpg → .png), so swapping
-   * the photo later needs ZERO code changes and stays fully independent of the
-   * Home image. This remote image is only the fallback.
-   */
-  contactProfile: "https://image.qwenlm.ai/generated-images/be05a0df-9390-49f2-8122-43d19f24a0b0/_result.png",
+  profile: "https://image.qwenlm.ai/generated-images/ada728cc-71f5-4e15-bf23-14f5c59e204f/_result.png",
+  contactProfile: "https://image.qwenlm.ai/generated-images/ada728cc-71f5-4e15-bf23-14f5c59e204f/_result.png",
+  rack: "https://image.qwenlm.ai/generated-images/38ce266e-4d9d-4a33-b426-4bba89801df2/_result.png",
 };

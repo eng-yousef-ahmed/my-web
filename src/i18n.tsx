@@ -4,25 +4,40 @@ export type Lang = "en" | "ar";
 export type B = { en: string; ar: string };
 
 const STR: Record<string, B> = {
-  // navigation (personal, singular)
+  /* navigation — personal portfolio wording */
   "nav.home": { en: "Home", ar: "الرئيسية" },
-  "nav.services": { en: "Services", ar: "خدماتي" },
-  "nav.projects": { en: "Projects", ar: "المشاريع" },
   "nav.about": { en: "About", ar: "عني" },
+  "nav.projects": { en: "Projects", ar: "المشاريع" },
+  "nav.services": { en: "Services", ar: "خدماتي" },
   "nav.contact": { en: "Contact", ar: "تواصل معي" },
 
-  // CTAs
-  "cta.readCase": { en: "View case study", ar: "عرض دراسة الحالة" },
-  "cta.backToProjects": { en: "Back to projects", ar: "العودة إلى المشاريع" },
-
-  // common
-  "common.langLabel": { en: "عربي", ar: "English" },
+  /* common */
   "common.skip": { en: "Skip to content", ar: "تخطَّ إلى المحتوى" },
   "common.menu": { en: "Menu", ar: "القائمة" },
   "common.close": { en: "Close", ar: "إغلاق" },
   "common.all": { en: "All", ar: "الكل" },
+  "common.langLabel": { en: "عربي", ar: "English" },
+  "common.minRead": { en: "min read", ar: "دقائق قراءة" },
 
-  // case study sections
+  /* CTAs */
+  "cta.exploreProjects": { en: "Explore Projects", ar: "استعرض مشاريعي" },
+  "cta.aboutMe": { en: "About Me", ar: "عني" },
+  "cta.viewAll": { en: "View all projects", ar: "عرض جميع المشاريع" },
+  "cta.readCase": { en: "View Project", ar: "عرض المشروع" },
+  "cta.backToProjects": { en: "Back to projects", ar: "العودة إلى المشاريع" },
+  "cta.contactMe": { en: "Contact Me", ar: "تواصل معي" },
+  "cta.viewProject": { en: "View My Projects", ar: "استعرض مشاريعي" },
+
+  /* footer */
+  "footer.blurb": {
+    en: "Hands-on experience building and running IT environments: infrastructure, networks, Microsoft and security systems.",
+    ar: "خبرة عملية في بناء وتشغيل بيئات تقنية المعلومات: البنية التحتية، الشبكات، مايكروسوفت وأنظمة الأمن والمراقبة.",
+  },
+  "footer.rights": { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
+  "footer.top": { en: "Back to top", ar: "العودة للأعلى" },
+  "footer.nav": { en: "Navigate", ar: "التنقل" },
+
+  /* case study sections */
   "case.overview": { en: "Overview", ar: "نظرة عامة" },
   "case.challenge": { en: "The Challenge", ar: "التحدي" },
   "case.solution": { en: "The Solution", ar: "الحل" },
@@ -32,17 +47,11 @@ const STR: Record<string, B> = {
   "case.results": { en: "Results", ar: "النتائج" },
   "case.verifiedNote": {
     en: "Client name and commercial details are kept confidential. Figures shown are limited to verified information only.",
-    ar: "أحافظ على سرية اسم العميل والتفاصيل التجارية، ولا أنشر إلا المعلومات الموثقة فقط.",
+    ar: "نحافظ على سرية اسم العميل والتفاصيل التجارية، ولا ننشر إلا المعلومات الموثقة فقط.",
   },
-
-  // footer
-  "footer.quickLinks": { en: "Navigate", ar: "التصفح" },
-  "footer.contact": { en: "Contact", ar: "التواصل" },
-  "footer.rights": { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
-  "footer.top": { en: "Back to top", ar: "العودة للأعلى" },
+  "case.next": { en: "Next project", ar: "المشروع التالي" },
+  "case.prev": { en: "Previous project", ar: "المشروع السابق" },
 };
-
-
 
 type Ctx = {
   lang: Lang;

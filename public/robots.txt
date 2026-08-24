@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tech-of-the-world.example/sitemap.xml
+Sitemap: https://tech-of-the-world.netlify.app/sitemap.xml

@@ -34,7 +34,7 @@ export default function App() {
     <LangProvider>
       <HashRouter>
         <Routes>
-          {/* the scanned QR opens this standalone digital business card — no site chrome */}
+          {/* the standalone digital business card (opened by scanning a QR) — no site chrome */}
           <Route
             path="/card"
             element={

@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
-import { SERVICE_CATEGORIES, SERVICE_TECH } from "../data/content";
-import { Btn, Icon, PageHero, Reveal } from "../components/kit";
+import { SERVICE_CATEGORIES } from "../data/content";
+import { Icon, PageHero, Reveal } from "../components/kit";
 
 export default function Services() {
-  const { L, isAr } = useLang();
+  const { isAr, L, t } = useLang();
   usePageMeta(
-    isAr ? "خدماتي | TECH OF THE WORLD" : "My Services | TECH OF THE WORLD",
+    isAr ? "خدماتي | يوسف أحمد — TECH OF THE WORLD" : "My Services | Yousef Ahmed — TECH OF THE WORLD",
     isAr
-      ? "خمسة مجالات أعمل بها: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
-      : "Five areas I work with: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."
+      ? "خمسة مسارات: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
+      : "Five service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."
   );
 
   return (
@@ -18,86 +18,89 @@ export default function Services() {
       <PageHero
         kicker={isAr ? "خدماتي" : "My Services"}
         title={{
-          en: "What I work with.",
-          ar: "ما أعمل به.",
+          en: "What I can professionally provide.",
+          ar: "ما أستطيع تقديمه باحتراف.",
         }}
         lead={{
-          en: "Five areas that fit together as one accountable environment, from the cable in the wall to the cloud tenant your teams live in.",
-          ar: "خمسة مجالات تتكامل كبيئة واحدة مسؤولة، من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك.",
+          en: "Five lines that fit together as one accountable environment, from the cable in the wall to the cloud tenant your teams live in.",
+          ar: "خمسة مسارات تتكامل كبيئة واحدة مسؤولة، من الكابل في الجدار حتى المستأجر السحابي الذي تعمل عليه فرقك.",
         }}
       />
 
-      <section className="bg-paper-100 text-ink-900">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-24 grid lg:grid-cols-[240px_1fr] gap-12">
-          {/* index */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-28 space-y-1" aria-label={isAr ? "مسارات الخدمات" : "Service lines"}>
+      <section className="relative bg-ink-950 text-paper-50 noise">
+        <div className="absolute inset-0 grid-bg" aria-hidden="true" />
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-14">
+          {/* sticky index (desktop) + sections */}
+          <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-14 items-start">
+            <nav className="hidden lg:block sticky top-28 border-s border-ink-700" aria-label={isAr ? "مسارات الخدمات" : "Service lines"}>
               {SERVICE_CATEGORIES.map((c, i) => (
                 <a
                   key={c.id}
-                  href={`#/services#${c.id}`}
-                  className="group flex items-baseline gap-3 py-2.5 border-b border-ink-900/10 hover:border-amber-600/50 transition-colors"
+                  href={`#${c.id}`}
+                  className="group flex items-center gap-3 py-3.5 ps-5 font-display text-[13.5px] font-semibold text-mist-400 hover:text-amber-400 transition-colors"
                 >
-                  <span className="font-mono text-[11px] text-amber-700">0{i + 1}</span>
-                  <span className="font-display text-[13.5px] font-semibold text-mist-500 group-hover:text-ink-900 transition-colors">{L(c.name)}</span>
+                  <span className="font-mono text-[10.5px] text-mist-500 group-hover:text-amber-500 transition-colors">0{i + 1}</span>
+                  {L(c.name)}
                 </a>
               ))}
             </nav>
-          </aside>
 
-          {/* services */}
-          <div className="space-y-16">
-            {SERVICE_CATEGORIES.map((c, i) => (
-              <Reveal key={c.id}>
-                <article id={c.id} className="scroll-mt-28">
-                  <div className="flex items-start gap-5">
-                    <span className="font-mono text-[13px] text-amber-700 mt-1.5">0{i + 1}</span>
-                    <span className="text-amber-600 mt-0.5"><Icon name={c.icon} className="w-7 h-7" /></span>
-                    <div className="flex-1 min-w-0">
-                      <h2 className="font-display text-2xl font-bold text-ink-900">{L(c.name)}</h2>
-                      <p className="mt-3 text-[15px] leading-relaxed text-mist-500 max-w-2xl">{L(c.value)}</p>
+            <div className="space-y-16">
+              {SERVICE_CATEGORIES.map((c, i) => (
+                <Reveal key={c.id} as="section" className="scroll-mt-28">
+                  <div id={c.id} className="border border-ink-700 bg-ink-900">
+                    <div className="p-6 sm:p-8">
+                      <div className="flex items-start gap-5">
+                        <span className="grid place-items-center w-13 h-13 shrink-0 border border-ink-600 text-amber-400" style={{ width: "3.25rem", height: "3.25rem" }}>
+                          <Icon name={c.icon} className="w-6 h-6" />
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-amber-500">
+                            0{i + 1} — {L(c.name)}
+                          </p>
+                          <h2 className="mt-2 font-display text-2xl font-bold leading-snug">{L(c.tagline)}</h2>
+                          <p className="mt-3.5 text-[14.5px] leading-relaxed text-mist-300 max-w-2xl">{L(c.value)}</p>
+                        </div>
+                      </div>
 
-                      <div className="mt-7 grid md:grid-cols-[1fr_260px] gap-8">
-                        <div>
-                          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-700 mb-3.5">
-                            {isAr ? "كيف أساعد" : "What I can help with"}
+                      <div className="mt-7 grid sm:grid-cols-2 gap-x-8 gap-y-3 border-t border-ink-700 pt-6">
+                        {c.items.map((it) => (
+                          <p key={it.en} className="flex gap-3 text-[13.5px] text-mist-300">
+                            <Icon name="check" className="w-4 h-4 shrink-0 mt-0.5 text-amber-500" strokeWidth={2.2} />
+                            {L(it)}
                           </p>
-                          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                            {c.items.map((it) => (
-                              <li key={it.en} className="flex gap-2.5 text-[13.5px] leading-relaxed text-ink-800">
-                                <span className="w-1 h-1 bg-amber-500 rotate-45 mt-2 shrink-0" aria-hidden="true" />
-                                {L(it)}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-amber-700 mb-3.5">
-                            {isAr ? "تقنيات ذات صلة" : "Relevant technologies"}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {(SERVICE_TECH[c.id] ?? []).map((tch) => (
-                              <span key={tch} className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-mist-500 border border-ink-900/15 px-2.5 py-1.5">
-                                {tch}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-ink-700 pt-5">
+                        <span className="font-mono text-[9.5px] uppercase tracking-[0.24em] text-mist-500 me-2">
+                          {isAr ? "أدوات" : "Tooling"}
+                        </span>
+                        {c.tech.map((tech) => (
+                          <span key={tech} className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-circuit-300 border border-ink-600 px-2.5 py-1.5" dir="ltr">
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
-                </article>
-              </Reveal>
-            ))}
+                </Reveal>
+              ))}
 
-            <Reveal className="pt-4 border-t border-ink-900/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-              <p className="text-[15px] text-mist-500 max-w-md">
-                {isAr
-                  ? "غير متأكد أي مسار يناسب حالتك؟ اشرح الموقف وسأقول لك بصدق ما تحتاجه."
-                  : "Not sure which line fits your situation? Describe the problem and I will tell you honestly what you need."}
-              </p>
-              <Btn to="/contact" className="shrink-0">{isAr ? "تواصل معي" : "Contact Me"}</Btn>
-            </Reveal>
+              {/* the single, quiet contact line */}
+              <Reveal className="flex flex-wrap items-center justify-between gap-4 border-t border-ink-700 pt-8">
+                <p className="text-[14px] text-mist-400">
+                  {isAr ? "مش متأكد أنهي مسار يناسب حالتك؟" : "Not sure which line fits your situation?"}
+                </p>
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center gap-2.5 font-display text-[13px] font-semibold uppercase tracking-[0.14em] text-amber-400 hover:text-amber-300 transition-colors"
+                >
+                  {t("cta.contactMe")}
+                  <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" strokeWidth={2} />
+                </Link>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>

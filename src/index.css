@@ -8,12 +8,10 @@
   --color-ink-700: #16283c;
   --color-ink-600: #1f344c;
 
-  /* "mist" greys — base values are tuned for DARK sections: bright,
-     white-leaning body text that never disappears into the ink. */
-  --color-mist-500: #93a6b6;
-  --color-mist-400: #b2c1cd;
-  --color-mist-300: #d1dce5;
   --color-mist-200: #e8eff4;
+  --color-mist-300: #d1dce5;
+  --color-mist-400: #b2c1cd;
+  --color-mist-500: #93a6b6;
 
   --color-paper-50: #f3f6f5;
   --color-paper-100: #eaf0ee;
@@ -30,11 +28,9 @@
   --color-circuit-400: #6cc7b4;
   --color-circuit-500: #4dab98;
 
-  /* electric blue — accent of the Contact / digital-card experience */
-  --color-volt-300: #8ac2ff;
+  --color-volt-300: #9cc4ff;
   --color-volt-400: #5aa7ff;
   --color-volt-500: #3b8bf5;
-  --color-volt-600: #2b6cd4;
 
   --font-display: "Space Grotesk", "Almarai", sans-serif;
   --font-body: "IBM Plex Sans", "IBM Plex Sans Arabic", sans-serif;
@@ -47,7 +43,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* keep anchored sections clear of the fixed header */
 [id] {
   scroll-margin-top: 92px;
 }
@@ -120,6 +115,39 @@ html[lang="ar"] .font-display {
   filter: saturate(0.55) contrast(1.08) brightness(0.72);
 }
 
+/* ---------- adaptive text contrast (context-driven) ----------
+   Light surfaces retint the mist scale dark; dark surfaces keep it bright.
+   Any card/section that sets one of these bg classes re-scopes automatically. */
+.grid-bg-light,
+.bg-paper-50,
+.bg-paper-100,
+.bg-paper-200,
+.bg-paper-300 {
+  --color-mist-200: #2e3d49;
+  --color-mist-300: #22303b;
+  --color-mist-400: #182530;
+  --color-mist-500: #0e1922;
+}
+.bg-ink-600,
+.bg-ink-700,
+.bg-ink-800,
+.bg-ink-850,
+.bg-ink-900,
+.bg-ink-950 {
+  --color-mist-200: #e8eff4;
+  --color-mist-300: #d1dce5;
+  --color-mist-400: #b2c1cd;
+  --color-mist-500: #93a6b6;
+}
+
+:root { --ya-kicker: #f0b35a; }
+.grid-bg-light,
+.bg-paper-50,
+.bg-paper-100,
+.bg-paper-200,
+.bg-paper-300 { --ya-kicker: #8f5a12; }
+.text-kicker { color: var(--ya-kicker); }
+
 /* ---------- scroll reveal ---------- */
 .rv {
   opacity: 0;
@@ -159,6 +187,15 @@ html[lang="ar"] .font-display {
 .led { animation: led-blink 2.2s ease-in-out infinite; }
 .led-fast { animation: led-blink 1.1s ease-in-out infinite; }
 
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  transform-origin: center;
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
@@ -180,7 +217,7 @@ html[lang="ar"] .font-display {
   will-change: transform;
 }
 
-/* ---------- underline draw for nav ---------- */
+/* ---------- nav underline draw ---------- */
 .nav-draw {
   position: relative;
 }
@@ -193,7 +230,7 @@ html[lang="ar"] .font-display {
   width: 100%;
   background: var(--color-amber-500);
   transform: scaleX(0);
-  transform-origin: var(--tw-nav-origin, left);
+  transform-origin: left;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 html[dir="rtl"] .nav-draw::after { transform-origin: right; }
@@ -207,24 +244,24 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   transition: border-color 0.15s ease-out, background-color 0.15s ease-out;
 }
 
-/* ---------- custom cursor ring (fine pointers only) ---------- */
+/* ---------- custom cursor ---------- */
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
   width: 34px;
   height: 34px;
-  border: 1.5px solid rgba(233, 163, 59, 0.9);
   border-radius: 9999px;
+  border: 1.5px solid rgba(233, 163, 59, 0.9);
   pointer-events: none;
   z-index: 120;
-  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
   will-change: transform;
+  transition: width 0.25s, height 0.25s, border-color 0.25s, opacity 0.3s;
 }
 .cursor-ring.cursor-hover {
   width: 56px;
   height: 56px;
-  border-color: rgba(240, 179, 90, 1);
+  border-color: #f0b35a;
 }
 .cursor-ring.cursor-down {
   width: 24px;
@@ -240,58 +277,6 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   to { opacity: 1; transform: none; }
 }
 .page-enter { animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
-
-/* ---------- social orbit ---------- */
-@keyframes orbitSpin { to { transform: rotate(360deg); } }
-.orbit-ring { animation: orbitSpin 46s linear infinite; transform-origin: center; }
-.orbit-ring-rev { animation-direction: reverse; animation-duration: 60s; }
-
-
-
-/* ---------- adaptive text contrast (CSS-variable based) ----------
-   Every `text-mist-*` utility reads `var(--color-mist-*)`, so re-declaring
-   the variable on a container re-tints ALL of its text at once — and the
-   value inherits, so nesting resolves itself with zero exceptions:
-
-   • LIGHT surfaces  → near-black text (reads as black, ≈13:1 on paper)
-   • DARK  surfaces  → bright white-leaning text (≈7–15:1 on ink)
-   • a dark card inside a light section re-declares the bright values on
-     itself, overriding the inherited black for its own subtree, and the
-     reverse is also true — no "invisible text on matching background". */
-
-/* LIGHT surfaces -> near-black text */
-.grid-bg-light,
-.bg-paper-50,
-.bg-paper-100,
-.bg-paper-200,
-.bg-paper-300 {
-  --color-mist-200: #2e3d49;
-  --color-mist-300: #22303b;
-  --color-mist-400: #182530;
-  --color-mist-500: #0e1922;
-}
-
-/* DARK surfaces -> bright, white-leaning text */
-.bg-ink-600,
-.bg-ink-700,
-.bg-ink-800,
-.bg-ink-850,
-.bg-ink-900,
-.bg-ink-950 {
-  --color-mist-200: #e8eff4;
-  --color-mist-300: #d1dce5;
-  --color-mist-400: #b2c1cd;
-  --color-mist-500: #93a6b6;
-}
-
-/* kicker labels: bright amber on dark surfaces (default), dark amber on light */
-:root { --ya-kicker: #f0b35a; }
-.grid-bg-light,
-.bg-paper-50,
-.bg-paper-100,
-.bg-paper-200,
-.bg-paper-300 { --ya-kicker: #8f5a12; }
-.text-kicker { color: var(--ya-kicker); }
 
 /* ---------- Batata the potato robot ---------- */
 @keyframes botFloat {
@@ -411,7 +396,7 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   color: var(--color-amber-400);
 }
 
-/* suggestions strip: auto-scrolls so every chip stays reachable, pauses on hover/focus */
+/* suggestions marquee inside the assistant */
 @keyframes botSugg {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -426,11 +411,6 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   animation-play-state: paused;
 }
 html[dir="rtl"] .bot-sugg-track { animation-direction: reverse; }
-@media (prefers-reduced-motion: reduce) {
-  .bot-sugg { overflow-x: auto; }
-  .bot-sugg-track { animation: none; }
-  .bot-sugg-track > div[aria-hidden="true"] { display: none; }
-}
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -444,6 +424,8 @@ html[dir="rtl"] .bot-sugg-track { animation-direction: reverse; }
     opacity: 1 !important;
     transform: none !important;
   }
-  .marquee-track { animation: none; flex-wrap: wrap; }
-  .scan::before { display: none; }
+  .kenburns { animation: none; }
+  .bot-sugg { overflow-x: auto; }
+  .bot-sugg-track { animation: none; }
+  .bot-sugg-track > div[aria-hidden="true"] { display: none; }
 }

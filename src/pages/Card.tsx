@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
-import { CARD, CARD_ASSETS, IMAGES, cardProfilePosition, contactCardVcf, websiteDisplay } from "../config";
-import { FlagSA, Icon, Reveal } from "../components/kit";
-import { useAsset } from "../components/kit";
+import { CARD, CARD_ASSETS, CONTACT, IMAGES, cardProfilePosition, contactCardVcf, websiteDisplay } from "../config";
+import { FlagSA, Icon, Reveal, useAsset } from "../components/kit";
 
 /**
- * The digital business card — the page a phone opens when it scans the QR.
- * Portrait + every contact channel + one-tap save, optimised for mobile.
- * The portrait comes from public/images/contact/profile.webp (replaceable,
- * zero code edits).
+ * The standalone digital business card — what a phone opens after scanning
+ * a QR that points at the website's /#/card route. No site chrome: just the
+ * identity, the channels and one tap to save the contact.
  */
 export default function CardPage() {
   const { isAr } = useLang();
@@ -27,8 +25,8 @@ export default function CardPage() {
     { icon: "phone", label: isAr ? "اتصال" : "Call", value: CARD.phoneDisplay, href: `tel:+${CARD.phoneDigits}`, ltr: true },
     { icon: "wa", label: isAr ? "واتساب" : "WhatsApp", value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, ltr: true, external: true },
     { icon: "mail", label: isAr ? "البريد" : "Email", value: CARD.email, href: `mailto:${CARD.email}`, ltr: true },
-    { icon: "linkedin", label: "LinkedIn", value: "yousef-ahmed", href: "https://www.linkedin.com/in/eng-yousef-ahmed/", ltr: true, external: true },
-    { icon: "globe", label: isAr ? "الموقع" : "Website", value: websiteDisplay(), href: "https://tech-of-the-world.netlify.app", ltr: true, external: true },
+    { icon: "linkedin", label: "LinkedIn", value: "yousef-ahmed", href: CONTACT.linkedin, ltr: true, external: true },
+    { icon: "globe", label: isAr ? "الموقع" : "Website", value: websiteDisplay(), href: CONTACT.website, ltr: true, external: true },
   ];
 
   return (
@@ -43,11 +41,7 @@ export default function CardPage() {
       <main className="relative max-w-md mx-auto px-5 pt-14 pb-10">
         {/* portrait — melts into the background, no frame */}
         <Reveal className="relative mx-auto w-44 h-44 sm:w-48 sm:h-48">
-          <div
-            className="absolute -inset-6 rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(90,167,255,0.25), transparent 65%)" }}
-            aria-hidden="true"
-          />
+          <div className="absolute -inset-6 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(90,167,255,0.25), transparent 65%)" }} aria-hidden="true" />
           <div
             className="relative w-full h-full overflow-hidden rounded-full"
             style={{
@@ -55,28 +49,19 @@ export default function CardPage() {
               WebkitMaskImage: "radial-gradient(circle at 50% 42%, #000 62%, transparent 97%)",
             }}
           >
-            <img
-              src={profileSrc}
-              alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"}
-              className="w-full h-full object-cover"
-              style={{ objectPosition: cardProfilePosition }}
-            />
+            <img src={profileSrc} alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"} className="w-full h-full object-cover" style={{ objectPosition: cardProfilePosition }} />
           </div>
           <span className="absolute bottom-1 end-1 grid place-items-center w-9 h-9 rounded-full bg-[#3fbf6f] ring-4 ring-ink-950 text-white">
-            <Icon name="wa" className="w-4.5 h-4.5" />
+            <Icon name="wa" className="w-4 h-4" />
           </span>
         </Reveal>
 
         {/* identity */}
         <Reveal delay={120} className="mt-7 text-center">
-          <h1 className="font-display text-3xl font-bold tracking-tight">
-            {isAr ? "يوسف أحمد" : "Yousef Ahmed"}
-          </h1>
-          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.26em] text-volt-300">
-            {isAr ? CARD.titleAr : CARD.title}
-          </p>
+          <h1 className="font-display text-3xl font-bold tracking-tight">{isAr ? CARD.nameAr : CARD.name}</h1>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.26em] text-volt-300">{isAr ? CARD.titleAr : CARD.title}</p>
           <p className="mt-3 inline-flex items-center gap-2 text-[13px] text-mist-400">
-            <FlagSA className="w-4.5 h-4.5" /> {isAr ? CARD.location.ar : CARD.location.en}
+            <FlagSA className="w-4 h-4" /> {isAr ? CARD.location.ar : CARD.location.en}
           </p>
         </Reveal>
 
@@ -87,7 +72,7 @@ export default function CardPage() {
             download="Yousef-Ahmed.vcf"
             className="group flex items-center justify-center gap-3 rounded-xl bg-volt-500 px-6 py-4 font-display text-[13.5px] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_14px_36px_-16px_rgba(59,139,245,0.7)] transition-all duration-150 hover:bg-volt-400 active:scale-[0.98]"
           >
-            <Icon name="addContact" className="w-5 h-5 transition-transform duration-150 group-hover:scale-110" strokeWidth={2} />
+            <Icon name="check" className="w-5 h-5 transition-transform duration-150 group-hover:scale-110" strokeWidth={2.2} />
             {isAr ? "احفظ جهة الاتصال" : "Save Contact"}
           </a>
         </Reveal>
@@ -119,10 +104,7 @@ export default function CardPage() {
         </div>
 
         <Reveal delay={620} className="mt-8 text-center">
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.24em] text-mist-400 transition-colors hover:text-volt-300"
-          >
+          <Link to="/contact" className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.24em] text-mist-400 transition-colors hover:text-volt-300">
             {isAr ? "بطاقة التواصل الكاملة" : "Full contact page"}
             <Icon name="arrow" className="w-3.5 h-3.5 rtl:-scale-x-100" strokeWidth={2} />
           </Link>
