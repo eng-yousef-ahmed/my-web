@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
 import type { B } from "../i18n";
@@ -9,12 +9,9 @@ import {
   CV_FILES,
   IMAGES,
   cardProfilePosition,
-  contactCardVcf,
   githubUrl,
-  qrFallbackUrl,
 } from "../config";
 import { Icon, Reveal, useAsset } from "../components/kit";
-import { SmartQR } from "../components/SmartQR";
 
 /* ================= shared glass surface ================= */
 function Glass({ className = "", children }: { className?: string; children: React.ReactNode }) {
@@ -113,18 +110,15 @@ const SKILLS: Skill[] = [
  */
 export function Contact() {
   const { isAr, L } = useLang();
-  const [copied, setCopied] = useState(false);
 
   usePageMeta(
     isAr ? "تواصل معي | يوسف أحمد — أخصائي دعم تقني أول" : "Contact | Yousef Ahmed — Senior IT Support Specialist",
     isAr
-      ? "بطاقة التواصل الرقمية ليوسف أحمد، أخصائي دعم تقني أول في جدة — هاتف، واتساب، بريد إلكتروني، لينكدإن ورمز QR."
-      : "Digital contact card of Yousef Ahmed, Senior IT Support Specialist in Jeddah — phone, WhatsApp, email, LinkedIn and a scannable QR."
+      ? "بطاقة التواصل الرقمية ليوسف أحمد، أخصائي دعم تقني أول في جدة — هاتف، واتساب، بريد إلكتروني ولينكدإن."
+      : "Digital contact card of Yousef Ahmed, Senior IT Support Specialist in Jeddah — phone, WhatsApp, email and LinkedIn."
   );
 
   const profileSrc = useAsset(CARD_ASSETS.profile, IMAGES.contactProfile);
-  const qrSrc = useAsset(CARD_ASSETS.qr, qrFallbackUrl(CONTACT.website));
-  const vcf = contactCardVcf();
 
   const channels: Channel[] = [
     {
@@ -174,22 +168,6 @@ export function Contact() {
     { key: "em", icon: "mail", label: "Email", href: `mailto:${CARD.email}` },
   ];
 
-  const shareProfile = async () => {
-    const url = CONTACT.website;
-    const payload = { title: `${CARD.name} — ${CARD.title}`, text: L(CARD.location), url };
-    try {
-      if (navigator.share) {
-        await navigator.share(payload);
-        return;
-      }
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* user dismissed the share sheet — nothing to do */
-    }
-  };
-
   return (
     <section className="relative bg-ink-950 text-paper-50 overflow-hidden noise">
       {/* ambient scene: fine grid + electric-blue stage lighting */}
@@ -207,10 +185,10 @@ export function Contact() {
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-8 pt-28 lg:pt-32 pb-20">
         {/* ================= HERO — introduction + portrait ================= */}
-        <div className="grid gap-12 lg:gap-16 lg:grid-cols-[1.04fr_0.96fr] items-center">
+        <div className="grid gap-12 lg:gap-16 lg:grid-cols-[0.9fr_1.1fr] items-center">
           {/* portrait — first on mobile, physical RIGHT on desktop (LTR) */}
           <Reveal delay={140} className="order-1 lg:order-2">
-            <div className="relative max-w-[460px] mx-auto lg:mx-0 lg:ms-auto">
+            <div className="relative max-w-[440px] sm:max-w-[500px] lg:max-w-[560px] mx-auto lg:mx-0 lg:ms-auto">
               {/* stage light behind the person */}
               <div
                 className="absolute -inset-10 rounded-full pointer-events-none"
@@ -221,8 +199,8 @@ export function Contact() {
               <div
                 className="relative aspect-[4/5]"
                 style={{
-                  maskImage: "radial-gradient(120% 105% at 50% 38%, #000 52%, transparent 96%)",
-                  WebkitMaskImage: "radial-gradient(120% 105% at 50% 38%, #000 52%, transparent 96%)",
+                  maskImage: "radial-gradient(135% 118% at 50% 35%, #000 42%, transparent 88%)",
+                  WebkitMaskImage: "radial-gradient(135% 118% at 50% 35%, #000 42%, transparent 88%)",
                 }}
               >
                 <img
@@ -231,9 +209,9 @@ export function Contact() {
                   className="kenburns absolute inset-0 w-full h-full object-cover"
                   style={{ objectPosition: cardProfilePosition }}
                 />
-                {/* cinematic melt: bottom + sides dissolve into the navy */}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/25" aria-hidden="true" />
-                <div className="absolute inset-0 bg-gradient-to-r from-ink-950/55 via-transparent to-ink-950/55" aria-hidden="true" />
+                {/* cinematic melt: edges dissolve into the navy with no hard lines */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/35 to-transparent" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-r from-ink-950/60 via-transparent to-ink-950/60" aria-hidden="true" />
               </div>
               {/* availability chip floating over the blend */}
               <div className="absolute bottom-6 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 lg:bottom-10 lg:start-8 lg:translate-x-0 rtl:lg:translate-x-0 inline-flex items-center gap-2.5 rounded-full border border-paper-50/15 bg-ink-950/60 backdrop-blur-md px-4 py-2">
@@ -299,79 +277,27 @@ export function Contact() {
           </div>
         </div>
 
-        {/* ================= GET IN TOUCH + QR ================= */}
-        <div className="mt-16 lg:mt-24 grid gap-6 lg:grid-cols-[1.12fr_0.88fr] items-stretch">
-          {/* contact channels */}
-          <Reveal>
-            <Glass className="h-full flex flex-col">
-              <div className="px-5 sm:px-7 pt-7 pb-5 flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="font-display text-2xl font-bold">{isAr ? "تواصل معي" : "Get In Touch"}</h2>
-                  <p className="mt-1.5 text-[13.5px] text-mist-400">
-                    {isAr ? "يسعدني تواصلك عبر أي من القنوات التالية." : "Feel free to reach out through any of the channels below."}
-                  </p>
-                </div>
-                <span className="hidden sm:block shrink-0 font-mono text-[9.5px] uppercase tracking-[0.24em] text-volt-300 border border-volt-500/25 bg-volt-500/10 rounded-full px-3 py-1.5 mt-1">
-                  05 {isAr ? "قنوات" : "Channels"}
-                </span>
+        {/* ================= GET IN TOUCH ================= */}
+        <Reveal className="mt-16 lg:mt-24">
+          <Glass className="max-w-2xl mx-auto flex flex-col">
+            <div className="px-5 sm:px-7 pt-7 pb-5 flex items-start justify-between gap-4">
+              <div>
+                <h2 className="font-display text-2xl font-bold">{isAr ? "تواصل معي" : "Get In Touch"}</h2>
+                <p className="mt-1.5 text-[13.5px] text-mist-400">
+                  {isAr ? "يسعدني تواصلك عبر أي من القنوات التالية." : "Feel free to reach out through any of the channels below."}
+                </p>
               </div>
-              <div className="flex-1 divide-y divide-paper-50/[0.06] border-t border-paper-50/[0.06]">
-                {channels.map((ch, i) => (
-                  <ChannelRow key={ch.key} ch={ch} index={i} />
-                ))}
-              </div>
-            </Glass>
-          </Reveal>
-
-          {/* QR card */}
-          <Reveal delay={120}>
-            <Glass className="h-full flex flex-col p-5 sm:p-7">
-              <h2 className="font-display text-2xl font-bold">{isAr ? "امسح للتواصل" : "Scan to Connect"}</h2>
-              <p className="mt-1.5 text-[13.5px] leading-relaxed text-mist-400">
-                {isAr
-                  ? "امسح الرمز — هتفتحلك بطاقة التعريف الرقمية بكل بيانات التواصل والصورة الشخصية."
-                  : "Scan the code — it opens my digital business card with the full contact details and photo."}
-              </p>
-
-              <div className="mt-6 mx-auto aspect-square w-full max-w-[240px] rounded-2xl bg-paper-50 p-3.5 shadow-[0_18px_50px_-24px_rgba(59,139,245,0.45)]">
-                <SmartQR size={240} />
-              </div>
-
-              {/* action bar */}
-              <div className="mt-7 grid grid-cols-3 gap-2.5">
-                <a
-                  href={vcf}
-                  download="yousef-ahmed.vcf"
-                  className="group flex flex-col items-center gap-2 rounded-xl border border-paper-50/10 bg-paper-50/[0.04] px-2 py-4 transition-all duration-150 hover:border-volt-400/50 hover:bg-volt-500/10"
-                >
-                  <Icon name="download" className="w-5 h-5 text-volt-400 transition-transform duration-150 group-hover:translate-y-0.5" />
-                  <span className="font-display text-[10.5px] font-semibold uppercase tracking-[0.08em] text-mist-200 group-hover:text-volt-300 transition-colors">
-                    {isAr ? "حفظ الجهة" : "Save Contact"}
-                  </span>
-                </a>
-                <a
-                  href={vcf}
-                  className="group flex flex-col items-center gap-2 rounded-xl border border-paper-50/10 bg-paper-50/[0.04] px-2 py-4 transition-all duration-150 hover:border-volt-400/50 hover:bg-volt-500/10"
-                >
-                  <Icon name="userplus" className="w-5 h-5 text-volt-400 transition-transform duration-150 group-hover:-translate-y-0.5" />
-                  <span className="font-display text-[10.5px] font-semibold uppercase tracking-[0.08em] text-mist-200 group-hover:text-volt-300 transition-colors">
-                    {isAr ? "أضف للجهات" : "Add to Contacts"}
-                  </span>
-                </a>
-                <button
-                  type="button"
-                  onClick={shareProfile}
-                  className="group flex flex-col items-center gap-2 rounded-xl border border-paper-50/10 bg-paper-50/[0.04] px-2 py-4 transition-all duration-150 hover:border-volt-400/50 hover:bg-volt-500/10 cursor-pointer"
-                >
-                  <Icon name={copied ? "check" : "share"} className={`w-5 h-5 transition-colors ${copied ? "text-[#3fbf6f]" : "text-volt-400"}`} />
-                  <span className={`font-display text-[10.5px] font-semibold uppercase tracking-[0.08em] transition-colors ${copied ? "text-[#3fbf6f]" : "text-mist-200 group-hover:text-volt-300"}`}>
-                    {copied ? (isAr ? "تم النسخ" : "Copied!") : isAr ? "مشاركة" : "Share Profile"}
-                  </span>
-                </button>
-              </div>
-            </Glass>
-          </Reveal>
-        </div>
+              <span className="hidden sm:block shrink-0 font-mono text-[9.5px] uppercase tracking-[0.24em] text-volt-300 border border-volt-500/25 bg-volt-500/10 rounded-full px-3 py-1.5 mt-1">
+                05 {isAr ? "قنوات" : "Channels"}
+              </span>
+            </div>
+            <div className="flex-1 divide-y divide-paper-50/[0.06] border-t border-paper-50/[0.06]">
+              {channels.map((ch, i) => (
+                <ChannelRow key={ch.key} ch={ch} index={i} />
+              ))}
+            </div>
+          </Glass>
+        </Reveal>
 
         {/* ================= PROFESSIONAL AREAS ================= */}
         <Reveal className="mt-6">
