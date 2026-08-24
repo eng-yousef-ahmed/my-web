@@ -75,13 +75,11 @@ export const githubUrl = (env.VITE_GITHUB_URL || "").trim();
 
 /* ================= contact-card assets (replaceable, no code edits) =================
  * Drop a file with the SAME name into the folder and the page picks it up
- * automatically — see the README inside each folder:
+ * automatically — see the README inside the folder:
  *
- *   public/images/contact/profile.webp      → hero portrait
- *   public/images/contact/contact-qr.webp   → QR code
+ *   public/images/contact/profile.webp      → contact-page portrait
  */
 export const CARD_ASSETS = {
-  logo: [`${base}/assets/branding/logo.svg`, `${base}/assets/branding/logo.png`],
   profile: [
     `${base}/images/contact/profile.webp`,
     `${base}/images/contact/profile.jpg`,
@@ -94,25 +92,10 @@ export const CARD_ASSETS = {
     `${base}/images/contact/contact-profile.jpg`,
     `${base}/images/contact/contact-profile.png`,
   ],
-  qr: [
-    `${base}/images/contact/contact-qr.webp`,
-    `${base}/images/contact/contact-qr.png`,
-    `${base}/images/contact/contact-qr.svg`,
-    `${base}/images/contact/contact-qr.jpg`,
-    /* earlier drop-location still honoured */
-    `${base}/assets/qr/contact-qr.png`,
-    `${base}/assets/qr/contact-qr.svg`,
-    `${base}/assets/qr/contact-qr.webp`,
-    `${base}/assets/qr/contact-qr.jpg`,
-  ],
 };
 
 /** Portrait crop anchor for the contact page — tune per photo via env, no code edits. */
 export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "50% 18%").trim();
-
-/** Scannable fallback QR (encodes the website URL) shown until a local file exists. */
-export const qrFallbackUrl = (data: string, size = 480) =>
-  `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&qzone=1&bgcolor=0A1420&color=F3F6F5&data=${encodeURIComponent(data)}`;
 
 /* ================= outbound automation =================
  * UTM parameters from the landing URL are captured once per session and
