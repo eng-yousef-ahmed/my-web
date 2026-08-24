@@ -54,26 +54,52 @@ export const CV_FILES = {
   en: `${base}/assets/cv/Yousef-Ahmed-CV-EN.pdf`,
 };
 
+/* ================= contact-card identity (single source of truth) ================= */
+export const CARD = {
+  name: "Yousef Ahmed",
+  nameAr: "يوسف أحمد",
+  title: "Senior IT Support Specialist",
+  titleAr: "أخصائي دعم تقني أول",
+  phoneDisplay: "+966 56 864 6500",
+  phoneDigits: "966568646500",
+  whatsappDisplay: "+966 56 864 6500",
+  whatsappDigits: "966568646500",
+  email: "eng.yousef.ahmed92@gmail.com",
+  location: { en: "Jeddah, Saudi Arabia", ar: "جدة، السعودية" },
+  mapsUrl: "https://maps.google.com/?q=Jeddah,+Saudi+Arabia",
+  linkedinDisplay: "linkedin.com/in/eng-yousef-ahmed",
+};
+
+/** Optional GitHub profile — the social icon only renders when configured (no fake URLs). */
+export const githubUrl = (env.VITE_GITHUB_URL || "").trim();
+
 /* ================= contact-card assets (replaceable, no code edits) =================
  * Drop a file with the SAME name into the folder and the page picks it up
  * automatically — see the README inside each folder:
  *
- *   public/assets/branding/logo.svg     → top logo
- *   public/assets/profile/profile.jpg   → full-screen portrait
- *   public/assets/qr/contact-qr.png     → QR code
+ *   public/images/contact/profile.webp      → hero portrait
+ *   public/images/contact/contact-qr.webp   → QR code
  */
 export const CARD_ASSETS = {
   logo: [`${base}/assets/branding/logo.svg`, `${base}/assets/branding/logo.png`],
   profile: [
+    `${base}/images/contact/profile.webp`,
+    `${base}/images/contact/profile.jpg`,
+    `${base}/images/contact/profile.png`,
+    /* earlier drop-locations still honoured so existing photos keep working */
     `${base}/assets/profile/profile.jpg`,
     `${base}/assets/profile/profile.webp`,
     `${base}/assets/profile/profile.png`,
-    /* legacy paths still honoured so previously-dropped photos keep working */
     `${base}/images/contact/contact-profile.webp`,
     `${base}/images/contact/contact-profile.jpg`,
     `${base}/images/contact/contact-profile.png`,
   ],
   qr: [
+    `${base}/images/contact/contact-qr.webp`,
+    `${base}/images/contact/contact-qr.png`,
+    `${base}/images/contact/contact-qr.svg`,
+    `${base}/images/contact/contact-qr.jpg`,
+    /* earlier drop-location still honoured */
     `${base}/assets/qr/contact-qr.png`,
     `${base}/assets/qr/contact-qr.svg`,
     `${base}/assets/qr/contact-qr.webp`,
@@ -141,25 +167,19 @@ export function mailLink(subject: string, body: string): string | null {
 export const telHref = (market: Market): string =>
   `tel:+${market === "eg" ? CONTACT.whatsappEG : CONTACT.whatsappSA}`;
 
-/** A downloadable vCard so one tap saves both lines + email into the visitor's phone. */
-export function vCardDataUrl(): string {
-  const nameParts = CONTACT.cardName.trim().split(/\s+/);
-  const family = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
-  const given = nameParts.length > 1 ? nameParts.slice(0, -1).join(" ") : CONTACT.cardName;
+/** vCard built from the contact-card identity — one tap saves the profile into the visitor's phone. */
+export function contactCardVcf(): string {
   const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
-    `FN:${CONTACT.cardName}`,
-    `N:${family};${given};;;`,
-    `ORG:${CONFIG.brand}`,
-    `TITLE:${CONTACT.cardTitle}`,
-    `TEL;TYPE=CELL:+${CONTACT.whatsappEG}`,
-    `TEL;TYPE=CELL,WORK:+${CONTACT.whatsappSA}`,
-    `EMAIL:${CONTACT.cardEmail}`,
+    `FN:${CARD.name}`,
+    "N:Ahmed;Yousef;;;",
+    `TITLE:${CARD.title}`,
+    `TEL;TYPE=CELL:+${CARD.phoneDigits}`,
+    `EMAIL:${CARD.email}`,
+    `URL:${CONTACT.linkedin}`,
     `URL:${CONTACT.website}`,
-    `URL:https://wa.me/${CONTACT.whatsappEG}`,
-    `URL:https://wa.me/${CONTACT.whatsappSA}`,
-    `NOTE:Technology That Moves Business Forward. WhatsApp: +${CONTACT.whatsappEG} (Egypt) / +${CONTACT.whatsappSA} (Saudi Arabia). IT services in Saudi Arabia & Egypt.`,
+    `NOTE:${CARD.title} — ${CARD.location.en}. WhatsApp: +${CARD.whatsappDigits}`,
     "END:VCARD",
   ];
   return `data:text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;

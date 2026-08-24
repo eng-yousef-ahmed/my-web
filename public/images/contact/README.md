@@ -1,27 +1,31 @@
-# Contact-page portrait — replace without touching code
+# صور صفحة التواصل — Contact page assets
 
-The image shown on the **Contact** page (`/contact`) is loaded from this folder.
+الملفان المستخدمان في الصفحة (استبدل أيًا منهما **بنفس الاسم** بدون أي تعديل في الأكواد):
 
-## To change it
+```
+public/images/contact/
+├── profile.webp        ← الصورة الشخصية في أعلى الصفحة
+└── contact-qr.webp     ← رمز QR في بطاقة "امسح للتواصل"
+```
 
-Save your photo here using one of these names (first one found wins):
+## profile.webp — الصورة الشخصية
 
-1. `contact-profile.webp`  ← preferred (smallest, best quality)
-2. `contact-profile.jpg`
-3. `contact-profile.png`
+- تُعرض بنسبة 4:5 مع `object-fit: cover` — تنكسرش التصميم مهما كانت أبعاد صورتك.
+- الوجه يبقى واضح: موضع القص الافتراضي يركز على الجزء العلوي.
+- لو صورتك محتاجة قص مختلف، عدّل متغير البيئة (بدون كود):
+  ```
+  VITE_CONTACT_PROFILE_POSITION=50% 12%
+  ```
+- التوصية: بورتريه عمودي ~1000×1250px، خلفية داكنة، حجم أقل من 500KB.
+- مدعوم أيضًا: `profile.jpg` / `profile.png` بنفس الاسم الأساسي.
 
-Then refresh / rebuild. The new photo appears automatically — no code changes.
+## contact-qr.webp — رمز QR
 
-## This is independent from the Home photo
+- اختبر الرمز بهاتفك قبل الرفع ليتأكد أنه **قابل للمسح**.
+- الرمز يُعرض داخل لوحة فاتحة، فالألوان القياسية (غامق على فاتح) هي الأفضل.
+- مدعوم أيضًا: `contact-qr.png` / `contact-qr.svg` / `contact-qr.jpg`.
 
-- **Home hero** → `public/images/profile/yousef-ahmed.webp`
-- **Contact page** → `public/images/contact/contact-profile.webp`  (this folder)
+## قبل ما تضيف ملفاتك
 
-You can use two completely different photographs.
-
-## Tips for a good result
-
-- Vertical crop (roughly 4:5), e.g. 1000×1250 px or larger.
-- Keep your face in the **upper third** — the design crops from the top.
-- A dark navy / charcoal background blends best with the page.
-- Keep it under ~400 KB (export as WebP).
+لو الملف غير موجود، الصفحة تستخدم بدائل جاهزة (صورة افتراضية ورمز QR يشير لموقعك) —
+أول ما تحط ملفاتك هنا هي اللي هتظهر تلقائيًا.

@@ -1,271 +1,420 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
 import type { B } from "../i18n";
 import {
+  CARD,
   CARD_ASSETS,
   CONTACT,
   CV_FILES,
   IMAGES,
   cardProfilePosition,
-  hasEmail,
-  mailLink,
+  contactCardVcf,
+  githubUrl,
   qrFallbackUrl,
-  waLink,
-  websiteDisplay,
 } from "../config";
-import { FlagEG, FlagSA, Icon, Reveal, useAsset } from "../components/kit";
+import { Icon, Reveal, useAsset } from "../components/kit";
 
-/* ================= contact channel row ================= */
+/* ================= shared glass surface ================= */
+function Glass({ className = "", children }: { className?: string; children: React.ReactNode }) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-[24px] border border-paper-50/[0.07] bg-paper-50/[0.03] backdrop-blur-xl shadow-[0_24px_70px_-40px_rgba(0,0,0,0.9)] ${className}`}
+    >
+      {/* hairline top-light that reads as glass, not a gradient */}
+      <span className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-paper-50/20 to-transparent" aria-hidden="true" />
+      {children}
+    </div>
+  );
+}
+
+/* ================= contact channels ================= */
 type Channel = {
   key: string;
   icon: string;
-  kind: B;
+  label: B;
   value: string;
   href: string;
   external?: boolean;
-  flag?: React.ReactNode;
 };
 
 function ChannelRow({ ch, index }: { ch: Channel; index: number }) {
   const { L } = useLang();
   return (
-    <Reveal delay={420 + index * 70}>
+    <Reveal delay={80 + index * 60}>
       <a
         href={ch.href}
         target={ch.external ? "_blank" : undefined}
         rel={ch.external ? "noopener noreferrer" : undefined}
-        aria-label={L(ch.kind)}
-        className="group grid grid-cols-[34px_40px_minmax(0,1fr)_auto] items-center gap-3 sm:gap-4 py-4 border-b border-paper-50/[0.08] transition-all duration-200 ease-out hover:border-amber-500/40 hover:bg-paper-50/[0.04] hover:ps-3"
+        aria-label={`${L(ch.label)} — ${ch.value}`}
+        className="group flex items-center gap-4 px-5 sm:px-7 py-4.5 transition-colors duration-150 hover:bg-paper-50/[0.045]"
       >
-        <span className="font-mono text-[11px] text-mist-500 transition-colors duration-200 group-hover:text-amber-500">
-          {String(index + 1).padStart(2, "0")}
+        <span className="grid place-items-center w-11 h-11 shrink-0 rounded-xl border border-volt-500/20 bg-volt-500/10 text-volt-400 transition-colors duration-150 group-hover:bg-volt-500/20 group-hover:border-volt-400/40">
+          <Icon name={ch.icon} className="w-[19px] h-[19px]" />
         </span>
-        <span className="relative grid place-items-center w-10 h-10">
-          <Icon name={ch.icon} className="w-[19px] h-[19px] text-mist-300 transition-colors duration-200 group-hover:text-amber-400" />
-          {ch.flag && (
-            <span className="absolute -bottom-0.5 -end-1 rounded-full ring-2 ring-ink-950 overflow-hidden leading-none">
-              {ch.flag}
-            </span>
-          )}
-        </span>
-        <span className="min-w-0">
-          <span className="block font-mono text-[9.5px] uppercase tracking-[0.24em] text-mist-400">{L(ch.kind)}</span>
-          <span className="block font-display text-[15.5px] font-semibold text-paper-50 truncate transition-colors duration-200 group-hover:text-amber-300" dir="ltr">
+        <span className="flex-1 min-w-0">
+          <span className="block font-mono text-[9.5px] uppercase tracking-[0.28em] text-mist-400">{L(ch.label)}</span>
+          <span className="block mt-0.5 font-display text-[15px] font-semibold text-paper-50 truncate transition-colors duration-150 group-hover:text-volt-300" dir="ltr">
             {ch.value}
           </span>
         </span>
         <Icon
           name="arrow"
           strokeWidth={2}
-          className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-amber-400"
+          className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-volt-400"
         />
       </a>
     </Reveal>
   );
 }
 
+/* ================= professional areas ================= */
+type Skill = { icon: string; title: B; desc: B };
+const SKILLS: Skill[] = [
+  {
+    icon: "headset",
+    title: { en: "IT Support", ar: "الدعم التقني" },
+    desc: {
+      en: "End-user support, troubleshooting & IT service management.",
+      ar: "دعم المستخدمين، استكشاف الأعطال وإدارة خدمات تقنية المعلومات.",
+    },
+  },
+  {
+    icon: "rack",
+    title: { en: "System Admin", ar: "إدارة الأنظمة" },
+    desc: {
+      en: "Windows Server, Active Directory, Group Policy, Backup.",
+      ar: "ويندوز سيرفر، أكتيف ديريكتوري، سياسات المجموعة والنسخ الاحتياطي.",
+    },
+  },
+  {
+    icon: "network",
+    title: { en: "Network", ar: "الشبكات" },
+    desc: {
+      en: "LAN/WAN, VPN, Firewalls, Switching & Monitoring.",
+      ar: "LAN/WAN وVPN والجدران النارية والتحويل والمراقبة.",
+    },
+  },
+  {
+    icon: "shield",
+    title: { en: "Security", ar: "الأمن والمراقبة" },
+    desc: {
+      en: "CCTV Systems, Access Control, Biometric & Security Solutions.",
+      ar: "أنظمة المراقبة والتحكم في الدخول والبصمة والحلول الأمنية.",
+    },
+  },
+];
+
 /* ================= the page =================
- * Split composition: the portrait owns the LEFT half (physically, in both
- * LTR and RTL) and melts into the page with no frame; the identity,
- * channels, CV and QR live on the right with generous, calm spacing.
- * Every visual asset (photo / QR) is a replaceable public file —
- * see public/assets/{profile,qr}/README.md.
+ * A premium digital business card / contact hub.
+ * Portrait  → public/images/contact/profile.webp   (replace the file, no code edits)
+ * QR code   → public/images/contact/contact-qr.webp (replace the file, no code edits)
  */
 export function Contact() {
   const { isAr, L } = useLang();
+  const [copied, setCopied] = useState(false);
+
   usePageMeta(
-    isAr ? "تواصل معي | م. يوسف أحمد — TECH OF THE WORLD" : "Contact | Eng. Yousef Ahmed — TECH OF THE WORLD",
+    isAr ? "تواصل معي | يوسف أحمد — أخصائي دعم تقني أول" : "Contact | Yousef Ahmed — Senior IT Support Specialist",
     isAr
-      ? "بطاقة التعريف الرقمية للمهندس يوسف أحمد، أخصائي دعم تقني أول في السعودية ومصر — واتساب، بريد إلكتروني، لينكدإن ورمز QR."
-      : "Digital business card of Eng. Yousef Ahmed, Senior IT Support Specialist in Saudi Arabia & Egypt — WhatsApp, email, LinkedIn and a scannable QR."
+      ? "بطاقة التواصل الرقمية ليوسف أحمد، أخصائي دعم تقني أول في جدة — هاتف، واتساب، بريد إلكتروني، لينكدإن ورمز QR."
+      : "Digital contact card of Yousef Ahmed, Senior IT Support Specialist in Jeddah — phone, WhatsApp, email, LinkedIn and a scannable QR."
   );
 
   const profileSrc = useAsset(CARD_ASSETS.profile, IMAGES.contactProfile);
   const qrSrc = useAsset(CARD_ASSETS.qr, qrFallbackUrl(CONTACT.website));
+  const vcf = contactCardVcf();
 
-  const waMsg = L({ en: "Hello Yousef, I'd like to get in touch.", ar: "مرحبًا يوسف، أود التواصل معك." });
   const channels: Channel[] = [
     {
-      key: "wa-sa",
-      icon: "wa",
-      kind: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" },
-      value: CONTACT.displaySA,
-      href: waLink(waMsg, "sa"),
-      external: true,
-      flag: <FlagSA className="w-4 h-4" />,
+      key: "phone",
+      icon: "phone",
+      label: { en: "Phone", ar: "الهاتف" },
+      value: CARD.phoneDisplay,
+      href: `tel:+${CARD.phoneDigits}`,
     },
     {
-      key: "wa-eg",
+      key: "whatsapp",
       icon: "wa",
-      kind: { en: "WhatsApp · Egypt", ar: "واتساب · مصر" },
-      value: CONTACT.displayEG,
-      href: waLink(waMsg, "eg"),
+      label: { en: "WhatsApp", ar: "واتساب" },
+      value: CARD.whatsappDisplay,
+      href: `https://wa.me/${CARD.whatsappDigits}`,
       external: true,
-      flag: <FlagEG className="w-4 h-4" />,
     },
-    ...(hasEmail
-      ? [
-          {
-            key: "email",
-            icon: "mail",
-            kind: { en: "Email", ar: "البريد الإلكتروني" },
-            value: CONTACT.email,
-            href: mailLink(L({ en: "Hello Yousef", ar: "مرحبًا يوسف" }), "") ?? "#",
-          } as Channel,
-        ]
-      : []),
+    {
+      key: "email",
+      icon: "mail",
+      label: { en: "Email", ar: "البريد الإلكتروني" },
+      value: CARD.email,
+      href: `mailto:${CARD.email}`,
+    },
     {
       key: "linkedin",
       icon: "linkedin",
-      kind: { en: "LinkedIn", ar: "لينكدإن" },
-      value: `/${CONTACT.linkedinHandle}`,
+      label: { en: "LinkedIn", ar: "لينكدإن" },
+      value: CARD.linkedinDisplay,
       href: CONTACT.linkedin,
       external: true,
     },
     {
-      key: "website",
-      icon: "globe",
-      kind: { en: "Website", ar: "الموقع" },
-      value: websiteDisplay(),
-      href: CONTACT.website,
+      key: "location",
+      icon: "pin",
+      label: { en: "Location", ar: "الموقع" },
+      value: L(CARD.location),
+      href: CARD.mapsUrl,
       external: true,
     },
   ];
 
+  const socials = [
+    { key: "wa", icon: "wa", label: "WhatsApp", href: `https://wa.me/${CARD.whatsappDigits}` },
+    { key: "li", icon: "linkedin", label: "LinkedIn", href: CONTACT.linkedin },
+    ...(githubUrl ? [{ key: "gh", icon: "github", label: "GitHub", href: githubUrl }] : []),
+    { key: "em", icon: "mail", label: "Email", href: `mailto:${CARD.email}` },
+  ];
+
+  const shareProfile = async () => {
+    const url = CONTACT.website;
+    const payload = { title: `${CARD.name} — ${CARD.title}`, text: L(CARD.location), url };
+    try {
+      if (navigator.share) {
+        await navigator.share(payload);
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* user dismissed the share sheet — nothing to do */
+    }
+  };
+
   return (
     <section className="relative bg-ink-950 text-paper-50 overflow-hidden noise">
-      <div className="relative grid lg:grid-cols-[minmax(0,46%)_minmax(0,1fr)]">
-        {/* ============ LEFT HALF — the portrait, melting into the page ============ */}
-        {/* Mobile: in-flow block on top · Desktop: full-height left column */}
-        <div className="relative h-[46svh] sm:h-[52svh] lg:h-auto lg:min-h-svh overflow-hidden">
-          <img
-            src={profileSrc}
-            alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"}
-            className="kenburns absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: cardProfilePosition }}
-          />
-          {/* the melt — the image dissolves softly toward the content side, bottom and top.
-              No hairline, no corner ticks: the photo simply fades into the page. */}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-[38%] via-ink-950/40 to-ink-950/50" aria-hidden="true" />
-          <div className="absolute inset-0 hidden lg:block bg-gradient-to-l from-ink-950 via-[34%] via-ink-950/60 to-transparent" aria-hidden="true" />
-          <div className="absolute inset-0 bg-ink-950/10" aria-hidden="true" />
-          {/* a faint warm rim light hugging the inner edge — atmosphere, not a border */}
-          <div
-            className="absolute inset-y-0 right-0 w-56 hidden lg:block pointer-events-none"
-            style={{ background: "linear-gradient(to left, rgba(233,163,59,0.07), transparent)" }}
-            aria-hidden="true"
-          />
-        </div>
+      {/* ambient scene: fine grid + electric-blue stage lighting */}
+      <div className="absolute inset-0 grid-bg opacity-70" aria-hidden="true" />
+      <div
+        className="absolute -top-40 end-[-10%] w-[52rem] h-[52rem] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(59,139,245,0.14), transparent 65%)" }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-[-30%] start-[-15%] w-[44rem] h-[44rem] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(59,139,245,0.07), transparent 65%)" }}
+        aria-hidden="true"
+      />
 
-        {/* ============ RIGHT HALF — identity, channels, CV, QR ============ */}
-        <div className="relative min-h-[calc(100svh-46svh)] sm:min-h-[calc(100svh-52svh)] lg:min-h-svh flex flex-col justify-center">
-          {/* ambient layers on the content side */}
-          <div className="absolute inset-0 grid-bg opacity-60" aria-hidden="true" />
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse 70% 60% at 62% 42%, rgba(233,163,59,0.06), transparent 70%)" }}
-            aria-hidden="true"
-          />
-          {/* faint echo arc hugging the content edge */}
-          <svg
-            className="absolute top-1/2 -translate-y-1/2 -start-24 w-[30rem] opacity-[0.35] pointer-events-none hidden xl:block"
-            viewBox="0 0 600 600"
-            fill="none"
-            aria-hidden="true"
-          >
-            <circle cx="300" cy="300" r="248" stroke="#16283c" strokeWidth="1" />
-            <circle cx="300" cy="300" r="292" stroke="#1f344c" strokeWidth="1" strokeDasharray="2 9" />
-            <path d="M300 8 A292 292 0 0 1 560 166" stroke="#e9a33b" strokeOpacity="0.3" strokeWidth="1.2" />
-            <circle cx="560" cy="166" r="3" fill="#e9a33b" fillOpacity="0.8" />
-          </svg>
-
-          <div className="relative px-6 sm:px-10 lg:px-14 xl:px-20 py-14 lg:py-20 max-w-[680px] w-full mx-auto lg:mx-0 lg:me-auto">
-            {/* availability line */}
-            <Reveal className="flex items-center gap-3.5">
-              <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-400">
-                {isAr ? "تواصل معي" : "Contact"}
-              </span>
-              <span className="ms-auto hidden sm:flex items-center gap-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#3fbf6f] led" aria-hidden="true" />
-                {isAr ? "متاح للتواصل" : "Available"}
-              </span>
-            </Reveal>
-
-            {/* identity */}
-            <Reveal line as="h1" delay={100} className="mt-6">
-              <span className="block font-display font-bold tracking-tight leading-[1.06] text-[clamp(2.3rem,4.2vw,3.4rem)]">
-                {isAr ? "م. يوسف أحمد" : "ENG. YOUSEF AHMED"}
-              </span>
-            </Reveal>
-            <Reveal delay={180} className="mt-3.5">
-              <p className="font-mono text-[12px] sm:text-[13px] uppercase tracking-[0.24em] text-amber-400/95">
-                {isAr ? "أخصائي دعم تقني أول" : "Senior IT Support Specialist"}
-              </p>
-            </Reveal>
-            <Reveal delay={240} className="mt-5 flex flex-wrap items-center gap-2.5">
-              <span className="inline-flex items-center gap-2 border border-ink-600 bg-ink-900/70 px-3.5 py-1.5 text-[12.5px] font-medium text-mist-200">
-                <FlagSA className="w-4.5 h-4.5" /> {isAr ? "السعودية" : "Saudi Arabia"}
-              </span>
-              <span className="inline-flex items-center gap-2 border border-ink-600 bg-ink-900/70 px-3.5 py-1.5 text-[12.5px] font-medium text-mist-200">
-                <FlagEG className="w-4.5 h-4.5" /> {isAr ? "مصر" : "Egypt"}
-              </span>
-            </Reveal>
-
-            {/* channels — each appears exactly once */}
-            <Reveal delay={320} className="mt-9 mb-1 flex items-center justify-between">
-              <p className="font-mono text-[9.5px] uppercase tracking-[0.28em] text-mist-500">
-                {isAr ? "قنوات التواصل" : "Channels"}
-              </p>
-              <p className="font-mono text-[9.5px] uppercase tracking-[0.28em] text-mist-500">
-                {String(channels.length).padStart(2, "0")}
-              </p>
-            </Reveal>
-            <div>
-              {channels.map((ch, i) => (
-                <ChannelRow key={ch.key} ch={ch} index={i} />
-              ))}
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8 pt-28 lg:pt-32 pb-20">
+        {/* ================= HERO — introduction + portrait ================= */}
+        <div className="grid gap-12 lg:gap-16 lg:grid-cols-[1.04fr_0.96fr] items-center">
+          {/* portrait — first on mobile, physical RIGHT on desktop (LTR) */}
+          <Reveal delay={140} className="order-1 lg:order-2">
+            <div className="relative max-w-[440px] mx-auto lg:mx-0 lg:ms-auto">
+              {/* stage light behind the person */}
+              <div
+                className="absolute -inset-8 rounded-full pointer-events-none"
+                style={{ background: "radial-gradient(circle at 50% 38%, rgba(90,167,255,0.22), transparent 62%)" }}
+                aria-hidden="true"
+              />
+              <div className="relative overflow-hidden rounded-[28px] border border-paper-50/10">
+                <img
+                  src={profileSrc}
+                  alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"}
+                  className="block w-full aspect-[4/5] object-cover"
+                  style={{ objectPosition: cardProfilePosition }}
+                />
+                {/* soft cinematic blend into the page */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-ink-950/10" aria-hidden="true" />
+                {/* availability chip */}
+                <div className="absolute bottom-4 start-4 inline-flex items-center gap-2.5 rounded-full border border-paper-50/15 bg-ink-950/60 backdrop-blur-md px-4 py-2">
+                  <span className="relative flex w-2 h-2">
+                    <span className="absolute inline-flex w-full h-full rounded-full bg-[#3fbf6f] pulse-ring" aria-hidden="true" />
+                    <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />
+                  </span>
+                  <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-200">
+                    {isAr ? "متاح للتواصل" : "Available for work"}
+                  </span>
+                </div>
+              </div>
             </div>
+          </Reveal>
 
-            {/* CV downloads + QR */}
-            <Reveal delay={480 + channels.length * 70} className="mt-9 flex flex-wrap items-end justify-between gap-8">
-              <div>
-                <p className="font-mono text-[9.5px] uppercase tracking-[0.28em] text-mist-500">
-                  {isAr ? "السيرة الذاتية" : "CV"}
-                </p>
-                <div className="mt-3.5 flex items-center gap-6">
-                  <a href={CV_FILES.ar} download className="group inline-flex items-center gap-2 font-display text-[12.5px] font-semibold uppercase tracking-[0.12em] text-mist-200 transition-colors hover:text-amber-400">
-                    <Icon name="doc" className="w-4 h-4 text-amber-500/80" /> {isAr ? "عربي" : "Arabic"}
-                    <Icon name="arrow" className="w-3.5 h-3.5 rotate-90 rtl:-scale-x-100 opacity-0 -translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0" strokeWidth={2.2} />
-                  </a>
-                  <span className="w-px h-4 bg-ink-600" aria-hidden="true" />
-                  <a href={CV_FILES.en} download className="group inline-flex items-center gap-2 font-display text-[12.5px] font-semibold uppercase tracking-[0.12em] text-mist-200 transition-colors hover:text-amber-400">
-                    <Icon name="doc" className="w-4 h-4 text-amber-500/80" /> {isAr ? "إنجليزي" : "English"}
-                    <Icon name="arrow" className="w-3.5 h-3.5 rotate-90 rtl:-scale-x-100 opacity-0 -translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0" strokeWidth={2.2} />
-                  </a>
-                </div>
-              </div>
+          {/* introduction — physical LEFT on desktop (LTR) */}
+          <div className="order-2 lg:order-1">
+            <Reveal className="inline-flex items-center gap-3">
+              <span className="h-px w-10 bg-volt-400" aria-hidden="true" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-volt-300">
+                {isAr ? "مرحبًا، أنا" : "Hello, I'm"}
+              </span>
+            </Reveal>
 
-              {/* QR — integrated plaque, always scannable */}
-              <div className="relative w-[128px] sm:w-[138px]">
-                <span className="absolute -top-1.5 -start-1.5 w-4 h-4 border-t border-s border-amber-500/70" aria-hidden="true" />
-                <span className="absolute -bottom-1.5 -end-1.5 w-4 h-4 border-b border-e border-amber-500/70" aria-hidden="true" />
-                <div className="chamfer-sm bg-ink-900/80 backdrop-blur-sm border border-paper-50/15 p-2.5 transition-colors duration-300 hover:border-amber-500/40">
-                  <img
-                    src={qrSrc}
-                    alt={isAr ? "رمز QR — امسحه للتواصل مع يوسف أحمد" : "QR code — scan to connect with Yousef Ahmed"}
-                    width={160}
-                    height={160}
-                    className="block w-full h-auto"
-                  />
-                </div>
-                <p className="mt-2.5 text-center font-mono text-[8.5px] uppercase tracking-[0.26em] text-mist-400">
-                  {isAr ? "امسح للتواصل" : "Scan to connect"}
-                </p>
-              </div>
+            <Reveal line as="h1" delay={90} className="mt-5">
+              <span className="block font-display font-bold tracking-tight leading-[1.08] text-[clamp(2.6rem,5.4vw,3.9rem)]">
+                {isAr ? (
+                  <>يوسف <span className="text-volt-400">أحمد</span></>
+                ) : (
+                  <>Yousef <span className="text-volt-400">Ahmed</span></>
+                )}
+              </span>
+            </Reveal>
+
+            <Reveal delay={180} className="mt-4">
+              <p className="font-mono text-[12.5px] sm:text-[13.5px] uppercase tracking-[0.24em] text-mist-300">
+                {L({ en: CARD.title, ar: CARD.titleAr })}
+              </p>
+            </Reveal>
+
+            <Reveal as="p" delay={260} className="mt-6 max-w-md text-[15.5px] leading-relaxed text-mist-400">
+              {isAr
+                ? "خبرة +9 سنوات في الدعم التقني، إدارة الأنظمة، بنية الشبكات التحتية والحلول التقنية."
+                : "9+ years of experience in IT Support, System Administration, Network Infrastructure & Technical Solutions."}
+            </Reveal>
+
+            <Reveal delay={340} className="mt-9 flex flex-wrap items-center gap-4">
+              <a
+                href={isAr ? CV_FILES.ar : CV_FILES.en}
+                download
+                className="group inline-flex items-center gap-3 rounded-xl bg-volt-500 px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_14px_36px_-16px_rgba(59,139,245,0.7)] transition-all duration-150 hover:bg-volt-400 active:scale-[0.97]"
+              >
+                <Icon name="download" className="w-4.5 h-4.5 transition-transform duration-150 group-hover:translate-y-0.5" strokeWidth={2} />
+                {isAr ? "تحميل السيرة الذاتية" : "Download CV"}
+              </a>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-3 rounded-xl border border-paper-50/15 bg-paper-50/[0.04] backdrop-blur-md px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-mist-200 transition-all duration-150 hover:border-volt-400/50 hover:text-volt-300 active:scale-[0.97]"
+              >
+                {isAr ? "استعرض أعمالي" : "View Portfolio"}
+                <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+              </Link>
             </Reveal>
           </div>
         </div>
+
+        {/* ================= GET IN TOUCH + QR ================= */}
+        <div className="mt-16 lg:mt-24 grid gap-6 lg:grid-cols-[1.12fr_0.88fr] items-stretch">
+          {/* contact channels */}
+          <Reveal>
+            <Glass className="h-full flex flex-col">
+              <div className="px-5 sm:px-7 pt-7 pb-5 flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="font-display text-2xl font-bold">{isAr ? "تواصل معي" : "Get In Touch"}</h2>
+                  <p className="mt-1.5 text-[13.5px] text-mist-400">
+                    {isAr ? "يسعدني تواصلك عبر أي من القنوات التالية." : "Feel free to reach out through any of the channels below."}
+                  </p>
+                </div>
+                <span className="hidden sm:block shrink-0 font-mono text-[9.5px] uppercase tracking-[0.24em] text-volt-300 border border-volt-500/25 bg-volt-500/10 rounded-full px-3 py-1.5 mt-1">
+                  05 {isAr ? "قنوات" : "Channels"}
+                </span>
+              </div>
+              <div className="flex-1 divide-y divide-paper-50/[0.06] border-t border-paper-50/[0.06]">
+                {channels.map((ch, i) => (
+                  <ChannelRow key={ch.key} ch={ch} index={i} />
+                ))}
+              </div>
+            </Glass>
+          </Reveal>
+
+          {/* QR card */}
+          <Reveal delay={120}>
+            <Glass className="h-full flex flex-col p-5 sm:p-7">
+              <h2 className="font-display text-2xl font-bold">{isAr ? "امسح للتواصل" : "Scan to Connect"}</h2>
+              <p className="mt-1.5 text-[13.5px] leading-relaxed text-mist-400">
+                {isAr ? "امسح رمز QR لحفظ بياناتي أو التواصل فورًا." : "Scan the QR code to save my contact or connect instantly."}
+              </p>
+
+              <div className="mt-6 mx-auto w-full max-w-[240px] rounded-2xl bg-paper-50 p-3.5 shadow-[0_18px_50px_-24px_rgba(59,139,245,0.45)]">
+                <img
+                  src={qrSrc}
+                  alt={isAr ? "رمز QR — امسحه لحفظ بيانات التواصل" : "QR code — scan to save my contact"}
+                  width={480}
+                  height={480}
+                  loading="lazy"
+                  className="block w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* action bar */}
+              <div className="mt-7 grid grid-cols-3 gap-2.5">
+                <a
+                  href={vcf}
+                  download="yousef-ahmed.vcf"
+                  className="group flex flex-col items-center gap-2 rounded-xl border border-paper-50/10 bg-paper-50/[0.04] px-2 py-4 transition-all duration-150 hover:border-volt-400/50 hover:bg-volt-500/10"
+                >
+                  <Icon name="download" className="w-5 h-5 text-volt-400 transition-transform duration-150 group-hover:translate-y-0.5" />
+                  <span className="font-display text-[10.5px] font-semibold uppercase tracking-[0.08em] text-mist-200 group-hover:text-volt-300 transition-colors">
+                    {isAr ? "حفظ الجهة" : "Save Contact"}
+                  </span>
+                </a>
+                <a
+                  href={vcf}
+                  className="group flex flex-col items-center gap-2 rounded-xl border border-paper-50/10 bg-paper-50/[0.04] px-2 py-4 transition-all duration-150 hover:border-volt-400/50 hover:bg-volt-500/10"
+                >
+                  <Icon name="userplus" className="w-5 h-5 text-volt-400 transition-transform duration-150 group-hover:-translate-y-0.5" />
+                  <span className="font-display text-[10.5px] font-semibold uppercase tracking-[0.08em] text-mist-200 group-hover:text-volt-300 transition-colors">
+                    {isAr ? "أضف للجهات" : "Add to Contacts"}
+                  </span>
+                </a>
+                <button
+                  type="button"
+                  onClick={shareProfile}
+                  className="group flex flex-col items-center gap-2 rounded-xl border border-paper-50/10 bg-paper-50/[0.04] px-2 py-4 transition-all duration-150 hover:border-volt-400/50 hover:bg-volt-500/10 cursor-pointer"
+                >
+                  <Icon name={copied ? "check" : "share"} className={`w-5 h-5 transition-colors ${copied ? "text-[#3fbf6f]" : "text-volt-400"}`} />
+                  <span className={`font-display text-[10.5px] font-semibold uppercase tracking-[0.08em] transition-colors ${copied ? "text-[#3fbf6f]" : "text-mist-200 group-hover:text-volt-300"}`}>
+                    {copied ? (isAr ? "تم النسخ" : "Copied!") : isAr ? "مشاركة" : "Share Profile"}
+                  </span>
+                </button>
+              </div>
+            </Glass>
+          </Reveal>
+        </div>
+
+        {/* ================= PROFESSIONAL AREAS ================= */}
+        <Reveal className="mt-6">
+          <Glass className="px-5 sm:px-8 py-8 sm:py-10">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-y-8">
+              {SKILLS.map((s, i) => (
+                <div
+                  key={s.title.en}
+                  className={`group relative px-0 sm:px-7 ${i > 0 ? "sm:border-s sm:border-paper-50/[0.07]" : ""} ${i >= 2 ? "sm:border-t-0" : ""}`}
+                >
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-mist-500">0{i + 1}</span>
+                  <span className="mt-3 flex w-fit text-volt-400 transition-transform duration-200 group-hover:-translate-y-0.5">
+                    <Icon name={s.icon} className="w-6 h-6" />
+                  </span>
+                  <h3 className="mt-3.5 font-display text-[17px] font-bold">{L(s.title)}</h3>
+                  <p className="mt-2 text-[13px] leading-relaxed text-mist-400">{L(s.desc)}</p>
+                </div>
+              ))}
+            </div>
+          </Glass>
+        </Reveal>
+
+        {/* ================= FINAL CTA ================= */}
+        <Reveal className="mt-20 text-center">
+          <p className="font-display text-2xl sm:text-[28px] font-bold tracking-tight">
+            {isAr ? (
+              <>لنبنِ <span className="text-volt-400">شيئًا رائعًا</span> معًا</>
+            ) : (
+              <>Let's build <span className="text-volt-400">something great</span> together</>
+            )}
+          </p>
+          <div className="mt-8 flex items-center justify-center gap-3.5">
+            {socials.map((s) => (
+              <a
+                key={s.key}
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label={s.label}
+                title={s.label}
+                className="grid place-items-center w-12 h-12 rounded-full border border-paper-50/12 bg-paper-50/[0.04] text-mist-300 backdrop-blur-md transition-all duration-150 hover:border-volt-400/60 hover:text-volt-300 hover:-translate-y-1"
+              >
+                <Icon name={s.icon} className="w-[19px] h-[19px]" />
+              </a>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

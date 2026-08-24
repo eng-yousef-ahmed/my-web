@@ -30,6 +30,12 @@
   --color-circuit-400: #6cc7b4;
   --color-circuit-500: #4dab98;
 
+  /* electric blue — accent of the Contact / digital-card experience */
+  --color-volt-300: #8ac2ff;
+  --color-volt-400: #5aa7ff;
+  --color-volt-500: #3b8bf5;
+  --color-volt-600: #2b6cd4;
+
   --font-display: "Space Grotesk", "Almarai", sans-serif;
   --font-body: "IBM Plex Sans", "IBM Plex Sans Arabic", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
