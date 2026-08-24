@@ -11,6 +11,7 @@ const ProjectsList = lazy(() => import("./pages/Projects").then((m) => ({ defaul
 const ProjectDetail = lazy(() => import("./pages/Projects").then((m) => ({ default: m.ProjectDetail })));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact").then((m) => ({ default: m.Contact })));
+const CardPage = lazy(() => import("./pages/Card"));
 
 function BootScreen() {
   return (
@@ -32,19 +33,35 @@ export default function App() {
   return (
     <LangProvider>
       <HashRouter>
-        <Layout>
-          <Suspense fallback={<BootScreen />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/projects" element={<ProjectsList />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
-          </Suspense>
-        </Layout>
+        <Routes>
+          {/* the scanned QR opens this standalone digital business card — no site chrome */}
+          <Route
+            path="/card"
+            element={
+              <Suspense fallback={<BootScreen />}>
+                <CardPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <Layout>
+                <Suspense fallback={<BootScreen />}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/projects" element={<ProjectsList />} />
+                    <Route path="/projects/:id" element={<ProjectDetail />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<Home />} />
+                  </Routes>
+                </Suspense>
+              </Layout>
+            }
+          />
+        </Routes>
       </HashRouter>
     </LangProvider>
   );

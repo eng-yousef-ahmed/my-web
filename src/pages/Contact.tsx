@@ -14,6 +14,7 @@ import {
   qrFallbackUrl,
 } from "../config";
 import { Icon, Reveal, useAsset } from "../components/kit";
+import { SmartQR } from "../components/SmartQR";
 
 /* ================= shared glass surface ================= */
 function Glass({ className = "", children }: { className?: string; children: React.ReactNode }) {
@@ -209,32 +210,40 @@ export function Contact() {
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-[1.04fr_0.96fr] items-center">
           {/* portrait — first on mobile, physical RIGHT on desktop (LTR) */}
           <Reveal delay={140} className="order-1 lg:order-2">
-            <div className="relative max-w-[440px] mx-auto lg:mx-0 lg:ms-auto">
+            <div className="relative max-w-[460px] mx-auto lg:mx-0 lg:ms-auto">
               {/* stage light behind the person */}
               <div
-                className="absolute -inset-8 rounded-full pointer-events-none"
-                style={{ background: "radial-gradient(circle at 50% 38%, rgba(90,167,255,0.22), transparent 62%)" }}
+                className="absolute -inset-10 rounded-full pointer-events-none"
+                style={{ background: "radial-gradient(circle at 50% 36%, rgba(90,167,255,0.22), transparent 62%)" }}
                 aria-hidden="true"
               />
-              <div className="relative overflow-hidden rounded-[28px] border border-paper-50/10">
+              {/* the portrait — no frame, edges melt into the page */}
+              <div
+                className="relative aspect-[4/5]"
+                style={{
+                  maskImage: "radial-gradient(120% 105% at 50% 38%, #000 52%, transparent 96%)",
+                  WebkitMaskImage: "radial-gradient(120% 105% at 50% 38%, #000 52%, transparent 96%)",
+                }}
+              >
                 <img
                   src={profileSrc}
                   alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"}
-                  className="block w-full aspect-[4/5] object-cover"
+                  className="kenburns absolute inset-0 w-full h-full object-cover"
                   style={{ objectPosition: cardProfilePosition }}
                 />
-                {/* soft cinematic blend into the page */}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-ink-950/10" aria-hidden="true" />
-                {/* availability chip */}
-                <div className="absolute bottom-4 start-4 inline-flex items-center gap-2.5 rounded-full border border-paper-50/15 bg-ink-950/60 backdrop-blur-md px-4 py-2">
-                  <span className="relative flex w-2 h-2">
-                    <span className="absolute inline-flex w-full h-full rounded-full bg-[#3fbf6f] pulse-ring" aria-hidden="true" />
-                    <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />
-                  </span>
-                  <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-200">
-                    {isAr ? "متاح للتواصل" : "Available for work"}
-                  </span>
-                </div>
+                {/* cinematic melt: bottom + sides dissolve into the navy */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/25" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-r from-ink-950/55 via-transparent to-ink-950/55" aria-hidden="true" />
+              </div>
+              {/* availability chip floating over the blend */}
+              <div className="absolute bottom-6 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 lg:bottom-10 lg:start-8 lg:translate-x-0 rtl:lg:translate-x-0 inline-flex items-center gap-2.5 rounded-full border border-paper-50/15 bg-ink-950/60 backdrop-blur-md px-4 py-2">
+                <span className="relative flex w-2 h-2">
+                  <span className="absolute inline-flex w-full h-full rounded-full bg-[#3fbf6f] pulse-ring" aria-hidden="true" />
+                  <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />
+                </span>
+                <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-200">
+                  {isAr ? "متاح للتواصل" : "Available for work"}
+                </span>
               </div>
             </div>
           </Reveal>
@@ -319,18 +328,13 @@ export function Contact() {
             <Glass className="h-full flex flex-col p-5 sm:p-7">
               <h2 className="font-display text-2xl font-bold">{isAr ? "امسح للتواصل" : "Scan to Connect"}</h2>
               <p className="mt-1.5 text-[13.5px] leading-relaxed text-mist-400">
-                {isAr ? "امسح رمز QR لحفظ بياناتي أو التواصل فورًا." : "Scan the QR code to save my contact or connect instantly."}
+                {isAr
+                  ? "امسح الرمز — هتفتحلك بطاقة التعريف الرقمية بكل بيانات التواصل والصورة الشخصية."
+                  : "Scan the code — it opens my digital business card with the full contact details and photo."}
               </p>
 
               <div className="mt-6 mx-auto w-full max-w-[240px] rounded-2xl bg-paper-50 p-3.5 shadow-[0_18px_50px_-24px_rgba(59,139,245,0.45)]">
-                <img
-                  src={qrSrc}
-                  alt={isAr ? "رمز QR — امسحه لحفظ بيانات التواصل" : "QR code — scan to save my contact"}
-                  width={480}
-                  height={480}
-                  loading="lazy"
-                  className="block w-full h-auto object-contain"
-                />
+                <SmartQR size={240} />
               </div>
 
               {/* action bar */}
