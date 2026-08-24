@@ -183,6 +183,30 @@ const PATHS: Record<string, React.ReactNode> = {
       transform="translate(1.2 0) scale(0.92)"
     />
   ),
+  github: (
+    <path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.48.09.65-.21.65-.46l-.01-1.61c-2.67.58-3.23-1.13-3.23-1.13-.44-1.11-1.07-1.4-1.07-1.4-.87-.6.07-.58.07-.58.96.07 1.47.99 1.47.99.85 1.46 2.24 1.04 2.79.8.09-.62.33-1.04.6-1.28-2.13-.24-4.37-1.07-4.37-4.75 0-1.05.37-1.91.99-2.58-.1-.24-.43-1.22.09-2.54 0 0 .81-.26 2.65.99a9.2 9.2 0 0 1 4.82 0c1.84-1.25 2.65-.99 2.65-.99.52 1.32.19 2.3.09 2.54.62.67.99 1.53.99 2.58 0 3.69-2.25 4.5-4.39 4.74.35.3.65.88.65 1.78l-.01 2.64c0 .25.17.55.66.46A9.5 9.5 0 0 0 12 2.5Z" />
+  ),
+  download: <path d="M12 3.5v11m0 0 4-4m-4 4-4-4M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" />,
+  addContact: (
+    <>
+      <circle cx="10" cy="8" r="3.5" />
+      <path d="M3.5 20c.8-3.5 3.4-5.5 6.5-5.5 1.6 0 3 .5 4.2 1.4M18.5 14.5v6M15.5 17.5h6" />
+    </>
+  ),
+  userplus: (
+    <>
+      <circle cx="10" cy="8" r="3.5" />
+      <path d="M4.5 19.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M18 7.5v5M15.5 10h5" />
+    </>
+  ),
+  share: (
+    <>
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="17.5" cy="5.5" r="2.5" />
+      <circle cx="17.5" cy="18.5" r="2.5" />
+      <path d="m8.3 10.8 6.9-4M8.3 13.2l6.9 4" />
+    </>
+  ),
 };
 
 export function Icon({ name, className = "w-5 h-5", strokeWidth = 1.7 }: { name: string; className?: string; strokeWidth?: number }) {
@@ -282,6 +306,50 @@ export function LogoMark({ tone = "light", className = "w-10 h-10" }: { tone?: "
       <rect x="8" y="37" width="7" height="2.4" fill="#E9A33B" />
     </svg>
   );
+}
+
+/* ---------- first-available asset resolver ----------
+ * Probes a list of public paths in order and resolves the first file that
+ * actually exists, falling back to a provided default. Lets any page bind
+ * to a replaceable asset folder with zero code edits later.
+ */
+const assetCache = new Map<string, Promise<string>>();
+
+export function useAsset(candidates: string[], fallback: string): string {
+  const key = candidates.join("|");
+  const [src, setSrc] = useState(fallback);
+
+  useEffect(() => {
+    if (!assetCache.has(key)) {
+      assetCache.set(
+        key,
+        new Promise((resolve) => {
+          let i = 0;
+          const next = () => {
+            if (i >= candidates.length) return resolve(fallback);
+            const img = new Image();
+            img.onload = () => resolve(candidates[i]);
+            img.onerror = () => {
+              i++;
+              next();
+            };
+            img.src = candidates[i];
+          };
+          next();
+        })
+      );
+    }
+    let active = true;
+    assetCache.get(key)!.then((s) => {
+      if (active) setSrc(s);
+    });
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, fallback]);
+
+  return src;
 }
 
 /* ---------- swappable brand logo (no code change needed) ----------

@@ -19,6 +19,20 @@ npm run dev      # local development
 npm run build    # production build → dist/
 ```
 
+## Contact card assets (no code edits)
+
+The Contact page is a full-screen digital business card driven by three
+replaceable public files — swap any of them (same filename) and rebuild:
+
+| Asset | Path | Fallback |
+| --- | --- | --- |
+| Logo | `public/assets/branding/logo.svg` (or `.png`) | site logo → built-in YA mark |
+| Portrait | `public/assets/profile/profile.jpg` (`.webp`/`.png` too) | generated default |
+| QR code | `public/assets/qr/contact-qr.png` (`.svg`/`.webp`/`.jpg` too) | live QR of the website URL |
+
+Portrait crop is tuned via `VITE_CONTACT_PROFILE_POSITION` (e.g. `50% 12%`).
+Full instructions live in the README inside each folder.
+
 ## Changing the profile image (no code edits)
 
 The Home hero portrait lives in one place: **`public/images/profile/`**.
