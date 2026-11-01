@@ -17,16 +17,11 @@ const STR: Record<string, B> = {
   "common.close": { en: "Close", ar: "إغلاق" },
   "common.all": { en: "All", ar: "الكل" },
   "common.langLabel": { en: "عربي", ar: "English" },
-  "common.minRead": { en: "min read", ar: "دقائق قراءة" },
 
   /* CTAs */
-  "cta.exploreProjects": { en: "Explore Projects", ar: "استعرض مشاريعي" },
-  "cta.aboutMe": { en: "About Me", ar: "عني" },
-  "cta.viewAll": { en: "View all projects", ar: "عرض جميع المشاريع" },
   "cta.readCase": { en: "View Project", ar: "عرض المشروع" },
   "cta.backToProjects": { en: "Back to projects", ar: "العودة إلى المشاريع" },
   "cta.contactMe": { en: "Contact Me", ar: "تواصل معي" },
-  "cta.viewProject": { en: "View My Projects", ar: "استعرض مشاريعي" },
 
   /* footer */
   "footer.blurb": {

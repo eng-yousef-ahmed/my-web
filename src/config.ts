@@ -11,26 +11,18 @@ const env = import.meta.env as Record<string, string | undefined>;
 const digits = (s: string) => s.replace(/\D/g, "");
 const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
 
-export const CONFIG = {
-  brand: "TECH OF THE WORLD",
-  symbol: "YA",
-  tagline: "Technology That Moves Business Forward.",
-  markets: ["Saudi Arabia", "Egypt"] as const,
-};
-
 /* ================= verified contact data ================= */
 export const CONTACT = {
   whatsappSA: digits(env.VITE_WHATSAPP_SA || "+966568992794"),
   whatsappEG: digits(env.VITE_WHATSAPP_EG || "+201203361192"),
   displaySA: "+966 56 899 2794",
   displayEG: "+20 120 336 1192",
-  email: (env.VITE_CONTACT_EMAIL || "TechOfTheWorled92@gmail.com").trim(),
+  email: (env.VITE_CONTACT_EMAIL || "youseefa77@gmail.com").trim(),
   linkedin: (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed/").trim(),
   linkedinHandle: "eng-yousef-ahmed",
   website: (env.VITE_WEBSITE_URL || "https://tech-of-the-world.netlify.app").trim(),
 };
 
-export const hasEmail = CONTACT.email.length > 0;
 
 /* ================= business-card identity ================= */
 export const CARD = {
@@ -38,11 +30,14 @@ export const CARD = {
   nameAr: "يوسف أحمد",
   title: "Senior IT Support Specialist",
   titleAr: "أخصائي دعم تقني أول",
-  phoneDisplay: "+966 56 864 6500",
-  phoneDigits: "966568646500",
-  whatsappDisplay: "+966 56 864 6500",
-  whatsappDigits: "966568646500",
-  email: "eng.yousef.ahmed92@gmail.com",
+  /* one source of truth: everything below comes from CONTACT */
+  phoneDisplay: CONTACT.displaySA,
+  phoneDigits: CONTACT.whatsappSA,
+  whatsappDisplay: CONTACT.displaySA,
+  whatsappDigits: CONTACT.whatsappSA,
+  whatsappEgDisplay: CONTACT.displayEG,
+  whatsappEgDigits: CONTACT.whatsappEG,
+  email: CONTACT.email,
   location: { en: "Jeddah, Saudi Arabia", ar: "جدة، السعودية" },
   mapsUrl: "https://maps.google.com/?q=Jeddah,+Saudi+Arabia",
   linkedinDisplay: "linkedin.com/in/eng-yousef-ahmed",
@@ -86,7 +81,6 @@ export const CARD_ASSETS = {
 };
 
 /** Portrait crop anchor — tune per photo via env, no code edits. */
-export const homeProfilePosition = (env.VITE_HOME_PROFILE_POSITION || "50% 12%").trim();
 export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "50% 18%").trim();
 
 /* ================= outbound helpers ================= */
@@ -130,13 +124,10 @@ export function waLink(message: string, market: Market = "sa"): string {
 
 /** Builds a mailto link. Returns null when the email is not configured. */
 export function mailLink(subject: string, body: string): string | null {
-  if (!hasEmail) return null;
+  if (!CONTACT.email) return null;
   return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(enrich(body))}`;
 }
 
-/** Click-to-call deep link for a market line. */
-export const telHref = (market: Market): string =>
-  `tel:+${market === "eg" ? CONTACT.whatsappEG : CONTACT.whatsappSA}`;
 
 /** vCard built from the card identity — one tap saves the profile into the visitor's phone. */
 export function contactCardVcf(): string {
@@ -147,10 +138,11 @@ export function contactCardVcf(): string {
     "N:Ahmed;Yousef;;;",
     `TITLE:${CARD.title}`,
     `TEL;TYPE=CELL:+${CARD.phoneDigits}`,
+    `TEL;TYPE=CELL:+${CARD.whatsappEgDigits}`,
     `EMAIL:${CARD.email}`,
     `URL:${CONTACT.linkedin}`,
     `URL:${CONTACT.website}`,
-    `NOTE:${CARD.title} — ${CARD.location.en}. WhatsApp: +${CARD.whatsappDigits}`,
+    `NOTE:${CARD.title} — ${CARD.location.en}. WhatsApp KSA: +${CARD.whatsappDigits} · Egypt: +${CARD.whatsappEgDigits}`,
     "END:VCARD",
   ];
   return `text/vcard;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
@@ -161,12 +153,10 @@ export function websiteDisplay(): string {
   return CONTACT.website.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/+$/, "");
 }
 
-/* ================= generated imagery (fallbacks only) =================
- * Real photos always come from the public folders above. These generated
- * images are only used while no local file exists yet.
+/* ================= fallbacks =================
+ * The real portraits ship with the site; these are only the last-resort paths.
  */
 export const IMAGES = {
-  profile: "https://image.qwenlm.ai/generated-images/ada728cc-71f5-4e15-bf23-14f5c59e204f/_result.png",
-  contactProfile: "https://image.qwenlm.ai/generated-images/ada728cc-71f5-4e15-bf23-14f5c59e204f/_result.png",
-  rack: "https://image.qwenlm.ai/generated-images/38ce266e-4d9d-4a33-b426-4bba89801df2/_result.png",
+  profile: `${base}/images/profile/yousef-ahmed.webp`,
+  contactProfile: `${base}/images/contact/profile.webp`,
 };

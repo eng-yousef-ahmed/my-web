@@ -46,10 +46,7 @@ function loadAll(): Promise<CaseStudy[]> {
         for (const folder of folders) {
           try {
             const mRes = await fetch(`${base}/projects/${folder}/meta.json`);
-            if (!mRes.ok) {
-              if (!merged.has(folder)) merged.set(folder, CASES[0]);
-              continue;
-            }
+            if (!mRes.ok) continue;
             const meta = (await mRes.json()) as MetaShape;
             const id = meta.id ?? folder;
             const existing = merged.get(id);

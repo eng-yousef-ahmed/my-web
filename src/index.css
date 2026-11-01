@@ -244,33 +244,6 @@ html[dir="rtl"] .nav-draw::after { transform-origin: right; }
   transition: border-color 0.15s ease-out, background-color 0.15s ease-out;
 }
 
-/* ---------- custom cursor ---------- */
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 9999px;
-  border: 1.5px solid rgba(233, 163, 59, 0.9);
-  pointer-events: none;
-  z-index: 120;
-  will-change: transform;
-  transition: width 0.25s, height 0.25s, border-color 0.25s, opacity 0.3s;
-}
-.cursor-ring.cursor-hover {
-  width: 56px;
-  height: 56px;
-  border-color: #f0b35a;
-}
-.cursor-ring.cursor-down {
-  width: 24px;
-  height: 24px;
-}
-@media (pointer: coarse) {
-  .cursor-ring { display: none; }
-}
-
 /* ---------- page transition ---------- */
 @keyframes pageEnter {
   from { opacity: 0; transform: translateY(16px); }

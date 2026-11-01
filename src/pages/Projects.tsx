@@ -73,7 +73,7 @@ function Lightbox({ imgs, i, onClose, onNav }: { imgs: { file: string }[]; i: nu
 export function ProjectsList() {
   const { isAr, L, t } = useLang();
   const { projects } = useAllProjects();
-  const [market, setMarket] = useState<"all" | "sa" | "eg" | "both">("all");
+  const [market, setMarket] = useState<"all" | "sa" | "eg">("all");
   usePageMeta(
     isAr ? "المشاريع | يوسف أحمد — TECH OF THE WORLD" : "Projects | Yousef Ahmed — TECH OF THE WORLD",
     isAr
@@ -81,7 +81,7 @@ export function ProjectsList() {
       : "Real case studies: infrastructure, networks, surveillance centers and Microsoft environments across Saudi Arabia and Egypt."
   );
 
-  const filtered = useMemo(() => projects.filter((c) => market === "all" || c.market === market), [projects, market]);
+  const filtered = useMemo(() => projects.filter((c) => market === "all" || c.market === market || c.market === "both"), [projects, market]);
 
   const filterBtn = (active: boolean) =>
     `px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] border transition-colors duration-150 cursor-pointer ${

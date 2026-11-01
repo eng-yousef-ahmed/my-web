@@ -90,7 +90,8 @@ export function Contact() {
 
   const channels: Channel[] = [
     { key: "phone", icon: "phone", label: { en: "Phone", ar: "الهاتف" }, value: CARD.phoneDisplay, href: `tel:+${CARD.phoneDigits}` },
-    { key: "whatsapp", icon: "wa", label: { en: "WhatsApp", ar: "واتساب" }, value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, external: true },
+    { key: "whatsapp", icon: "wa", label: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" }, value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, external: true },
+    { key: "whatsapp-eg", icon: "wa", label: { en: "WhatsApp · Egypt", ar: "واتساب · مصر" }, value: CARD.whatsappEgDisplay, href: `https://wa.me/${CARD.whatsappEgDigits}`, external: true },
     { key: "email", icon: "mail", label: { en: "Email", ar: "البريد الإلكتروني" }, value: CARD.email, href: `mailto:${CARD.email}` },
     { key: "linkedin", icon: "linkedin", label: { en: "LinkedIn", ar: "لينكدإن" }, value: CARD.linkedinDisplay, href: CONTACT.linkedin, external: true },
     { key: "location", icon: "pin", label: { en: "Location", ar: "الموقع" }, value: L(CARD.location), href: CARD.mapsUrl, external: true },
@@ -213,7 +214,7 @@ export function Contact() {
                 </p>
               </div>
               <span className="hidden sm:block shrink-0 font-mono text-[9.5px] uppercase tracking-[0.24em] text-volt-300 border border-volt-500/25 bg-volt-500/10 rounded-full px-3 py-1.5 mt-1">
-                05 {isAr ? "قنوات" : "Channels"}
+                {String(channels.length).padStart(2, "0")} {isAr ? "قنوات" : "Channels"}
               </span>
             </div>
             <div className="divide-y divide-paper-50/[0.06] border-t border-paper-50/[0.06]">

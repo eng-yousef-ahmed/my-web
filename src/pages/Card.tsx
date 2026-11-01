@@ -23,7 +23,8 @@ export default function CardPage() {
 
   const channels = [
     { icon: "phone", label: isAr ? "اتصال" : "Call", value: CARD.phoneDisplay, href: `tel:+${CARD.phoneDigits}`, ltr: true },
-    { icon: "wa", label: isAr ? "واتساب" : "WhatsApp", value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, ltr: true, external: true },
+    { icon: "wa", label: isAr ? "واتساب · السعودية" : "WhatsApp · KSA", value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, ltr: true, external: true },
+    { icon: "wa", label: isAr ? "واتساب · مصر" : "WhatsApp · Egypt", value: CARD.whatsappEgDisplay, href: `https://wa.me/${CARD.whatsappEgDigits}`, ltr: true, external: true },
     { icon: "mail", label: isAr ? "البريد" : "Email", value: CARD.email, href: `mailto:${CARD.email}`, ltr: true },
     { icon: "linkedin", label: "LinkedIn", value: "yousef-ahmed", href: CONTACT.linkedin, ltr: true, external: true },
     { icon: "globe", label: isAr ? "الموقع" : "Website", value: websiteDisplay(), href: CONTACT.website, ltr: true, external: true },

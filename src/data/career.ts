@@ -82,12 +82,3 @@ export const LANGUAGES: B[] = [
   { en: "Arabic (native)", ar: "العربية (اللغة الأم)" },
   { en: "English (professional working proficiency)", ar: "الإنجليزية (كفاءة مهنية)" },
 ];
-
-export const CERTS: B[] = [
-  { en: "Cisco Networking Academy, IT Support Specialist", ar: "أكاديمية سيسكو، أخصائي دعم تقني" },
-  { en: "Cisco Networking Academy, Network Technician", ar: "أكاديمية سيسكو، فني شبكات" },
-  { en: "Networking Basics & Operating Systems Basics", ar: "أساسيات الشبكات وأنظمة التشغيل" },
-  { en: "IT Customer Support & Computer Hardware Basics", ar: "دعم عملاء التقنية وأساسيات العتاد" },
-  { en: "CCNA Studies & VMware Virtualization (Lab)", ar: "دراسات CCNA وافتراضية VMware (عملي)" },
-  { en: "PowerShell Fundamentals", ar: "أساسيات باورشيل" },
-];

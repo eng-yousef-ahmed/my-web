@@ -245,13 +245,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-ink-950">
       <a
         href="#main-content"
+        onClick={(e) => {
+          e.preventDefault();
+          const main = document.getElementById("main-content");
+          main?.focus();
+          main?.scrollIntoView();
+        }}
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-[100] focus:bg-amber-500 focus:text-ink-950 focus:px-5 focus:py-3 font-display font-bold"
       >
         {t("common.skip")}
       </a>
       <ScrollProgress />
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
         <div key={location.pathname} className="page-enter">
           {children}
         </div>
