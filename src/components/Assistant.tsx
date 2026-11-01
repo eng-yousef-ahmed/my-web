@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { useLang, usePrefersReducedMotion } from "../i18n";
 import { CONTACT, CV_FILES, waLink } from "../config";
 import { Icon } from "./kit";
+import { CASES } from "../data/cases";
+import { SERVICE_CATEGORIES } from "../data/content";
 
 /* ================= Batata — the potato robot assistant ================= */
 
+type Intent = "need" | "work" | "hire" | "urgent";
 type Msg = { from: "bot" | "user"; html: string; actions?: Action[] };
-type Action = { label: string; to?: string; wa?: "sa" | "eg"; dl?: string };
+type Action = { label: string; to?: string; wa?: "sa" | "eg"; dl?: string; href?: string; intent?: Intent };
 type Mood = "idle" | "happy" | "talking" | "thinking" | "urgent" | "dance";
 
 const norm = (s: string) =>
@@ -19,13 +22,27 @@ const norm = (s: string) =>
     .replace(/ة/g, "ه")
     .replace(/[^\p{L}\p{N}\s]/gu, " ");
 
-const has = (n: string, keys: string[]) => keys.some((k) => n.includes(norm(k)));
+const has = (n: string, keys: string[]) => {
+  const tokens = n.split(/\s+/).filter(Boolean);
+  return keys.some((key) => {
+    const k = norm(key).trim();
+    return /^[a-z0-9]{1,5}$/.test(k) ? tokens.includes(k) : n.includes(k);
+  });
+};
 
 const STR = {
   ar: {
     online: "متصل الآن، يرد في ثواني",
     greeting:
-      "أهلًا! أنا <b>بطاطا</b>، مساعد المهندس يوسف أحمد الذكي. اسألني عن الخدمات أو الخبرة أو طرق التواصل.",
+      "أهلًا! أنا <b>بطاطا</b>، مساعد المهندس يوسف أحمد. قولّي إيه اللي جابك وأوصّلك للمكان المناسب في الموقع:",
+    guideNeed: "أحتاج خدمة تقنية لشركتي",
+    guideWork: "أريد أشوف أعماله",
+    guideHire: "أبحث عن موظف / تعاون",
+    guideUrgent: "عندي مشكلة عاجلة",
+    needReply: "تمام! اختر المسار الأقرب لاحتياجك وهتلاقي التفاصيل:",
+    workReply: "دي أبرز المشاريع اللي نفّذها المهندس يوسف، اختر واحد تقرأ دراسة الحالة:",
+    hireReply: "يسعدنا! حمّل السيرة الذاتية أو تواصل مباشرة:",
+    allProjects: "كل المشاريع",
     placeholder: "اكتب سؤالك هنا…",
     send: "إرسال",
     sugg: ["ما هي خدماتك؟", "كم خبرة يوسف؟", "كيف أتواصل معك؟", "ابعتلي السيرة الذاتية"],
@@ -38,7 +55,7 @@ const STR = {
       "الاستشارات التقنية",
     ] as [string, string, string, string, string],
     experience:
-      "خبرة <b>+9 سنوات</b> عملية: دعم أكثر من <b>500 مستخدم</b> و<b>500 جهاز</b> في بيئات مؤسسية بالسعودية ومصر، مع خفض الأعطال المتكررة <b>50–65%</b>.",
+      "خبرة <b>+9 سنوات</b> عملية: دعم أكثر من <b>500 مستخدم</b> وإدارة أكثر من <b>500 جهاز</b> في بيئة مؤسسية على Windows Domain، مع خفض الأعطال المتكررة <b>50–65%</b>. عمل في السعودية ومصر.",
     contact:
       "أسهل طريق: <b>واتساب</b> للسعودية أو مصر، أو البريد الإلكتروني. كل التفاصيل في صفحة التواصل.",
     cvReply: "أكيد! دي السيرة الذاتية للمهندس يوسف أحمد، حمّلها بالنسخة اللي تناسبك:",
@@ -58,7 +75,15 @@ const STR = {
   en: {
     online: "Online, replies in seconds",
     greeting:
-      "Hi! I'm <b>Batata</b>, Eng. Yousef Ahmed's smart assistant. Ask me about services, experience or how to get in touch.",
+      "Hi! I'm <b>Batata</b>, Eng. Yousef Ahmed's assistant. Tell me what brings you here and I'll take you to the right place:",
+    guideNeed: "I need an IT service for my company",
+    guideWork: "Show me his work",
+    guideHire: "Hiring / collaboration",
+    guideUrgent: "I have an urgent problem",
+    needReply: "Great! Pick the line closest to what you need and you'll find the details:",
+    workReply: "Here are Eng. Yousef's highlight projects. Pick one to read the case study:",
+    hireReply: "Glad to hear it! Grab the CV or reach out directly:",
+    allProjects: "All projects",
     placeholder: "Type your question…",
     send: "Send",
     sugg: ["What do you do?", "How experienced are you?", "How can I reach you?", "Send me the CV"],
@@ -71,7 +96,7 @@ const STR = {
       "IT Consultancy",
     ] as [string, string, string, string, string],
     experience:
-      "<b>9+ years</b> hands-on: supporting <b>500+ users</b> and <b>500+ endpoints</b> in enterprise environments across Saudi Arabia and Egypt, cutting recurring incidents by <b>50–65%</b>.",
+      "<b>9+ years</b> hands-on: supporting <b>500+ users</b> and managing <b>500+ endpoints</b> in an enterprise Windows Domain, cutting recurring incidents by <b>50–65%</b>. Worked in Saudi Arabia and Egypt.",
     contact:
       "Easiest way: <b>WhatsApp</b> for Saudi Arabia or Egypt, or email. All details are on the contact page.",
     cvReply: "Of course! Here's Eng. Yousef Ahmed's CV. Grab the version that suits you:",
@@ -151,12 +176,48 @@ function BotSprite({ mood, track, className = "w-16 h-16" }: { mood: Mood; track
 }
 
 /* ================= reply engine ================= */
-function replyFor(raw: string, lang: "ar" | "en", market?: "sa" | "eg"): { html: string; actions?: Action[]; mood?: Mood } {
+function replyFor(raw: string, lang: "ar" | "en", market?: "sa" | "eg", intent?: Intent): { html: string; actions?: Action[]; mood?: Mood } {
   const n = norm(raw);
   const s = STR[lang];
   const out: { html: string; actions?: Action[]; mood?: Mood } = { html: "" };
   const marketTarget: "sa" | "eg" = market ?? (has(n, ["مصر", "القاهره", "اسكندريه", "egypt", "cairo", "alex"]) ? "eg" : "sa");
 
+  if (intent === "need") {
+    out.html = s.needReply;
+    out.actions = [
+      ...SERVICE_CATEGORIES.map((c) => ({ label: c.name[lang], to: `/services#${c.id}` })),
+      { label: s.goContact, to: "/contact" },
+    ];
+    return out;
+  }
+  if (intent === "work") {
+    out.html = s.workReply;
+    out.actions = [
+      ...CASES.filter((c) => c.featured).slice(0, 3).map((c) => ({ label: c.title[lang], to: `/projects/${c.id}` })),
+      { label: s.allProjects, to: "/projects" },
+    ];
+    return out;
+  }
+  if (intent === "hire") {
+    out.html = s.hireReply;
+    out.mood = "happy";
+    out.actions = [
+      { label: lang === "ar" ? "عربي PDF" : "Arabic PDF", dl: CV_FILES.ar },
+      { label: lang === "ar" ? "إنجليزي PDF" : "English PDF", dl: CV_FILES.en },
+      { label: "LinkedIn", href: CONTACT.linkedin },
+      { label: s.goContact, to: "/contact" },
+    ];
+    return out;
+  }
+  if (intent === "urgent") {
+    out.html = s.urgent;
+    out.mood = "urgent";
+    out.actions = [
+      { label: `${s.goWhatsapp} 🇸🇦`, wa: "sa" },
+      { label: `${s.goWhatsapp} 🇪🇬`, wa: "eg" },
+    ];
+    return out;
+  }
   if (has(n, ["بطاطا", "batata"])) {
     out.html = s.nameAsked;
     out.mood = "dance";
@@ -187,7 +248,7 @@ function replyFor(raw: string, lang: "ar" | "en", market?: "sa" | "eg"): { html:
     out.actions = [{ label: s.goContact, to: "/services" }];
     return out;
   }
-  if (has(n, ["خبره", "سنين", "experience", "years", "9", "كام سنه"])) {
+  if (has(n, ["خبره", "سنين", "experience", "years", "كام سنه"])) {
     out.html = s.experience;
     out.actions = [{ label: s.goProjects, to: "/projects" }];
     return out;
@@ -238,17 +299,27 @@ export function Assistant() {
   const [track, setTrack] = useState<{ x: number; y: number } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const booted = useRef(false);
+  const greetingMsg = (): Msg => ({
+    from: "bot",
+    html: s.greeting,
+    actions: [
+      { label: s.guideNeed, intent: "need" },
+      { label: s.guideWork, intent: "work" },
+      { label: s.guideHire, intent: "hire" },
+      { label: s.guideUrgent, intent: "urgent" },
+    ],
+  });
   const moodTimer = useRef<number>(0);
 
   useEffect(() => {
     if (!open) return;
     if (!booted.current) {
       booted.current = true;
-      setMsgs([{ from: "bot", html: s.greeting }]);
+      setMsgs([greetingMsg()]);
       setMood("happy");
       return;
     }
-    setMsgs((m) => (m.length ? m : [{ from: "bot", html: s.greeting }]));
+    setMsgs((m) => (m.length ? m : [greetingMsg()]));
   }, [open, s.greeting]);
 
   useEffect(() => {
@@ -265,14 +336,14 @@ export function Assistant() {
     return () => window.removeEventListener("mousemove", onMove);
   }, [open, reduced]);
 
-  const send = (text: string) => {
+  const send = (text: string, intent?: Intent) => {
     const clean = text.trim();
     if (!clean || typing) return;
     setMsgs((m) => [...m, { from: "user", html: clean.replace(/</g, "&lt;") }]);
     setInput("");
     setTyping(true);
     setMood("thinking");
-    const reply = replyFor(clean, lang);
+    const reply = replyFor(clean, lang, undefined, intent);
     window.setTimeout(() => {
       setTyping(false);
       setMsgs((m) => [...m, { from: "bot", html: reply.html, actions: reply.actions }]);
@@ -326,7 +397,7 @@ export function Assistant() {
             <BotSprite mood={typing ? "thinking" : mood} className="w-11 h-11" />
             <div className="flex-1 min-w-0">
               <p className="font-display font-bold text-[14px] text-paper-50">بطاطا · Batata</p>
-              <p className="text-[10.5px] text-mist-400 flex items-center gap-1.5">
+              <p className="text-[11px] text-mist-400 flex items-center gap-1.5">
                 <span className={`w-1.5 h-1.5 rounded-full led ${mood === "urgent" ? "bg-red-400" : "bg-[#3fbf6f]"}`} aria-hidden="true" />
                 {statusLine}
               </p>
@@ -339,38 +410,46 @@ export function Assistant() {
           {/* messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3.5 bg-ink-950/40">
             {msgs.map((m, i) => (
+              <React.Fragment key={i}>
               <div key={i} className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[85%] px-3.5 py-2.5 text-[13px] leading-relaxed ${
-                    m.from === "user"
-                      ? "bg-amber-500 text-ink-950 font-medium"
-                      : "bg-ink-800 text-mist-200 border border-ink-700"
-                  }`}
-                  dangerouslySetInnerHTML={{ __html: m.html }}
-                />
-              </div>
-            ))}
-            {msgs.map((m, i) =>
-              m.actions?.length ? (
-                <div key={`a${i}`} className={`flex flex-wrap gap-2 ${m.from === "user" ? "justify-end" : "justify-start"}`}>
-                  {m.actions.map((a, j) =>
-                    a.dl ? (
-                      <a key={j} href={a.dl} download className="bot-chip bot-chip-cv">
-                        <Icon name="download" className="w-3.5 h-3.5" /> {a.label}
-                      </a>
-                    ) : a.wa ? (
-                      <a key={j} href={waHref(a.wa)} target="_blank" rel="noopener noreferrer" className="bot-chip bot-chip-wa">
-                        <Icon name="wa" className="w-3.5 h-3.5" /> {a.label}
-                      </a>
-                    ) : (
-                      <Link key={j} to={a.to ?? "/"} onClick={() => setOpen(false)} className="bot-chip">
-                        {a.label}
-                      </Link>
-                    )
-                  )}
+                  <div
+                    className={`max-w-[85%] px-3.5 py-2.5 text-[13px] leading-relaxed ${
+                      m.from === "user"
+                        ? "bg-amber-500 text-ink-950 font-medium"
+                        : "bg-ink-800 text-mist-200 border border-ink-700"
+                    }`}
+                    dangerouslySetInnerHTML={{ __html: m.html }}
+                  />
                 </div>
-              ) : null
-            )}
+                {m.actions?.length ? (
+                  <div key={`a${i}`} className={`flex flex-wrap gap-2 ${m.from === "user" ? "justify-end" : "justify-start"}`}>
+                    {m.actions.map((a, j) =>
+                      a.intent ? (
+                        <button key={j} type="button" onClick={() => send(a.label, a.intent)} className="bot-chip">
+                          {a.label}
+                        </button>
+                      ) : a.href ? (
+                        <a key={j} href={a.href} target="_blank" rel="noopener noreferrer" className="bot-chip bot-chip-cv">
+                          {a.label}
+                        </a>
+                      ) : a.dl ? (
+                        <a key={j} href={a.dl} download className="bot-chip bot-chip-cv">
+                          <Icon name="download" className="w-3.5 h-3.5" /> {a.label}
+                        </a>
+                      ) : a.wa ? (
+                        <a key={j} href={waHref(a.wa)} target="_blank" rel="noopener noreferrer" className="bot-chip bot-chip-wa">
+                          <Icon name="wa" className="w-3.5 h-3.5" /> {a.label}
+                        </a>
+                      ) : (
+                        <Link key={j} to={a.to ?? "/"} onClick={() => setOpen(false)} className="bot-chip">
+                          {a.label}
+                        </Link>
+                      )
+                    )}
+                  </div>
+                ) : null}
+              </React.Fragment>
+            ))}
             {typing && (
               <div className="flex items-center gap-1.5 px-3.5 py-3 w-fit bg-ink-800 border border-ink-700">
                 <span className="bot-dot" />
@@ -386,7 +465,7 @@ export function Assistant() {
               {[0, 1].map((dup) => (
                 <div key={dup} aria-hidden={dup === 1} className="flex gap-2 shrink-0">
                   {s.sugg.map((q) => (
-                    <button key={q} onClick={() => send(q)} className="bot-chip bot-chip-cv whitespace-nowrap !py-1.5 !text-[10.5px]">
+                    <button key={q} onClick={() => send(q)} className="bot-chip bot-chip-cv whitespace-nowrap !py-1.5 !text-[11px]">
                       {q}
                     </button>
                   ))}

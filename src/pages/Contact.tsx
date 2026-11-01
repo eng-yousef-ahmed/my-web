@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
 import type { B } from "../i18n";
 import { CARD, CARD_ASSETS, CONTACT, CV_FILES, IMAGES, cardProfilePosition, githubUrl } from "../config";
-import { Icon, Reveal, useAsset } from "../components/kit";
+import { Btn, Icon, Reveal, useAsset } from "../components/kit";
 
 /* ================= shared glass surface ================= */
 function Glass({ className = "", children }: { className?: string; children: React.ReactNode }) {
   return (
-    <div className={`relative overflow-hidden rounded-[24px] border border-paper-50/[0.07] bg-paper-50/[0.03] backdrop-blur-xl shadow-[0_24px_70px_-40px_rgba(0,0,0,0.9)] ${className}`}>
+    <div className={`relative overflow-hidden border border-ink-700 bg-ink-900/70 backdrop-blur-sm ${className}`}>
       <span className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-paper-50/20 to-transparent" aria-hidden="true" />
       {children}
     </div>
@@ -30,48 +29,24 @@ function ChannelRow({ ch, index }: { ch: Channel; index: number }) {
         className="group flex items-center gap-4 px-5 sm:px-7 py-4 transition-colors duration-150 hover:bg-paper-50/[0.045]"
         style={{ paddingBlock: "1.05rem" }}
       >
-        <span className="grid place-items-center w-11 h-11 shrink-0 rounded-xl border border-volt-500/20 bg-volt-500/10 text-volt-400 transition-colors duration-150 group-hover:bg-volt-500/20 group-hover:border-volt-400/40">
+        <span className="grid place-items-center w-11 h-11 shrink-0 border border-amber-500/20 bg-amber-500/10 text-amber-400 transition-colors duration-150 group-hover:bg-amber-500/20 group-hover:border-amber-400/40">
           <Icon name={ch.icon} className="w-[19px] h-[19px]" />
         </span>
         <span className="flex-1 min-w-0">
-          <span className="block font-mono text-[9.5px] uppercase tracking-[0.28em] text-mist-400">{L(ch.label)}</span>
-          <span className="block mt-0.5 font-display text-[15px] font-semibold text-paper-50 truncate transition-colors duration-150 group-hover:text-volt-300" dir="ltr">
+          <span className="block font-mono text-[11px] uppercase tracking-[0.28em] text-mist-400">{L(ch.label)}</span>
+          <span className="block mt-0.5 font-display text-[15px] font-semibold text-paper-50 truncate transition-colors duration-150 group-hover:text-amber-300" dir="ltr">
             {ch.value}
           </span>
         </span>
         <Icon
           name="arrow"
           strokeWidth={2}
-          className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-volt-400"
+          className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-amber-400"
         />
       </a>
     </Reveal>
   );
 }
-
-/* ================= professional areas ================= */
-const SKILLS: { icon: string; title: B; desc: B }[] = [
-  {
-    icon: "headset",
-    title: { en: "IT Support", ar: "الدعم التقني" },
-    desc: { en: "End-user support, troubleshooting & IT service management.", ar: "دعم المستخدمين، استكشاف الأعطال وإدارة خدمات تقنية المعلومات." },
-  },
-  {
-    icon: "rack",
-    title: { en: "System Admin", ar: "إدارة الأنظمة" },
-    desc: { en: "Windows Server, Active Directory, Group Policy, Backup.", ar: "ويندوز سيرفر، أكتيف ديريكتوري، سياسات المجموعة والنسخ الاحتياطي." },
-  },
-  {
-    icon: "network",
-    title: { en: "Network", ar: "الشبكات" },
-    desc: { en: "LAN/WAN, VPN, Firewalls, Switching & Monitoring.", ar: "LAN/WAN وVPN والجدران النارية والتحويل والمراقبة." },
-  },
-  {
-    icon: "shield",
-    title: { en: "Security", ar: "الأمن والمراقبة" },
-    desc: { en: "CCTV Systems, Access Control, Biometric & Security Solutions.", ar: "أنظمة المراقبة والتحكم في الدخول والبصمة والحلول الأمنية." },
-  },
-];
 
 /* ================= the page =================
  * A premium digital contact hub. The portrait melts into the page with no
@@ -90,7 +65,8 @@ export function Contact() {
 
   const channels: Channel[] = [
     { key: "phone", icon: "phone", label: { en: "Phone", ar: "الهاتف" }, value: CARD.phoneDisplay, href: `tel:+${CARD.phoneDigits}` },
-    { key: "whatsapp", icon: "wa", label: { en: "WhatsApp", ar: "واتساب" }, value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, external: true },
+    { key: "whatsapp", icon: "wa", label: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" }, value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, external: true },
+    { key: "whatsapp-eg", icon: "wa", label: { en: "WhatsApp · Egypt", ar: "واتساب · مصر" }, value: CARD.whatsappEgDisplay, href: `https://wa.me/${CARD.whatsappEgDigits}`, external: true },
     { key: "email", icon: "mail", label: { en: "Email", ar: "البريد الإلكتروني" }, value: CARD.email, href: `mailto:${CARD.email}` },
     { key: "linkedin", icon: "linkedin", label: { en: "LinkedIn", ar: "لينكدإن" }, value: CARD.linkedinDisplay, href: CONTACT.linkedin, external: true },
     { key: "location", icon: "pin", label: { en: "Location", ar: "الموقع" }, value: L(CARD.location), href: CARD.mapsUrl, external: true },
@@ -107,8 +83,8 @@ export function Contact() {
     <section className="relative bg-ink-950 text-paper-50 overflow-hidden noise">
       {/* ambient scene: fine grid + electric-blue stage lighting */}
       <div className="absolute inset-0 grid-bg opacity-70" aria-hidden="true" />
-      <div className="absolute -top-40 end-[-10%] w-[52rem] h-[52rem] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,139,245,0.14), transparent 65%)" }} aria-hidden="true" />
-      <div className="absolute bottom-[-30%] start-[-15%] w-[44rem] h-[44rem] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,139,245,0.07), transparent 65%)" }} aria-hidden="true" />
+      <div className="absolute -top-40 end-[-10%] w-[52rem] h-[52rem] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(233,163,59,0.14), transparent 65%)" }} aria-hidden="true" />
+      <div className="absolute bottom-[-30%] start-[-15%] w-[44rem] h-[44rem] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(233,163,59,0.07), transparent 65%)" }} aria-hidden="true" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-8 pt-28 lg:pt-32 pb-20">
         {/* ================= HERO — introduction + portrait ================= */}
@@ -116,7 +92,7 @@ export function Contact() {
           {/* portrait — first on mobile, physical RIGHT on desktop (LTR), melts into the page */}
           <Reveal delay={140} className="order-1 lg:order-2">
             <div className="relative max-w-[440px] sm:max-w-[500px] lg:max-w-[560px] mx-auto lg:mx-0 lg:ms-auto">
-              <div className="absolute -inset-10 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle at 50% 36%, rgba(90,167,255,0.22), transparent 62%)" }} aria-hidden="true" />
+              <div className="absolute -inset-10 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle at 50% 36%, rgba(233,163,59,0.22), transparent 62%)" }} aria-hidden="true" />
               {/* the portrait — no frame, edges dissolve into the navy */}
               <div
                 className="relative aspect-[4/5]"
@@ -140,7 +116,7 @@ export function Contact() {
                   <span className="absolute inline-flex w-full h-full rounded-full bg-[#3fbf6f] pulse-ring" aria-hidden="true" />
                   <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />
                 </span>
-                <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-200">
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-mist-200">
                   {isAr ? "متاح للتواصل" : "Available for work"}
                 </span>
               </div>
@@ -150,8 +126,8 @@ export function Contact() {
           {/* introduction — physical LEFT on desktop (LTR) */}
           <div className="order-2 lg:order-1">
             <Reveal className="inline-flex items-center gap-3">
-              <span className="h-px w-10 bg-volt-400" aria-hidden="true" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-volt-300">
+              <span className="h-px w-10 bg-amber-400" aria-hidden="true" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-300">
                 {isAr ? "مرحبًا، أنا" : "Hello, I'm"}
               </span>
             </Reveal>
@@ -160,11 +136,11 @@ export function Contact() {
               <span className="block font-display font-bold tracking-tight leading-[1.08] text-[clamp(2.6rem,5.4vw,3.9rem)]">
                 {isAr ? (
                   <>
-                    يوسف <span className="text-volt-400">أحمد</span>
+                    يوسف <span className="text-amber-400">أحمد</span>
                   </>
                 ) : (
                   <>
-                    Yousef <span className="text-volt-400">Ahmed</span>
+                    Yousef <span className="text-amber-400">Ahmed</span>
                   </>
                 )}
               </span>
@@ -183,21 +159,13 @@ export function Contact() {
             </Reveal>
 
             <Reveal delay={340} className="mt-9 flex flex-wrap items-center gap-4">
-              <a
-                href={isAr ? CV_FILES.ar : CV_FILES.en}
-                download
-                className="group inline-flex items-center gap-3 rounded-xl bg-volt-500 px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_14px_36px_-16px_rgba(59,139,245,0.7)] transition-all duration-150 hover:bg-volt-400 active:scale-[0.97]"
-              >
-                <Icon name="download" className="w-4 h-4 transition-transform duration-150 group-hover:translate-y-0.5" strokeWidth={2} />
+              <Btn href={isAr ? CV_FILES.ar : CV_FILES.en} download arrow={false}>
+                <Icon name="download" className="w-4 h-4" strokeWidth={2} />
                 {isAr ? "تحميل السيرة الذاتية" : "Download CV"}
-              </a>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-3 rounded-xl border border-paper-50/15 bg-paper-50/[0.04] backdrop-blur-md px-6 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-mist-200 transition-all duration-150 hover:border-volt-400/50 hover:text-volt-300 active:scale-[0.97]"
-              >
+              </Btn>
+              <Btn to="/projects" variant="outline">
                 {isAr ? "استعرض أعمالي" : "View Portfolio"}
-                <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
-              </Link>
+              </Btn>
             </Reveal>
           </div>
         </div>
@@ -212,8 +180,8 @@ export function Contact() {
                   {isAr ? "يسعدني تواصلك عبر أي من القنوات التالية." : "Feel free to reach out through any of the channels below."}
                 </p>
               </div>
-              <span className="hidden sm:block shrink-0 font-mono text-[9.5px] uppercase tracking-[0.24em] text-volt-300 border border-volt-500/25 bg-volt-500/10 rounded-full px-3 py-1.5 mt-1">
-                05 {isAr ? "قنوات" : "Channels"}
+              <span className="hidden sm:block shrink-0 font-mono text-[11px] uppercase tracking-[0.24em] text-amber-300 border border-amber-500/25 bg-amber-500/10 px-3 py-1.5 mt-1">
+                {String(channels.length).padStart(2, "0")} {isAr ? "قنوات" : "Channels"}
               </span>
             </div>
             <div className="divide-y divide-paper-50/[0.06] border-t border-paper-50/[0.06]">
@@ -224,34 +192,16 @@ export function Contact() {
           </Glass>
         </Reveal>
 
-        {/* ================= PROFESSIONAL AREAS ================= */}
-        <Reveal className="mt-6">
-          <Glass className="px-5 sm:px-8 py-8 sm:py-10">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-y-8">
-              {SKILLS.map((sk, i) => (
-                <div key={sk.title.en} className={`group relative px-0 sm:px-7 ${i > 0 ? "sm:border-s sm:border-paper-50/[0.07]" : ""}`}>
-                  <span className="font-mono text-[10px] tracking-[0.3em] text-mist-500">0{i + 1}</span>
-                  <span className="mt-3 flex w-fit text-volt-400 transition-transform duration-200 group-hover:-translate-y-0.5">
-                    <Icon name={sk.icon} className="w-6 h-6" />
-                  </span>
-                  <h3 className="mt-3.5 font-display text-[17px] font-bold">{L(sk.title)}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-mist-400">{L(sk.desc)}</p>
-                </div>
-              ))}
-            </div>
-          </Glass>
-        </Reveal>
-
         {/* ================= FINAL CTA ================= */}
         <Reveal className="mt-20 text-center">
           <p className="font-display text-2xl sm:text-[28px] font-bold tracking-tight">
             {isAr ? (
               <>
-                لنبنِ <span className="text-volt-400">شيئًا رائعًا</span> معًا
+                لنبنِ <span className="text-amber-400">شيئًا رائعًا</span> معًا
               </>
             ) : (
               <>
-                Let's build <span className="text-volt-400">something great</span> together
+                Let's build <span className="text-amber-400">something great</span> together
               </>
             )}
           </p>
@@ -264,7 +214,7 @@ export function Contact() {
                 rel={so.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 aria-label={so.label}
                 title={so.label}
-                className="grid place-items-center w-12 h-12 rounded-full border border-paper-50/12 bg-paper-50/[0.04] text-mist-300 backdrop-blur-md transition-all duration-150 hover:border-volt-400/60 hover:text-volt-300 hover:-translate-y-1"
+                className="grid place-items-center w-12 h-12 border border-ink-600 text-mist-300 transition-all duration-150 hover:border-amber-400/60 hover:text-amber-300 hover:-translate-y-1"
               >
                 <Icon name={so.icon} className="w-[19px] h-[19px]" />
               </a>

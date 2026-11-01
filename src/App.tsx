@@ -2,7 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { LangProvider } from "./i18n";
 import { Layout } from "./components/chrome";
-import { LogoMark } from "./components/kit";
+import { Btn, LogoMark } from "./components/kit";
+import { useLang, usePageMeta } from "./i18n";
 
 /* Code-splitting: each page ships as its own chunk. */
 const Home = lazy(() => import("./pages/Home"));
@@ -26,6 +27,22 @@ function BootScreen() {
         </div>
       </div>
     </div>
+  );
+}
+
+function NotFound() {
+  const { isAr } = useLang();
+  usePageMeta(isAr ? "الصفحة غير موجودة | يوسف أحمد" : "Page not found | Yousef Ahmed", "");
+  return (
+    <section className="min-h-[70vh] bg-ink-950 text-paper-50 grid place-items-center pt-32">
+      <div className="text-center px-5">
+        <p className="font-mono text-amber-500 text-sm uppercase tracking-[0.3em]">404</p>
+        <h1 className="mt-4 font-display text-3xl font-bold">{isAr ? "الصفحة غير موجودة." : "Page not found."}</h1>
+        <Btn to="/" className="mt-8" arrow={false}>
+          {isAr ? "العودة للرئيسية" : "Back to home"}
+        </Btn>
+      </div>
+    </section>
   );
 }
 
@@ -55,7 +72,7 @@ export default function App() {
                     <Route path="/projects/:id" element={<ProjectDetail />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/contact" element={<Contact />} />
-                    <Route path="*" element={<Home />} />
+                    <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Suspense>
               </Layout>

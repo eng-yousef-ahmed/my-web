@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
-import { CAREER, CERTIFICATIONS, EDUCATION, FOCUS_AREAS, FOUNDER_METRICS, LANGUAGES, TECH_GROUPS, WHY_US } from "../data/content";
+import { CAREER, CERTIFICATIONS, EDUCATION, LANGUAGES, TECH_GROUPS, WHY_US } from "../data/content";
 import { FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 
 export default function About() {
@@ -26,20 +26,6 @@ export default function About() {
           ar: "أنا يوسف أحمد، أخصائي دعم تقني أول. لأكثر من 9 سنوات أبقيت الأعمال تعمل: دعم المستخدمين، وبناء البنية التحتية، وإدارة بيئات مايكروسوفت، وتركيب أنظمة الأمن التي تعتمد عليها العمليات.",
         }}
       />
-
-      {/* metrics — verified numbers only */}
-      <section className="bg-paper-100 text-ink-900 grid-bg-light">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-14">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-ink-900/15 border border-ink-900/15">
-            {FOUNDER_METRICS.map((m, i) => (
-              <Reveal key={m.label.en} delay={i * 80} className="bg-paper-100 p-7">
-                <p className="font-display text-4xl font-bold text-ink-900">{m.value}</p>
-                <p className="mt-2 text-[13px] text-mist-500">{L(m.label)}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* career timeline */}
       <section className="relative bg-ink-950 text-paper-50 noise">
@@ -99,24 +85,13 @@ export default function About() {
           <Reveal className="max-w-2xl">
             <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-kicker">
               <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
-              {isAr ? "مجالات التركيز" : "Technical Focus"}
+              {isAr ? "أسلوب العمل" : "How I Work"}
             </p>
             <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
-              {isAr ? "ما أتقنه فعلًا." : "What I actually know."}
+              {isAr ? "كيف أعمل مع عملائي." : "How I work with clients."}
             </h2>
           </Reveal>
-          <div className="mt-9 flex flex-wrap gap-2.5">
-            {FOCUS_AREAS.map((f, i) => (
-              <Reveal key={f.en} delay={(i % 6) * 50}>
-                <span className="inline-block border border-ink-900/15 bg-paper-50 px-4 py-2.5 text-[13.5px] font-medium text-ink-800">
-                  {L(f)}
-                </span>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* approach */}
-          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {WHY_US.map((w, i) => (
               <Reveal key={w.title.en} delay={(i % 3) * 80}>
                 <div className="h-full bg-paper-50 border border-ink-900/10 p-6 card-lift hover:border-ink-900/30">
@@ -146,7 +121,7 @@ export default function About() {
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-ink-700 border border-ink-700">
             {TECH_GROUPS.map((g, i) => (
               <Reveal key={g.name.en} delay={i * 60} className="bg-ink-900 p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-amber-400">{L(g.name)}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-amber-400">{L(g.name)}</p>
                 <ul className="mt-4 space-y-2">
                   {g.items.map((it) => (
                     <li key={it} className="flex items-center gap-2 text-[13px] text-mist-300" dir="ltr">
