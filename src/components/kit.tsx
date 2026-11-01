@@ -241,7 +241,7 @@ export function Logo({ tone = "light", compact = false }: { tone?: "light" | "da
           <span className={`font-display block text-[15px] font-bold tracking-wide ${main}`}>
             TECH <span className="text-amber-500">OF</span> THE WORLD
           </span>
-          <span className={`block text-[9.5px] tracking-[0.32em] uppercase mt-1 ${sub}`}>Yousef Ahmed</span>
+          <span className={`block text-[11px] tracking-[0.32em] uppercase mt-1 ${sub}`}>Yousef Ahmed</span>
         </span>
       )}
     </span>
@@ -344,6 +344,7 @@ export function Btn({
   arrow = true,
   type,
   disabled,
+  download,
 }: {
   to?: string;
   href?: string;
@@ -354,6 +355,7 @@ export function Btn({
   arrow?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
+  download?: boolean;
 }) {
   const base = `group inline-flex items-center gap-3 chamfer-sm px-6 py-3.5 font-display text-[13.5px] font-semibold uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.97] ${
     disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
@@ -375,7 +377,7 @@ export function Btn({
     );
   if (href)
     return (
-      <a href={href} className={cls} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" onClick={onClick}>
+      <a href={href} className={cls} download={download || undefined} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" onClick={onClick}>
         {children}
         {arrowEl}
       </a>

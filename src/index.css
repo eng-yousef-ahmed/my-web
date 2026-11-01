@@ -112,7 +112,7 @@ html[lang="ar"] .font-display {
 }
 
 .duo-img {
-  filter: saturate(0.55) contrast(1.08) brightness(0.72);
+  filter: saturate(0.85) contrast(1.04) brightness(0.9);
 }
 
 /* ---------- adaptive text contrast (context-driven) ----------

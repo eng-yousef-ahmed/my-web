@@ -1,7 +1,11 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
 import { HOME_ASSETS, IMAGES } from "../config";
+import { Link } from "react-router-dom";
 import { Btn, Icon, Reveal, useAsset } from "../components/kit";
+import { FOUNDER_METRICS, SERVICE_CATEGORIES } from "../data/content";
+import { MARKET_LABEL } from "../data/cases";
+import { useAllProjects } from "../data/projectLoader";
 
 /* ================= HOME — the portrait IS the page =================
  * The profile image becomes the full-page cinematic background; the
@@ -22,6 +26,7 @@ export default function Home() {
   const src = useAsset(HOME_ASSETS.profile, IMAGES.profile);
 
   return (
+    <>
     <section className="relative min-h-svh bg-ink-950 text-paper-50 overflow-hidden noise">
       {/* ---------- the portrait as full-page background ---------- */}
       {/* mobile: subject centered in the upper area */}
@@ -29,7 +34,7 @@ export default function Home() {
         src={src}
         alt={isAr ? "يوسف أحمد، أخصائي دعم تقني أول" : "Yousef Ahmed, Senior IT Support Specialist"}
         className="kenburns absolute inset-0 w-full h-full object-cover lg:hidden"
-        style={{ objectPosition: "50% 10%" }}
+        style={{ objectPosition: "68% 10%" }}
       />
       {/* desktop: subject placed opposite the text side (physical in both LTR & RTL) */}
       <img
@@ -64,7 +69,7 @@ export default function Home() {
 
       {/* vertical edge label */}
       <p
-        className="absolute end-7 top-1/2 -translate-y-1/2 hidden xl:block font-mono text-[9.5px] uppercase tracking-[0.42em] text-mist-400/70"
+        className="absolute end-7 top-1/2 -translate-y-1/2 hidden xl:block font-mono text-[11px] uppercase tracking-[0.42em] text-mist-400/70"
         style={{ writingMode: "vertical-rl" }}
         aria-hidden="true"
       >
@@ -84,7 +89,7 @@ export default function Home() {
                 <span className="absolute inline-flex w-full h-full rounded-full bg-[#3fbf6f] pulse-ring" aria-hidden="true" />
                 <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />
               </span>
-              <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mist-200">
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-mist-200">
                 {isAr ? "متاح للتواصل" : "Available"}
               </span>
             </span>
@@ -145,7 +150,7 @@ export default function Home() {
 
       {/* quiet baseline strip */}
       <div className="absolute inset-x-0 bottom-0 z-10 hidden sm:block" aria-hidden="true">
-        <div className="max-w-[1400px] mx-auto px-8 pb-6 flex items-center justify-between font-mono text-[9.5px] uppercase tracking-[0.3em] text-mist-500">
+        <div className="max-w-[1400px] mx-auto px-8 pb-6 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.3em] text-mist-500">
           <span>{isAr ? "جدة · السعودية" : "Jeddah · Saudi Arabia"}</span>
           <span className="flex items-center gap-2">
             <Icon name="globe" className="w-3.5 h-3.5 text-amber-500/70" />
@@ -153,6 +158,118 @@ export default function Home() {
           </span>
           <span>{isAr ? "عن بُعد + ميداني" : "Remote + On-site"}</span>
         </div>
+      </div>
+    </section>
+    <ProofSection />
+    <ServicesStrip />
+    </>
+  );
+}
+
+/* ================= proof: numbers + selected work (all from existing data) ================= */
+function ProofSection() {
+  const { isAr, L, t } = useLang();
+  const { projects } = useAllProjects();
+  const featured = projects.filter((p) => p.featured).slice(0, 3);
+
+  return (
+    <section className="bg-paper-100 text-ink-900 grid-bg-light">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-ink-900/15 border border-ink-900/15">
+          {FOUNDER_METRICS.map((m, i) => (
+            <Reveal key={m.label.en} delay={i * 80} className="bg-paper-100 p-6 sm:p-7">
+              <p className="font-display text-3xl sm:text-4xl font-bold text-ink-900">{m.value}</p>
+              <p className="mt-2 text-[13px] text-mist-500">{L(m.label)}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-16 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-kicker">
+              <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
+              {isAr ? "أعمال مختارة" : "Selected Work"}
+            </p>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
+              {isAr ? "مشاريع سلّمتها فعلًا." : "Projects I actually delivered."}
+            </h2>
+          </div>
+          <Link
+            to="/projects"
+            className="group inline-flex items-center gap-2.5 font-display text-[13px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
+          >
+            {isAr ? "كل المشاريع" : "All projects"}
+            <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+          </Link>
+        </Reveal>
+
+        <div className="mt-9 grid md:grid-cols-3 gap-5">
+          {featured.map((c, i) => (
+            <Reveal key={c.id} delay={i * 80} className="h-full">
+              <Link
+                to={`/projects/${c.id}`}
+                className="group block h-full bg-paper-50 border border-ink-900/10 p-6 card-lift hover:border-ink-900/30"
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-amber-700">
+                  {String(i + 1).padStart(2, "0")} · {L(MARKET_LABEL[c.market])}
+                </span>
+                <h3 className="mt-3 font-display text-xl font-bold leading-snug text-ink-900 group-hover:text-amber-700 transition-colors">
+                  {L(c.title)}
+                </h3>
+                <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-mist-500">{L(c.sector)}</p>
+                <p className="mt-3 text-[14px] leading-relaxed text-mist-500 line-clamp-3">{L(c.summary)}</p>
+                <span className="mt-5 inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 group-hover:text-amber-700 transition-colors">
+                  {t("cta.readCase")}
+                  <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= what I offer — links into the Services page ================= */
+function ServicesStrip() {
+  const { isAr, L } = useLang();
+  return (
+    <section className="relative bg-ink-950 text-paper-50 noise">
+      <div className="absolute inset-0 grid-bg" aria-hidden="true" />
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-16 lg:py-20">
+        <Reveal className="max-w-2xl">
+          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500">
+            <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
+            {isAr ? "ما أقدّمه" : "What I Offer"}
+          </p>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
+            {isAr ? "خمسة مسارات، مسؤول واحد." : "Five service lines, one accountable owner."}
+          </h2>
+        </Reveal>
+
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-ink-700 border border-ink-700">
+          {SERVICE_CATEGORIES.map((c, i) => (
+            <Reveal key={c.id} delay={i * 60} className="bg-ink-900">
+              <Link to={`/services#${c.id}`} className="group flex h-full flex-col p-6 hover:bg-ink-850 transition-colors">
+                <Icon name={c.icon} className="w-6 h-6 text-amber-400" />
+                <span className="mt-4 font-display text-[15px] font-bold leading-snug group-hover:text-amber-400 transition-colors">{L(c.name)}</span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-10 flex flex-wrap items-center justify-between gap-5 border-t border-ink-700 pt-8">
+          <p className="text-[15px] text-mist-300 max-w-md">
+            {isAr ? "عندك بيئة تقنية محتاجة تتبني أو تتصلّح؟ احكيلي عنها." : "Have an IT environment to build or fix? Tell me about it."}
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Btn to="/contact">{isAr ? "تواصل معي" : "Contact Me"}</Btn>
+            <Btn to="/services" variant="outline">
+              {isAr ? "كل الخدمات" : "All Services"}
+            </Btn>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

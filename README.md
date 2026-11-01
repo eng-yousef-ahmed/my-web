@@ -41,14 +41,13 @@ Contact details live in `src/config.ts` and can be overridden with `VITE_*` vari
 | `VITE_LINKEDIN_URL` | LinkedIn profile |
 | `VITE_GITHUB_URL` | empty — icon appears only when set |
 | `VITE_WEBSITE_URL` | site URL used on the card |
-| `VITE_CONTACT_PROFILE_POSITION` | `50% 18%` — portrait crop |
+| `VITE_CONTACT_PROFILE_POSITION` | `64% 14%` — portrait crop on Contact/card |
 
 The digital card, Contact page, footer and assistant all read from the same values.
 
 ## Replacing content without code edits
 
-- **Home portrait:** `public/images/profile/yousef-ahmed.webp`
-- **Contact / card portrait:** `public/images/contact/profile.webp`
+- **Portrait (Home, Contact and digital card):** `public/images/profile/yousef-ahmed.webp`
 - **CVs:** `public/assets/cv/Yousef-Ahmed-CV-AR.pdf` and `…-EN.pdf` (keep the filenames)
 - **Logo:** `public/logo-light.svg` (dark sections) and `public/logo-dark.svg` (light sections)
 - **Project photos / extra projects:** see `public/projects/_template/README.md`; list the folder names in `public/projects/index.json`

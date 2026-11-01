@@ -5,31 +5,26 @@ import { MARKET_LABEL, type CaseStudy } from "../data/cases";
 import { useAllProjects } from "../data/projectLoader";
 import { Btn, Icon, PageHero, Reveal } from "../components/kit";
 
-/* ================= case visual (used when no field photos) ================= */
+/* ================= case cover (used until field photos are added) ================= */
 function CaseVisual({ c, index }: { c: CaseStudy; index: number }) {
+  const { L } = useLang();
   return (
-    <svg viewBox="0 0 400 150" className="w-full h-[150px] bg-ink-900 block" aria-hidden="true">
-      <defs>
-        <pattern id={`p-${c.id}`} width="26" height="26" patternUnits="userSpaceOnUse">
-          <path d="M0 26 26 0" stroke="#16283c" strokeWidth="1" />
-        </pattern>
-      </defs>
-      <rect width="400" height="150" fill="#0a1420" />
-      <rect width="400" height="150" fill={`url(#p-${c.id})`} />
-      <circle cx="330" cy="45" r="54" fill="none" stroke="#1f344c" />
-      <circle cx="330" cy="45" r="34" fill="none" stroke="#E9A33B" strokeOpacity="0.5" strokeDasharray="4 6" />
-      <text x="24" y="52" fontFamily="Space Grotesk, Almarai, sans-serif" fontWeight="700" fontSize="28" fill="#f3f6f5">
+    <div className="relative overflow-hidden border border-ink-700 bg-ink-900 p-6 sm:p-8 min-h-[190px] flex flex-col justify-between">
+      <div className="absolute inset-0 grid-bg opacity-70" aria-hidden="true" />
+      <span className="absolute -top-6 end-3 font-display font-bold leading-none text-[8rem] text-amber-500/10 select-none" aria-hidden="true">
         {String(index + 1).padStart(2, "0")}
-      </text>
-      <text x="24" y="76" fontFamily="IBM Plex Mono, monospace" fontSize="9" letterSpacing="3" fill="#7e93a6">
-        CASE STUDY · YA
-      </text>
-      {c.technologies.slice(0, 3).map((tech, i) => (
-        <text key={tech} x={24 + i * 118} y="124" fontFamily="IBM Plex Mono, monospace" fontSize="10" letterSpacing="1.5" fill="#6cc7b4">
-          ▸ {tech.toUpperCase()}
-        </text>
-      ))}
-    </svg>
+      </span>
+      <p className="relative font-mono text-[11px] uppercase tracking-[0.24em] text-amber-400">
+        {L(c.sector)} · {L(MARKET_LABEL[c.market])}
+      </p>
+      <div className="relative mt-8 flex flex-wrap gap-2">
+        {c.technologies.slice(0, 4).map((tech) => (
+          <span key={tech} className="font-mono text-[11px] uppercase tracking-[0.08em] text-circuit-300 border border-ink-600 bg-ink-950/60 px-2.5 py-1.5" dir="ltr">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -38,8 +33,9 @@ function Lightbox({ imgs, i, onClose, onNav }: { imgs: { file: string }[]; i: nu
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onNav(i + 1);
-      if (e.key === "ArrowLeft") onNav(i - 1);
+      const rtl = document.documentElement.dir === "rtl";
+      if (e.key === "ArrowRight") onNav(rtl ? i - 1 : i + 1);
+      if (e.key === "ArrowLeft") onNav(rtl ? i + 1 : i - 1);
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -125,15 +121,18 @@ export function ProjectsList() {
                 >
                   <span className="font-mono text-[13px] text-amber-700 pt-1.5">{String(i + 1).padStart(2, "0")}</span>
                   <span className="min-w-0">
+                    {c.images && c.images.length > 0 && (
+                      <img src={c.images[0].file} alt="" loading="lazy" className="duo-img mb-4 h-40 w-full max-w-md object-cover border border-ink-900/15" />
+                    )}
                     <span className="flex flex-wrap items-center gap-x-4 gap-y-1">
                       <span className="font-display text-xl font-bold text-ink-900 group-hover:text-amber-700 transition-colors duration-150">{L(c.title)}</span>
-                      <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-mist-500">{L(MARKET_LABEL[c.market])}</span>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-mist-500">{L(MARKET_LABEL[c.market])}</span>
                     </span>
                     <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-amber-700">{L(c.sector)}</span>
                     <span className="mt-2.5 block text-[14px] leading-relaxed text-mist-500 max-w-2xl line-clamp-2">{L(c.summary)}</span>
                     <span className="mt-3.5 flex flex-wrap gap-2">
                       {c.technologies.slice(0, 4).map((tech) => (
-                        <span key={tech} className="font-mono text-[10px] uppercase tracking-[0.1em] text-mist-500 border border-ink-900/15 px-2 py-1">
+                        <span key={tech} className="font-mono text-[11px] uppercase tracking-[0.1em] text-mist-500 border border-ink-900/15 px-2 py-1">
                           {tech}
                         </span>
                       ))}
@@ -205,16 +204,16 @@ export function ProjectDetail() {
             <Icon name="arrow" className="w-4 h-4 -scale-x-100 rtl:scale-x-100" /> {t("cta.backToProjects")}
           </Link>
           <Reveal className="mt-6 flex flex-wrap gap-2.5">
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] border border-amber-500/50 text-amber-400 px-3 py-1.5">
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] border border-amber-500/50 text-amber-400 px-3 py-1.5">
               {L(MARKET_LABEL[c.market])}
             </span>
             {c.period && (
-              <span className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.2em] border border-circuit-500/50 text-circuit-300 px-3 py-1.5" dir="ltr">
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] border border-circuit-500/50 text-circuit-300 px-3 py-1.5" dir="ltr">
                 <Icon name="clock" className="w-3.5 h-3.5" />
                 {L(c.period)}
               </span>
             )}
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] border border-ink-600 text-mist-300 px-3 py-1.5">{L(c.sector)}</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] border border-ink-600 text-mist-300 px-3 py-1.5">{L(c.sector)}</span>
           </Reveal>
           <Reveal line as="h1" delay={90} className="mt-5">
             <span className="block font-display text-3xl sm:text-4xl lg:text-[44px] font-bold leading-[1.1] max-w-3xl">{L(c.title)}</span>
@@ -287,23 +286,23 @@ export function ProjectDetail() {
           <aside className="lg:sticky lg:top-28 space-y-6">
             <div className="border border-ink-700 bg-ink-900 p-6 space-y-5">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-mist-500">{t("case.technologies")}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-mist-500">{t("case.technologies")}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {c.technologies.map((tech) => (
-                    <span key={tech} className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-circuit-300 border border-ink-600 px-2.5 py-1.5">
+                    <span key={tech} className="font-mono text-[11px] uppercase tracking-[0.08em] text-circuit-300 border border-ink-600 px-2.5 py-1.5">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
               <div className="border-t border-ink-700 pt-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-mist-500">{t("case.role")}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-mist-500">{t("case.role")}</p>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-mist-300">{L(c.role)}</p>
               </div>
             </div>
 
             <div className="border border-ink-700 bg-ink-900 p-6">
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-mist-500">{t("case.results")}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-mist-500">{t("case.results")}</p>
               <ul className="mt-4 space-y-3.5">
                 {c.results.map((r) => (
                   <li key={r.en} className="flex gap-3 text-[13.5px] leading-relaxed text-mist-300">
@@ -317,11 +316,11 @@ export function ProjectDetail() {
             {/* prev / next */}
             <div className="grid grid-cols-2 gap-px bg-ink-700 border border-ink-700">
               <Link to={`/projects/${prev.id}`} className="group bg-ink-900 p-4 hover:bg-ink-850 transition-colors">
-                <p className="font-mono text-[9.5px] uppercase tracking-[0.2em] text-mist-500">{t("case.prev")}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist-500">{t("case.prev")}</p>
                 <p className="mt-1.5 font-display text-[13px] font-semibold leading-snug group-hover:text-amber-400 transition-colors line-clamp-2">{L(prev.title)}</p>
               </Link>
               <Link to={`/projects/${next.id}`} className="group bg-ink-900 p-4 hover:bg-ink-850 transition-colors text-end">
-                <p className="font-mono text-[9.5px] uppercase tracking-[0.2em] text-mist-500">{t("case.next")}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist-500">{t("case.next")}</p>
                 <p className="mt-1.5 font-display text-[13px] font-semibold leading-snug group-hover:text-amber-400 transition-colors line-clamp-2">{L(next.title)}</p>
               </Link>
             </div>

@@ -35,14 +35,14 @@ export default function CardPage() {
       <div className="absolute inset-0 grid-bg opacity-60" aria-hidden="true" />
       <div
         className="absolute -top-32 inset-x-0 h-[26rem] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 60% 55% at 50% 0%, rgba(59,139,245,0.16), transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse 60% 55% at 50% 0%, rgba(233,163,59,0.16), transparent 70%)" }}
         aria-hidden="true"
       />
 
       <main className="relative max-w-md mx-auto px-5 pt-14 pb-10">
         {/* portrait — melts into the background, no frame */}
         <Reveal className="relative mx-auto w-44 h-44 sm:w-48 sm:h-48">
-          <div className="absolute -inset-6 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(90,167,255,0.25), transparent 65%)" }} aria-hidden="true" />
+          <div className="absolute -inset-6 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(233,163,59,0.25), transparent 65%)" }} aria-hidden="true" />
           <div
             className="relative w-full h-full overflow-hidden rounded-full"
             style={{
@@ -52,7 +52,7 @@ export default function CardPage() {
           >
             <img src={profileSrc} alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"} className="w-full h-full object-cover" style={{ objectPosition: cardProfilePosition }} />
           </div>
-          <span className="absolute bottom-1 end-1 grid place-items-center w-9 h-9 rounded-full bg-[#3fbf6f] ring-4 ring-ink-950 text-white">
+          <span className="absolute bottom-1 end-1 grid place-items-center w-9 h-9 rounded-full bg-[#3fbf6f] ring-4 ring-ink-950 text-ink-950">
             <Icon name="wa" className="w-4 h-4" />
           </span>
         </Reveal>
@@ -60,7 +60,7 @@ export default function CardPage() {
         {/* identity */}
         <Reveal delay={120} className="mt-7 text-center">
           <h1 className="font-display text-3xl font-bold tracking-tight">{isAr ? CARD.nameAr : CARD.name}</h1>
-          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.26em] text-volt-300">{isAr ? CARD.titleAr : CARD.title}</p>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.26em] text-amber-300">{isAr ? CARD.titleAr : CARD.title}</p>
           <p className="mt-3 inline-flex items-center gap-2 text-[13px] text-mist-400">
             <FlagSA className="w-4 h-4" /> {isAr ? CARD.location.ar : CARD.location.en}
           </p>
@@ -71,15 +71,15 @@ export default function CardPage() {
           <a
             href={vcf}
             download="Yousef-Ahmed.vcf"
-            className="group flex items-center justify-center gap-3 rounded-xl bg-volt-500 px-6 py-4 font-display text-[13.5px] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_14px_36px_-16px_rgba(59,139,245,0.7)] transition-all duration-150 hover:bg-volt-400 active:scale-[0.98]"
+            className="group chamfer-sm flex items-center justify-center gap-3 bg-amber-500 px-6 py-4 font-display text-[13.5px] font-semibold uppercase tracking-[0.12em] text-ink-950  transition-all duration-150 hover:bg-amber-400 active:scale-[0.98]"
           >
-            <Icon name="check" className="w-5 h-5 transition-transform duration-150 group-hover:scale-110" strokeWidth={2.2} />
+            <Icon name="download" className="w-5 h-5" strokeWidth={2} />
             {isAr ? "احفظ جهة الاتصال" : "Save Contact"}
           </a>
         </Reveal>
 
         {/* channels */}
-        <div className="mt-8 rounded-[22px] border border-paper-50/[0.07] bg-paper-50/[0.03] backdrop-blur-xl overflow-hidden divide-y divide-paper-50/[0.06]">
+        <div className="mt-8 border border-paper-50/[0.07] bg-paper-50/[0.03] backdrop-blur-xl overflow-hidden divide-y divide-paper-50/[0.06]">
           {channels.map((ch, i) => (
             <Reveal key={ch.label} delay={260 + i * 60}>
               <a
@@ -89,28 +89,28 @@ export default function CardPage() {
                 aria-label={`${ch.label} — ${ch.value}`}
                 className="group flex items-center gap-4 px-5 py-3.5 transition-colors duration-150 hover:bg-paper-50/[0.05]"
               >
-                <span className="grid place-items-center w-10 h-10 shrink-0 rounded-xl border border-volt-500/20 bg-volt-500/10 text-volt-400 transition-colors duration-150 group-hover:bg-volt-500/20">
+                <span className="grid place-items-center w-10 h-10 shrink-0 border border-amber-500/20 bg-amber-500/10 text-amber-400 transition-colors duration-150 group-hover:bg-amber-500/20">
                   <Icon name={ch.icon} className="w-[18px] h-[18px]" />
                 </span>
                 <span className="flex-1 min-w-0">
-                  <span className="block font-mono text-[9px] uppercase tracking-[0.26em] text-mist-400">{ch.label}</span>
-                  <span className="block mt-0.5 font-display text-[14px] font-semibold text-paper-50 truncate group-hover:text-volt-300 transition-colors duration-150" dir={ch.ltr ? "ltr" : undefined}>
+                  <span className="block font-mono text-[11px] uppercase tracking-[0.26em] text-mist-400">{ch.label}</span>
+                  <span className="block mt-0.5 font-display text-[14px] font-semibold text-paper-50 truncate group-hover:text-amber-300 transition-colors duration-150" dir={ch.ltr ? "ltr" : undefined}>
                     {ch.value}
                   </span>
                 </span>
-                <Icon name="arrow" strokeWidth={2} className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-volt-400" />
+                <Icon name="arrow" strokeWidth={2} className="w-4 h-4 shrink-0 text-mist-500 opacity-0 -translate-x-1.5 rtl:translate-x-1.5 rtl:-scale-x-100 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-amber-400" />
               </a>
             </Reveal>
           ))}
         </div>
 
         <Reveal delay={620} className="mt-8 text-center">
-          <Link to="/contact" className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.24em] text-mist-400 transition-colors hover:text-volt-300">
+          <Link to="/contact" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-mist-400 transition-colors hover:text-amber-300">
             {isAr ? "بطاقة التواصل الكاملة" : "Full contact page"}
             <Icon name="arrow" className="w-3.5 h-3.5 rtl:-scale-x-100" strokeWidth={2} />
           </Link>
-          <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.3em] text-mist-500/70">
-            TECH <span className="text-volt-400/70">OF</span> THE WORLD
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.3em] text-mist-500/70">
+            TECH <span className="text-amber-400/70">OF</span> THE WORLD
           </p>
         </Reveal>
       </main>

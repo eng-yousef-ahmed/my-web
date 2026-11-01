@@ -39,7 +39,7 @@ export default function Services() {
                   href={`#${c.id}`}
                   className="group flex items-center gap-3 py-3.5 ps-5 font-display text-[13.5px] font-semibold text-mist-400 hover:text-amber-400 transition-colors"
                 >
-                  <span className="font-mono text-[10.5px] text-mist-500 group-hover:text-amber-500 transition-colors">0{i + 1}</span>
+                  <span className="font-mono text-[11px] text-mist-500 group-hover:text-amber-500 transition-colors">0{i + 1}</span>
                   {L(c.name)}
                 </a>
               ))}
@@ -55,7 +55,7 @@ export default function Services() {
                           <Icon name={c.icon} className="w-6 h-6" />
                         </span>
                         <div className="flex-1 min-w-0">
-                          <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-amber-500">
+                          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-amber-500">
                             0{i + 1} — {L(c.name)}
                           </p>
                           <h2 className="mt-2 font-display text-2xl font-bold leading-snug">{L(c.tagline)}</h2>
@@ -72,16 +72,6 @@ export default function Services() {
                         ))}
                       </div>
 
-                      <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-ink-700 pt-5">
-                        <span className="font-mono text-[9.5px] uppercase tracking-[0.24em] text-mist-500 me-2">
-                          {isAr ? "أدوات" : "Tooling"}
-                        </span>
-                        {c.tech.map((tech) => (
-                          <span key={tech} className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-circuit-300 border border-ink-600 px-2.5 py-1.5" dir="ltr">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </Reveal>

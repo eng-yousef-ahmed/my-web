@@ -60,8 +60,7 @@ export const CV_FILES = {
  * automatically. See the README inside each folder:
  *
  *   public/images/profile/   → Home page full-screen portrait
- *   public/images/contact/   → Contact page portrait
- */
+  */
 export const HOME_ASSETS = {
   profile: [
     `${base}/images/profile/yousef-ahmed.webp`,
@@ -73,15 +72,12 @@ export const HOME_ASSETS = {
 };
 
 export const CARD_ASSETS = {
-  profile: [
-    `${base}/images/contact/profile.webp`,
-    `${base}/images/contact/profile.jpg`,
-    `${base}/images/contact/profile.png`,
-  ],
+  /* the contact page and digital card reuse the main portrait, so there is one photo to maintain */
+  profile: HOME_ASSETS.profile,
 };
 
 /** Portrait crop anchor — tune per photo via env, no code edits. */
-export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "50% 18%").trim();
+export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "64% 14%").trim();
 
 /* ================= outbound helpers ================= */
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign"] as const;
@@ -158,5 +154,5 @@ export function websiteDisplay(): string {
  */
 export const IMAGES = {
   profile: `${base}/images/profile/yousef-ahmed.webp`,
-  contactProfile: `${base}/images/contact/profile.webp`,
+  contactProfile: `${base}/images/profile/yousef-ahmed.webp`,
 };

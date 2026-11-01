@@ -8,7 +8,6 @@ export type ServiceCategory = {
   tagline: B;
   value: B;
   items: B[];
-  tech: string[];
 };
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -31,7 +30,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { en: "IT Environment Assessment", ar: "تقييم البيئة التقنية" },
       { en: "Preventive Maintenance & Health Checks", ar: "الصيانة الوقائية وفحوصات السلامة" },
     ],
-    tech: ["Windows 10/11", "ManageEngine", "AnyDesk", "RDP"],
   },
   {
     id: "networks",
@@ -52,7 +50,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { en: "Structured Cabling", ar: "التوصيلات المنظمة" },
       { en: "Network Troubleshooting", ar: "استكشاف أعطال الشبكات" },
     ],
-    tech: ["MikroTik", "HP Switches", "TCP/IP", "DNS/DHCP"],
   },
   {
     id: "microsoft-cloud",
@@ -73,7 +70,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { en: "Microsoft 365 Administration", ar: "إدارة مايكروسوفت 365" },
       { en: "OneDrive & SharePoint", ar: "ون درايف وشير بوينت" },
     ],
-    tech: ["Windows Server", "Active Directory", "M365", "Exchange Online"],
   },
   {
     id: "security-systems",
@@ -94,7 +90,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { en: "Biometric & Attendance Systems", ar: "أنظمة البصمة والحضور" },
       { en: "Door Access Control", ar: "التحكم في دخول الأبواب" },
     ],
-    tech: ["Hikvision", "Dahua", "ZKTeco", "NVR/DVR"],
   },
   {
     id: "consultancy",
@@ -114,7 +109,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { en: "Technology Recommendations", ar: "التوصيات التقنية" },
       { en: "Business IT Consulting", ar: "استشارات الأعمال التقنية" },
     ],
-    tech: ["Assessment", "Planning", "Documentation"],
   },
 ];
 
@@ -178,22 +172,6 @@ export const FOUNDER_METRICS: { value: string; label: B }[] = [
   { value: "+500", label: { en: "Users supported", ar: "مستخدم مدعوم" } },
   { value: "+500", label: { en: "Endpoints managed", ar: "جهاز طرفي مُدار" } },
   { value: "50–65%", label: { en: "Recurring incident reduction", ar: "انخفاض الأعطال المتكررة" } },
-];
-
-/* ---------------- technical focus areas ---------------- */
-export const FOCUS_AREAS: B[] = [
-  { en: "IT Support", ar: "الدعم التقني" },
-  { en: "Windows Server", ar: "ويندوز سيرفر" },
-  { en: "Active Directory", ar: "أكتيف ديريكتوري" },
-  { en: "Group Policy", ar: "سياسات المجموعة" },
-  { en: "Networking", ar: "الشبكات" },
-  { en: "Microsoft 365", ar: "مايكروسوفت 365" },
-  { en: "CCTV", ar: "المراقبة" },
-  { en: "Access Control", ar: "التحكم في الدخول" },
-  { en: "Monitoring", ar: "المراقبة التشغيلية" },
-  { en: "Enterprise Printing", ar: "الطباعة المؤسسية" },
-  { en: "Remote Support", ar: "الدعم عن بُعد" },
-  { en: "Infrastructure", ar: "البنية التحتية" },
 ];
 
 /* ---------------- technology groups (hands-on only) ---------------- */
