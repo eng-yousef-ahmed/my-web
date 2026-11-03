@@ -7,7 +7,7 @@ import { Icon, PageHero, Reveal } from "../components/kit";
 export default function Services() {
   const { isAr, L, t } = useLang();
   usePageMeta(
-    isAr ? "خدماتي | يوسف أحمد — TECH OF THE WORLD" : "My Services | Yousef Ahmed — TECH OF THE WORLD",
+    isAr ? "خدماتي | يوسف أحمد" : "My Services | Yousef Ahmed",
     isAr
       ? "خمسة مسارات: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
       : "Five service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."

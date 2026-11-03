@@ -7,7 +7,7 @@ import { FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 export default function About() {
   const { isAr, L } = useLang();
   usePageMeta(
-    isAr ? "عني | يوسف أحمد — TECH OF THE WORLD" : "About | Yousef Ahmed — TECH OF THE WORLD",
+    isAr ? "عني | يوسف أحمد" : "About | Yousef Ahmed",
     isAr
       ? "قصة يوسف أحمد المهنية: +9 سنوات في الدعم التقني والبنية التحتية والشبكات ومايكروسوفت وأنظمة الأمن في السعودية ومصر."
       : "The professional story of Yousef Ahmed: 9+ years in IT support, infrastructure, networks, Microsoft and security systems across Saudi Arabia and Egypt."

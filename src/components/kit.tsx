@@ -231,6 +231,7 @@ export function LogoMark({ tone = "light", className = "w-10 h-10" }: { tone?: "
 }
 
 export function Logo({ tone = "light", compact = false }: { tone?: "light" | "dark"; compact?: boolean }) {
+  const { isAr } = useLang();
   const main = tone === "light" ? "text-paper-50" : "text-ink-900";
   const sub = tone === "light" ? "text-mist-400" : "text-mist-500";
   return (
@@ -238,10 +239,20 @@ export function Logo({ tone = "light", compact = false }: { tone?: "light" | "da
       <LogoMark tone={tone} className={compact ? "w-9 h-9" : "w-10 h-10"} />
       {!compact && (
         <span className="leading-none">
-          <span className={`font-display block text-[15px] font-bold tracking-wide ${main}`}>
-            TECH <span className="text-amber-500">OF</span> THE WORLD
+          <span className={`font-display block text-[18px] font-bold tracking-tight ${main}`}>
+            {isAr ? (
+              <>
+                يوسف <span className="text-amber-500">أحمد</span>
+              </>
+            ) : (
+              <>
+                Yousef <span className="text-amber-500">Ahmed</span>
+              </>
+            )}
           </span>
-          <span className={`block text-[11px] tracking-[0.32em] uppercase mt-1 ${sub}`}>Yousef Ahmed</span>
+          <span className={`block text-[11px] mt-1.5 ${isAr ? "" : "tracking-[0.18em] uppercase"} ${sub}`}>
+            {isAr ? "أخصائي دعم تقني أول" : "IT Support Specialist"}
+          </span>
         </span>
       )}
     </span>

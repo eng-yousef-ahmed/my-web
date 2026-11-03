@@ -71,7 +71,7 @@ export function ProjectsList() {
   const { projects } = useAllProjects();
   const [market, setMarket] = useState<"all" | "sa" | "eg">("all");
   usePageMeta(
-    isAr ? "المشاريع | يوسف أحمد — TECH OF THE WORLD" : "Projects | Yousef Ahmed — TECH OF THE WORLD",
+    isAr ? "المشاريع | يوسف أحمد" : "Projects | Yousef Ahmed",
     isAr
       ? "دراسات حالة حقيقية: بنية تحتية وشبكات ومراكز مراقبة وبيئات مايكروسوفت في السعودية ومصر."
       : "Real case studies: infrastructure, networks, surveillance centers and Microsoft environments across Saudi Arabia and Egypt."

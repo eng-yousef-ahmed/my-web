@@ -94,7 +94,7 @@ npx vite preview
 
 ---
 
-## 6️⃣ ربط دومين خاص (techoftheworld.com مثلًا)
+## 6️⃣ ربط دومين خاص (yousefahmed.com مثلًا)
 
 1. اشترِ الدومين من أي مزود (Namecheap / GoDaddy / مزود محلي)
 2. من لوحة Netlify/Vercel: **Domains → Add domain**
