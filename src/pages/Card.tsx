@@ -12,7 +12,7 @@ import { FlagSA, Icon, Reveal, useAsset } from "../components/kit";
 export default function CardPage() {
   const { isAr } = useLang();
   usePageMeta(
-    `${CARD.name} — ${CARD.title} | TECH OF THE WORLD`,
+    `${CARD.name} — ${CARD.title}`,
     isAr
       ? `بطاقة التواصل الرقمية — ${CARD.titleAr} في ${CARD.location.ar}`
       : `Digital contact card — ${CARD.title} in ${CARD.location.en}`
@@ -109,9 +109,6 @@ export default function CardPage() {
             {isAr ? "بطاقة التواصل الكاملة" : "Full contact page"}
             <Icon name="arrow" className="w-3.5 h-3.5 rtl:-scale-x-100" strokeWidth={2} />
           </Link>
-          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.3em] text-mist-500/70">
-            TECH <span className="text-amber-400/70">OF</span> THE WORLD
-          </p>
         </Reveal>
       </main>
     </div>

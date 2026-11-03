@@ -42,7 +42,7 @@ function ScrollProgress() {
 
 /* ================= header ================= */
 export function Header() {
-  const { t, lang, toggle } = useLang();
+  const { t, lang, toggle, isAr } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -69,7 +69,7 @@ export function Header() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 flex items-center justify-between h-[72px]">
-        <Link to="/" aria-label="TECH OF THE WORLD — Home" className="shrink-0 hover:opacity-90 transition-opacity">
+        <Link to="/" aria-label={isAr ? "يوسف أحمد — الرئيسية" : "Yousef Ahmed — Home"} className="shrink-0 hover:opacity-90 transition-opacity">
           <Logo tone="light" />
         </Link>
 
@@ -200,7 +200,7 @@ export function Footer() {
 
         <div className="mt-10 pt-6 border-t border-ink-700 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist-500">
-            © {year} Yousef Ahmed · TECH OF THE WORLD · {t("footer.rights")}
+            © {year} {isAr ? "يوسف أحمد" : "Yousef Ahmed"} · {t("footer.rights")}
           </p>
           <div className="flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.2em] text-mist-500">
             <span className="flex items-center gap-2">

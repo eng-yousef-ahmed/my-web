@@ -16,8 +16,8 @@ export default function Home() {
   const { isAr } = useLang();
   usePageMeta(
     isAr
-      ? "يوسف أحمد — أخصائي دعم تقني أول | TECH OF THE WORLD"
-      : "Yousef Ahmed — Senior IT Support Specialist | TECH OF THE WORLD",
+      ? "يوسف أحمد — أخصائي دعم تقني أول"
+      : "Yousef Ahmed — Senior IT Support Specialist",
     isAr
       ? "أبني وأدير بيئات تقنية موثوقة تعتمد عليها الأعمال يوميًا. خبرة عملية في البنية التحتية والشبكات ومايكروسوفت وأنظمة الأمن في السعودية ومصر."
       : "I build and manage reliable IT environments that businesses depend on every day. Hands-on experience across infrastructure, networks, Microsoft and security systems in Saudi Arabia & Egypt."
@@ -84,7 +84,7 @@ export default function Home() {
           <Reveal className="flex flex-wrap items-center gap-4">
             <span className="inline-flex items-center gap-3">
               <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.34em] text-amber-400">TECH OF THE WORLD</span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.34em] text-amber-400">{isAr ? "ملف أعمال" : "Portfolio"}</span>
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-paper-50/15 bg-ink-950/55 backdrop-blur-sm px-3.5 py-1.5">
               <span className="relative flex w-2 h-2">

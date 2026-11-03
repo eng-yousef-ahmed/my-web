@@ -1,5 +1,5 @@
 /**
- * TECH OF THE WORLD — central, environment-driven configuration.
+ * Yousef Ahmed portfolio — central, environment-driven configuration.
  *
  * All contact data and replaceable-asset paths live here, so nothing is
  * hard-coded inside components. Environment variables can override any
