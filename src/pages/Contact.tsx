@@ -1,8 +1,8 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
 import type { B } from "../i18n";
-import { CARD, CARD_ASSETS, CONTACT, CV_FILES, IMAGES, cardProfilePosition, githubUrl } from "../config";
-import { Btn, Icon, Reveal, useAsset } from "../components/kit";
+import { CARD, CONTACT, CV_FILES, IMAGES, githubUrl } from "../config";
+import { Btn, Icon, Reveal } from "../components/kit";
 
 /* ================= shared glass surface ================= */
 function Glass({ className = "", children }: { className?: string; children: React.ReactNode }) {
@@ -61,8 +61,6 @@ export function Contact() {
       : "Digital contact card of Yousef Ahmed, Senior IT Support Specialist in Jeddah — phone, WhatsApp, email and LinkedIn."
   );
 
-  const profileSrc = useAsset(CARD_ASSETS.profile, IMAGES.contactProfile);
-
   const channels: Channel[] = [
     { key: "phone", icon: "phone", label: { en: "Phone", ar: "الهاتف" }, value: CARD.phoneDisplay, href: `tel:+${CARD.phoneDigits}` },
     { key: "whatsapp", icon: "wa", label: { en: "WhatsApp · Saudi Arabia", ar: "واتساب · السعودية" }, value: CARD.whatsappDisplay, href: `https://wa.me/${CARD.whatsappDigits}`, external: true },
@@ -90,28 +88,29 @@ export function Contact() {
         {/* ================= HERO — introduction + portrait ================= */}
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-[0.9fr_1.1fr] items-center">
           {/* portrait — first on mobile, physical RIGHT on desktop (LTR), melts into the page */}
-          <Reveal delay={140} className="order-1 lg:order-2">
+          <Reveal delay={140} className="order-1 lg:order-2 pb-6 lg:pb-0">
             <div className="relative max-w-[440px] sm:max-w-[500px] lg:max-w-[560px] mx-auto lg:mx-0 lg:ms-auto">
               <div className="absolute -inset-10 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle at 50% 36%, rgba(233,163,59,0.22), transparent 62%)" }} aria-hidden="true" />
-              {/* the portrait — no frame, edges dissolve into the navy */}
+              {/* the YA mark — no frame: the logo's own lines are used as a mask over a warm gradient,
+                  so it melts into the page instead of sitting in a box */}
               <div
-                className="relative aspect-[4/5]"
+                role="img"
+                aria-label={isAr ? "شعار YA ليوسف أحمد" : "YA monogram — Yousef Ahmed"}
+                className="relative aspect-square"
                 style={{
-                  maskImage: "radial-gradient(135% 118% at 50% 35%, #000 42%, transparent 88%)",
-                  WebkitMaskImage: "radial-gradient(135% 118% at 50% 35%, #000 42%, transparent 88%)",
+                  background: "linear-gradient(165deg, #fbe3b8 0%, #f0b35a 38%, #e9a33b 62%, rgba(233,163,59,0.08) 100%)",
+                  maskImage: `url(${IMAGES.contactLogo})`,
+                  WebkitMaskImage: `url(${IMAGES.contactLogo})`,
+                  maskSize: "contain",
+                  WebkitMaskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  WebkitMaskPosition: "center",
                 }}
-              >
-                <img
-                  src={profileSrc}
-                  alt={isAr ? "صورة شخصية للمهندس يوسف أحمد" : "Portrait of Yousef Ahmed"}
-                  className="kenburns absolute inset-0 w-full h-full object-cover"
-                  style={{ objectPosition: cardProfilePosition }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/25" aria-hidden="true" />
-                <div className="absolute inset-0 bg-gradient-to-r from-ink-950/55 via-transparent to-ink-950/55" aria-hidden="true" />
-              </div>
+              />
               {/* availability chip floating over the blend */}
-              <div className="absolute bottom-6 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 lg:bottom-10 lg:start-8 lg:translate-x-0 inline-flex items-center gap-2.5 rounded-full border border-paper-50/15 bg-ink-950/60 backdrop-blur-md px-4 py-2">
+              <div className="absolute -bottom-7 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 lg:-bottom-8 lg:start-8 lg:translate-x-0 lg:rtl:translate-x-0 inline-flex items-center gap-2.5 rounded-full border border-paper-50/15 bg-ink-950/60 backdrop-blur-md px-4 py-2">
                 <span className="relative flex w-2 h-2">
                   <span className="absolute inline-flex w-full h-full rounded-full bg-[#3fbf6f] pulse-ring" aria-hidden="true" />
                   <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />

@@ -155,4 +155,5 @@ export function websiteDisplay(): string {
 export const IMAGES = {
   profile: `${base}/images/profile/yousef-ahmed.webp`,
   contactProfile: `${base}/images/profile/yousef-ahmed.webp`,
+  contactLogo: `${base}/images/contact/logo.png`,
 };
