@@ -34,7 +34,7 @@ export default function Home() {
         src={src}
         alt={isAr ? "يوسف أحمد، أخصائي دعم تقني أول" : "Yousef Ahmed, Senior IT Support Specialist"}
         className="kenburns absolute inset-0 w-full h-full object-cover lg:hidden"
-        style={{ objectPosition: "68% 10%" }}
+        style={{ objectPosition: "50% 10%" }}
       />
       {/* desktop: subject placed opposite the text side (physical in both LTR & RTL) */}
       <img
