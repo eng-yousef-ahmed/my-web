@@ -3,3 +3,14 @@ node_modules/
 dist/
 build/
 *.log
+
+# local environment files (keep only .env.example in git)
+.env
+.env.*
+!.env.example
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

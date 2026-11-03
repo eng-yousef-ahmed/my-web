@@ -337,9 +337,9 @@ export function Assistant() {
   }, [open, reduced]);
 
   const send = (text: string, intent?: Intent) => {
-    const clean = text.trim();
+    const clean = text.trim().slice(0, 500);
     if (!clean || typing) return;
-    setMsgs((m) => [...m, { from: "user", html: clean.replace(/</g, "&lt;") }]);
+    setMsgs((m) => [...m, { from: "user", html: clean.slice(0, 500) }]);
     setInput("");
     setTyping(true);
     setMood("thinking");
@@ -418,7 +418,8 @@ export function Assistant() {
                         ? "bg-amber-500 text-ink-950 font-medium"
                         : "bg-ink-800 text-mist-200 border border-ink-700"
                     }`}
-                    dangerouslySetInnerHTML={{ __html: m.html }}
+                    /* bot replies are fixed strings from this file; the visitor's own text is never parsed as HTML */
+                    {...(m.from === "bot" ? { dangerouslySetInnerHTML: { __html: m.html } } : { children: m.html })}
                   />
                 </div>
                 {m.actions?.length ? (
@@ -486,6 +487,7 @@ export function Assistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={s.placeholder}
+              maxLength={500}
               className="flex-1 min-w-0 bg-ink-800 border border-ink-600 px-3.5 py-2.5 text-[13px] text-paper-50 placeholder:text-mist-500 focus:border-amber-500 focus:outline-none transition-colors"
             />
             <button

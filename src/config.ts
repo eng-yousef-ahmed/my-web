@@ -82,6 +82,9 @@ export const cardProfilePosition = (env.VITE_CONTACT_PROFILE_POSITION || "64% 14
 /* ================= outbound helpers ================= */
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign"] as const;
 
+/** Campaign tags come from the URL, so accept only short plain tokens (letters, digits, _ . -); anything else is dropped. */
+const cleanUtm = (v: string | null): string => (v && /^[\w.-]{1,40}$/.test(v) ? v : "");
+
 /** Call once on app boot (HashRouter puts the query after "#/route?"). */
 export function captureUtm(): void {
   try {
@@ -89,7 +92,7 @@ export function captureUtm(): void {
     const q = new URLSearchParams(query);
     const found: Record<string, string> = {};
     UTM_KEYS.forEach((k) => {
-      const v = q.get(k);
+      const v = cleanUtm(q.get(k));
       if (v) found[k] = v;
     });
     if (Object.keys(found).length) sessionStorage.setItem("ya-utm", JSON.stringify(found));
@@ -100,7 +103,10 @@ export function captureUtm(): void {
 
 function storedUtm(): Record<string, string> {
   try {
-    return JSON.parse(sessionStorage.getItem("ya-utm") ?? "{}") as Record<string, string>;
+    const raw = JSON.parse(sessionStorage.getItem("ya-utm") ?? "{}") as Record<string, unknown>;
+    const out: Record<string, string> = {};
+    for (const k of UTM_KEYS) if (typeof raw[k] === "string" && cleanUtm(raw[k] as string)) out[k] = cleanUtm(raw[k] as string);
+    return out;
   } catch {
     return {};
   }

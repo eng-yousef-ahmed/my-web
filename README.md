@@ -64,6 +64,12 @@ src/
   pages/           Home · About · Services · Projects · Contact · Card
 ```
 
+## Security
+
+- `public/_headers` sets a strict Content-Security-Policy (scripts only from the site itself), `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy` and HSTS on Netlify / Cloudflare Pages. If you add a new external service (analytics, fonts, embeds), add its host to the CSP there.
+- No secrets live in the code: everything in `.env.example` is public contact info. Real `.env*` files are git-ignored.
+- Dependabot opens weekly pull requests for dependency updates (`.github/dependabot.yml`); run `npm audit` before releases.
+
 ## Deployment
 
 Any static host: build command `npm run build`, output directory `dist`. Hash routing needs no server rewrites.
