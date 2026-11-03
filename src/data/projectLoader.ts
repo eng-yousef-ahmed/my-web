@@ -30,9 +30,13 @@ export type MetaShape = {
 const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
 let cached: Promise<CaseStudy[]> | null = null;
 
+/* folder and image names must be plain file-system names: no slashes, dots-up, or schemes */
+const SAFE_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
+const isSafe = (n: unknown): n is string => typeof n === "string" && SAFE_NAME.test(n) && !n.includes("..");
+
 function normalizeImages(meta: MetaShape, folder: string): { file: string; caption?: B }[] | undefined {
   if (!meta.images?.length) return undefined;
-  return meta.images.map((img) => ({ ...img, file: `${base}/projects/${folder}/images/${img.file}` }));
+  return meta.images.filter((img) => isSafe(img.file)).map((img) => ({ ...img, file: `${base}/projects/${folder}/images/${img.file}` }));
 }
 
 function loadAll(): Promise<CaseStudy[]> {
@@ -44,6 +48,7 @@ function loadAll(): Promise<CaseStudy[]> {
         if (!res.ok) return CASES;
         const folders: string[] = await res.json();
         for (const folder of folders) {
+          if (!isSafe(folder)) continue;
           try {
             const mRes = await fetch(`${base}/projects/${folder}/meta.json`);
             if (!mRes.ok) continue;
