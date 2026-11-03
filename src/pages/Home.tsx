@@ -36,14 +36,16 @@ export default function Home() {
         className="kenburns absolute inset-0 w-full h-full object-cover lg:hidden"
         style={{ objectPosition: "50% 10%" }}
       />
-      {/* desktop: subject placed opposite the text side (physical in both LTR & RTL) */}
-      <img
-        src={src}
-        alt=""
-        aria-hidden="true"
-        className="kenburns absolute inset-0 w-full h-full object-cover hidden lg:block"
-        style={{ objectPosition: isAr ? "26% 12%" : "74% 12%" }}
-      />
+      {/* desktop: subject placed opposite the text side. The photo has the subject on the right,
+          so in Arabic (text on the right) the image is mirrored to bring him to the left. */}
+      <div className={`absolute inset-0 hidden lg:block ${isAr ? "-scale-x-100" : ""}`} aria-hidden="true">
+        <img
+          src={src}
+          alt=""
+          className="kenburns w-full h-full object-cover"
+          style={{ objectPosition: "74% 12%" }}
+        />
+      </div>
 
       {/* readability scrims — dark where the text lives, soft elsewhere */}
       <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/72 to-ink-950/[0.06] rtl:bg-gradient-to-l" aria-hidden="true" />
