@@ -47,7 +47,8 @@ The digital card, Contact page, footer and assistant all read from the same valu
 
 ## Replacing content without code edits
 
-- **Portrait (Home, Contact and digital card):** `public/images/profile/yousef-ahmed.webp`
+- **Portrait (Home and digital card):** `public/images/profile/yousef-ahmed.webp`
+- **Contact page logo:** `public/images/contact/logo.png` (light lines on transparent)
 - **CVs:** `public/assets/cv/Yousef-Ahmed-CV-AR.pdf` and `…-EN.pdf` (keep the filenames)
 - **Logo:** `public/logo-light.svg` (dark sections) and `public/logo-dark.svg` (light sections)
 - **Project photos / extra projects:** see `public/projects/_template/README.md`; list the folder names in `public/projects/index.json`
