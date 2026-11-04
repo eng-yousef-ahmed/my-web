@@ -105,6 +105,7 @@ const PATHS: Record<string, React.ReactNode> = {
     </>
   ),
   chevron: <path d="m6 9.5 6 6 6-6" />,
+  external: <path d="M7 17 17 7M8 7h9v9" />,
   download: <path d="M12 3.5v11m0 0 4-4m-4 4-4-4M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" />,
   linkedin: (
     <path

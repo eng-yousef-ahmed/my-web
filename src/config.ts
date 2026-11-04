@@ -20,7 +20,7 @@ export const CONTACT = {
   email: (env.VITE_CONTACT_EMAIL || "youseefa77@gmail.com").trim(),
   linkedin: (env.VITE_LINKEDIN_URL || "https://www.linkedin.com/in/eng-yousef-ahmed/").trim(),
   linkedinHandle: "eng-yousef-ahmed",
-  website: (env.VITE_WEBSITE_URL || "https://tech-of-the-world.netlify.app").trim(),
+  website: (env.VITE_WEBSITE_URL || "https://yousef-ahmed-phi.vercel.app").trim(),
 };
 
 

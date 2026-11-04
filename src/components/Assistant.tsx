@@ -5,6 +5,7 @@ import { CONTACT, CV_FILES, waLink } from "../config";
 import { Icon } from "./kit";
 import { CASES } from "../data/cases";
 import { SERVICE_CATEGORIES } from "../data/content";
+import { CERTIFICATES } from "../data/certificates";
 
 /* ================= Batata — the potato robot assistant ================= */
 
@@ -45,7 +46,7 @@ const STR = {
     allProjects: "كل المشاريع",
     placeholder: "اكتب سؤالك هنا…",
     send: "إرسال",
-    sugg: ["ما هي خدماتك؟", "كم خبرة يوسف؟", "كيف أتواصل معك؟", "ابعتلي السيرة الذاتية"],
+    sugg: ["ما هي خدماتك؟", "ما هي شهاداتك؟", "كم خبرة يوسف؟", "كيف أتواصل معك؟", "ابعتلي السيرة الذاتية"],
     servicesTitle: "أعمل عبر خمسة مسارات:",
     services: [
       "تقنية المعلومات والبنية التحتية",
@@ -71,6 +72,10 @@ const STR = {
     goWhatsapp: "واتساب مباشر",
     goContact: "صفحة التواصل",
     goProjects: "المشاريع",
+    goCerts: "كل الشهادات",
+    certsTitle: "حاصل على <b>3 شهادات إتمام</b> من Cisco Networking Academy (مستوى طالب)، ولكل واحدة رابط تحقق رسمي على Credly:",
+    certsFoot: "ويستعد حاليًا لشهادة CCNA مع تطبيق عملي على VMware.",
+    verify: "تحقق",
   },
   en: {
     online: "Online, replies in seconds",
@@ -86,7 +91,7 @@ const STR = {
     allProjects: "All projects",
     placeholder: "Type your question…",
     send: "Send",
-    sugg: ["What do you do?", "How experienced are you?", "How can I reach you?", "Send me the CV"],
+    sugg: ["What do you do?", "Your certificates?", "How experienced are you?", "How can I reach you?", "Send me the CV"],
     servicesTitle: "I work across five lines:",
     services: [
       "IT & Infrastructure",
@@ -112,6 +117,10 @@ const STR = {
     goWhatsapp: "Direct WhatsApp",
     goContact: "Contact page",
     goProjects: "Projects",
+    goCerts: "All certificates",
+    certsTitle: "<b>3 course-completion certificates</b> from Cisco Networking Academy (student level), each with an official Credly verification link:",
+    certsFoot: "Currently preparing for CCNA, with hands-on VMware lab work.",
+    verify: "Verify",
   },
 };
 
@@ -205,6 +214,7 @@ function replyFor(raw: string, lang: "ar" | "en", market?: "sa" | "eg", intent?:
       { label: lang === "ar" ? "عربي PDF" : "Arabic PDF", dl: CV_FILES.ar },
       { label: lang === "ar" ? "إنجليزي PDF" : "English PDF", dl: CV_FILES.en },
       { label: "LinkedIn", href: CONTACT.linkedin },
+      { label: s.goCerts, to: "/about#certifications" },
       { label: s.goContact, to: "/contact" },
     ];
     return out;
@@ -246,6 +256,17 @@ function replyFor(raw: string, lang: "ar" | "en", market?: "sa" | "eg", intent?:
       `<p class="mb-2">${s.servicesTitle}</p>` +
       s.services.map((x) => `<span class="bot-bullet"></span>${x}<br/>`).join("");
     out.actions = [{ label: s.goContact, to: "/services" }];
+    return out;
+  }
+  if (has(n, ["شهاده", "شهادات", "شهادتك", "certificate", "certificates", "certification", "certified", "cisco", "ccna", "credly", "badge", "credential"])) {
+    out.html =
+      `<p class="mb-2">${s.certsTitle}</p>` +
+      CERTIFICATES.map((c) => `<span class="bot-bullet"></span>${c.title[lang]}<br/>`).join("") +
+      `<p class="mt-2">${s.certsFoot}</p>`;
+    out.actions = [
+      ...CERTIFICATES.map((c) => ({ label: `${s.verify}: ${c.title[lang]}`, href: c.verifyUrl })),
+      { label: s.goCerts, to: "/about#certifications" },
+    ];
     return out;
   }
   if (has(n, ["خبره", "سنين", "experience", "years", "كام سنه"])) {

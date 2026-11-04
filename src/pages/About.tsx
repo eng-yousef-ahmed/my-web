@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
 import { CAREER, CERTIFICATIONS, EDUCATION, LANGUAGES, TECH_GROUPS, WHY_US } from "../data/content";
+import { CERTIFICATES, formatIssued } from "../data/certificates";
 import { FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 
 export default function About() {
@@ -141,8 +142,60 @@ export default function About() {
         </div>
       </section>
 
-      {/* education, languages, development */}
-      <section className="bg-paper-100 text-ink-900 grid-bg-light">
+      {/* credentials: verified certificates, then education, languages, development */}
+      <section id="certifications" className="bg-paper-100 text-ink-900 grid-bg-light scroll-mt-24">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-16 lg:pt-20">
+          <Reveal className="max-w-2xl">
+            <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-kicker">
+              <span className="h-px w-10 bg-amber-500" aria-hidden="true" />
+              {isAr ? "الشهادات" : "Certifications"}
+            </p>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
+              {isAr ? "شهادات موثّقة يمكن التحقق منها." : "Verified credentials you can check."}
+            </h2>
+            <p className="mt-4 text-[14.5px] leading-relaxed text-mist-500">
+              {isAr
+                ? "شهادات إتمام من Cisco Networking Academy (مستوى طالب)، ولكل واحدة بادج رسمي على Credly برابط تحقق."
+                : "Course-completion certificates from Cisco Networking Academy (student level). Each has an official Credly badge with a public verification link."}
+            </p>
+          </Reveal>
+
+          <div className="mt-10 grid md:grid-cols-3 gap-5">
+            {CERTIFICATES.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
+                <article className="h-full flex flex-col bg-paper-50 border border-ink-900/10 p-6 card-lift hover:border-ink-900/30">
+                  <div className="flex items-start gap-4">
+                    <img src={c.badge} alt="" width={72} height={72} loading="lazy" className="w-[72px] h-[72px] shrink-0" />
+                    <div className="min-w-0">
+                      <h3 className="font-display text-[17px] font-bold leading-snug">{L(c.title)}</h3>
+                      <p className="mt-1 text-[13px] text-mist-500">{L(c.issuer)}</p>
+                      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-amber-700">{formatIssued(c.issued, isAr)}</p>
+                      <p className="mt-0.5 text-[12px] text-mist-500">{L(c.level)}</p>
+                    </div>
+                  </div>
+                  <ul className="mt-5 space-y-2 flex-1">
+                    {c.skills.map((sk) => (
+                      <li key={sk.en} className="flex gap-2.5 text-[13px] leading-relaxed text-mist-500">
+                        <Icon name="check" className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" strokeWidth={2.2} />
+                        {L(sk)}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={c.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mt-6 inline-flex items-center gap-2 border-t border-ink-900/10 pt-4 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
+                  >
+                    {isAr ? "تحقق من الشهادة" : "Verify credential"}
+                    <Icon name="external" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                  </a>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 grid md:grid-cols-3 gap-10">
           <Reveal>
             <h2 className="font-display text-xl font-bold">{isAr ? "التعليم" : "Education"}</h2>
