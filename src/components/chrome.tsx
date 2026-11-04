@@ -231,14 +231,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [location.pathname, location.hash]);
 
-  /* In-page anchors (e.g. /services#networks). */
+  /* In-page anchors (e.g. /services#networks). The target page is lazy-loaded, so keep
+     looking for the section until it exists instead of assuming it is already on screen. */
   useEffect(() => {
     const id = location.hash.replace(/^#/, "");
     if (!id) return;
-    const timer = setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 120);
-    return () => clearTimeout(timer);
+    let tries = 0;
+    let timer = 0;
+    const attempt = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (++tries < 40) timer = window.setTimeout(attempt, 100);
+    };
+    timer = window.setTimeout(attempt, 120);
+    return () => window.clearTimeout(timer);
   }, [location.hash, location.pathname]);
 
   return (

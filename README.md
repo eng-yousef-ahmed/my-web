@@ -18,7 +18,7 @@ A floating assistant (**Batata**) guides visitors to services, experience, the C
 
 ## Stack
 
-Vite · React 18 · TypeScript · Tailwind CSS v4 · react-router-dom (hash routing, works on any static host).
+Vite 8 · React 19 · TypeScript 7 · Tailwind CSS v4 (Node 20.19+ or 22.12+, see `.nvmrc`) · react-router-dom (hash routing, works on any static host).
 
 ## Run
 
