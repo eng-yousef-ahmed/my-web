@@ -280,7 +280,6 @@ export const LANGUAGES: B[] = [
 ];
 
 export const CERTIFICATIONS: B[] = [
-  { en: "Cisco Networking Academy — Network Technician Career Path", ar: "أكاديمية سيسكو — مسار فني الشبكات" },
   { en: "CCNA Studies & VMware Virtualization (hands-on lab)", ar: "دراسات CCNA ومحاكاة VMware الافتراضية (معمل عملي)" },
   { en: "PowerShell Fundamentals", ar: "أساسيات PowerShell" },
 ];

@@ -160,7 +160,7 @@ export default function About() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <div className="mt-10 grid sm:grid-cols-2 gap-5">
             {CERTIFICATES.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
                 <article className="h-full flex flex-col bg-paper-50 border border-ink-900/10 p-6 card-lift hover:border-ink-900/30">

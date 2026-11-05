@@ -25,6 +25,22 @@ const LEVEL: B = { en: "Course completion · student level", ar: "إتمام د�
 
 export const CERTIFICATES: Certificate[] = [
   {
+    id: "network-technician-career-path",
+    title: { en: "Network Technician Career Path", ar: "مسار فني الشبكات" },
+    issuer: ISSUER,
+    level: LEVEL,
+    issued: "2026-06-07",
+    badge: `${base}/images/certificates/network-technician-career-path.webp`,
+    verifyUrl: "https://www.credly.com/badges/ce705adb-2108-4894-ba0e-9565495bb52c",
+    skills: [
+      { en: "Network standards, protocols and Ethernet switching", ar: "معايير وبروتوكولات الشبكات وتبديل Ethernet" },
+      { en: "IPv4 and IPv6 addressing", ar: "عنونة IPv4 وIPv6" },
+      { en: "DNS and DHCP operation and basic connectivity diagnosis", ar: "عمل DNS وDHCP وتشخيص مشاكل الاتصال" },
+      { en: "Wireless router setup and secure user access", ar: "إعداد الراوتر اللاسلكي وضبط وصول آمن للمستخدمين" },
+      { en: "Troubleshooting methodology and help-desk best practices", ar: "منهجية استكشاف الأعطال وأفضل ممارسات الدعم" },
+    ],
+  },
+  {
     id: "it-support-career-path",
     title: { en: "IT Support Specialist Career Path", ar: "مسار أخصائي الدعم التقني" },
     issuer: ISSUER,
