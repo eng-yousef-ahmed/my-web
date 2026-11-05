@@ -88,7 +88,7 @@ export default function Home() {
                 <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3fbf6f]" aria-hidden="true" />
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-mist-200">
-                {isAr ? "متاح للتواصل" : "Available"}
+                {isAr ? "متاح لوظائف أخصائي دعم تقني أول" : "Open to Senior IT Support roles"}
               </span>
             </span>
           </Reveal>
