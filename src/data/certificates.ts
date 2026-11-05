@@ -71,22 +71,6 @@ export const CERTIFICATES: Certificate[] = [
       { en: "Network and email setup on mobile devices", ar: "إعداد الشبكة والبريد على الأجهزة المحمولة" },
     ],
   },
-  {
-    id: "networking-basics",
-    title: { en: "Networking Basics", ar: "أساسيات الشبكات" },
-    issuer: ISSUER,
-    level: LEVEL,
-    issued: "2026-06-01",
-    badge: `${base}/images/certificates/networking-basics.webp`,
-    verifyUrl: "https://www.credly.com/badges/2f9c08fe-eeef-42fb-939f-c16ee4da1ea6",
-    skills: [
-      { en: "Network types, components, standards and protocols", ar: "أنواع الشبكات ومكوّناتها ومعاييرها وبروتوكولاتها" },
-      { en: "IPv4 and IPv6 addressing", ar: "عنونة IPv4 وIPv6" },
-      { en: "How routers connect networks", ar: "كيف تربط الراوترات الشبكات" },
-      { en: "Testing and troubleshooting connectivity", ar: "اختبار الاتصال واستكشاف أعطاله" },
-      { en: "Configuring a wireless router and client securely", ar: "إعداد راوتر لاسلكي وجهاز عميل بشكل آمن" },
-    ],
-  },
 ];
 
 /** "Jun 2026" / "يونيو 2026" — Gregorian calendar and Latin digits in both languages. */
