@@ -85,10 +85,10 @@ const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign"] as const;
 /** Campaign tags come from the URL, so accept only short plain tokens (letters, digits, _ . -); anything else is dropped. */
 const cleanUtm = (v: string | null): string => (v && /^[\w.-]{1,40}$/.test(v) ? v : "");
 
-/** Call once on app boot (HashRouter puts the query after "#/route?"). */
+/** Call once on app boot. Reads the query string (and the old "#/route?query" form of legacy links). */
 export function captureUtm(): void {
   try {
-    const query = window.location.hash.split("?")[1] ?? "";
+    const query = window.location.search.slice(1) || (window.location.hash.split("?")[1] ?? "");
     const q = new URLSearchParams(query);
     const found: Record<string, string> = {};
     UTM_KEYS.forEach((k) => {

@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
+import ROUTE_META from "../data/route-meta.json";
 import type { B } from "../i18n";
 import { CARD, CONTACT, CV_FILES, IMAGES, githubUrl } from "../config";
 import { Btn, Icon, Reveal } from "../components/kit";
@@ -54,12 +55,8 @@ function ChannelRow({ ch, index }: { ch: Channel; index: number }) {
  */
 export function Contact() {
   const { isAr, L } = useLang();
-  usePageMeta(
-    isAr ? "تواصل معي | يوسف أحمد — أخصائي دعم تقني أول" : "Contact | Yousef Ahmed — Senior IT Support Specialist",
-    isAr
-      ? "بطاقة التواصل الرقمية ليوسف أحمد، أخصائي دعم تقني أول في جدة — هاتف، واتساب، بريد إلكتروني ولينكدإن."
-      : "Digital contact card of Yousef Ahmed, Senior IT Support Specialist in Jeddah — phone, WhatsApp, email and LinkedIn."
-  );
+  const meta = ROUTE_META["/contact"];
+  usePageMeta(isAr ? meta.title.ar : meta.title.en, isAr ? meta.description.ar : meta.description.en);
 
   const channels: Channel[] = [
     { key: "phone", icon: "phone", label: { en: "Phone", ar: "الهاتف" }, value: CARD.phoneDisplay, href: `tel:+${CARD.phoneDigits}` },

@@ -6,7 +6,7 @@ import { FlagSA, Icon, Reveal, useAsset } from "../components/kit";
 
 /**
  * The standalone digital business card — what a phone opens after scanning
- * a QR that points at the website's /#/card route. No site chrome: just the
+ * a QR that points at the website's /card route. No site chrome: just the
  * identity, the channels and one tap to save the contact.
  */
 export default function CardPage() {

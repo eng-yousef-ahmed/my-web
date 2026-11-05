@@ -1,0 +1,52 @@
+{
+  "/": {
+    "title": {
+      "en": "Yousef Ahmed — Senior IT Support Specialist",
+      "ar": "يوسف أحمد — أخصائي دعم تقني أول"
+    },
+    "description": {
+      "en": "I build and manage reliable IT environments that businesses depend on every day. Hands-on experience across infrastructure, networks, Microsoft and security systems in Saudi Arabia & Egypt.",
+      "ar": "أبني وأدير بيئات تقنية موثوقة تعتمد عليها الأعمال يوميًا. خبرة عملية في البنية التحتية والشبكات ومايكروسوفت وأنظمة الأمن في السعودية ومصر."
+    }
+  },
+  "/about": {
+    "title": {
+      "en": "About | Yousef Ahmed",
+      "ar": "عني | يوسف أحمد"
+    },
+    "description": {
+      "en": "The professional story of Yousef Ahmed: 9+ years in IT support, infrastructure, networks, Microsoft and security systems across Saudi Arabia and Egypt.",
+      "ar": "قصة يوسف أحمد المهنية: +9 سنوات في الدعم التقني والبنية التحتية والشبكات ومايكروسوفت وأنظمة الأمن في السعودية ومصر."
+    }
+  },
+  "/services": {
+    "title": {
+      "en": "My Services | Yousef Ahmed",
+      "ar": "خدماتي | يوسف أحمد"
+    },
+    "description": {
+      "en": "Five service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy.",
+      "ar": "خمسة مسارات: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
+    }
+  },
+  "/contact": {
+    "title": {
+      "en": "Contact | Yousef Ahmed — Senior IT Support Specialist",
+      "ar": "تواصل معي | يوسف أحمد — أخصائي دعم تقني أول"
+    },
+    "description": {
+      "en": "Digital contact card of Yousef Ahmed, Senior IT Support Specialist in Jeddah — phone, WhatsApp, email and LinkedIn.",
+      "ar": "بطاقة التواصل الرقمية ليوسف أحمد، أخصائي دعم تقني أول في جدة — هاتف، واتساب، بريد إلكتروني ولينكدإن."
+    }
+  },
+  "/projects": {
+    "title": {
+      "en": "Projects | Yousef Ahmed",
+      "ar": "المشاريع | يوسف أحمد"
+    },
+    "description": {
+      "en": "Real case studies: infrastructure, networks, surveillance centers and Microsoft environments across Saudi Arabia and Egypt.",
+      "ar": "دراسات حالة حقيقية: بنية تحتية وشبكات ومراكز مراقبة وبيئات مايكروسوفت في السعودية ومصر."
+    }
+  }
+}
