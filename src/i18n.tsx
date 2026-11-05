@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { CONTACT } from "./config";
 
 export type Lang = "en" | "ar";
 export type B = { en: string; ar: string };
@@ -93,17 +94,28 @@ export function useLang(): Ctx {
   return ctx;
 }
 
-/** Sets document title + meta description per page. */
+/** Sets document title, meta description and the canonical / social tags for the current page. */
 export function usePageMeta(title: string, description: string) {
   useEffect(() => {
     document.title = title;
-    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-    meta.content = description;
+    const setMeta = (attr: "name" | "property", key: string, value: string) => {
+      let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+      }
+      el.content = value;
+    };
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+    setMeta("name", "twitter:title", title);
+    const path = window.location.pathname.replace(/\/+$/, "") || "/";
+    const url = CONTACT.website.replace(/\/+$/, "") + (path === "/" ? "/" : path);
+    setMeta("property", "og:url", url);
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (canonical) canonical.href = url;
   }, [title, description]);
 }
 

@@ -1,18 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
+import ROUTE_META from "../data/route-meta.json";
 import { CAREER, CERTIFICATIONS, EDUCATION, LANGUAGES, TECH_GROUPS, WHY_US } from "../data/content";
 import { CERTIFICATES, CERTIFICATE_PDFS, formatIssued } from "../data/certificates";
 import { FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 
 export default function About() {
   const { isAr, L } = useLang();
-  usePageMeta(
-    isAr ? "عني | يوسف أحمد" : "About | Yousef Ahmed",
-    isAr
-      ? "قصة يوسف أحمد المهنية: +9 سنوات في الدعم التقني والبنية التحتية والشبكات ومايكروسوفت وأنظمة الأمن في السعودية ومصر."
-      : "The professional story of Yousef Ahmed: 9+ years in IT support, infrastructure, networks, Microsoft and security systems across Saudi Arabia and Egypt."
-  );
+  const meta = ROUTE_META["/about"];
+  usePageMeta(isAr ? meta.title.ar : meta.title.en, isAr ? meta.description.ar : meta.description.en);
 
   return (
     <>

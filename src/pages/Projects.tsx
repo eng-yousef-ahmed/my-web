@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
+import ROUTE_META from "../data/route-meta.json";
 import { MARKET_LABEL, type CaseStudy } from "../data/cases";
 import { useAllProjects } from "../data/projectLoader";
 import { Btn, Icon, PageHero, Reveal } from "../components/kit";
@@ -70,12 +71,8 @@ export function ProjectsList() {
   const { isAr, L, t } = useLang();
   const { projects } = useAllProjects();
   const [market, setMarket] = useState<"all" | "sa" | "eg">("all");
-  usePageMeta(
-    isAr ? "المشاريع | يوسف أحمد" : "Projects | Yousef Ahmed",
-    isAr
-      ? "دراسات حالة حقيقية: بنية تحتية وشبكات ومراكز مراقبة وبيئات مايكروسوفت في السعودية ومصر."
-      : "Real case studies: infrastructure, networks, surveillance centers and Microsoft environments across Saudi Arabia and Egypt."
-  );
+  const meta = ROUTE_META["/projects"];
+  usePageMeta(isAr ? meta.title.ar : meta.title.en, isAr ? meta.description.ar : meta.description.en);
 
   const filtered = useMemo(() => projects.filter((c) => market === "all" || c.market === market || c.market === "both"), [projects, market]);
 

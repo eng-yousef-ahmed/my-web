@@ -1,5 +1,6 @@
 import React from "react";
 import { useLang, usePageMeta } from "../i18n";
+import ROUTE_META from "../data/route-meta.json";
 import { HOME_ASSETS, IMAGES } from "../config";
 import { Link } from "react-router-dom";
 import { Btn, Icon, Reveal, useAsset } from "../components/kit";
@@ -15,14 +16,8 @@ import { useAllProjects } from "../data/projectLoader";
  */
 export default function Home() {
   const { isAr } = useLang();
-  usePageMeta(
-    isAr
-      ? "يوسف أحمد — أخصائي دعم تقني أول"
-      : "Yousef Ahmed — Senior IT Support Specialist",
-    isAr
-      ? "أبني وأدير بيئات تقنية موثوقة تعتمد عليها الأعمال يوميًا. خبرة عملية في البنية التحتية والشبكات ومايكروسوفت وأنظمة الأمن في السعودية ومصر."
-      : "I build and manage reliable IT environments that businesses depend on every day. Hands-on experience across infrastructure, networks, Microsoft and security systems in Saudi Arabia & Egypt."
-  );
+  const meta = ROUTE_META["/"];
+  usePageMeta(isAr ? meta.title.ar : meta.title.en, isAr ? meta.description.ar : meta.description.en);
 
   const src = useAsset(HOME_ASSETS.profile, IMAGES.profile);
 

@@ -7,18 +7,18 @@ Bilingual (English LTR / Arabic RTL), built to present real work to business own
 
 | Route | Purpose |
 | --- | --- |
-| `/#/` | Home — portrait hero |
-| `/#/about` | Experience timeline, tools, education |
-| `/#/services` | The five service lines |
-| `/#/projects` and `/#/projects/:id` | Case studies |
-| `/#/contact` | Contact channels and CV download |
-| `/#/card` | Standalone digital business card (QR target, with Save Contact) |
+| `/` | Home — portrait hero |
+| `/about` | Experience timeline, tools, education |
+| `/services` | The five service lines |
+| `/projects` and `/projects/:id` | Case studies |
+| `/contact` | Contact channels and CV download |
+| `/card` | Standalone digital business card (QR target, with Save Contact) |
 
 A floating assistant (**Batata**) guides visitors to services, experience, the CV and contact channels.
 
 ## Stack
 
-Vite 8 · React 19 · TypeScript 7 · Tailwind CSS v4 (Node 20.19+ or 22.12+, see `.nvmrc`) · react-router-dom (hash routing, works on any static host).
+Vite 8 · React 19 · TypeScript 7 · Tailwind CSS v4 (Node 20.19+ or 22.12+, see `.nvmrc`) · react-router-dom (clean URLs; `npm run build` also writes one HTML file per page so link previews and search engines see each page's own title/description, plus a full `sitemap.xml`).
 
 ## Run
 
@@ -73,6 +73,6 @@ src/
 
 ## Deployment
 
-Live site: https://yousef-ahmed-phi.vercel.app (Vercel; headers come from `vercel.json`). Any static host works: build command `npm run build`, output directory `dist`. Hash routing needs no server rewrites.
+Live site: https://yousef-ahmed-phi.vercel.app (Vercel; headers come from `vercel.json`). Any static host works: build command `npm run build`, output directory `dist`. Clean URLs need a fallback to `index.html`: `vercel.json` and `public/_redirects` provide it for Vercel and Netlify/Cloudflare; on Apache see `SETUP_AR.md`. Old `/#/route` links (printed QR codes) are redirected automatically. Page titles/descriptions for the pre-rendered HTML live in `src/data/route-meta.json`; case-study pages need Node 22.18+ at build time (otherwise they are skipped with a warning).
 
 Content rule: no invented clients, metrics, certifications or testimonials — only verified information.

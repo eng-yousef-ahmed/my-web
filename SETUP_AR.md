@@ -71,26 +71,38 @@ npx vite preview
 
 ## 5️⃣ نشر الموقع على الإنترنت (مجانًا)
 
-### 🟢 الأسهل على الإطلاق — Netlify Drop (من غير حساب GitHub)
-
-1. نفّذ `npm run build` على جهازك
-2. افتح [app.netlify.com/drop](https://app.netlify.com/drop)
-3. **اسحب مجلد `dist` وحطه في الصفحة** — خلاص، الموقع شغّال برابط مباشر!
-4. (اختياري) من إعدادات الموقع غيّر النطاق الفرعي مثل: `tech-of-the-world.netlify.app`
-
-### 🟢 Vercel / Cloudflare Pages (مع GitHub)
+### 🟢 Vercel (المستخدم حاليًا — مع GitHub)
 
 1. ارفع المشروع على GitHub
-2. ادخل [vercel.com](https://vercel.com) أو [pages.cloudflare.com](https://pages.cloudflare.com)
-3. Import المشروع → Build command: `npm run build` → Output: `dist`
-4. Deploy — وكل تعديل بترفعه على GitHub بيتنشر تلقائيًا
+2. ادخل [vercel.com](https://vercel.com) → Import المشروع → Build command: `npm run build` → Output: `dist`
+3. Deploy — وكل تعديل بترفعه على GitHub بيتنشر تلقائيًا
+4. ملف `vercel.json` فيه الروابط النظيفة (`/about` بدل `/#/about`) وهيدرز الأمان، ويُقرأ تلقائيًا
+
+### 🟢 Netlify أو Cloudflare Pages
+
+- **Netlify Drop (من غير GitHub):** نفّذ `npm run build` ثم اسحب مجلد `dist` إلى [app.netlify.com/drop](https://app.netlify.com/drop). الملفان `_redirects` و`_headers` داخل `dist` يُقرآن تلقائيًا (الأول للروابط النظيفة، والثاني للهيدرز).
+- **مع GitHub:** نفس خطوات Vercel (Build: `npm run build`، Output: `dist`).
 
 ### 🟢 استضافة مشتركة / cPanel (لو عندك استضافة عربية)
 
 1. نفّذ `npm run build`
 2. ادخل لوحة الاستضافة → File Manager → مجلد `public_html`
 3. ارفع **محتويات مجلد `dist`** (مش المجلد نفسه)
-4. الموقع هيفتح على دومينك مباشرة — الموقع مصمم بـ Hash Routing فمش محتاج أي إعدادات سيرفر
+4. الموقع يستخدم روابط نظيفة (`/about`)، فأنشئ بجوارها ملف اسمه `.htaccess` فيه:
+
+```apache
+RewriteEngine On
+# /about  →  about.html  (الصفحات المُولَّدة وقت البناء)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+# أي رابط آخر  →  التطبيق
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+```
+
+   (هذا الملف لا يعمل إلا على سيرفرات Apache. لو الاستضافة غير Apache فاستخدم Vercel أو Netlify.)
 
 ---
 
@@ -129,4 +141,4 @@ npm run dev       # شغل محلي للتطوير
 npm run build     # جهّز النسخة النهائية → مجلد dist
 npx vite preview  # جرّب النسخة النهائية محليًا
 ```
-ثم اسحب `dist` إلى [Netlify Drop](https://app.netlify.com/drop) — والموقع على الإنترنت 🚀
+ثم ارفع المشروع على GitHub ليُنشر على Vercel تلقائيًا (أو اسحب `dist` إلى [Netlify Drop](https://app.netlify.com/drop)) — والموقع على الإنترنت 🚀

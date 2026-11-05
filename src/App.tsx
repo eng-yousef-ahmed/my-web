@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import React, { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { LangProvider } from "./i18n";
 import { Layout } from "./components/chrome";
 import { Btn, LogoMark } from "./components/kit";
@@ -42,6 +42,14 @@ function BootScreen() {
 function NotFound() {
   const { isAr } = useLang();
   usePageMeta(isAr ? "الصفحة غير موجودة | يوسف أحمد" : "Page not found | Yousef Ahmed", "");
+  // unknown URLs are served the app shell (HTTP 200), so tell crawlers not to index them
+  useEffect(() => {
+    const m = document.createElement("meta");
+    m.name = "robots";
+    m.content = "noindex";
+    document.head.appendChild(m);
+    return () => m.remove();
+  }, []);
   return (
     <section className="min-h-[70vh] bg-ink-950 text-paper-50 grid place-items-center pt-32">
       <div className="text-center px-5">
@@ -55,10 +63,21 @@ function NotFound() {
   );
 }
 
+/** Old links (printed QR codes, shared URLs) used "/#/route"; send them to the clean path. */
+function LegacyHashRedirect() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const h = window.location.hash;
+    if (h.startsWith("#/")) navigate(h.slice(1), { replace: true });
+  }, [navigate]);
+  return null;
+}
+
 export default function App() {
   return (
     <LangProvider>
-      <HashRouter>
+      <BrowserRouter basename={(import.meta.env.BASE_URL || "/").replace(/\/$/, "") || undefined}>
+        <LegacyHashRedirect />
         <Routes>
           {/* the standalone digital business card (opened by scanning a QR) — no site chrome */}
           <Route
@@ -88,7 +107,7 @@ export default function App() {
             }
           />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </LangProvider>
   );
 }

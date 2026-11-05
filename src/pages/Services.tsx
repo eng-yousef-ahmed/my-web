@@ -1,17 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
+import ROUTE_META from "../data/route-meta.json";
 import { SERVICE_CATEGORIES } from "../data/content";
 import { Icon, PageHero, Reveal } from "../components/kit";
 
 export default function Services() {
   const { isAr, L, t } = useLang();
-  usePageMeta(
-    isAr ? "خدماتي | يوسف أحمد" : "My Services | Yousef Ahmed",
-    isAr
-      ? "خمسة مسارات: البنية التحتية، الشبكات، مايكروسوفت والسحابة، أنظمة الأمن، والاستشارات التقنية."
-      : "Five service lines: IT & Infrastructure, Networks, Microsoft & Cloud, Security Systems and IT Consultancy."
-  );
+  const meta = ROUTE_META["/services"];
+  usePageMeta(isAr ? meta.title.ar : meta.title.en, isAr ? meta.description.ar : meta.description.en);
 
   return (
     <>
