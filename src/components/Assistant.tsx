@@ -73,7 +73,7 @@ const STR = {
     goContact: "صفحة التواصل",
     goProjects: "المشاريع",
     goCerts: "كل الشهادات",
-    certsTitle: "حاصل على <b>3 شهادات إتمام</b> من Cisco Networking Academy (مستوى طالب)، ولكل واحدة رابط تحقق رسمي على Credly:",
+    certsTitle: "حاصل على <b>{n} شهادة إتمام</b> من Cisco Networking Academy (مستوى طالب)، ولكل واحدة رابط تحقق رسمي على Credly:",
     certsFoot: "ويستعد حاليًا لشهادة CCNA مع تطبيق عملي على VMware.",
     verify: "تحقق",
   },
@@ -118,7 +118,7 @@ const STR = {
     goContact: "Contact page",
     goProjects: "Projects",
     goCerts: "All certificates",
-    certsTitle: "<b>3 course-completion certificates</b> from Cisco Networking Academy (student level), each with an official Credly verification link:",
+    certsTitle: "<b>{n} course-completion certificates</b> from Cisco Networking Academy (student level), each with an official Credly verification link:",
     certsFoot: "Currently preparing for CCNA, with hands-on VMware lab work.",
     verify: "Verify",
   },
@@ -260,11 +260,11 @@ function replyFor(raw: string, lang: "ar" | "en", market?: "sa" | "eg", intent?:
   }
   if (has(n, ["شهاده", "شهادات", "شهادتك", "certificate", "certificates", "certification", "certified", "cisco", "ccna", "credly", "badge", "credential"])) {
     out.html =
-      `<p class="mb-2">${s.certsTitle}</p>` +
+      `<p class="mb-2">${s.certsTitle.replace("{n}", String(CERTIFICATES.length))}</p>` +
       CERTIFICATES.map((c) => `<span class="bot-bullet"></span>${c.title[lang]}<br/>`).join("") +
       `<p class="mt-2">${s.certsFoot}</p>`;
     out.actions = [
-      ...CERTIFICATES.map((c) => ({ label: `${s.verify}: ${c.title[lang]}`, href: c.verifyUrl })),
+      ...CERTIFICATES.slice(0, 3).map((c) => ({ label: `${s.verify}: ${c.title[lang]}`, href: c.verifyUrl })),
       { label: s.goCerts, to: "/about#certifications" },
     ];
     return out;
