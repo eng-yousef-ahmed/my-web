@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Btn, Icon, Reveal, useAsset } from "../components/kit";
 import { FOUNDER_METRICS, SERVICE_CATEGORIES } from "../data/content";
 import { MARKET_LABEL } from "../data/cases";
+import { CERTIFICATES, formatIssued } from "../data/certificates";
 import { useAllProjects } from "../data/projectLoader";
 
 /* ================= HOME — the portrait IS the page =================
@@ -185,6 +186,42 @@ function ProofSection() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-6">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-x-10 gap-y-5 border border-ink-900/15 bg-paper-50 px-5 sm:px-7 py-5">
+            <div className="lg:w-48 shrink-0">
+              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-kicker">{isAr ? "شهادات موثّقة" : "Verified credentials"}</p>
+              <Link
+                to="/about#certifications"
+                className="group mt-2 inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
+              >
+                {isAr ? "كل الشهادات" : "All certificates"}
+                <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+              </Link>
+            </div>
+            <ul className="flex-1 grid sm:grid-cols-3 gap-x-6 gap-y-4">
+              {CERTIFICATES.map((c) => (
+                <li key={c.id}>
+                  <a
+                    href={c.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-3.5"
+                    aria-label={`${L(c.title)} — ${isAr ? "تحقق من الشهادة" : "verify credential"}`}
+                  >
+                    <img src={c.badge} alt="" width={52} height={52} loading="lazy" className="w-[52px] h-[52px] shrink-0" />
+                    <span className="min-w-0">
+                      <span className="block font-display text-[14px] font-bold leading-snug text-ink-900 group-hover:text-amber-700 transition-colors">{L(c.title)}</span>
+                      <span className="mt-0.5 block text-[12px] text-mist-500">
+                        Cisco Networking Academy · {formatIssued(c.issued, isAr)}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
 
         <Reveal className="mt-16 flex flex-wrap items-end justify-between gap-4">
           <div>
