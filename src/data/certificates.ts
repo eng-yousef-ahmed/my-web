@@ -2,7 +2,7 @@ import type { B } from "../i18n";
 
 /* ---------------- verified certificates ----------------
  * Cisco Networking Academy "Certificate of Course Completion" (student-level credential),
- * each issued with a public Credly badge. The verify links come from the QR code printed
+ * each issued with a public Credly badge (and, for most, a PDF certificate with a Cert ID). The verify links come from the QR code printed
  * on the certificates themselves ("Scan to Verify").
  */
 export type Certificate = {
@@ -14,11 +14,15 @@ export type Certificate = {
   issued: string;
   badge: string;
   verifyUrl: string;
+  /** the plain completion certificate (PDF), when one was issued for this course */
+  pdf?: string;
   /** what the certificate states the holder can do (short form of the printed list) */
   skills: B[];
 };
 
 const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+
+const pdfOf = (name: string) => `${base}/assets/certificates/${name}.pdf`;
 
 const ISSUER: B = { en: "Cisco Networking Academy", ar: "أكاديمية سيسكو للشبكات" };
 const LEVEL: B = { en: "Course completion · student level", ar: "إتمام دورة · مستوى طالب" };
@@ -57,6 +61,73 @@ export const CERTIFICATES: Certificate[] = [
     ],
   },
   {
+    id: "security-connectivity-support",
+    title: { en: "Security and Connectivity Support", ar: "دعم الأمن والاتصال" },
+    issuer: ISSUER,
+    level: LEVEL,
+    issued: "2026-06-04",
+    badge: `${base}/images/certificates/security-connectivity-support.webp`,
+    verifyUrl: "https://www.credly.com/badges/6410d571-6231-4556-bf01-969e83bc1f88",
+    pdf: pdfOf("security-connectivity-support"),
+    skills: [
+      { en: "Diagnosing connectivity issues with services, peripherals and shared resources", ar: "تشخيص مشاكل الاتصال بالخدمات والأجهزة الطرفية والموارد المشتركة" },
+      { en: "Troubleshooting wired and wireless networks for users", ar: "استكشاف أعطال الشبكات السلكية واللاسلكية للمستخدمين" },
+      { en: "IP addressing, default gateways, DNS and DHCP", ar: "عنونة IP والبوابات الافتراضية وDNS وDHCP" },
+      { en: "Command-line tools to verify connectivity", ar: "أدوات سطر الأوامر للتحقق من الاتصال" },
+      { en: "Common cyber threats, social engineering and protecting organizational data", ar: "التهديدات الشائعة والهندسة الاجتماعية وحماية بيانات المؤسسة" },
+    ],
+  },
+  {
+    id: "hardware-upgrade-support",
+    title: { en: "Hardware and Upgrade Support", ar: "دعم الأجهزة والترقية" },
+    issuer: ISSUER,
+    level: LEVEL,
+    issued: "2026-06-04",
+    badge: `${base}/images/certificates/hardware-upgrade-support.webp`,
+    verifyUrl: "https://www.credly.com/badges/5d6a6cad-d6d2-41a7-aed4-77917f0ae6a7",
+    pdf: pdfOf("hardware-upgrade-support"),
+    skills: [
+      { en: "Troubleshooting computer hardware components and peripherals", ar: "استكشاف أعطال مكونات الكمبيوتر والأجهزة الطرفية" },
+      { en: "Checking hardware and performance with built-in tools", ar: "فحص الأجهزة والأداء بالأدوات المدمجة" },
+      { en: "Ports, cables and component compatibility", ar: "المنافذ والكابلات وتوافق المكونات" },
+      { en: "Deciding when upgrades are needed", ar: "تحديد الحاجة إلى الترقية" },
+      { en: "Safely replacing and upgrading RAM, drives and power supplies", ar: "الاستبدال والترقية الآمنة للذاكرة والأقراص ووحدات الطاقة" },
+    ],
+  },
+  {
+    id: "it-customer-support-basics",
+    title: { en: "IT Customer Support Basics", ar: "أساسيات دعم عملاء تقنية المعلومات" },
+    issuer: ISSUER,
+    level: LEVEL,
+    issued: "2026-06-03",
+    badge: `${base}/images/certificates/it-customer-support-basics.webp`,
+    verifyUrl: "https://www.credly.com/badges/c8ced2b8-b661-4d26-9616-7d0f93070cda",
+    pdf: pdfOf("it-customer-support-basics"),
+    skills: [
+      { en: "Help-desk functions and purpose", ar: "وظائف وهدف مكتب المساعدة" },
+      { en: "Recording and summarizing customer issues and solutions", ar: "توثيق وتلخيص مشاكل العملاء وحلولها" },
+      { en: "Step-by-step troubleshooting", ar: "استكشاف الأعطال خطوة بخطوة" },
+      { en: "Supporting user devices remotely", ar: "دعم أجهزة المستخدمين عن بُعد" },
+      { en: "Common issues in email, collaboration and productivity apps", ar: "المشاكل الشائعة في البريد وأدوات التعاون وبرامج الإنتاجية" },
+    ],
+  },
+  {
+    id: "computer-hardware-basics",
+    title: { en: "Computer Hardware Basics", ar: "أساسيات أجهزة الكمبيوتر" },
+    issuer: ISSUER,
+    level: LEVEL,
+    issued: "2026-06-03",
+    badge: `${base}/images/certificates/computer-hardware-basics.webp`,
+    verifyUrl: "https://www.credly.com/badges/b6875559-e0fc-4153-b602-1e7a29f67796",
+    pdf: pdfOf("computer-hardware-basics"),
+    skills: [
+      { en: "Installing components to build, repair or upgrade PCs", ar: "تركيب المكونات لبناء أجهزة الكمبيوتر وإصلاحها وترقيتها" },
+      { en: "Hardware and preventive maintenance", ar: "صيانة الأجهزة والصيانة الوقائية" },
+      { en: "Laptops and mobile devices", ar: "الحواسيب المحمولة والأجهزة المحمولة" },
+      { en: "General and fire safety standards", ar: "معايير السلامة العامة وسلامة الحريق" },
+    ],
+  },
+  {
     id: "os-basics",
     title: { en: "Operating Systems Basics", ar: "أساسيات أنظمة التشغيل" },
     issuer: ISSUER,
@@ -64,6 +135,7 @@ export const CERTIFICATES: Certificate[] = [
     issued: "2026-06-03",
     badge: `${base}/images/certificates/os-basics.webp`,
     verifyUrl: "https://www.credly.com/badges/6ae0c319-25b2-41d1-a778-bf03d6aff464",
+    pdf: pdfOf("os-basics"),
     skills: [
       { en: "Windows architecture and administrative tools", ar: "بنية ويندوز وأدوات الإدارة" },
       { en: "Linux shell: text files, services and log files", ar: "سطر أوامر لينكس: الملفات النصية والخدمات وملفات السجل" },
@@ -73,7 +145,6 @@ export const CERTIFICATES: Certificate[] = [
   },
 ];
 
-/** "Jun 2026" / "يونيو 2026" — Gregorian calendar and Latin digits in both languages. */
 export function formatIssued(iso: string, isAr: boolean): string {
   return new Intl.DateTimeFormat(isAr ? "ar-EG-u-nu-latn" : "en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 }
