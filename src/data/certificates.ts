@@ -77,3 +77,35 @@ export const CERTIFICATES: Certificate[] = [
 export function formatIssued(iso: string, isAr: boolean): string {
   return new Intl.DateTimeFormat(isAr ? "ar-EG-u-nu-latn" : "en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 }
+
+/* ---------------- pathway exam certificates ----------------
+ * Cisco Networking Academy certificates for completing the career-path exams.
+ * They carry a certificate ID (no public badge), so the PDF itself is linked.
+ */
+export type ExamCertificate = {
+  id: string;
+  title: B;
+  issuer: B;
+  issued: string;
+  certId: string;
+  pdf: string;
+};
+
+export const EXAM_CERTIFICATES: ExamCertificate[] = [
+  {
+    id: "network-technician-exam",
+    title: { en: "Network Technician Career Path Exam", ar: "امتحان مسار فني الشبكات" },
+    issuer: ISSUER,
+    issued: "2026-06-07",
+    certId: "5d20b25a-3610-442e-9c71-c246d22959cc",
+    pdf: `${base}/assets/certificates/network-technician-pathway-exam.pdf`,
+  },
+  {
+    id: "it-support-exam",
+    title: { en: "IT Support Specialist Pathway Exam", ar: "امتحان مسار أخصائي الدعم التقني" },
+    issuer: ISSUER,
+    issued: "2026-06-04",
+    certId: "f09c6b5f-b9ec-4c5d-92b1-c4c56444fabe",
+    pdf: `${base}/assets/certificates/it-support-specialist-pathway-exam.pdf`,
+  },
+];

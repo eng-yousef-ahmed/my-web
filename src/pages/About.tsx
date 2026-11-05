@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLang, usePageMeta } from "../i18n";
 import { CAREER, CERTIFICATIONS, EDUCATION, LANGUAGES, TECH_GROUPS, WHY_US } from "../data/content";
-import { CERTIFICATES, formatIssued } from "../data/certificates";
+import { CERTIFICATES, EXAM_CERTIFICATES, formatIssued } from "../data/certificates";
 import { FlagEG, FlagSA, Icon, PageHero, Reveal } from "../components/kit";
 
 export default function About() {
@@ -188,6 +188,37 @@ export default function About() {
                     className="group mt-6 inline-flex items-center gap-2 border-t border-ink-900/10 pt-4 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
                   >
                     {isAr ? "تحقق من الشهادة" : "Verify credential"}
+                    <Icon name="external" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                  </a>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-12">
+            <h3 className="font-display text-xl font-bold">{isAr ? "شهادات امتحان المسار" : "Pathway exam certificates"}</h3>
+            <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-mist-500">
+              {isAr
+                ? "شهادات من Cisco Networking Academy لإتمام امتحان المسار، وعليها رقم شهادة. الملف الأصلي متاح للاطلاع."
+                : "Cisco Networking Academy certificates for completing the career-path exams, each with a certificate ID. The original file is available to view."}
+            </p>
+          </Reveal>
+          <div className="mt-6 grid sm:grid-cols-2 gap-5">
+            {EXAM_CERTIFICATES.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
+                <article className="h-full flex flex-col bg-paper-50 border border-ink-900/10 p-6 card-lift hover:border-ink-900/30">
+                  <h4 className="font-display text-[17px] font-bold leading-snug">{L(c.title)}</h4>
+                  <p className="mt-1 text-[13px] text-mist-500">{L(c.issuer)}</p>
+                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-amber-700">{formatIssued(c.issued, isAr)}</p>
+                  <p className="mt-3 text-[12px] text-mist-500">{isAr ? "رقم الشهادة" : "Cert ID"}</p>
+                  <p dir="ltr" className="mt-0.5 break-all font-mono text-[11px] text-ink-900 rtl:text-right">{c.certId}</p>
+                  <a
+                    href={c.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mt-5 inline-flex items-center gap-2 border-t border-ink-900/10 pt-4 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
+                  >
+                    {isAr ? "عرض الشهادة (PDF)" : "View certificate (PDF)"}
                     <Icon name="external" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
                   </a>
                 </article>
