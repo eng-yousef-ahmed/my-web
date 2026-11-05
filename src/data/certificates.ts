@@ -14,15 +14,11 @@ export type Certificate = {
   issued: string;
   badge: string;
   verifyUrl: string;
-  /** the plain completion certificate (PDF), when one was issued for this course */
-  pdf?: string;
   /** what the certificate states the holder can do (short form of the printed list) */
   skills: B[];
 };
 
 const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
-
-const pdfOf = (name: string) => `${base}/assets/certificates/${name}.pdf`;
 
 const ISSUER: B = { en: "Cisco Networking Academy", ar: "أكاديمية سيسكو للشبكات" };
 const LEVEL: B = { en: "Course completion · student level", ar: "إتمام دورة · مستوى طالب" };
@@ -68,7 +64,6 @@ export const CERTIFICATES: Certificate[] = [
     issued: "2026-06-04",
     badge: `${base}/images/certificates/security-connectivity-support.webp`,
     verifyUrl: "https://www.credly.com/badges/6410d571-6231-4556-bf01-969e83bc1f88",
-    pdf: pdfOf("security-connectivity-support"),
     skills: [
       { en: "Diagnosing connectivity issues with services, peripherals and shared resources", ar: "تشخيص مشاكل الاتصال بالخدمات والأجهزة الطرفية والموارد المشتركة" },
       { en: "Troubleshooting wired and wireless networks for users", ar: "استكشاف أعطال الشبكات السلكية واللاسلكية للمستخدمين" },
@@ -85,7 +80,6 @@ export const CERTIFICATES: Certificate[] = [
     issued: "2026-06-04",
     badge: `${base}/images/certificates/hardware-upgrade-support.webp`,
     verifyUrl: "https://www.credly.com/badges/5d6a6cad-d6d2-41a7-aed4-77917f0ae6a7",
-    pdf: pdfOf("hardware-upgrade-support"),
     skills: [
       { en: "Troubleshooting computer hardware components and peripherals", ar: "استكشاف أعطال مكونات الكمبيوتر والأجهزة الطرفية" },
       { en: "Checking hardware and performance with built-in tools", ar: "فحص الأجهزة والأداء بالأدوات المدمجة" },
@@ -102,7 +96,6 @@ export const CERTIFICATES: Certificate[] = [
     issued: "2026-06-03",
     badge: `${base}/images/certificates/it-customer-support-basics.webp`,
     verifyUrl: "https://www.credly.com/badges/c8ced2b8-b661-4d26-9616-7d0f93070cda",
-    pdf: pdfOf("it-customer-support-basics"),
     skills: [
       { en: "Help-desk functions and purpose", ar: "وظائف وهدف مكتب المساعدة" },
       { en: "Recording and summarizing customer issues and solutions", ar: "توثيق وتلخيص مشاكل العملاء وحلولها" },
@@ -119,7 +112,6 @@ export const CERTIFICATES: Certificate[] = [
     issued: "2026-06-03",
     badge: `${base}/images/certificates/computer-hardware-basics.webp`,
     verifyUrl: "https://www.credly.com/badges/b6875559-e0fc-4153-b602-1e7a29f67796",
-    pdf: pdfOf("computer-hardware-basics"),
     skills: [
       { en: "Installing components to build, repair or upgrade PCs", ar: "تركيب المكونات لبناء أجهزة الكمبيوتر وإصلاحها وترقيتها" },
       { en: "Hardware and preventive maintenance", ar: "صيانة الأجهزة والصيانة الوقائية" },
@@ -135,7 +127,6 @@ export const CERTIFICATES: Certificate[] = [
     issued: "2026-06-03",
     badge: `${base}/images/certificates/os-basics.webp`,
     verifyUrl: "https://www.credly.com/badges/6ae0c319-25b2-41d1-a778-bf03d6aff464",
-    pdf: pdfOf("os-basics"),
     skills: [
       { en: "Windows architecture and administrative tools", ar: "بنية ويندوز وأدوات الإدارة" },
       { en: "Linux shell: text files, services and log files", ar: "سطر أوامر لينكس: الملفات النصية والخدمات وملفات السجل" },
@@ -149,12 +140,13 @@ export function formatIssued(iso: string, isAr: boolean): string {
   return new Intl.DateTimeFormat(isAr ? "ar-EG-u-nu-latn" : "en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 }
 
-/* ---------------- pathway exam certificates ----------------
- * Cisco Networking Academy certificates for completing the career-path exams.
- * They carry a certificate ID (no public badge), so the PDF itself is linked.
+/* ---------------- certificate PDFs ----------------
+ * The original Cisco Networking Academy certificates (PDF), each with its Cert ID.
+ * Two are for the career-path exams; the rest are course-completion certificates.
  */
-export type ExamCertificate = {
+export type CertificatePdf = {
   id: string;
+  kind: "exam" | "course";
   title: B;
   issuer: B;
   issued: string;
@@ -162,21 +154,14 @@ export type ExamCertificate = {
   pdf: string;
 };
 
-export const EXAM_CERTIFICATES: ExamCertificate[] = [
-  {
-    id: "network-technician-exam",
-    title: { en: "Network Technician Career Path Exam", ar: "امتحان مسار فني الشبكات" },
-    issuer: ISSUER,
-    issued: "2026-06-07",
-    certId: "5d20b25a-3610-442e-9c71-c246d22959cc",
-    pdf: `${base}/assets/certificates/network-technician-pathway-exam.pdf`,
-  },
-  {
-    id: "it-support-exam",
-    title: { en: "IT Support Specialist Pathway Exam", ar: "امتحان مسار أخصائي الدعم التقني" },
-    issuer: ISSUER,
-    issued: "2026-06-04",
-    certId: "f09c6b5f-b9ec-4c5d-92b1-c4c56444fabe",
-    pdf: `${base}/assets/certificates/it-support-specialist-pathway-exam.pdf`,
-  },
+const pdf = (name: string) => `${base}/assets/certificates/${name}.pdf`;
+
+export const CERTIFICATE_PDFS: CertificatePdf[] = [
+  { id: "network-technician-exam", kind: "exam", title: { en: "Network Technician Career Path Exam", ar: "امتحان مسار فني الشبكات" }, issuer: ISSUER, issued: "2026-06-07", certId: "5d20b25a-3610-442e-9c71-c246d22959cc", pdf: pdf("network-technician-pathway-exam") },
+  { id: "it-support-exam", kind: "exam", title: { en: "IT Support Specialist Pathway Exam", ar: "امتحان مسار أخصائي الدعم التقني" }, issuer: ISSUER, issued: "2026-06-04", certId: "f09c6b5f-b9ec-4c5d-92b1-c4c56444fabe", pdf: pdf("it-support-specialist-pathway-exam") },
+  { id: "security-connectivity-pdf", kind: "course", title: { en: "Security and Connectivity Support", ar: "دعم الأمن والاتصال" }, issuer: ISSUER, issued: "2026-06-04", certId: "db1758d6-213d-4ec9-8c60-e5c2ad8cb11d", pdf: pdf("security-connectivity-support") },
+  { id: "hardware-upgrade-pdf", kind: "course", title: { en: "Hardware and Upgrade Support", ar: "دعم الأجهزة والترقية" }, issuer: ISSUER, issued: "2026-06-04", certId: "9cd31861-a7b7-43cb-89ff-b0b278ebda67", pdf: pdf("hardware-upgrade-support") },
+  { id: "it-customer-support-pdf", kind: "course", title: { en: "IT Customer Support Basics", ar: "أساسيات دعم عملاء تقنية المعلومات" }, issuer: ISSUER, issued: "2026-06-03", certId: "49e37b96-0a27-4668-af7c-d8ceec64efc5", pdf: pdf("it-customer-support-basics") },
+  { id: "computer-hardware-pdf", kind: "course", title: { en: "Computer Hardware Basics", ar: "أساسيات أجهزة الكمبيوتر" }, issuer: ISSUER, issued: "2026-06-03", certId: "5815ca4d-af66-4556-8cd7-741daffa05b8", pdf: pdf("computer-hardware-basics") },
+  { id: "os-basics-pdf", kind: "course", title: { en: "Operating Systems Basics", ar: "أساسيات أنظمة التشغيل" }, issuer: ISSUER, issued: "2026-06-03", certId: "3c3bc920-4a01-4f9e-a05f-23f0bc94196a", pdf: pdf("os-basics") },
 ];
