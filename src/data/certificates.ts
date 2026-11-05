@@ -143,37 +143,6 @@ export const CERTIFICATES: Certificate[] = [
       { en: "Network and email setup on mobile devices", ar: "إعداد الشبكة والبريد على الأجهزة المحمولة" },
     ],
   },
-  {
-    id: "intro-modern-ai",
-    title: { en: "Introduction to Modern AI", ar: "مقدمة في الذكاء الاصطناعي الحديث" },
-    issuer: ISSUER,
-    level: LEVEL,
-    issued: "2026-06-02",
-    badge: `${base}/images/certificates/intro-modern-ai.webp`,
-    verifyUrl: "https://www.credly.com/badges/9c620900-4613-46ba-8675-990182bc9a3c",
-    pdf: pdfOf("intro-modern-ai"),
-    skills: [
-      { en: "Core AI and machine-learning concepts", ar: "المفاهيم الأساسية للذكاء الاصطناعي وتعلّم الآلة" },
-      { en: "How large language models work and how to prompt them", ar: "كيف تعمل النماذج اللغوية الكبيرة وكيفية كتابة التعليمات لها" },
-      { en: "Chatbots for summarizing, rewording and idea generation", ar: "استخدام المحادثات الذكية للتلخيص وإعادة الصياغة وتوليد الأفكار" },
-      { en: "LLMs with tools (web search, page scraping) and multimodal prompting", ar: "النماذج مع الأدوات (بحث الويب) والتعليمات متعددة الوسائط" },
-    ],
-  },
-  {
-    id: "intro-data-science",
-    title: { en: "Introduction to Data Science", ar: "مقدمة في علم البيانات" },
-    issuer: ISSUER,
-    level: LEVEL,
-    issued: "2026-06-02",
-    badge: `${base}/images/certificates/intro-data-science.webp`,
-    verifyUrl: "https://www.credly.com/badges/eb0381e0-2c57-4af6-90c7-3eb720f29a6c",
-    pdf: pdfOf("intro-data-science"),
-    skills: [
-      { en: "Promises and challenges of data analytics", ar: "وعود وتحديات تحليل البيانات" },
-      { en: "The role of data in AI and machine learning", ar: "دور البيانات في الذكاء الاصطناعي وتعلّم الآلة" },
-      { en: "Career options in data analytics", ar: "المسارات المهنية في تحليل البيانات" },
-    ],
-  },
 ];
 
 export function formatIssued(iso: string, isAr: boolean): string {
