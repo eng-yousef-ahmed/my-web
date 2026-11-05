@@ -195,12 +195,12 @@ function ProofSection() {
                 to="/about#certifications"
                 className="group mt-2 inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
               >
-                {isAr ? "كل الشهادات" : "All certificates"}
+                {isAr ? `كل الشهادات (${CERTIFICATES.length})` : `All ${CERTIFICATES.length} certificates`}
                 <Icon name="arrow" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
               </Link>
             </div>
-            <ul className="flex-1 grid sm:grid-cols-3 gap-x-6 gap-y-4">
-              {CERTIFICATES.map((c) => (
+            <ul className="flex-1 grid sm:grid-cols-2 gap-x-6 gap-y-4">
+              {CERTIFICATES.slice(0, 4).map((c) => (
                 <li key={c.id}>
                   <a
                     href={c.verifyUrl}

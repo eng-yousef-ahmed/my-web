@@ -160,7 +160,7 @@ export default function About() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {CERTIFICATES.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
                 <article className="h-full flex flex-col bg-paper-50 border border-ink-900/10 p-6 card-lift hover:border-ink-900/30">
@@ -173,23 +173,41 @@ export default function About() {
                       <p className="mt-0.5 text-[12px] text-mist-500">{L(c.level)}</p>
                     </div>
                   </div>
-                  <ul className="mt-5 space-y-2 flex-1">
-                    {c.skills.map((sk) => (
-                      <li key={sk.en} className="flex gap-2.5 text-[13px] leading-relaxed text-mist-500">
-                        <Icon name="check" className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" strokeWidth={2.2} />
-                        {L(sk)}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={c.verifyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group mt-6 inline-flex items-center gap-2 border-t border-ink-900/10 pt-4 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
-                  >
-                    {isAr ? "تحقق من الشهادة" : "Verify credential"}
-                    <Icon name="external" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
-                  </a>
+                  <details className="group/d mt-5 flex-1">
+                    <summary className="flex cursor-pointer list-none items-center gap-2 text-[12.5px] font-semibold text-ink-900 hover:text-amber-700 [&::-webkit-details-marker]:hidden">
+                      <Icon name="arrow" className="w-3.5 h-3.5 transition-transform group-open/d:rotate-90 rtl:-scale-x-100 rtl:group-open/d:rotate-90" strokeWidth={2.2} />
+                      {isAr ? "ما تغطيه الدورة" : "What it covers"}
+                    </summary>
+                    <ul className="mt-3 space-y-2">
+                      {c.skills.map((sk) => (
+                        <li key={sk.en} className="flex gap-2.5 text-[13px] leading-relaxed text-mist-500">
+                          <Icon name="check" className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" strokeWidth={2.2} />
+                          {L(sk)}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-ink-900/10 pt-4">
+                    <a
+                      href={c.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-900 hover:text-amber-700 transition-colors"
+                    >
+                      {isAr ? "تحقق من الشهادة" : "Verify credential"}
+                      <Icon name="external" className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                    </a>
+                    {c.pdf && (
+                      <a
+                        href={c.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-[11px] uppercase tracking-[0.14em] text-mist-500 hover:text-amber-700 transition-colors"
+                      >
+                        PDF
+                      </a>
+                    )}
+                  </div>
                 </article>
               </Reveal>
             ))}
