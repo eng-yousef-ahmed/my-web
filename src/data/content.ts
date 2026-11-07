@@ -187,7 +187,7 @@ export const TECH_GROUPS: TechGroup[] = [
   },
   {
     name: { en: "Networking", ar: "الشبكات" },
-    items: ["MikroTik RouterOS", "TCP/IP · DNS · DHCP", "HP Switches", "Business Wi-Fi", "Site-to-Site VPN"],
+    items: ["MikroTik RouterOS", "TCP/IP · DNS · DHCP", "HP Switches", "Business Wi-Fi", "Site-to-Site VPN (lab)"],
   },
   {
     name: { en: "Surveillance & Access", ar: "المراقبة والتحكم" },
@@ -225,6 +225,7 @@ export const CAREER: CareerEntry[] = [
       { en: "Active Directory & Microsoft 365 administration", ar: "إدارة أكتيف ديريكتوري ومايكروسوفت 365" },
       { en: "Enterprise printing infrastructure (Xerox, HP, Canon, Ricoh)", ar: "بنية الطباعة المؤسسية (زيروكس، HP، كانون، ريكو)" },
       { en: "Executive (VIP) support for senior management", ar: "الدعم التنفيذي (VIP) للإدارة العليا" },
+      { en: "100+ tickets a month; recurring incidents down 50–65% (measured by ticket volume) since a quarterly preventive-maintenance plan and root-cause fixes", ar: "أكثر من 100 تذكرة شهريًا؛ انخفاض الأعطال المتكررة 50–65% (مقاسًا بعدد التذاكر) منذ خطة صيانة دورية كل 3 أشهر وحلول جذرية للأعطال" },
     ],
   },
   {
@@ -239,6 +240,7 @@ export const CAREER: CareerEntry[] = [
       { en: "Led a team of 6+ IT technicians through peak season", ar: "قيادة فريق من أكثر من 6 فنيين خلال ذروة الموسم" },
       { en: "Incident response, escalations & preventive maintenance", ar: "الاستجابة للحوادث والتصعيد والصيانة الوقائية" },
       { en: "CCTV, access control, biometrics & IP telephony", ar: "المراقبة والتحكم في الدخول والبصمة والهواتف" },
+      { en: "200+ CCTV cameras and 50+ pilgrim-gate entry sensors across the Mina and Muzdalifah camps, each linked to its control devices", ar: "أكثر من 200 كاميرا مراقبة وأكثر من 50 مستشعرًا لبوابات دخول الحجاج في مخيمات منى ومزدلفة، مع ربط كل جهاز بالأجهزة الخاصة به" },
     ],
   },
   {
@@ -249,13 +251,27 @@ export const CAREER: CareerEntry[] = [
     market: "eg",
     caseId: "zahran-market",
     points: [
-      { en: "1st & 2nd line support across multiple retail branches", ar: "دعم من المستويين الأول والثاني عبر فروع تجزئة متعددة" },
+      { en: "1st & 2nd line support across 18 branches, the head office and warehouses", ar: "دعم من المستويين الأول والثاني عبر 18 فرعًا والمقر الإداري والمخازن" },
       { en: "POS systems, printers, scanners & branch networking", ar: "أنظمة نقاط البيع والطابعات والماسحات وشبكات الفروع" },
       { en: "PRTG monitoring & CCTV / attendance systems", ar: "مراقبة PRTG وأنظمة المراقبة والحضور" },
+      { en: "MikroTik Hotspot portal: free guest Wi-Fi for mall visitors after login", ar: "بوابة Hotspot على MikroTik لتسجيل دخول زوار المول وإتاحة إنترنت مجاني" },
     ],
   },
   {
-    role: { en: "Network & Devices Specialist", ar: "أخصائي شبكات وأجهزة" },
+    role: { en: "Help Desk", ar: "دعم فني (Help Desk)" },
+    company: { en: "El Nasr Clothing & Textiles Co. (KABO)", ar: "شركة النصر للملابس والمنسوجات (كابو)" },
+    location: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
+    period: { en: "May 2018 — May 2019", ar: "مايو 2018 — مايو 2019" },
+    market: "eg",
+    points: [
+      { en: "Employee device support", ar: "دعم أجهزة الموظفين" },
+      { en: "Domain services", ar: "خدمات الدومين (Domain)" },
+      { en: "Network support", ar: "دعم الشبكات" },
+      { en: "CCTV cameras", ar: "كاميرات المراقبة" },
+    ],
+  },
+  {
+    role: { en: "IT Support & Network Specialist", ar: "أخصائي دعم تقني وشبكات" },
     company: { en: "Arab Computers Company (ACC)", ar: "الشركة العربية للحاسبات" },
     project: { en: "On-site at United Abco Company", ar: "في مقر شركة أبكو المتحدة" },
     location: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
@@ -263,7 +279,8 @@ export const CAREER: CareerEntry[] = [
     market: "eg",
     caseId: "united-abco",
     points: [
-      { en: "On-site corporate IT support & IMAC activities", ar: "دعم تقني ميداني للشركات وأنشطة IMAC" },
+      { en: "On-site corporate IT support for ~200+ users & IMAC activities", ar: "دعم تقني ميداني لنحو 200 مستخدم أو أكثر وأنشطة IMAC" },
+      { en: "Also covered the CCTV cameras and the internal telephone exchange (PBX)", ar: "إضافةً إلى كاميرات المراقبة والسنترال الداخلي للشركة" },
       { en: "LAN/Wi-Fi connectivity & Active Directory assistance", ar: "اتصال LAN/Wi-Fi والمساعدة في أكتيف ديريكتوري" },
     ],
   },
@@ -271,7 +288,7 @@ export const CAREER: CareerEntry[] = [
 
 /* ---------------- education & development ---------------- */
 export const EDUCATION: B[] = [
-  { en: "Industrial Technical Institute — Alexandria, Egypt", ar: "المعهد الفني الصناعي — الإسكندرية، مصر" },
+  { en: "Industrial Technical Institute, Metalworking — Technological College, Alexandria, Egypt (2013)", ar: "معهد فني صناعي، تخصص تشغيل معادن — الكلية التكنولوجية بالإسكندرية، مصر (2013)" },
 ];
 
 export const LANGUAGES: B[] = [
@@ -280,6 +297,8 @@ export const LANGUAGES: B[] = [
 ];
 
 export const CERTIFICATIONS: B[] = [
-  { en: "CCNA Studies & VMware Virtualization (hands-on lab)", ar: "دراسات CCNA ومحاكاة VMware الافتراضية (معمل عملي)" },
+  { en: "CCNA studies", ar: "دراسة CCNA" },
+  { en: "Self-study lab: Firewall and VLAN on VMware", ar: "معمل دراسة ذاتية: Firewall وVLAN على VMware" },
+  { en: "Self-study lab: MikroTik line bonding, load balancing and Site-to-Site VPN", ar: "معمل دراسة ذاتية: دمج الخطوط وتوزيع الأحمال وربط الفروع Site-to-Site على MikroTik" },
   { en: "PowerShell Fundamentals", ar: "أساسيات PowerShell" },
 ];

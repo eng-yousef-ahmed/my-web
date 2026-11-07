@@ -48,18 +48,18 @@ export const CASES: CaseStudy[] = [
       ar: "موقع مؤقت متعدد المناطق بمئات المستخدمين وظروف ميدانية قاسية وانعدام تام لتحمّل التوقف خلال الموسم. الاتصال والمراقبة والحضور والهواتف كان يجب أن تعمل كمنظومة واحدة من اليوم الأول.",
     },
     solution: {
-      en: "A single coherent infrastructure: structured cabling and distribution per zone, one managed network with clean segmentation, CCTV and NVR coverage on critical points, biometric attendance for shift teams, and IP telephony for operations.",
-      ar: "بنية واحدة مترابطة: توصيلات منظمة وتوزيع لكل منطقة، وشبكة مُدارة بتقسيم نظيف، وتغطية مراقبة وتسجيل للنقاط الحرجة، وبصمة حضور لفرق الورديات، وهواتف IP للتشغيل.",
+      en: "A single coherent infrastructure: structured cabling and distribution per zone, one managed network, CCTV and NVR coverage on critical points, biometric attendance for shift teams, and IP telephony for operations.",
+      ar: "بنية واحدة مترابطة: توصيلات منظمة وتوزيع لكل منطقة، وشبكة مُدارة، وتغطية مراقبة وتسجيل للنقاط الحرجة، وبصمة حضور لفرق الورديات، وهواتف IP للتشغيل.",
     },
     implementation: [
       { en: "Pre-season infrastructure deployment and system readiness", ar: "نشر البنية التحتية قبل الموسم وجاهزية الأنظمة" },
-      { en: "Network segmentation between operational and guest traffic", ar: "تقسيم الشبكة بين حركة التشغيل والضيوف" },
       { en: "CCTV and NVR recording on entrances and critical areas", ar: "مراقبة وتسجيل NVR على المداخل والمناطق الحرجة" },
+      { en: "200+ CCTV cameras and 50+ pilgrim-gate entry sensors across the Mina and Muzdalifah camps, each linked to its control devices", ar: "أكثر من 200 كاميرا مراقبة وأكثر من 50 مستشعرًا لبوابات دخول الحجاج في مخيمات منى ومزدلفة، مع ربط كل جهاز بالأجهزة الخاصة به" },
       { en: "Biometric attendance integrated with shift operations", ar: "بصمة حضور مدمجة مع عمليات الورديات" },
       { en: "Incident response and escalation routines during peak", ar: "روتين الاستجابة للحوادث والتصعيد خلال الذروة" },
       { en: "Daily coordination with project managers and vendors", ar: "تنسيق يومي مع مديري المشروع والموردين" },
     ],
-    technologies: ["MikroTik", "Structured Cabling", "CCTV", "NVR", "ZKTeco", "IP Telephony"],
+    technologies: ["Structured Cabling", "CCTV", "NVR", "ZKTeco", "IP Telephony"],
     role: {
       en: "IT Operations Supervisor: led a team of 6+ technicians through the season, owning incident response, preventive maintenance and day-to-day operation of the whole environment.",
       ar: "مشرف عمليات تقنية المعلومات: قيادة فريق من أكثر من 6 فنيين طوال الموسم، مع ملكية الاستجابة للحوادث والصيانة الوقائية والتشغيل اليومي للبيئة كاملة.",
@@ -113,167 +113,6 @@ export const CASES: CaseStudy[] = [
       { en: "High service availability with consistent SLA compliance for 500+ users", ar: "توافر خدمي عالٍ مع التزام مستمر بمستويات الخدمة لأكثر من 500 مستخدم" },
       { en: "Standardized onboarding: accounts, devices, M365 and printers ready on day one", ar: "تجهيز موحّد: حسابات وأجهزة وM365 وطابعات جاهزة من اليوم الأول" },
       { en: "Accurate asset and incident records for long-term operations", ar: "سجلات أصول وحوادث دقيقة للعمليات طويلة الأمد" },
-    ],
-  },
-  {
-    id: "cctv-command-center",
-    title: { en: "CCTV Command Center", ar: "مركز قيادة المراقبة" },
-    sector: { en: "Security Operations", ar: "العمليات الأمنية" },
-    market: "sa",
-    featured: true,
-    catIds: ["security-systems", "networks"],
-    summary: {
-      en: "A centralized surveillance operation: dozens of feeds on one video wall, retention sized for real review windows, and remote access for the people who need it.",
-      ar: "عملية مراقبة مركزية: عشرات البثوث على جدار فيديو واحد، واحتفاظ مُقدر على نوافذ المراجعة الفعلية، ووصول عن بُعد لمن يحتاجه.",
-    },
-    overview: {
-      en: "A facility needed its cameras to answer operational questions, not just record. The project turned scattered CCTV into a command-center workflow: live monitoring at the right desk, retrieval in minutes, and remote viewing for authorized users.",
-      ar: "احتاجت منشأة أن تجيب كاميراتها عن أسئلة تشغيلية لا أن تسجل فحسب. حوّل المشروع المراقبة المتفرقة إلى سير عمل مركز قيادة: مشاهدة حية على المكتب الصحيح، واسترجاع في دقائق، ومشاهدة عن بُعد للمخولين.",
-    },
-    challenge: {
-      en: "Footage existed but was unusable under pressure: no coverage plan, retention that filled disks without purpose, and no live workflow. Finding an incident meant hours of scrubbing, if the moment was recorded at all.",
-      ar: "اللقطات كانت موجودة لكن غير قابلة للاستخدام تحت الضغط: بلا خطة تغطية، واحتفاظ يملأ الأقراص بلا هدف، وبلا سير مشاهدة حي. إيجاد حادثة كان يعني ساعات من البحث، إن كانت اللحظة مسجلة أصلًا.",
-    },
-    solution: {
-      en: "Coverage designed backward from the questions the footage must answer: entrances, cash points, stock movement and perimeter. NVR retention sized to the business's review window, a video wall for live ops, and controlled remote access.",
-      ar: "تغطية مصممة رجوعًا من الأسئلة التي يجب أن تجيب عنها اللقطات: المداخل ونقاط النقد وحركة المخزون والأسوار. احتفاظ NVR بحجم نافذة المراجعة الفعلية، وجدار فيديو للتشغيل الحي، ووصول عن بُعد مُتحكم فيه.",
-    },
-    implementation: [
-      { en: "Camera placement by coverage goal: height, lighting and lens choice", ar: "وضع الكاميرات حسب هدف التغطية: الارتفاع والإضاءة واختيار العدسة" },
-      { en: "NVR storage planned for the real review window", ar: "تخطيط تخزين NVR على نافذة المراجعة الفعلية" },
-      { en: "Video wall layout for continuous live monitoring", ar: "تخطيط جدار الفيديو للمراقبة الحية المستمرة" },
-      { en: "Remote viewing with role-based access", ar: "مشاهدة عن بُعد بصلاحيات حسب الدور" },
-      { en: "Retrieval workflow tested against real incident scenarios", ar: "اختبار سير الاسترجاع ضد سيناريوهات حوادث حقيقية" },
-    ],
-    technologies: ["Hikvision", "Dahua", "NVR", "Video Wall", "Remote Viewing"],
-    role: {
-      en: "Design and delivery: translating operational questions into a coverage plan, storage sizing and a monitoring workflow the team actually uses.",
-      ar: "التصميم والتسليم: ترجمة الأسئلة التشغيلية إلى خطة تغطية وتقدير تخزين وسير مراقبة يستخدمه الفريق فعلًا.",
-    },
-    results: [
-      { en: "Incident retrieval dropped from hours to minutes", ar: "انخفض استرجاع الحوادث من ساعات إلى دقائق" },
-      { en: "Coverage that answers real questions instead of counting cameras", ar: "تغطية تجيب عن أسئلة حقيقية بدل عدّ الكاميرات" },
-      { en: "Live monitoring became an operational routine, not an afterthought", ar: "أصبحت المشاهدة الحية روتينًا تشغيليًا لا أمرًا ثانويًا" },
-    ],
-  },
-  {
-    id: "enterprise-data-center",
-    title: { en: "Enterprise Data Center Build", ar: "بناء مركز بيانات مؤسسي" },
-    sector: { en: "IT Infrastructure", ar: "البنية التحتية" },
-    market: "sa",
-    featured: false,
-    catIds: ["it-infrastructure", "networks"],
-    summary: {
-      en: "A server room built to be run: labeled structured cabling, rack standards, power discipline and as-built documentation handed over for long-term operations.",
-      ar: "غرفة خوادم مبنية لتُدار: توصيلات منظمة موسومة، ومعايير رفوف، وانضباط طاقة، وتوثيق as-built مُسلّم للعمليات طويلة الأمد.",
-    },
-    overview: {
-      en: "A growing organization needed its infrastructure consolidated into a proper server room rather than scattered closets. The build established the physical foundation everything else would stand on.",
-      ar: "احتاجت مؤسسة نامية تجميع بنيتها في غرفة خوادم حقيقية بدل دواليب متفرقة. أرسى البناء الأساس المادي الذي سيقوم عليه كل شيء آخر.",
-    },
-    challenge: {
-      en: "Existing equipment lived in ad-hoc closets with undocumented cabling. Any change risked unknown outages, and maintenance meant tracing cables by hand.",
-      ar: "المعدات القائمة كانت في دواليب عشوائية بتوصيلات غير موثقة. أي تغيير كان يخاطر بأعطال مجهولة، والصيانة كانت تعني تتبّع الكابلات يدويًا.",
-    },
-    solution: {
-      en: "A designed room: racks with clear standards, structured cabling tested and labeled end to end, power and cooling considered, and complete as-built documentation.",
-      ar: "غرفة مصممة: رفوف بمعايير واضحة، وتوصيلات منظمة مُختبرة وموسومة من الطرف للطرف، ومراعاة الطاقة والتبريد، وتوثيق as-built كامل.",
-    },
-    implementation: [
-      { en: "Rack layout and equipment migration plan", ar: "تخطيط الرفوف وخطة ترحيل المعدات" },
-      { en: "Structured cabling with testing and labeling", ar: "توصيلات منظمة مع الاختبار والوسم" },
-      { en: "Power distribution and basic monitoring", ar: "توزيع الطاقة ومراقبة أساسية" },
-      { en: "As-built documentation and handover", ar: "توثيق as-built والتسليم" },
-    ],
-    technologies: ["Structured Cabling", "Rack Infrastructure", "PRTG", "Windows Server"],
-    role: {
-      en: "Design and build coordination, working alongside construction and vendors to deliver an operations-ready room.",
-      ar: "التصميم وتنسيق البناء بالتعاون مع الإنشاءات والموردين لتسليم غرفة جاهزة للتشغيل.",
-    },
-    results: [
-      { en: "Every port traceable in minutes, not hours", ar: "كل منفذ قابل للتتبع في دقائق لا ساعات" },
-      { en: "Maintenance simplified for years ahead", ar: "صيانة مبسطة لسنوات قادمة" },
-      { en: "A stable base for future virtualization and growth", ar: "قاعدة مستقرة للمحاكاة الافتراضية والنمو مستقبلًا" },
-    ],
-  },
-  {
-    id: "hotel-wifi",
-    title: { en: "Hotel Wi-Fi Infrastructure", ar: "بنية واي فاي فندقية" },
-    sector: { en: "Hospitality", ar: "الضيافة" },
-    market: "sa",
-    featured: false,
-    catIds: ["networks"],
-    summary: {
-      en: "Guest Wi-Fi that simply works everywhere, on a separate network from operations and POS, with bandwidth managed so one download never eats the whole pipe.",
-      ar: "واي فاي للضيوف يعمل ببساطة في كل مكان، على شبكة منفصلة عن التشغيل ونقاط البيع، مع إدارة نطاق ترددي فلا يلتهم تنزيل واحد الخط كله.",
-    },
-    overview: {
-      en: "A hospitality property where Wi-Fi complaints reached the front desk daily. The rebuild started from a physical survey of the building, not from a datasheet.",
-      ar: "منشأة ضيافة كانت شكاوى الواي فاي تصل استقبالها يوميًا. بدأت إعادة البناء من مسح فيزيائي للمبنى لا من أوراق المواصفات.",
-    },
-    challenge: {
-      en: "Concrete walls, mirrors and shafts killed coverage in patches. Guests, operations and POS shared one flat network, and bandwidth hogs starved everyone else.",
-      ar: "الجدران الخرسانية والمرايا والآبار كانت تقتل التغطية على شكل رقع. الضيوف والتشغيل ونقاط البيع يتشاركون شبكة واحدة مسطحة، وملتهمو النطاق يجوّعون البقية.",
-    },
-    solution: {
-      en: "Access points placed where the building allows signal to travel, three VLANs (guest, operations, management), and bandwidth policy that keeps every user comfortable.",
-      ar: "نقاط وصول وُضعت حيث يسمح المبنى بمرور الإشارة، وثلاثة VLANs (ضيوف، تشغيل، إدارة)، وسياسة نطاق ترددي تُبقي كل مستخدم مرتاحًا.",
-    },
-    implementation: [
-      { en: "On-site signal survey per floor and zone", ar: "مسح إشارة ميداني لكل دور ومنطقة" },
-      { en: "VLAN separation for guest, operations and POS", ar: "فصل VLAN للضيوف والتشغيل ونقاط البيع" },
-      { en: "Per-user bandwidth management", ar: "إدارة نطاق ترددي لكل مستخدم" },
-      { en: "Centralized management and monitoring", ar: "إدارة ومراقبة مركزية" },
-    ],
-    technologies: ["MikroTik", "Business Wi-Fi", "VLAN", "Bandwidth Management"],
-    role: {
-      en: "Survey, design and deployment of the wireless environment, plus the policies that keep it behaving under load.",
-      ar: "مسح وتصميم ونشر البيئة اللاسلكية، بالإضافة إلى السياسات التي تبقيها منضبطة تحت الضغط.",
-    },
-    results: [
-      { en: "Coverage complaints stopped being a front-desk issue", ar: "توقفت شكاوى التغطية عن كونها مشكلة استقبال" },
-      { en: "POS and operations isolated from guest traffic", ar: "نقاط البيع والتشغيل معزولة عن حركة الضيوف" },
-      { en: "Consistent speed in every room and lobby corner", ar: "سرعة ثابتة في كل غرفة وركن بهو" },
-    ],
-  },
-  {
-    id: "mikrotik-s2s-vpn",
-    title: { en: "MikroTik Site-to-Site VPN", ar: "شبكة VPN بين المواقع بميكروتيك" },
-    sector: { en: "Networking", ar: "الشبكات" },
-    market: "both",
-    featured: false,
-    catIds: ["networks"],
-    summary: {
-      en: "Branches that used to move files on USB drives became one private network: encrypted tunnels, clean addressing and monitoring that notices a drop in minutes.",
-      ar: "فروع كانت تنقل الملفات على وحدات USB أصبحت شبكة خاصة واحدة: أنفاق مشفرة وعنونَة نظيفة ومراقبة تلاحظ السقوط في دقائق.",
-    },
-    overview: {
-      en: "Multiple locations needed to reach shared servers, applications and printers as if under one roof, without exposing anything to the public internet.",
-      ar: "احتاجت مواقع متعددة الوصول إلى خوادم وتطبيقات وطابعات مشتركة كأنها تحت سقف واحد، دون كشف أي شيء على الإنترنت العام.",
-    },
-    challenge: {
-      en: "Disconnected sites bred workarounds: personal cloud accounts, risky port forwarding, and every branch running its own miniature IT universe.",
-      ar: "المواقع المنفصلة ولّدت حلولًا ملتوية: حسابات سحابية شخصية، وتحويل منافذ خطِر، وكل فرع يدير كونه التقني المصغر.",
-    },
-    solution: {
-      en: "Site-to-site VPN tunnels on MikroTik with a clean addressing plan, routing that keeps local traffic local, and monitoring on every tunnel.",
-      ar: "أنفاق VPN بين المواقع على ميكروتيك مع خطة عنونة نظيفة، وتوجيه يُبقي الحركة المحلية محلية، ومراقبة على كل نفق.",
-    },
-    implementation: [
-      { en: "Addressing plan designed so sites never collide", ar: "خطة عنونة مصممة ألا تتصادم المواقع" },
-      { en: "Encrypted tunnels between head office and branches", ar: "أنفاق مشفرة بين المكتب الرئيسي والفروع" },
-      { en: "Firewall rules per site and per service", ar: "قواعد جدار ناري لكل موقع ولكل خدمة" },
-      { en: "Tunnel health monitoring with fast alerting", ar: "مراقبة صحة الأنفاق مع تنبيه سريع" },
-    ],
-    technologies: ["MikroTik", "Site-to-Site VPN", "Firewall", "PRTG"],
-    role: {
-      en: "Design, deployment and monitoring of the VPN layer connecting all sites.",
-      ar: "تصميم ونشر ومراقبة طبقة الـ VPN الرابطة لكل المواقع.",
-    },
-    results: [
-      { en: "File servers and printers reachable from any site", ar: "خوادم الملفات والطابعات متاحة من أي موقع" },
-      { en: "Workarounds retired in favor of one private network", ar: "أُحيلت الحلول الملتوية للتقاعد لصالح شبكة خاصة واحدة" },
-      { en: "Dropped tunnels noticed in minutes, not days", ar: "الأنفاق الساقطة تُلاحظ في دقائق لا أيام" },
     ],
   },
   {

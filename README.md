@@ -60,7 +60,7 @@ The digital card, Contact page, footer and assistant all read from the same valu
 src/
   config.ts        contact data, asset paths, link helpers
   i18n.tsx         EN/AR provider, UI strings, page-meta hook
-  data/            content.ts · career.ts · cases.ts · certificates.ts · projectLoader.ts
+  data/            content.ts · cases.ts · certificates.ts · projectLoader.ts
   components/      kit.tsx (icons, logo, buttons, reveal) · chrome.tsx (header, footer, layout) · Assistant.tsx
   pages/           Home · About · Services · Projects · Contact · Card
 ```
