@@ -271,7 +271,7 @@ export const CAREER: CareerEntry[] = [
     ],
   },
   {
-    role: { en: "Network & Devices Specialist", ar: "أخصائي شبكات وأجهزة" },
+    role: { en: "IT Support & Network Specialist", ar: "أخصائي دعم تقني وشبكات" },
     company: { en: "Arab Computers Company (ACC)", ar: "الشركة العربية للحاسبات" },
     project: { en: "On-site at United Abco Company", ar: "في مقر شركة أبكو المتحدة" },
     location: { en: "Alexandria, Egypt", ar: "الإسكندرية، مصر" },
