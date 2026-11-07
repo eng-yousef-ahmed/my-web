@@ -55,6 +55,7 @@ export const CASES: CaseStudy[] = [
       { en: "Pre-season infrastructure deployment and system readiness", ar: "نشر البنية التحتية قبل الموسم وجاهزية الأنظمة" },
       { en: "Network segmentation between operational and guest traffic", ar: "تقسيم الشبكة بين حركة التشغيل والضيوف" },
       { en: "CCTV and NVR recording on entrances and critical areas", ar: "مراقبة وتسجيل NVR على المداخل والمناطق الحرجة" },
+      { en: "200+ CCTV cameras and 50+ pilgrim-gate entry sensors across the Mina and Muzdalifah camps, each linked to its control devices", ar: "أكثر من 200 كاميرا مراقبة وأكثر من 50 مستشعرًا لبوابات دخول الحجاج في مخيمات منى ومزدلفة، مع ربط كل جهاز بالأجهزة الخاصة به" },
       { en: "Biometric attendance integrated with shift operations", ar: "بصمة حضور مدمجة مع عمليات الورديات" },
       { en: "Incident response and escalation routines during peak", ar: "روتين الاستجابة للحوادث والتصعيد خلال الذروة" },
       { en: "Daily coordination with project managers and vendors", ar: "تنسيق يومي مع مديري المشروع والموردين" },
@@ -194,86 +195,6 @@ export const CASES: CaseStudy[] = [
       { en: "Every port traceable in minutes, not hours", ar: "كل منفذ قابل للتتبع في دقائق لا ساعات" },
       { en: "Maintenance simplified for years ahead", ar: "صيانة مبسطة لسنوات قادمة" },
       { en: "A stable base for future virtualization and growth", ar: "قاعدة مستقرة للمحاكاة الافتراضية والنمو مستقبلًا" },
-    ],
-  },
-  {
-    id: "hotel-wifi",
-    title: { en: "Hotel Wi-Fi Infrastructure", ar: "بنية واي فاي فندقية" },
-    sector: { en: "Hospitality", ar: "الضيافة" },
-    market: "sa",
-    featured: false,
-    catIds: ["networks"],
-    summary: {
-      en: "Guest Wi-Fi that simply works everywhere, on a separate network from operations and POS, with bandwidth managed so one download never eats the whole pipe.",
-      ar: "واي فاي للضيوف يعمل ببساطة في كل مكان، على شبكة منفصلة عن التشغيل ونقاط البيع، مع إدارة نطاق ترددي فلا يلتهم تنزيل واحد الخط كله.",
-    },
-    overview: {
-      en: "A hospitality property where Wi-Fi complaints reached the front desk daily. The rebuild started from a physical survey of the building, not from a datasheet.",
-      ar: "منشأة ضيافة كانت شكاوى الواي فاي تصل استقبالها يوميًا. بدأت إعادة البناء من مسح فيزيائي للمبنى لا من أوراق المواصفات.",
-    },
-    challenge: {
-      en: "Concrete walls, mirrors and shafts killed coverage in patches. Guests, operations and POS shared one flat network, and bandwidth hogs starved everyone else.",
-      ar: "الجدران الخرسانية والمرايا والآبار كانت تقتل التغطية على شكل رقع. الضيوف والتشغيل ونقاط البيع يتشاركون شبكة واحدة مسطحة، وملتهمو النطاق يجوّعون البقية.",
-    },
-    solution: {
-      en: "Access points placed where the building allows signal to travel, three VLANs (guest, operations, management), and bandwidth policy that keeps every user comfortable.",
-      ar: "نقاط وصول وُضعت حيث يسمح المبنى بمرور الإشارة، وثلاثة VLANs (ضيوف، تشغيل، إدارة)، وسياسة نطاق ترددي تُبقي كل مستخدم مرتاحًا.",
-    },
-    implementation: [
-      { en: "On-site signal survey per floor and zone", ar: "مسح إشارة ميداني لكل دور ومنطقة" },
-      { en: "VLAN separation for guest, operations and POS", ar: "فصل VLAN للضيوف والتشغيل ونقاط البيع" },
-      { en: "Per-user bandwidth management", ar: "إدارة نطاق ترددي لكل مستخدم" },
-      { en: "Centralized management and monitoring", ar: "إدارة ومراقبة مركزية" },
-    ],
-    technologies: ["MikroTik", "Business Wi-Fi", "VLAN", "Bandwidth Management"],
-    role: {
-      en: "Survey, design and deployment of the wireless environment, plus the policies that keep it behaving under load.",
-      ar: "مسح وتصميم ونشر البيئة اللاسلكية، بالإضافة إلى السياسات التي تبقيها منضبطة تحت الضغط.",
-    },
-    results: [
-      { en: "Coverage complaints stopped being a front-desk issue", ar: "توقفت شكاوى التغطية عن كونها مشكلة استقبال" },
-      { en: "POS and operations isolated from guest traffic", ar: "نقاط البيع والتشغيل معزولة عن حركة الضيوف" },
-      { en: "Consistent speed in every room and lobby corner", ar: "سرعة ثابتة في كل غرفة وركن بهو" },
-    ],
-  },
-  {
-    id: "mikrotik-s2s-vpn",
-    title: { en: "MikroTik Site-to-Site VPN", ar: "شبكة VPN بين المواقع بميكروتيك" },
-    sector: { en: "Networking", ar: "الشبكات" },
-    market: "both",
-    featured: false,
-    catIds: ["networks"],
-    summary: {
-      en: "Branches that used to move files on USB drives became one private network: encrypted tunnels, clean addressing and monitoring that notices a drop in minutes.",
-      ar: "فروع كانت تنقل الملفات على وحدات USB أصبحت شبكة خاصة واحدة: أنفاق مشفرة وعنونَة نظيفة ومراقبة تلاحظ السقوط في دقائق.",
-    },
-    overview: {
-      en: "Multiple locations needed to reach shared servers, applications and printers as if under one roof, without exposing anything to the public internet.",
-      ar: "احتاجت مواقع متعددة الوصول إلى خوادم وتطبيقات وطابعات مشتركة كأنها تحت سقف واحد، دون كشف أي شيء على الإنترنت العام.",
-    },
-    challenge: {
-      en: "Disconnected sites bred workarounds: personal cloud accounts, risky port forwarding, and every branch running its own miniature IT universe.",
-      ar: "المواقع المنفصلة ولّدت حلولًا ملتوية: حسابات سحابية شخصية، وتحويل منافذ خطِر، وكل فرع يدير كونه التقني المصغر.",
-    },
-    solution: {
-      en: "Site-to-site VPN tunnels on MikroTik with a clean addressing plan, routing that keeps local traffic local, and monitoring on every tunnel.",
-      ar: "أنفاق VPN بين المواقع على ميكروتيك مع خطة عنونة نظيفة، وتوجيه يُبقي الحركة المحلية محلية، ومراقبة على كل نفق.",
-    },
-    implementation: [
-      { en: "Addressing plan designed so sites never collide", ar: "خطة عنونة مصممة ألا تتصادم المواقع" },
-      { en: "Encrypted tunnels between head office and branches", ar: "أنفاق مشفرة بين المكتب الرئيسي والفروع" },
-      { en: "Firewall rules per site and per service", ar: "قواعد جدار ناري لكل موقع ولكل خدمة" },
-      { en: "Tunnel health monitoring with fast alerting", ar: "مراقبة صحة الأنفاق مع تنبيه سريع" },
-    ],
-    technologies: ["MikroTik", "Site-to-Site VPN", "Firewall", "PRTG"],
-    role: {
-      en: "Design, deployment and monitoring of the VPN layer connecting all sites.",
-      ar: "تصميم ونشر ومراقبة طبقة الـ VPN الرابطة لكل المواقع.",
-    },
-    results: [
-      { en: "File servers and printers reachable from any site", ar: "خوادم الملفات والطابعات متاحة من أي موقع" },
-      { en: "Workarounds retired in favor of one private network", ar: "أُحيلت الحلول الملتوية للتقاعد لصالح شبكة خاصة واحدة" },
-      { en: "Dropped tunnels noticed in minutes, not days", ar: "الأنفاق الساقطة تُلاحظ في دقائق لا أيام" },
     ],
   },
   {
